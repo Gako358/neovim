@@ -157,7 +157,7 @@
           # customRC = pkgs.lib.readFile ./init.vim;
           # if you wish to only load the onedark-vim colorscheme:
           start = with pkgs.neovimPlugins; [ 
-	    colors.lua
+	    colors
 	  ];
         };
       }
