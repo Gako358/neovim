@@ -3,4 +3,6 @@
 " -----------------------------------------------------------
 
 " Colorscheme Configurations
-lua require('github-theme').setup()
+lua require('github-theme').setup({
+  theme_style = "dark",
+})
