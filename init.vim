@@ -3,6 +3,8 @@
 " -----------------------------------------------------------
 
 " Colorscheme Configurations
-lua require('github-theme').setup({
+lua << EOF
+require('github-theme').setup({
   theme_style = "dark",
 })
+EOF
