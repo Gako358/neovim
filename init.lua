@@ -1,8 +1,5 @@
--- Import Lua modules
--- load basic configuration
 local utils = require("core.utils")
 
--- Try to call the cache plugin
 pcall(require, "impatient")
 
 for _, module_name in
@@ -15,6 +12,3 @@ do
   end
 end
 
--- vim.defer_fn(function()
---   require("plugins").load()
--- end, 0)
