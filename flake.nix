@@ -12,6 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
+    # Core
+    "plugin:impatient.nvim" = {
+      url = "github:lewis6991/impatient.nvim";
+      flake = false;
+    };
     # Theme
     "plugin:github-nvim-theme" = {
       url = "github:projekt0n/github-nvim-theme";

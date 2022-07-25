@@ -101,13 +101,30 @@
         "type": "github"
       }
     },
+    "plugin:impatient.nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1657193991,
+        "narHash": "sha256-wy9/VnMz+cPuS3aWqjBW9DttvePX0CvCajb8DPu6JWw=",
+        "owner": "lewis6991",
+        "repo": "impatient.nvim",
+        "rev": "2aa872de40dbbebe8e2d3a0b8c5651b81fe8b235",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "impatient.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "neovim-flake": "neovim-flake",
         "nixpkgs": "nixpkgs",
         "plugin:github-nvim-theme": "plugin:github-nvim-theme",
-        "plugin:gitsigns": "plugin:gitsigns"
+        "plugin:gitsigns": "plugin:gitsigns",
+        "plugin:impatient.nvim": "plugin:impatient.nvim"
       }
     }
   },
