@@ -154,11 +154,11 @@
 
         packages.neovimMx = neovimBuilder {
           # the next line loads a trivial example of a init.vim:
-          # customRC = pkgs.lib.readFile ./init.vim;
+          customRC = pkgs.lib.readFile ./colors.lua;
           # if you wish to only load the onedark-vim colorscheme:
-          start = with pkgs.neovimPlugins; [ 
-	    colors
-	  ];
+          # start = with pkgs.neovimPlugins; [ 
+	  #   colors
+	  # ];
         };
       }
     );
