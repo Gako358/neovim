@@ -72,6 +72,8 @@
           vim.vimAlias = true;
           vim.theme.github-theme.enable = true;
 
+          vim.treesitter.enable = true;
+
         };
       };
 

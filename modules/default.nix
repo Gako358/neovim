@@ -4,5 +4,7 @@
     ./core
     ./basic
     ./theme
+
+    ./treesitter
   ];
 }
