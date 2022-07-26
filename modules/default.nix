@@ -7,5 +7,6 @@
     ./lsp
     ./cmp
     ./treesitter
+    ./snippets
   ];
 }
