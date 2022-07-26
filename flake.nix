@@ -58,11 +58,11 @@
           vim.vimAlias = true;
 
           # Enable theme
-          vim.theme = {
-	    enable = true;
-	    name = "github-theme";
-	    style = "darker";
-	  };
+          # vim.theme = {
+	   # enable = true;
+	   # name = "github-theme";
+	   # style = "darker";
+	 # };
       
         };
       };
