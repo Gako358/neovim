@@ -284,7 +284,7 @@
           vim.lsp.nix = true;
           vim.lsp.python = true;
           vim.lsp.ruby = true;
-          vim.lsp.rust = true;
+          #vim.lsp.rust = true;
           vim.lsp.terraform = true;
           vim.lsp.typescript = true;
           vim.lsp.vimscript = true;
