@@ -4,9 +4,5 @@
     ./core
     ./basic
     ./theme
-    ./lsp
-    ./cmp
-    ./treesitter
-    ./snippets
   ];
 }
