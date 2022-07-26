@@ -16,5 +16,36 @@ in {
     vim.startPlugins = with pkgs.neovimPlugins; [
       nvim-treesitter
     ];
+    in ''
+        -- Treesitter config
+        require'nvim-treesitter.configs'.setup {
+          highlight = {
+            enable = true,
+            disable = {},
+          },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "gnn",
+              node_incremental = "grn",
+              scope_incremental = "grc",
+              node_decremental = "grm",
+            },
+          },
+          ${writeIf cfg.autotagHtml ''
+          autotag = {
+            enable = true,
+          },
+        ''}
+        }
+        local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
+        parser_config.hare = {
+          install_info = {
+            url = "",
+            files = { "" }
+          },
+          filetype = "ha",
+        }
+      '';
   };
 }
