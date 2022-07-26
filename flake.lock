@@ -15,7 +15,7 @@
         "type": "github"
       }
     },
-    "github-nvim-theme": {
+    "github-theme": {
       "flake": false,
       "locked": {
         "lastModified": 1658829336,
@@ -72,7 +72,7 @@
     },
     "root": {
       "inputs": {
-        "github-nvim-theme": "github-nvim-theme",
+        "github-theme": "github-theme",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs"
       }

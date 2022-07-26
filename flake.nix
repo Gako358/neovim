@@ -12,7 +12,7 @@
     ### Vim plugins ###
     
     # Theme
-    github-nvim-theme = {
+    github-theme = {
       url = "github:projekt0n/github-nvim-theme";
       flake = false;
     };
@@ -22,7 +22,7 @@
   outputs = { self, nixpkgs, neovim, ... }@inputs:
   let
     plugins = [
-      "github-nvim-theme"
+      "github-theme"
     
     ];
 
@@ -58,7 +58,11 @@
           vim.vimAlias = true;
 
           # Enable theme
-          vim.theme.github-nvim-theme.enable = true;
+          vim.theme = {
+	    enable = true;
+	    name = "github-theme";
+	    style = "darker";
+	  };
       
         };
       };

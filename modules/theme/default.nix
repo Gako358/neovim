@@ -3,73 +3,45 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.theme.github;
+  cfg = config.vim.theme.github-theme;
 in {
 
-  options.vim.theme.github = {
+  options.vim.theme.github-theme = {
     enable = mkEnableOption "Enable github-nvim theme";
-
-    lineNumberBackgroundColoured = mkOption {
-      default = false;
-      description = "Set the colour of the line number on the selected line.";
-      type = types.bool;
-    };
-
-    uniformStatusLine = mkOption {
-      default = false;
-      description = "Set the status line to be uniform when inactive and active";
-      type = types.bool;
-    };
-
-    boldVerticalSplit = mkOption {
-      default = false;
-      description = "Set to have a bold verticle split between panes";
-      type = types.bool;
-    };
-
-    uniformDiffBackground = mkOption {
-      default = false;
-      description = "Set to disable colourful backgrounds on diff";
-      type = types.bool;
-    };
-
-    bold = mkOption {
-      default = true;
-      description = "Enable bold text";
-      type = types.bool;
-    };
-
-    italic = mkOption {
-      default = false;
-      description = "Enable italic text";
-      type = types.bool;
-    };
-
-    underline = mkOption {
-      default = true;
-      description = "Enable underlined text";
-      type = types.bool;
-    };
-
-    italicComments = mkOption {
-      default = true;
-      description = "Enable italics for comments";
-      type = types.bool;
-    };
 
   };
 
   config = mkIf (cfg.enable) 
-  (let
-    mkVimBool = val: if val then "1" else "0";
-    mkIfNotNone = val: if val == "none" then null else val;
-  in {
-    vim.configRC = ''
-      colorscheme github_dark
-    '';
+  (
+    let
+      # mkVimBool = val: if val then "1" else "0";
+   
+    in {
 
-    vim.startPlugins = with pkgs.neovimPlugins; [github-nvim-theme];
+      vim.startPlugins = with pkgs.neovimPlugins; [github-theme];
+
+      vim.luaConfigRC = ''
+
+	require("github-theme").setup({
+  	  theme_style = "dark",
+  	  function_style = "italic",
+  	  sidebars = {"qf", "vista_kind", "terminal", "packer"},
+
+  	  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+  	  colors = {hint = "orange", error = "#ff0000"},
+
+  	  -- Overwrite the highlight groups
+  	  overrides = function(c)
+    	    return {
+      	      htmlTag = {fg = c.red, bg = "#282c34", sp = c.hint, style = "underline"},
+      	      DiagnosticHint = {link = "LspDiagnosticsDefaultHint"},
+      	      -- this will remove the highlight groups
+      	      TSField = {},
+    	    }
+  	  end
+	})
+      '';
     
-  });
+    });
 
 }
