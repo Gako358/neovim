@@ -11,8 +11,8 @@ in {
   options.vim.lsp = {
     enable = mkEnableOption "neovim lsp support";
     formatOnSave = mkEnableOption "Format on save";
-    rust = enable = mkEnableOption "Rust LSP";
-    lua = enable = mkEnableOption "Lua LSP";
+    rust = mkEnableOption "Rust LSP";
+    lua = mkEnableOption "Lua LSP";
     python = mkEnableOption "Python LSP";
     bash = mkEnableOption "Bash LSP";
     clang = mkEnableOption "C language LSP";
