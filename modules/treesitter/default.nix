@@ -25,6 +25,24 @@ in {
     in ''
       -- Treesitter config
       require'nvim-treesitter.configs'.setup {
+        ensure_installed = {
+        vim.g.enable_treesitter_ft,
+        'typescript',
+        'javascript',
+        'comment',
+        'python',
+        'bibtex',
+        'html',
+        'bash',
+        'make',
+        'json',
+        'rust',
+        'vim',
+        'lua',
+        'css',
+        'cpp',
+        'c',
+        },
         highlight = {
           enable = true,
           disable = {},
