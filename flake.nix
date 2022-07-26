@@ -56,6 +56,11 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
+          vim.theme = {
+            enable = true;
+            name = "github-theme";
+            style = "dark";
+          };
         };
       };
 

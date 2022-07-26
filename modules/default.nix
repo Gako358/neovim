@@ -3,5 +3,6 @@
   imports = [
     ./core
     ./basic
+    ./theme
   ];
 }
