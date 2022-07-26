@@ -44,10 +44,25 @@ in {
         'cpp',
         'c',
         },
+
         highlight = {
           enable = true,
           disable = {},
         },
+
+        matchup = {
+          enable = true,
+        },
+
+        textobjects = {
+          select = {
+            enable = true,
+
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+          },
+        },
+
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -58,6 +73,7 @@ in {
           },
         }
       }
+
       local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
        parser_config.hare = {
         install_info = {
