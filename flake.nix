@@ -1,170 +1,164 @@
 {
-  description = "Luca's simple Neovim flake for easy configuration";
+  description = "Wil Taylor's NeoVim config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    neovim-flake = {
+
+    neovim = {
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    # Core
-    "plugin:impatient.nvim" = {
-      url = "github:lewis6991/impatient.nvim";
-      flake = false;
-    };
-    # Theme
-    "plugin:github-nvim-theme" = {
-      url = "github:projekt0n/github-nvim-theme";
-      flake = false;
-    };
-    # Git
-    "plugin:gitsigns" = {
-      url = "github:lewis6991/gitsigns.nvim";
-      flake = false;
-    };
+
+
+    rnix-lsp = { url = "github:nix-community/rnix-lsp"; };
+
+    # Vim plugins
+    gruvbox = { url = "github:morhetz/gruvbox"; flake = false; };
+    nord-vim = { url = "github:arcticicestudio/nord-vim"; flake = false; };
+    vim-startify = { url = "github:mhinz/vim-startify"; flake = false; };
+    lightline-vim = { url = "github:itchyny/lightline.vim"; flake = false; };
+    nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
+    completion-nvim = { url = "github:nvim-lua/completion-nvim"; flake = false; };
+    vim-nix = { url = "github:LnL7/vim-nix"; flake = false; };
+    nvim-dap = { url = "github:mfussenegger/nvim-dap"; flake = false; };
+    nvim-telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
+    telescope-dap = { url = "github:nvim-telescope/telescope-dap.nvim"; flake = false; };
+    popup-nvim = { url = "github:nvim-lua/popup.nvim"; flake = false; };
+    plenary-nvim = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
+    nvim-web-devicons = { url = "github:kyazdani42/nvim-web-devicons"; flake = false; };
+    nvim-tree-lua = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
+    vimagit = { url = "github:jreybert/vimagit"; flake = false; };
+    fugitive = { url = "github:tpope/vim-fugitive"; flake = false; };
+    nvim-lightbulb = { url = "github:kosayoda/nvim-lightbulb"; flake = false; };
+    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false;};
+    nvim-treesitter-context = { url = "github:romgrk/nvim-treesitter-context"; flake = false;};
+    editorconfig-vim = { url = "github:editorconfig/editorconfig-vim"; flake = false; };
+    indentline = { url = "github:Yggdroot/indentLine"; flake = false; };
+    indent-blankline-nvim = { url = "github:lukas-reineke/indent-blankline.nvim"; flake = false; };
+    nvim-blame-line = { url = "github:tveskag/nvim-blame-line"; flake = false; };
+    nvim-dap-virtual-text = { url = "github:theHamsta/nvim-dap-virtual-text"; flake = false; };
+    vim-cursorword = { url = "github:itchyny/vim-cursorword"; flake = false; };
+    vim-test = { url = "github:vim-test/vim-test"; flake = false; };
+    nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
-    # This line makes this package availeable for all systems
-    # ("x86_64-linux", "aarch64-linux", "i686-linux", "x86_64-darwin",...)
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        # Once we add this overlay to our nixpkgs, we are able to
-        # use `pkgs.neovimPlugins`, which is a map of our plugins.
-        # Each input in the format:
-        # ```
-        # "plugin:yourPluginName" = {
-        #   url   = "github:exampleAuthor/examplePlugin";
-        #   flake = false;
-        # };
-        # ```
-        # included in the `inputs` section is packaged to a (neo-)vim
-        # plugin and can then be used via
-        # ```
-        # pkgs.neovimPlugins.yourPluginName
-        # ```
-        pluginOverlay = final: prev:
-          let
-            inherit (prev.vimUtils) buildVimPluginFrom2Nix;
-            treesitterGrammars = prev.tree-sitter.withPlugins (_: prev.tree-sitter.allGrammars);
-            plugins = builtins.filter
-              (s: (builtins.match "plugin:.*" s) != null)
-              (builtins.attrNames inputs);
-            plugName = input:
-              builtins.substring
-                (builtins.stringLength "plugin:")
-                (builtins.stringLength input)
-                input;
-            buildPlug = name: buildVimPluginFrom2Nix {
-              pname = plugName name;
-              version = "master";
-              src = builtins.getAttr name inputs;
+  outputs = { self, nixpkgs, neovim, rnix-lsp, ... }@inputs:
+  let
+    plugins = [
+      "gruvbox"
+      "nord-vim"
+      "vim-startify"
+      "lightline-vim"
+      "nvim-lspconfig"
+      "completion-nvim"
+      "vim-nix"
+      "nvim-dap"
+      "nvim-telescope"
+      "popup-nvim"
+      "plenary-nvim"
+      "nvim-web-devicons"
+      "nvim-tree-lua"
+      "telescope-dap"
+      "vimagit"
+      "fugitive" 
+      "nvim-lightbulb"
+      "nvim-treesitter"
+      "nvim-treesitter-context"
+      "editorconfig-vim"
+      "indent-blankline-nvim"
+      "indentline"
+      "nvim-blame-line"
+      "nvim-dap-virtual-text"
+      "vim-cursorword"
+      "vim-test"
+      "nvim-which-key"
+    ];
 
-              # Tree-sitter fails for a variety of lang grammars unless using :TSUpdate
-              # For now install imperatively
-              #postPatch =
-              #  if (name == "nvim-treesitter") then ''
-              #    rm -r parser
-              #    ln -s ${treesitterGrammars} parser
-              #  '' else "";
-            };
-          in
-          {
-            neovimPlugins = builtins.listToAttrs (map
-              (plugin: {
-                name = plugName plugin;
-                value = buildPlug plugin;
-              })
-              plugins);
-          };
+    externalBitsOverlay = top: last: {
+      rnix-lsp = rnix-lsp.defaultPackage.${top.system};
+      neovim-nightly = neovim.defaultPackage.${top.system};
+    };
 
-        # Apply the overlay and load nixpkgs as `pkgs`
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            pluginOverlay
-            (final: prev: {
-              neovim-unwrapped = inputs.neovim-flake.packages.${prev.system}.neovim;
-            })
-          ];
+    pluginOverlay = top: last: let
+      buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
+        pname = name;
+        version = "master";
+        src = builtins.getAttr name inputs;
+      };
+    in {
+      neovimPlugins = builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
+    };
+    
+    allPkgs = lib.mkPkgs { 
+      inherit nixpkgs; 
+      cfg = { };
+      overlays = [
+        pluginOverlay
+        externalBitsOverlay
+      ];
+    };
+
+    lib = import ./lib;
+
+    mkNeoVimPkg = pkgs: lib.neovimBuilder {
+        inherit pkgs;
+        config = {
+          vim.viAlias = true;
+          vim.vimAlias = true;
+          vim.dashboard.startify.enable = true;
+          vim.dashboard.startify.customHeader = [ "NIXOS NEOVIM CONFIG" ];
+          vim.theme.nord.enable = true;
+          vim.disableArrows = true;
+          vim.statusline.lightline.enable = true;
+          vim.lsp.enable = true;
+          vim.lsp.bash = true;
+          vim.lsp.go = true;
+          vim.lsp.nix = true;
+          vim.lsp.python = true;
+          vim.lsp.ruby = true;
+          vim.lsp.rust = true;
+          vim.lsp.terraform = true;
+          vim.lsp.typescript = true;
+          vim.lsp.vimscript = true;
+          vim.lsp.yaml = true;
+          vim.lsp.docker = true;
+          vim.lsp.tex = true;
+          vim.lsp.css = true;
+          vim.lsp.html = true;
+          vim.lsp.json = true;
+          vim.lsp.clang = true;
+          vim.lsp.cmake = false; # Currently broken
+          vim.lsp.lightbulb = true;
+          vim.lsp.variableDebugPreviews = true;
+          vim.fuzzyfind.telescope.enable = true;
+          vim.filetree.nvimTreeLua.enable = true;
+          vim.git.enable = true;
+          vim.formatting.editorConfig.enable = true;
+          vim.editor.indentGuide = true;
+          vim.editor.underlineCurrentWord = true;
+          vim.test.enable = true;
         };
+      };
 
-        # neovimBuilder is a function that takes your prefered
-        # configuration as input and just returns a version of
-        # neovim where the default config was overwritten with your
-        # config.
-        # 
-        # Parameters:
-        # customRC | your init.vim as string
-        # viAlias  | allow calling neovim using `vi`
-        # vimAlias | allow calling neovim using `vim`
-        # start    | The set of plugins to load on every startup
-        #          | The list is in the form ["yourPluginName" "anotherPluginYouLike"];
-        #          |
-        #          | Important: The default is to load all plugins, if
-        #          |            `start = [ "blabla" "blablabla" ]` is
-        #          |            not passed as an argument to neovimBuilder!
-        #          |
-        #          | Make sure to add:
-        #          | ```
-        #          | "plugin:yourPluginName" = {
-        #          |   url   = "github:exampleAuthor/examplePlugin";
-        #          |   flake = false;
-        #          | };
-        #          | 
-        #          | "plugin:anotherPluginYouLike" = {
-        #          |   url   = "github:exampleAuthor/examplePlugin";
-        #          |   flake = false;
-        #          | };
-        #          | ```
-        #          | to your imports!
-        # opt      | List of optional plugins to load only when 
-        #          | explicitly loaded from inside neovim
-        neovimBuilder = { customRC ? ""
-                        , viAlias  ? true
-                        , vimAlias ? true
-                        , start    ? builtins.attrValues pkgs.neovimPlugins
-                        , opt      ? []
-                        , debug    ? false }:
-                        let
-                          myNeovimUnwrapped = pkgs.neovim-unwrapped.overrideAttrs (prev: {
-                            propagatedBuildInputs = with pkgs; [ pkgs.stdenv.cc.cc.lib ];
-                          });
-                        in
-                        pkgs.wrapNeovim myNeovimUnwrapped {
-                          inherit viAlias;
-                          inherit vimAlias;
-                          configure = {
-                            customRC = customRC;
-                            packages.myVimPackage = with pkgs.neovimPlugins; {
-                              start = start;
-                              opt = opt;
-                            };
-                          };
-                        };
-      in
-      rec {
-        defaultApp = apps.nvim;
-        defaultPackage = packages.neovimMx;
+  in {
 
-        apps.nvim = {
-            type = "app";
-            program = "${defaultPackage}/bin/nvim";
-          };
+    apps = lib.withDefaultSystems (sys:
+    {
+      nvim = {
+        type = "app";
+        program = "${self.defaultPackage."${sys}"}/bin/nvim";
+      };
+    });
 
-        packages.neovimMx = neovimBuilder {
-          # the next line loads a trivial example of a init.vim:
-          customRC = pkgs.lib.readFile ./init.vim;
-          # if you wish to only load the onedark-vim colorscheme:
-          # start = with pkgs.neovimPlugins; [ 
-	  #   colors
-	  # ];
-        };
-      }
-    );
+    defaultApp = lib.withDefaultSystems (sys: {
+      type = "app";
+      program = "${self.defaultPackage."${sys}"}/bin/nvim";
+    });
+
+    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimWT);
+
+    packages = lib.withDefaultSystems (sys: {
+      neovimWT = mkNeoVimPkg allPkgs."${sys}";
+    });
+  };
 }
