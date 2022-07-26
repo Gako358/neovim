@@ -16,36 +16,42 @@ in {
     vim.startPlugins = with pkgs.neovimPlugins; [
       nvim-treesitter
     ];
+    vim.luaConfigRC = let
+      tree-sitter-hare = builtins.fetchGit {
+        url = "https://git.sr.ht/~ecmma/tree-sitter-hare";
+        ref = "master";
+        rev = "bc26a6a949f2e0d98b7bfc437d459b250900a165";
+      };
     in ''
-        -- Treesitter config
-        require'nvim-treesitter.configs'.setup {
-          highlight = {
-            enable = true,
-            disable = {},
+      -- Treesitter config
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          enable = true,
+          disable = {},
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
           },
-          incremental_selection = {
-            enable = true,
-            keymaps = {
-              init_selection = "gnn",
-              node_incremental = "grn",
-              scope_incremental = "grc",
-              node_decremental = "grm",
-            },
-          },
-          ${writeIf cfg.autotagHtml ''
-          autotag = {
-            enable = true,
-          },
+        },
+        ${writeIf cfg.autotagHtml ''
+        autotag = {
+          enable = true,
+        },
         ''}
-        }
-        local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
-        parser_config.hare = {
-          install_info = {
-            url = "",
-            files = { "" }
-          },
-          filetype = "ha",
-        }
-      '';
+      }
+      local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
+       parser_config.hare = {
+        install_info = {
+          url = "",
+          files = { "" }
+        },
+        filetype = "ha",
+      }
+    '';
   };
 }
