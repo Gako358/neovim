@@ -36,7 +36,7 @@ in {
             else null
           )
         ]
-        (
+        ++(
           if cfg.rust.enable
           then [
             rust-tools
