@@ -37,6 +37,7 @@ in {
         'make',
         'json',
         'rust',
+        'nix',
         'vim',
         'lua',
         'css',
