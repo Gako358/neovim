@@ -36,10 +36,9 @@ in {
             else null
           )
         ]
-        ++ (
+        (
           if cfg.rust.enable
           then [
-            crates-nvim
             rust-tools
           ]
           else []
