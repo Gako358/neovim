@@ -23,12 +23,16 @@ in {
       vim.luaConfigRC = ''
 
 	require("github-theme").setup({
-  	  theme_style = "dark_default",
+  	  theme_style = "dark",
   	  function_style = "italic",
   	  sidebars = {"qf", "vista_kind", "terminal", "packer"},
 
   	  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-  	  colors = {hint = "orange", error = "#ff0000"},
+  	  colors = {
+        hint = "orange", 
+        error = "#ff0000"
+        bg = "#282828"
+      },
 
   	  -- Overwrite the highlight groups
   	  overrides = function(c)
