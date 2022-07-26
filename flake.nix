@@ -277,8 +277,8 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
-          vim.dashboard.startify.enable = true;
-          vim.dashboard.startify.customHeader = [ "NIXOS NEOVIM CONFIG" ];
+          #vim.dashboard.startify.enable = true;
+          #vim.dashboard.startify.customHeader = [ "NIXOS NEOVIM CONFIG" ];
           vim.theme.nord.enable = true;
           vim.disableArrows = true;
           vim.statusline.lightline.enable = true;
