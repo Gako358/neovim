@@ -1,5 +1,5 @@
 {
-  description = "MerrinX's NeoVim config";
+  description = "Wil Taylor's NeoVim config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -9,8 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ### Vim plugins ###
-    
+    # Vim plugins
+
     # Theme
     github-theme = {
       url = "github:projekt0n/github-nvim-theme";
@@ -23,7 +23,7 @@
   let
     plugins = [
       "github-theme"
-    
+
     ];
 
     externalBitsOverlay = top: last: {
@@ -56,14 +56,6 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
-
-          # Enable theme
-          # vim.theme = {
-	   # enable = true;
-	   # name = "github-theme";
-	   # style = "darker";
-	 # };
-      
         };
       };
 
@@ -82,10 +74,10 @@
       program = "${self.defaultPackage."${sys}"}/bin/nvim";
     });
 
-    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMx);
+    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimWT);
 
     packages = lib.withDefaultSystems (sys: {
-      neovimMx = mkNeoVimPkg allPkgs."${sys}";
+      neovimWT = mkNeoVimPkg allPkgs."${sys}";
     });
   };
 }

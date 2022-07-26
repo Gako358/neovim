@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 {
   imports = [
-    # ./theme
-
+    ./core
+    ./basic
   ];
 }
