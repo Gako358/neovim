@@ -30,7 +30,7 @@ in {
   	  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
   	  colors = {
         hint = "orange", 
-        error = "#ff0000"
+        error = "#ff0000",
         bg = "#282828"
       },
 
