@@ -159,6 +159,10 @@
       url = "github:arcticicestudio/nord-vim";
       flake = false;
     };
+    vim-startify = { 
+      url = "github:mhinz/vim-startify"; 
+      flake = false; 
+    };
 
     # Rust crates
     crates-nvim = {
