@@ -130,6 +130,8 @@
           vim.lsp.bash = true;
           vim.lsp.clang = true;
           vim.lsp.nix = true;
+
+          vim.treesitter.enable = true;
         };
       };
 
