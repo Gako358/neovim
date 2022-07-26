@@ -3,10 +3,10 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.theme.github-nvim;
+  cfg = config.vim.theme.github;
 in {
 
-  options.vim.theme.github-nvim = {
+  options.vim.theme.github = {
     enable = mkEnableOption "Enable github-nvim theme";
 
     lineNumberBackgroundColoured = mkOption {
@@ -32,7 +32,6 @@ in {
       description = "Set to disable colourful backgrounds on diff";
       type = types.bool;
     };
-
 
     bold = mkOption {
       default = true;
@@ -63,12 +62,13 @@ in {
   config = mkIf (cfg.enable) 
   (let
     mkVimBool = val: if val then "1" else "0";
+    mkIfNotNone = val: if val == "none" then null else val;
   in {
     vim.configRC = ''
-      colorscheme github-nvim
+      colorscheme github_dark
     '';
 
-    vim.startPlugins = with pkgs.neovimPlugins; [github-nvim];
+    vim.startPlugins = with pkgs.neovimPlugins; [github-nvim-theme];
     
   });
 
