@@ -304,9 +304,9 @@
           vim.filetree.nvimTreeLua.enable = true;
           vim.git.enable = true;
           vim.formatting.editorConfig.enable = true;
-          vim.editor.indentGuide = true;
-          vim.editor.underlineCurrentWord = true;
-          vim.test.enable = true;
+          # vim.editor.indentGuide = true;
+          # vim.editor.underlineCurrentWord = true;
+          # vim.test.enable = true;
         };
       };
 
