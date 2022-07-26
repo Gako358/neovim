@@ -1,17 +1,25 @@
-{config, lib, pkgs, ...}:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
+    ./completion
+    ./theme
     ./core
     ./basic
-    ./themes
-    ./dashboard
     ./statusline
-    ./lsp
-    ./fuzzyfind
+    ./tabline
     ./filetree
+    ./visuals
+    ./lsp
+    ./treesitter
+    ./autopairs
+    ./snippets
+    ./keys
+    ./markdown
+    ./telescope
     ./git
-    ./formating
-    ./editor
-    ./test
   ];
 }

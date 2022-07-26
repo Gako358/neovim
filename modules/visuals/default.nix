@@ -1,10 +1,11 @@
 {
   pkgs,
-  lib,
   config,
+  lib,
   ...
 }: {
   imports = [
-    ./nvimtreelua.nix
+    ./config.nix
+    ./visuals.nix
   ];
 }

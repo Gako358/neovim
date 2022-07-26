@@ -1,17 +1,18 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim.filetree.nvimTreeLua;
 in {
   options.vim.filetree.nvimTreeLua = {
-    enable = mkEnableOption "Enable nvim-tree-lua";
-
-    devIcons = mkOption {
-      default = true;
-      description = "Install devicons to display next to files";
+    enable = mkOption {
       type = types.bool;
+      default = false;
+      description = "Enable nvim-tree-lua";
     };
 
     treeSide = mkOption {
@@ -21,14 +22,14 @@ in {
     };
 
     treeWidth = mkOption {
-      default = 30;
+      default = 25;
       description = "Width of the tree in charecters";
       type = types.int;
     };
 
     hideFiles = mkOption {
-      default = [ ".git" "node_modules" ".cache" ];
-      description = "Files to hide in the file view by default";
+      default = [".git" "node_modules" ".cache"];
+      description = "Files to hide in the file view by default.";
       type = with types; listOf str;
     };
 
@@ -38,7 +39,7 @@ in {
       type = types.bool;
     };
 
-    openOnDirectoryStart = mkOption {
+    openOnSetup = mkOption {
       default = true;
       description = "Open when vim is started on a directory";
       type = types.bool;
@@ -51,7 +52,7 @@ in {
     };
 
     ignoreFileTypes = mkOption {
-      default = [ "startify" ];
+      default = [];
       description = "Ignore file types";
       type = with types; listOf str;
     };
@@ -87,8 +88,14 @@ in {
     };
 
     disableNetRW = mkOption {
-      default = true;
+      default = false;
       description = "Disables netrw and replaces it with tree";
+      type = types.bool;
+    };
+
+    hijackNetRW = mkOption {
+      default = true;
+      description = "Prevents netrw from automatically opening when opening directories";
       type = types.bool;
     };
 
@@ -100,83 +107,74 @@ in {
 
     groupEmptyFolders = mkOption {
       default = true;
-      description = "compat empty folders trees into a single item";
+      description = "Compact empty folders trees into a single item";
+      type = types.bool;
+    };
+
+    lspDiagnostics = mkOption {
+      default = true;
+      description = "Shows lsp diagnostics in the tree";
       type = types.bool;
     };
   };
 
   config = mkIf cfg.enable (
     let
-      mkVimBool =  val: if val then 1 else 0;
+      mkVimBool = val:
+        if val
+        then 1
+        else 0;
     in {
-    vim.startPlugins = with pkgs.neovimPlugins; [
-      nvim-tree-lua
-      (if cfg.devIcons then nvim-web-devicons else null)
-    ];
+      vim.startPlugins = with pkgs.neovimPlugins; [
+        nvim-tree-lua
+      ];
 
-    vim.nnoremap = {
-      "<leader>fn" = "<cmd>NvimTreeToggle<cr>";
-    };
+      vim.nnoremap = {
+        "<C-n>" = ":NvimTreeToggle<CR>";
+        "<leader>tr" = ":NvimTreeRefresh<CR>";
+        "<leader>tf" = ":NvimTreeFindFile<CR>";
+      };
 
-    vim.luaConfigRC= ''
-      local wk = require("which-key")
+      vim.globals = {
+        "nvim_tree_add_trailing" = mkVimBool cfg.trailingSlash;
+        "nvim_tree_group_empty" = mkVimBool cfg.groupEmptyFolders;
+      };
 
-      wk.register({
-        f = {
-          name = "File Management",
-          n = {"File Tree"},
-        },
-      }, { prefix = "<leader>" })
-
-
-      require'nvim-tree'.setup {
-        disable_netrw       = ${toString cfg.disableNetRW},
-        hijack_netrw        = true,
-        open_on_setup       = false,
-        ignore_ft_on_setup  = {},
-        update_to_buf_dir   = {
-          enable = true,
-          auto_open = ${toString cfg.openOnDirectoryStart},
-        },
-        auto_close          = ${toString cfg.closeOnLastWindow},
-        open_on_tab         = false,
-        hijack_cursor       = false,
-        update_cwd          = false,
-        update_focused_file = {
-          enable      = false,
-          update_cwd  = false,
-          ignore_list = {}
-        },
-        system_open = {
-          cmd  = nil,
-          args = {}
-        },
-        filters = {
-          dotfiles = ${if cfg.hideDotFiles then "true" else "false"},
-          custom = {".git","node_modules",".cache"}          
-        },
-        git = {
-          enable = true,
-          ignore = ${if cfg.hideIgnoredGitFiles then "true" else "false"}
-        },
-        view = {
-          width = ${toString cfg.treeWidth},
-          side = '${cfg.treeSide}',
-          auto_resize = false,
-          mappings = {
-            custom_only = false,
-            list = {}
-          }
-        }
-      }
-    '';
-
-    vim.globals = {
-      "nvim_tree_quit_on_open" = mkVimBool cfg.closeOnFileOpen;
-      "nvim_tree_indent_markers" = mkVimBool cfg.indentMarkers;
-      "nvim_tree_add_trailing" = mkVimBool cfg.trailingSlash;
-      "nvim_tree_group_empty" = mkVimBool cfg.groupEmptyFolders;
-    };
-  });
+      vim.luaConfigRC = ''
+        require'nvim-tree'.setup({
+          disable_netrw = ${boolToString cfg.disableNetRW},
+          hijack_netrw = ${boolToString cfg.hijackNetRW},
+          open_on_tab = ${boolToString cfg.openTreeOnNewTab},
+          open_on_setup = ${boolToString cfg.openOnSetup},
+          diagnostics = {
+            enable = ${boolToString cfg.lspDiagnostics},
+          },
+          view  = {
+            width = ${toString cfg.treeWidth},
+            side = ${"'" + cfg.treeSide + "'"},
+          },
+          renderer = {
+            indent_markers = {
+              enable = ${boolToString cfg.indentMarkers},
+            },
+          },
+          actions = {
+            open_file = {
+              quit_on_open = ${boolToString cfg.closeOnFileOpen},
+            },
+          },
+          git = {
+            enable = true,
+            ignore = ${boolToString cfg.hideIgnoredGitFiles},
+          },
+          filters = {
+            dotfiles = ${boolToString cfg.hideDotFiles},
+            custom = {
+              ${builtins.concatStringsSep "\n" (builtins.map (s: "\"" + s + "\",") cfg.hideFiles)}
+            },
+          },
+        })
+      '';
+    }
+  );
 }
-

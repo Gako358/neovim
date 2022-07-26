@@ -1,11 +1,12 @@
 {
-  pkgs,
   config,
   lib,
+  pkgs,
   ...
 }: {
   imports = [
-    ./lualine.nix
+    ./treesitter.nix
+    ./context.nix
     ./config.nix
   ];
 }

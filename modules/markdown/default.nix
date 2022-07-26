@@ -1,11 +1,11 @@
 {
-  pkgs,
   config,
   lib,
+  pkgs,
   ...
 }: {
   imports = [
-    ./lualine.nix
     ./config.nix
+    ./glow.nix
   ];
 }

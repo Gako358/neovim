@@ -5,6 +5,6 @@
   ...
 }: {
   imports = [
-    ./nvimtreelua.nix
+    ./vsnip.nix
   ];
 }
