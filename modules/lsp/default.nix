@@ -132,7 +132,7 @@ in {
         --
         -- always enable sumneko_lua for Lua developing
         local server_set = {
-          sumneko_lua = 0,
+          sumneko_lua = 1,
         }
         
         -- IF
