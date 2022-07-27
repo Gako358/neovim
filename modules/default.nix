@@ -6,6 +6,6 @@
     ./theme
 
     ./treesitter
-    ./lsp
+    #./lsp
   ];
 }

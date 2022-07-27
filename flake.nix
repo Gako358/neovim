@@ -34,12 +34,6 @@
       flake = false;
     };
 
-    nvim-lsp-installer = {
-      url = "github:williamboman/nvim-lsp-installer";
-      flake = false;
-    };
-
-
   };
 
   outputs = { self, nixpkgs, neovim, ... }@inputs:
@@ -49,7 +43,6 @@
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
-      "nvim-lsp-installer"
     ];
 
     externalBitsOverlay = top: last: {
@@ -85,12 +78,12 @@
           vim.theme.github-theme.enable = true;
 
           vim.treesitter.enable = true;
-          vim.lsp.enable = true;
-          vim.lsp.python = true;
-          vim.lsp.clang = true;
-          vim.lsp.bash = true;
-          vim.lsp.lua = true;
-          vim.lsp.nix = true;
+          #vim.lsp.enable = true;
+          #vim.lsp.python = true;
+          #vim.lsp.clang = true;
+          #vim.lsp.bash = true;
+          #vim.lsp.lua = true;
+          #vim.lsp.nix = true;
 
         };
       };

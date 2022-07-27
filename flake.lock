@@ -70,22 +70,6 @@
         "type": "github"
       }
     },
-    "nvim-lsp-installer": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1658842139,
-        "narHash": "sha256-kKCx215bnaf1izAXQW22JgPoOjOCdZ+ZhmkJL88f2UY=",
-        "owner": "williamboman",
-        "repo": "nvim-lsp-installer",
-        "rev": "ff51c2173d2917517c96f22d9c21940307930b57",
-        "type": "github"
-      },
-      "original": {
-        "owner": "williamboman",
-        "repo": "nvim-lsp-installer",
-        "type": "github"
-      }
-    },
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -139,7 +123,6 @@
         "github-theme": "github-theme",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
-        "nvim-lsp-installer": "nvim-lsp-installer",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
         "plenary-nvim": "plenary-nvim"
