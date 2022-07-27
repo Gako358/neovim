@@ -17,24 +17,35 @@ in {
       nvim-treesitter
     ];
     vim.luaConfigRC = let
+      tree-sitter-hare = builtins.fetchGit {
+          url = "https://git.sr.ht/~ecmma/tree-sitter-hare";
+          ref = "master";
+          rev = "bc26a6a949f2e0d98b7bfc437d459b250900a165";
+        };
     in ''
       -- Treesitter config
       require'nvim-treesitter.configs'.setup {
-        -- A list of parser names, or "all"
-        ensure_installed = { "c", "lua", "python", "nix" },
-
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        auto_install = true,
-
         highlight = {
-          -- `false` will disable the whole extension
           enable = true,
-
-          additional_vim_regex_highlighting = false,
+          disable = {},
         },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+          },
+        },
+      }
+      local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
+      parser_config.hare = {
+        install_info = {
+          url = "",
+          files = { "" }
+        },
+        filetype = "ha",
       }
     '';
   };
