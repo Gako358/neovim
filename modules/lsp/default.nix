@@ -15,16 +15,6 @@
     };
 
     config = mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [
-       rnix-lsp
-       clang-tools
-       rust-analyzer
-       nodePackages.pyright
-       sumneko-lua-language-server
-       nodePackages.bash-language-server
-
-      ];
-
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-lspconfig
       ];
