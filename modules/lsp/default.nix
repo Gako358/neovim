@@ -17,9 +17,9 @@
        rnix-lsp
        clang-tools
        rust-analyzer
-       nodePackages.bash
        nodePackages.pyright
        sumneko-lua-language-server
+       nodePackages.bash-language-server
 
       ];
 
