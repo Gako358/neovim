@@ -15,6 +15,7 @@ in {
   config = mkIf cfg.enable {
     vim.startPlugins = with pkgs.neovimPlugins; [
       nvim-lspconfig
+      nvim-lsp-installer
     ];
 
     vim.luaConfigRC = let
