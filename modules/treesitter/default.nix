@@ -20,7 +20,7 @@ in {
       else "";
     in {  
       vim.startPlugins = with pkgs.neovimPlugins; [
-        nvim-treesitter.withPlugins (plugins: unstable.tree-sitter.allGrammars)
+        nvim-treesitter
       ];
       
       vim.luaConfigRC = let
