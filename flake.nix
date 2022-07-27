@@ -86,6 +86,7 @@
 
           vim.treesitter.enable = true;
           vim.lsp.enable = true;
+          vim.lsp.python = true;
 
         };
       };
