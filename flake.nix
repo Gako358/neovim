@@ -24,10 +24,10 @@
     };
 
     # LSP
-    nvim-treesitter = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      flake = false;
-    };
+    # nvim-treesitter = {
+    #   url = "github:nvim-treesitter/nvim-treesitter";
+    #   flake = false;
+    # };
 
     nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
@@ -41,7 +41,7 @@
     plugins = [
       "github-theme"
       "plenary-nvim"
-      "nvim-treesitter"
+      # "nvim-treesitter"
       "nvim-lspconfig"
     ];
 
@@ -77,7 +77,7 @@
           vim.vimAlias = true;
           vim.theme.github-theme.enable = true;
 
-          vim.treesitter.enable = true;
+          # vim.treesitter.enable = true;
           vim.lsp.enable = true;
           vim.lsp.python = true;
           vim.lsp.clang = true;
