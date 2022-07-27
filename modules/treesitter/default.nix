@@ -54,15 +54,6 @@ in {
           enable = true,
         },
 
-        textobjects = {
-          select = {
-            enable = true,
-
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-          },
-        },
-
         incremental_selection = {
           enable = true,
           keymaps = {
