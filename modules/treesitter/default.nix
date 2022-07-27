@@ -19,52 +19,26 @@ in {
     vim.luaConfigRC = let
     in ''
       -- Treesitter config
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          vim.g.enable_treesitter_ft,
-          'typescript',
-          'javascript',
-          'comment',
-          'python',
-          'bibtex',
-          'html',
-          'bash',
-          'make',
-          'json',
-          'rust',
-          'vim',
-          'lua',
-          'css',
-          'cpp',
-          'c',
-        },
+      require'nvim-treesitter.configs'.setup {
+        -- A list of parser names, or "all"
+        ensure_installed = { "c", "lua", "rust", "nix" },
+
+        -- Install parsers synchronously (only applied to `ensure_installed`)
+        sync_install = false,
+
+        -- Automatically install missing parsers when entering buffer
+        auto_install = true,
+
+        -- List of parsers to ignore installing (for "all")
+        ignore_install = { "javascript" },
+
         highlight = {
+          -- `false` will disable the whole extension
           enable = true,
-        },
-        matchup = {
-          enable = true,
-        },
-        textobjects = {
-          select = {
-            enable = true,
 
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-              ["ab"] = "@block.outer",
-              ["ib"] = "@block.inner",
-              ["al"] = "@call.outer",
-              ["il"] = "@call.inner",
-            },
-          },
+          additional_vim_regex_highlighting = false,
         },
-      })
+      }
     '';
   };
 }
