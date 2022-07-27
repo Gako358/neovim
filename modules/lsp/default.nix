@@ -70,7 +70,7 @@
         '' else ""}
 
         ${if cfg.clang then ''
-          require('lspconfig')['clang'].setup{
+          require('lspconfig')['clangd'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
@@ -79,7 +79,7 @@
         '' else ""}
 
         ${if cfg.bash then ''
-          require('lspconfig')['bash'].setup{
+          require('lspconfig')['bashls'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"}
@@ -87,15 +87,15 @@
         '' else ""}
 
         ${if cfg.lua then ''
-          require('lspconfig')['lua'].setup{
+          require('lspconfig')['sumneko_lua'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
-              cmd = {"${pkgs.sumneko-lua-language-server}/bin/sumneko", "start"}
+              cmd = {"${pkgs.sumneko-lua-language-server}/bin/sumneko_lua", "start"}
           }
         '' else ""}
 
         ${if cfg.nix then ''
-          require('lspconfig')['nix'].setup{
+          require('lspconfig')['rnix'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
