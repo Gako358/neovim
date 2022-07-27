@@ -166,7 +166,6 @@ in {
         -- install those servers when necessary.
         for lspserver, _ in pairs(server_set) do
           local opts = {
-            on_attach = require("plugins.coding.keymap").lsp_keymap,
             capabilities = capabilities,
             root_dir = vim.loop.cwd,
             handlers = handlers,
