@@ -12,6 +12,10 @@
       };
 
       python = mkEnableOption "Enable Python Language Support";
+      clang = mkEnableOption "Enable C Language Support";
+      bash = mkEnableOption "Enable Bash Language Support";
+      lua = mkEnableOption "Enable Lua Language Support";
+      nix = mkEnableOption "Enable Nix Language Support";
     };
 
     config = mkIf cfg.enable {
@@ -64,6 +68,40 @@
               cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
           }
         '' else ""}
+
+        ${if cfg.clang then ''
+          require('lspconfig')['clang'].setup{
+              on_attach = on_attach,
+              flags = lsp_flags,
+              cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
+              filetypes = { "c", "cpp", "objc", "objcpp" };
+          }
+        '' else ""}
+
+        ${if cfg.bash then ''
+          require('lspconfig')['bash'].setup{
+              on_attach = on_attach,
+              flags = lsp_flags,
+              cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"}
+          }
+        '' else ""}
+
+        ${if cfg.lua then ''
+          require('lspconfig')['lua'].setup{
+              on_attach = on_attach,
+              flags = lsp_flags,
+              cmd = {"${pkgs.sumneko-lua-language-server}/bin/sumneko", "start"}
+          }
+        '' else ""}
+
+        ${if cfg.nix then ''
+          require('lspconfig')['nix'].setup{
+              on_attach = on_attach,
+              flags = lsp_flags,
+              cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
+          }
+        '' else ""}
+
       '';
   };
 }
