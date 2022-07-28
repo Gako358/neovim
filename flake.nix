@@ -64,18 +64,24 @@
       url = "github:saadparwaiz1/cmp_luasnip";
       flake = false;
     };
+    lightspeed = {
+      url = "github:ggandor/lightspeed.nvim";
+      flake = false;
+    };
 
     # CORE PLUGINS
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
     };
-    lightspeed-nvim = {
-      url = "github:ggandor/lightspeed.nvim";
-      flake = false;
-    };
     web-devicons = {
       url = "github:kyazdani42/nvim-web-devicons";
+      flake = false;
+    };
+
+    # FILETREE
+    nvim-filetree = {
+      url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
 
@@ -96,9 +102,10 @@
       "cmp-path"
       "cmp-buffer"
       "cmp-luasnip"
+      "lightspeed"
       "nvim-autopairs"
-      "lightspeed-nvim"
       "web-devicons"
+      "nvim-filetree"
     ];
 
     externalBitsOverlay = top: last: {
@@ -147,7 +154,7 @@
           vim.autocomplete.enable = true;
 
           vim.autopairs.enable = true;
-          vim.primaryPlugins.enable = true;
+          vim.filetree.enable = true;
 
         };
       };

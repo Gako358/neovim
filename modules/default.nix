@@ -11,6 +11,6 @@
     ./cmp
 
     ./autopairs
-    ./primary
+    ./filetree
   ];
 }

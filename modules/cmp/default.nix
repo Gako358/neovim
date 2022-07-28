@@ -20,6 +20,7 @@ in {
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         github-copilot
+        lightspeed
         nvim-cmp
         luasnip
         cmp-nvim-lsp

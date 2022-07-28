@@ -111,7 +111,7 @@
         "type": "github"
       }
     },
-    "lightspeed-nvim": {
+    "lightspeed": {
       "flake": false,
       "locked": {
         "lastModified": 1656952533,
@@ -214,6 +214,22 @@
         "type": "github"
       }
     },
+    "nvim-filetree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659001763,
+        "narHash": "sha256-2x6DmLsuhhU7A4I/pELiC6QI+eCB2LC/PuSEHFhV2Zw=",
+        "owner": "kyazdani42",
+        "repo": "nvim-tree.lua",
+        "rev": "7fcb48c852b9d58709169a4dc1ec634fa9ea56f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kyazdani42",
+        "repo": "nvim-tree.lua",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -270,12 +286,13 @@
         "cmp-path": "cmp-path",
         "github-copilot": "github-copilot",
         "github-theme": "github-theme",
-        "lightspeed-nvim": "lightspeed-nvim",
+        "lightspeed": "lightspeed",
         "luasnip": "luasnip",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
         "nvim-autopairs": "nvim-autopairs",
         "nvim-cmp": "nvim-cmp",
+        "nvim-filetree": "nvim-filetree",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
         "plenary-nvim": "plenary-nvim",
