@@ -151,6 +151,11 @@ in {
       "<space>" = "<nop>";
     } else {};
 
+    vim.luaConfigRC = ''
+      vim.g.copilot_no_tab_map = true
+      vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+    '';
+
     vim.configRC = ''
 
       "Settings that are set for everything
@@ -166,9 +171,6 @@ in {
       set tm=${toString cfg.mapTimeout}
       set hidden
 
-      vim.g.copilot_no_tab_map = true
-      vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
       ${writeIf cfg.splitBelow ''
         set splitbelow
       ''}
@@ -182,7 +184,7 @@ in {
       ''}
 
       ${writeIf cfg.autoIndent ''
-        set ai
+        set smartindent
       ''}
             
       ${writeIf cfg.preventJunkFiles ''
