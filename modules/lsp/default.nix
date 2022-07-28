@@ -105,7 +105,7 @@
         '' else ""}
 
         ${if cfg.rust then ''
-          require('lspconfig')['rust-analyzer'].setup{
+          require('lspconfig')['rust_analyzer'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
