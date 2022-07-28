@@ -16,21 +16,8 @@
       bash = mkEnableOption "Enable Bash Language Support";
       lua = mkEnableOption "Enable Lua Language Support";
       nix = mkEnableOption "Enable Nix Language Support";
-      rust = {
-        enable = mkEnableOption "Rust LSP";
-        rustAnalyzerOpts = mkOption {
-          type = types.str;
-          default = ''
-            ["rust-analyzer"] = {
-              experimental = {
-                procAttrMacros = true,
-              },
-            },
-          '';
-          description = "options to pass to rust analyzer";
-        };
-      };
-      ts = mkEnableOption "TS Language LSP";
+      rust = mkEnableOption "Enable Rust Support";
+      typescript = mkEnableOption "Enable Typescript/Javascript Support";
     };
 
     config = mkIf cfg.enable {
@@ -125,7 +112,7 @@
           }
         '' else ""}
          
-        ${if cfg.ts then ''
+        ${if cfg.typescript then ''
           require('lspconfig')['tsserver'].setup{
               on_attach = on_attach,
               flags = lsp_flags,

@@ -80,13 +80,13 @@
 
           vim.treesitter.enable = true;
           vim.lsp.enable = true;
-          vim.lsp.rust.enable = true;
           vim.lsp.python = true;
           vim.lsp.clang = true;
           vim.lsp.bash = true;
           vim.lsp.lua = true;
           vim.lsp.nix = true;
-          vim.lsp.ts = true;
+          vim.lsp.rust = true;
+          vim.lsp.typescript = true;
 
         };
       };
