@@ -11,5 +11,6 @@
     ./cmp
 
     ./autopairs
+    ./primary
   ];
 }

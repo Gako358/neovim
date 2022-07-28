@@ -147,6 +147,7 @@
           vim.autocomplete.enable = true;
 
           vim.autopairs.enable = true;
+          vim.primaryPlugins.enable = true;
 
         };
       };
