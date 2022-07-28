@@ -79,6 +79,22 @@
         "type": "github"
       }
     },
+    "github-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1655477152,
+        "narHash": "sha256-V13La54aIb3hQNDE7BmOIIZWy7In5cG6kE0fti/wxVQ=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "c2e75a3a7519c126c6fdb35984976df9ae13f564",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "copilot.vim",
+        "type": "github"
+      }
+    },
     "github-theme": {
       "flake": false,
       "locked": {
@@ -120,11 +136,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1658992702,
-        "narHash": "sha256-8j8yyGDFltucVN7+HVpXwiQ/MeHvlAHR2IF9UGDp+W8=",
+        "lastModified": 1659008958,
+        "narHash": "sha256-+LaSruYw9Q6u2C/0X79kIAj1n3+RTOXLiT3STx/yd1k=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "b971547c5456e5c96a759adefb3a91bf0c28e6e0",
+        "rev": "9cb8b5f8dbef6c81d287639726e425d80c15c70d",
         "type": "github"
       },
       "original": {
@@ -220,6 +236,7 @@
         "cmp-luasnip": "cmp-luasnip",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
+        "github-copilot": "github-copilot",
         "github-theme": "github-theme",
         "luasnip": "luasnip",
         "neovim": "neovim",

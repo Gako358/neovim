@@ -33,6 +33,12 @@
       flake = false;
     };
 
+    # COPILOT
+    github-copilot = {
+      url = "github:github/copilot.vim";
+      flake = false;
+    };
+
     # CMP
     nvim-cmp = {
       url = "github:hrsh7th/nvim-cmp";
@@ -68,6 +74,7 @@
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
+      "github-copilot"
       "nvim-cmp"
       "luasnip"
       "cmp-nvim-lsp"

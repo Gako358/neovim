@@ -19,6 +19,7 @@ in {
         else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
+        github-copilot
         nvim-cmp
         luasnip
         cmp-nvim-lsp
