@@ -149,19 +149,16 @@ in {
 
     vim.nnoremap = if (cfg.mapLeaderSpace) then {
       "<space>" = "<nop>";
+      "<C-h>" = "<C-w>h";
+      "<C-j>" = "<C-w>j";
+      "<C-k>" = "<C-w>k";
+      "<C-l>" = "<C-w>l";
     } else {};
 
     vim.luaConfigRC = ''
       vim.g.copilot_no_tab_map = true
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
     '';
-
-    vim.nnoremap = {
-      "<C-h>" = "<C-w>h";
-      "<C-j>" = "<C-w>j";
-      "<C-k>" = "<C-w>k";
-      "<C-l>" = "<C-w>l";
-    };
 
     vim.configRC = ''
 
