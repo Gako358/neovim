@@ -156,6 +156,13 @@ in {
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
     '';
 
+    vim.nnoremap = {
+      "<C-h>" = "<C-w>h";
+      "<C-j>" = "<C-w>j";
+      "<C-k>" = "<C-w>k";
+      "<C-l>" = "<C-w>l";
+    };
+
     vim.configRC = ''
 
       "Settings that are set for everything
@@ -170,11 +177,6 @@ in {
       set shortmess+=c
       set tm=${toString cfg.mapTimeout}
       set hidden
-
-      map('n', '<C-h>', '<C-w>h')
-      map('n', '<C-j>', '<C-w>j')
-      map('n', '<C-k>', '<C-w>k')
-      map('n', '<C-l>', '<C-w>l')
 
       ${writeIf cfg.splitBelow ''
         set splitbelow
