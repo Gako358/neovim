@@ -28,9 +28,34 @@
       url = "github:nvim-treesitter/nvim-treesitter";
       flake = false;
     };
-
     nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
+      flake = false;
+    };
+
+    # CMP
+    nvim-cmp = {
+      url = "github:hrsh7th/nvim-cmp";
+      flake = false;
+    };
+    luasnip = {
+      url = "github:L3MON4D3/LuaSnip";
+      flake = false;
+    };
+    cmp-nvim-lsp = {
+      url = "github:hrsh7th/cmp-nvim-lsp";
+      flake = false;
+    };
+    cmp-path = {
+      url = "github:hrsh7th/cmp-path";
+      flake = false;
+    };
+    cmp-buffer = {
+      url = "github:hrsh7th/cmp-buffer";
+      flake = false;
+    };
+    cmp-luasnip = {
+      url = "github:saadparwaiz1/cmp_luasnip";
       flake = false;
     };
 
@@ -43,6 +68,12 @@
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
+      "nvim-cmp"
+      "luasnip"
+      "cmp-nvim-lsp"
+      "cmp-path"
+      "cmp-buffer"
+      "cmp-luasnip"
     ];
 
     externalBitsOverlay = top: last: {
@@ -87,6 +118,8 @@
           vim.lsp.nix = true;
           vim.lsp.rust = true;
           vim.lsp.typescript = true;
+
+          vim.autocomplete.enable = true;
 
         };
       };
