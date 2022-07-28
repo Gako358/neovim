@@ -65,9 +65,17 @@
       flake = false;
     };
 
-    # PRIMARY
+    # CORE PLUGINS
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
+      flake = false;
+    };
+    lightspeed-nvim = {
+      url = "github:ggandor/lightspeed.nvim";
+      flake = false;
+    };
+    web-devicons = {
+      url = "github:kyazdani42/nvim-web-devicons";
       flake = false;
     };
 
@@ -89,6 +97,8 @@
       "cmp-buffer"
       "cmp-luasnip"
       "nvim-autopairs"
+      "lightspeed-nvim"
+      "web-devicons"
     ];
 
     externalBitsOverlay = top: last: {

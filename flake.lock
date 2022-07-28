@@ -111,6 +111,22 @@
         "type": "github"
       }
     },
+    "lightspeed-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656952533,
+        "narHash": "sha256-ooGtrjEA8D/VFhQEAKCm5OrXz0LknTKvaulVqRClmgo=",
+        "owner": "ggandor",
+        "repo": "lightspeed.nvim",
+        "rev": "a4b4277d143270c6a7d85ef2e1574a1bbeab6677",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggandor",
+        "repo": "lightspeed.nvim",
+        "type": "github"
+      }
+    },
     "luasnip": {
       "flake": false,
       "locked": {
@@ -254,6 +270,7 @@
         "cmp-path": "cmp-path",
         "github-copilot": "github-copilot",
         "github-theme": "github-theme",
+        "lightspeed-nvim": "lightspeed-nvim",
         "luasnip": "luasnip",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
@@ -261,7 +278,24 @@
         "nvim-cmp": "nvim-cmp",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
-        "plenary-nvim": "plenary-nvim"
+        "plenary-nvim": "plenary-nvim",
+        "web-devicons": "web-devicons"
+      }
+    },
+    "web-devicons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1657021684,
+        "narHash": "sha256-+t6EVhQ7iC9BZOtVeQwrzkmpmUtc/WWBcUohoX4/+Tg=",
+        "owner": "kyazdani42",
+        "repo": "nvim-web-devicons",
+        "rev": "2d02a56189e2bde11edd4712fea16f08a6656944",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kyazdani42",
+        "repo": "nvim-web-devicons",
+        "type": "github"
       }
     }
   },
