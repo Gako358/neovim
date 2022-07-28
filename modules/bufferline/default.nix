@@ -22,7 +22,7 @@ in {
 
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
-        "nvim-bufferline"
+        nvim-bufferline
       ];
 
       vim.nnoremap = {
