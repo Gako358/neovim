@@ -1,4 +1,4 @@
-{ pkgs, lib, config }:
+{ pkgs, lib, config, ... }:
 with lib;
 with builtins;
 let
