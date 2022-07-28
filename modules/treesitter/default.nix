@@ -31,13 +31,24 @@ in {
         };
       
       in ''
-        require'nvim-treesitter.configs'.setup {
+        require'nvim-treesitter.configs'.setup({
 
           highlight = {
             enable = true,
+            use_languagetree = true,
             disable = {},
           },
-        }
+
+          rainbo = {
+            enable = true,
+            extended_mode = true,
+            max_file_lines = nil
+          },
+
+          autotag = {
+            enable = true,
+          }
+        })
       '';
     }
   );
