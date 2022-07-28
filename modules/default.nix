@@ -9,5 +9,7 @@
     ./lsp
 
     ./cmp
+
+    ./autopairs
   ];
 }

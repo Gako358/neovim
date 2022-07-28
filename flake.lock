@@ -166,6 +166,22 @@
         "type": "github"
       }
     },
+    "nvim-autopairs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1657074500,
+        "narHash": "sha256-a2z7Nq1uO96uVIBXUlmsNbtGjQm9VtR8DBwo9ReVHx8=",
+        "owner": "windwp",
+        "repo": "nvim-autopairs",
+        "rev": "972a7977e759733dd6721af7bcda7a67e40c010e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "windwp",
+        "repo": "nvim-autopairs",
+        "type": "github"
+      }
+    },
     "nvim-cmp": {
       "flake": false,
       "locked": {
@@ -241,6 +257,7 @@
         "luasnip": "luasnip",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
+        "nvim-autopairs": "nvim-autopairs",
         "nvim-cmp": "nvim-cmp",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",

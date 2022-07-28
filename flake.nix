@@ -65,6 +65,13 @@
       flake = false;
     };
 
+    # PRIMARY
+    nvim-autopairs = {
+      url = "github:windwp/nvim-autopairs";
+      flake = false;
+    };
+
+
   };
 
   outputs = { self, nixpkgs, neovim, ... }@inputs:
@@ -81,6 +88,7 @@
       "cmp-path"
       "cmp-buffer"
       "cmp-luasnip"
+      "nvim-autopairs"
     ];
 
     externalBitsOverlay = top: last: {
@@ -127,6 +135,8 @@
           vim.lsp.typescript = true;
 
           vim.autocomplete.enable = true;
+
+          vim.autopairs.enable = true;
 
         };
       };
