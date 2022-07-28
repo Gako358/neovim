@@ -78,6 +78,10 @@
       url = "github:kyazdani42/nvim-web-devicons";
       flake = false;
     };
+    nvim-bufferline = {
+      url = "github:akinsho/bufferline.nvim";
+      flake = false;
+    };
 
     # FILETREE
     nvim-filetree = {
@@ -106,6 +110,7 @@
       "nvim-autopairs"
       "web-devicons"
       "nvim-filetree"
+      "nvim-bufferline"
     ];
 
     externalBitsOverlay = top: last: {
@@ -155,7 +160,7 @@
 
           vim.autopairs.enable = true;
           vim.filetree.enable = true;
-
+          vim.bufferline.enable = true;
         };
       };
 

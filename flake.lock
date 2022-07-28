@@ -198,6 +198,22 @@
         "type": "github"
       }
     },
+    "nvim-bufferline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658671824,
+        "narHash": "sha256-eIKufuUM5aJTDhTHgQb3bFmpnIY9RiGqCZXURJ6+PUU=",
+        "owner": "akinsho",
+        "repo": "bufferline.nvim",
+        "rev": "c4dd9b4de03b891f648b098c25e4dc1bc48a13e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "akinsho",
+        "repo": "bufferline.nvim",
+        "type": "github"
+      }
+    },
     "nvim-cmp": {
       "flake": false,
       "locked": {
@@ -291,6 +307,7 @@
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
         "nvim-autopairs": "nvim-autopairs",
+        "nvim-bufferline": "nvim-bufferline",
         "nvim-cmp": "nvim-cmp",
         "nvim-filetree": "nvim-filetree",
         "nvim-lspconfig": "nvim-lspconfig",
