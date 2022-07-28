@@ -4,6 +4,8 @@ with builtins;
 
 let
   cfg = config.vim.treesitter;
+  inherit (pkgs) neovimPlugins;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options.vim.treesitter = {
     enable = mkOption {
