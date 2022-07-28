@@ -75,6 +75,7 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
+          vim.autoIndent = true;
           vim.theme.github-theme.enable = true;
 
           vim.treesitter.enable = true;
@@ -84,6 +85,8 @@
           vim.lsp.bash = true;
           vim.lsp.lua = true;
           vim.lsp.nix = true;
+          vim.lsp.rust = true;
+          vim.lsp.ts = true;
 
         };
       };
