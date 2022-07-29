@@ -36,6 +36,12 @@ in {
           ref = "master";
           rev = "bc26a6a949f2e0d98b7bfc437d459b250900a165";
         };
+
+        tree-sitter-lua = builtins.fetchGit {
+          url = "https://github.com/MunifTanjim/tree-sitter-lua";
+          ref = "main";
+          rev = "c9ece5b2d348f917052db5a2da9bd4ecff07426c";
+        };
       in ''
         -- Treesitter config
         require'nvim-treesitter.configs'.setup {
@@ -60,6 +66,13 @@ in {
             files = { "" }
           },
           filetype = "ha",
+        }
+        parser_config.lua = {
+          install_info = {
+            url = "",
+            files = { "" }
+          },
+          filetype = "lua",
         }
       '';     
     }
