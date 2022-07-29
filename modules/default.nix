@@ -10,7 +10,7 @@
 
     ./cmp
 
-    #./autopairs
+    ./autopairs
     ./filetree
     ./bufferline
   ];

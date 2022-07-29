@@ -158,7 +158,7 @@
 
           vim.autocomplete.enable = true;
 
-          #vim.autopairs.enable = true;
+          vim.autopairs.enable = true;
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
         };

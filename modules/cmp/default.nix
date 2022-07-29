@@ -183,14 +183,7 @@ in {
           }, {
             { name = "cmdline" },
           }),
-        })
-        
-        --set max height of items
-        vim.cmd([[ set pumheight=7 ]])
-        vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = "#565c64" })
-        for group, hl in pairs(highlights) do
-          vim.api.nvim_set_hl(0, group, hl)
-        end
+        }) 
       '';
     }
   );
