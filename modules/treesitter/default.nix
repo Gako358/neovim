@@ -4,8 +4,6 @@ with builtins;
 
 let
   cfg = config.vim.treesitter;
-  inherit (pkgs) neovimPlugins;
-  inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options.vim.treesitter = {
     enable = mkOption {
@@ -22,7 +20,12 @@ in {
       else "";
     in {  
       vim.startPlugins = with pkgs.neovimPlugins; [
-        nvim-treesitter
+        (nvim-treesitter.withPlugins (
+          plugins: with plugins; [
+            tree-sitter-nix
+            tree-sitter-python
+          ]
+        ))
       ];
       
       vim.luaConfigRC = let
