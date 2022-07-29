@@ -23,7 +23,7 @@ in {
         nvim-treesitter
       ];
 
-      vim.configRC = writeIf cfg.fold ''
+      vim.configRC = ''
         " Tree-sitter based folding
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
