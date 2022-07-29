@@ -23,22 +23,33 @@ in {
         nvim-treesitter
       ];
       
-      vim.luaConfigRC = let
-        tree-sitter-hare = builtins.fetchGit {
-          url = "https://git.sr.ht/~ecmma/tree-sitter-hare";
-          ref = "master";
-          rev = "bc26a6a949f2e0d98b7bfc437d459b250900a165";
-        };
-      
-      in ''
+      vim.luaConfigRC = ''
         require'nvim-treesitter.configs'.setup({
-
+          ensure_installed = {
+            vim.g.enable_treesitter_ft,
+            'typescript',
+            'javascript',
+            'comment',
+            'python',
+            'bibtex',
+            'html',
+            'bash',
+            'make',
+            'json',
+            'rust',
+            'vim',
+            'lua',
+            'css',
+            'cpp',
+            'c',
+          },
           highlight = {
             enable = true,
-            use_languagetree = true,
-            disable = {},
           },
           autotag = {
+            enable = true,
+          },
+          matchup = {
             enable = true,
           }
         })
