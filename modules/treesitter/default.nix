@@ -30,19 +30,7 @@ in {
         set nofoldenable
       '';
 
-      vim.luaConfigRC = let
-        tree-sitter-hare = builtins.fetchGit {
-          url = "https://git.sr.ht/~ecmma/tree-sitter-hare";
-          ref = "master";
-          rev = "bc26a6a949f2e0d98b7bfc437d459b250900a165";
-        };
-
-        tree-sitter-lua = builtins.fetchGit {
-          url = "https://github.com/MunifTanjim/tree-sitter-lua";
-          ref = "main";
-          rev = "c9ece5b2d348f917052db5a2da9bd4ecff07426c";
-        };
-      in ''
+      vim.luaConfigRC = ''
         -- Treesitter config
         require'nvim-treesitter.configs'.setup {
           highlight = {
@@ -58,21 +46,6 @@ in {
               node_decremental = "grm",
             },
           },
-        }
-        local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
-        parser_config.hare = {
-          install_info = {
-            url = "",
-            files = { "" }
-          },
-          filetype = "ha",
-        }
-        parser_config.lua = {
-          install_info = {
-            url = "",
-            files = { "" }
-          },
-          filetype = "lua",
         }
       '';     
     }
