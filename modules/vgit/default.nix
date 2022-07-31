@@ -19,6 +19,7 @@ in {
         else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
+        plenary-nvim         
         nvim-vgit
       ];
 
