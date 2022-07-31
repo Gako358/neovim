@@ -19,7 +19,9 @@ in {
         else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
-        github-copilot
+        # github-copilot
+        copilot-lua
+        copilot-cmp
         lightspeed
         nvim-cmp
         luasnip
@@ -34,6 +36,7 @@ in {
         local luasnip = require 'luasnip'
         
         require("luasnip/loaders/from_vscode").lazy_load()
+        require("copilot").setup()
         
         local has_words_before = function()
           local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -155,6 +158,7 @@ in {
             end, { "i", "s" }),
           },
           sources = {
+            { name = "copilot"},
             { name = "nvim_lsp", priority = 99 },
             { name = "luasnip" },
             { name = "buffer" },

@@ -149,10 +149,17 @@ in {
 
     vim.nnoremap = if (cfg.mapLeaderSpace) then {
       "<space>" = "<nop>";
+
       "<C-h>" = "<C-w>h";
       "<C-j>" = "<C-w>j";
       "<C-k>" = "<C-w>k";
       "<C-l>" = "<C-w>l";
+
+      "<A-Up>" = ":resize -1<CR>";
+      "<A-Down>" = ":resize +1<CR>";
+      "<A-Left>" = ":vertical resize -1<CR>";
+      "<A-Right>" = ":vertical resize +1<CR>";
+
     } else {};
 
     vim.luaConfigRC = ''

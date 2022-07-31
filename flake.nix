@@ -38,6 +38,14 @@
       url = "github:github/copilot.vim";
       flake = false;
     };
+    copilot-lua = {
+      url = "github:zbirenbaum/copilot.lua";
+      flake = false;
+    };
+    copilot-cmp = {
+      url = "github:zbirenbaum/copilot-cmp";
+      flake = false;
+    };
 
     # CMP
     nvim-cmp = {
@@ -100,6 +108,8 @@
       "nvim-treesitter"
       "nvim-lspconfig"
       "github-copilot"
+      "copilot-lua"
+      "copilot-cmp"
       "nvim-cmp"
       "luasnip"
       "cmp-nvim-lsp"
