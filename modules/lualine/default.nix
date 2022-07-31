@@ -20,7 +20,6 @@ in {
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         lualine
-        web-devicons
       ];
 
       vim.luaConfigRC = ''

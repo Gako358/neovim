@@ -20,7 +20,6 @@ in {
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-vgit
-        plenary-nvim
       ];
 
       vim.luaConfigRC = ''
