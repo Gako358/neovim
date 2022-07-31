@@ -262,6 +262,22 @@
         "type": "github"
       }
     },
+    "nvim-gitsigns": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658740207,
+        "narHash": "sha256-g4GDabo1AqcGkHfXNla47NcxC2Da6RL8CJLms8y0/bY=",
+        "owner": "lewis6991",
+        "repo": "gitsigns.nvim",
+        "rev": "8b817e76b6399634f3f49e682d6e409844241858",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "gitsigns.nvim",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -291,22 +307,6 @@
       "original": {
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "type": "github"
-      }
-    },
-    "nvim-vgit": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653839595,
-        "narHash": "sha256-ucjVbpIwJ9eNBEQKVxN0a09GB773M2lTMdzYcLQ88QM=",
-        "owner": "tanvirtin",
-        "repo": "vgit.nvim",
-        "rev": "ee9081c304b44509b2f4267f1f7addc303f9fb9b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tanvirtin",
-        "repo": "vgit.nvim",
         "type": "github"
       }
     },
@@ -343,9 +343,9 @@
         "nvim-bufferline": "nvim-bufferline",
         "nvim-cmp": "nvim-cmp",
         "nvim-filetree": "nvim-filetree",
+        "nvim-gitsigns": "nvim-gitsigns",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
-        "nvim-vgit": "nvim-vgit",
         "plenary-nvim": "plenary-nvim",
         "web-devicons": "web-devicons"
       }

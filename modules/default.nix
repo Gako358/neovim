@@ -14,6 +14,6 @@
     ./filetree
     ./bufferline
     ./lualine
-    ./vgit
+    ./gitsigns
   ];
 }

@@ -82,8 +82,8 @@
       url = "github:akinsho/bufferline.nvim";
       flake = false;
     };
-    nvim-vgit = {
-      url = "github:tanvirtin/vgit.nvim";
+    nvim-gitsigns = {
+      url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
     lualine = {
@@ -118,7 +118,7 @@
       "nvim-autopairs"
       "web-devicons"
       "nvim-bufferline"
-      "nvim-vgit"
+      "nvim-gitsigns"
       "lualine"
       "nvim-filetree"
     ];
@@ -172,7 +172,7 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
-          vim.vgit.enable = true;
+          vim.gitsigns.enable = true;
         };
       };
 

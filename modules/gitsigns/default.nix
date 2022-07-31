@@ -2,12 +2,12 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.vgit;
+  cfg = config.vim.gitsigns;
 in {
-  options.vim.vgit = {
+  options.vim.gitsigns = {
     enable = mkOption {
       type = types.bool;
-      description = "enable git plugin: [nvim-vgit]";
+      description = "enable git plugin: [nvim-gitsigns]";
     };
   };
 
@@ -19,12 +19,11 @@ in {
         else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
-        plenary-nvim         
-        nvim-vgit
+        nvim-gitsigns
       ];
 
       vim.luaConfigRC = ''
-        require('vgit').setup()
+        require('gitsigns').setup()
       '';
     }
   );
