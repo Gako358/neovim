@@ -21,6 +21,7 @@ in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         github-copilot
         lightspeed
+        nvim-comment
         nvim-cmp
         luasnip
         cmp-nvim-lsp
@@ -34,6 +35,7 @@ in {
         local luasnip = require 'luasnip'
         
         require("luasnip/loaders/from_vscode").lazy_load()
+        require('nvim_comment').setup()
         
         local has_words_before = function()
           local line, col = unpack(vim.api.nvim_win_get_cursor(0))

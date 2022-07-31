@@ -68,6 +68,10 @@
       url = "github:ggandor/lightspeed.nvim";
       flake = false;
     };
+    nvim-comment = {
+      url = "github:terrortylor/nvim-comment";
+      flake = false;
+    };
 
     # CORE PLUGINS
     nvim-autopairs = {
@@ -91,13 +95,11 @@
       flake = false;
     };
 
-
     # FILETREE
     nvim-filetree = {
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
-
   };
 
   outputs = { self, nixpkgs, neovim, ... }@inputs:
@@ -115,6 +117,7 @@
       "cmp-buffer"
       "cmp-luasnip"
       "lightspeed"
+      "nvim-comment"
       "nvim-autopairs"
       "web-devicons"
       "nvim-bufferline"
