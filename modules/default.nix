@@ -13,5 +13,7 @@
     ./autopairs
     ./filetree
     ./bufferline
+    ./lualine
+    ./vgit
   ];
 }

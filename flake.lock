@@ -64,38 +64,6 @@
         "type": "github"
       }
     },
-    "copilot-cmp": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1659048397,
-        "narHash": "sha256-nhP2qS/VrME/t7IRJxcFZ7Re8uodYr+T651uZAJxCQ4=",
-        "owner": "zbirenbaum",
-        "repo": "copilot-cmp",
-        "rev": "a226d537832e8fcb46c6c3ad91e833d151005624",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zbirenbaum",
-        "repo": "copilot-cmp",
-        "type": "github"
-      }
-    },
-    "copilot-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1659048444,
-        "narHash": "sha256-e3/TYVIyVd44SnlHzIKpJWlBv5oZNQryZWSj+y4Zh80=",
-        "owner": "zbirenbaum",
-        "repo": "copilot.lua",
-        "rev": "f345b7a1b86b85e479510923d37028872e491cb9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zbirenbaum",
-        "repo": "copilot.lua",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1644229661,
@@ -156,6 +124,22 @@
       "original": {
         "owner": "ggandor",
         "repo": "lightspeed.nvim",
+        "type": "github"
+      }
+    },
+    "lualine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659092071,
+        "narHash": "sha256-gRhT6uQzCmKvCJkaq+ypMD1CueqwV8oyhxS3Z63hp2o=",
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim",
+        "rev": "6d11f9f50817020cf634903a235628cabe0c56f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim",
         "type": "github"
       }
     },
@@ -281,11 +265,11 @@
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1659060831,
-        "narHash": "sha256-/NqUczGfC+zRzwRnFJbPrht2+IfHq0xAiLl0QGLSSQA=",
+        "lastModified": 1659259811,
+        "narHash": "sha256-pF+OWhWL0XpR0bn9yruNRkmKXcQVooYnWkboJsFgpxs=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "60f2993b9661d9844cee3bebdbd1b5860577eb3c",
+        "rev": "df3be5006530ff73b57d6c302b4da7ed2b0e159d",
         "type": "github"
       },
       "original": {
@@ -297,16 +281,32 @@
     "nvim-treesitter": {
       "flake": false,
       "locked": {
-        "lastModified": 1659205324,
-        "narHash": "sha256-2AT+/j1DUCRK17jq5PFKXajrCHMXjMVUbSNLRfHh1wQ=",
+        "lastModified": 1659259384,
+        "narHash": "sha256-vqfEzVuLzin1cXrrFGbTtIOIrBblJk0j9wBWhoIhFpM=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "18ad3904fbf7f1a11140c97e45432d57e63b40eb",
+        "rev": "4e934673d88b1c906ff622c664bf98e0b493a2fa",
         "type": "github"
       },
       "original": {
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
+    "nvim-vgit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1653839595,
+        "narHash": "sha256-ucjVbpIwJ9eNBEQKVxN0a09GB773M2lTMdzYcLQ88QM=",
+        "owner": "tanvirtin",
+        "repo": "vgit.nvim",
+        "rev": "ee9081c304b44509b2f4267f1f7addc303f9fb9b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tanvirtin",
+        "repo": "vgit.nvim",
         "type": "github"
       }
     },
@@ -332,11 +332,10 @@
         "cmp-luasnip": "cmp-luasnip",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
-        "copilot-cmp": "copilot-cmp",
-        "copilot-lua": "copilot-lua",
         "github-copilot": "github-copilot",
         "github-theme": "github-theme",
         "lightspeed": "lightspeed",
+        "lualine": "lualine",
         "luasnip": "luasnip",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
@@ -346,6 +345,7 @@
         "nvim-filetree": "nvim-filetree",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
+        "nvim-vgit": "nvim-vgit",
         "plenary-nvim": "plenary-nvim",
         "web-devicons": "web-devicons"
       }

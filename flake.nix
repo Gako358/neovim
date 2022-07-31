@@ -38,14 +38,6 @@
       url = "github:github/copilot.vim";
       flake = false;
     };
-    copilot-lua = {
-      url = "github:zbirenbaum/copilot.lua";
-      flake = false;
-    };
-    copilot-cmp = {
-      url = "github:zbirenbaum/copilot-cmp";
-      flake = false;
-    };
 
     # CMP
     nvim-cmp = {
@@ -90,13 +82,21 @@
       url = "github:akinsho/bufferline.nvim";
       flake = false;
     };
+    nvim-vgit = {
+      url = "github:tanvirtin/vgit.nvim";
+      flake = false;
+    };
+    lualine = {
+      url = "github:nvim-lualine/lualine.nvim";
+      flake = false;
+    };
+
 
     # FILETREE
     nvim-filetree = {
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
-
 
   };
 
@@ -108,8 +108,6 @@
       "nvim-treesitter"
       "nvim-lspconfig"
       "github-copilot"
-      "copilot-lua"
-      "copilot-cmp"
       "nvim-cmp"
       "luasnip"
       "cmp-nvim-lsp"
@@ -119,8 +117,10 @@
       "lightspeed"
       "nvim-autopairs"
       "web-devicons"
-      "nvim-filetree"
       "nvim-bufferline"
+      "nvim-vgit"
+      "lualine"
+      "nvim-filetree"
     ];
 
     externalBitsOverlay = top: last: {
@@ -171,6 +171,8 @@
           vim.autopairs.enable = true;
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
+          vim.lualine.enable = true;
+          vim.vgit.enable = true;
         };
       };
 
