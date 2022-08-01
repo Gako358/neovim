@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, stdenv, writeTextFile, curl, git, cacert, neovim-nightly, ... }:
 with lib;
 with builtins;
 
