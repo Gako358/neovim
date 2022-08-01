@@ -23,11 +23,6 @@ in {
         nvim-treesitter
       ];
 
-      require'nvim-treesitter'.withPlugins = plugins: with pkgs; [
-        tree-sitter-nix
-        tree-sitter-python
-      ]
-
       vim.configRC = ''
         " Tree-sitter based folding
         set foldmethod=expr
