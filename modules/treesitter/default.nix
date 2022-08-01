@@ -33,6 +33,11 @@ in {
       vim.luaConfigRC = ''
         -- Treesitter config
         require('nvim-treesitter.configs').setup {
+          ensure_installed = {
+            vim.g.enable_treesitter_ft,
+            'nix',
+            'python',
+          },
           highlight = {
             enable = true,
           },
