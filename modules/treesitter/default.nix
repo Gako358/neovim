@@ -21,11 +21,6 @@ in {
     in {  
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-treesitter
-        (nvim-treesitter.withPlugins (
-          plugins: with plugins; [
-            tree-sitter-nix
-          ]
-        ))
       ];
 
       vim.configRC = ''
@@ -36,8 +31,14 @@ in {
       '';
 
       vim.luaConfigRC = ''
+        require("nvim-treesitter.install").compilers = { "clang++" }
+
         -- Treesitter config
         require'nvim-treesitter.configs'.setup {
+          ensure_installed = {
+            vim.g.enable_treesitter_ft,
+            'nix',
+          },
           highlight = {
             enable = true,
             disable = {},
