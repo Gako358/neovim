@@ -46,6 +46,11 @@ in {
             },
           },
         }
+
+        require'nvim-treesitter'.withPlugins (plugins: with pkgs; [
+          tree-sitter-nix
+          tree-sitter-python
+        ])
       '';     
     }
   );
