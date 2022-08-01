@@ -1,44 +1,52 @@
-{ pkgs, lib, config, stdenv, writeTextFile, curl, git, cacert, neovim-nightly, ... }:
+{ pkgs, config, lib, ...}:
 with lib;
 with builtins;
 
 let
-  installParsers = writeTextFile {
-    name = "install-parsers.lua";
-    text = ''
-      treesitter = require("nvim-treesitter")
-      treesitter.setup()
-      require'nvim-treesitter.configs'.setup({
-        ensure_installed = "maintained",
-      })
-      vim.cmd("TSInstallSync maintained")
-      vim.cmd("q")
-    '';
+  cfg = config.vim.treesitter;
+in {
+  options.vim.treesitter = {
+    enable = mkOption {
+      type = types.bool;
+      description = "enable tree-sitter [nvim-treesitter]";
+    };
   };
-in stdenv.mkDerivation rec {
-  pname = "nvim-treesitter-parsers";
-  version = flake.inputs.nvim-treesitter.shortRev;
-  src = flake.inputs.nvim-treesitter;
 
-  buildInputs = [ neovim-nightly curl cacert git ];
+  config = mkIf cfg.enable (
+    let
+      writeIf = cond: msg:
+      if cond
+      then msg
+      else "";
+    in {  
+      vim.startPlugins = with pkgs.neovimPlugins; [
+        nvim-treesitter
+      ];
 
-  # Should not be setting HOME
-  buildPhase = ''
-    pushd lua
-    HOME=./ nvim -u NONE --headless -c "luafile ${installParsers}"
-    popd
-  '';
+      vim.configRC = ''
+        " Tree-sitter based folding
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+        set nofoldenable
+      '';
 
-  installPhase = ''
-    installDir=$out/share/nvim/parser
-    mkdir -p $installDir
-    cp -a parser/*.so $installDir
-  '';
-
-  meta = with lib; {
-    description = "nvim-treesitter maintained parsers";
-    homepage = "https://github.com/nvim-treesitter/nvim-treesitter";
-    platforms = [ "x86_64-darwin" "x86_64-linux" ];
-    license = with licenses; [ asl20 ];
-  };
+      vim.luaConfigRC = ''
+        -- Treesitter config
+        require('nvim-treesitter.configs').setup {
+          highlight = {
+            enable = true,
+          },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "gnn",
+              node_incremental = "grn",
+              scope_incremental = "grc",
+              node_decremental = "grm",
+            },
+          },
+        }
+      '';     
+    }
+  );
 }
