@@ -310,6 +310,22 @@
         "type": "github"
       }
     },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659281621,
+        "narHash": "sha256-s8nHE4IJrnJbKgurdXv7PgKqx0RmVbiZWpyuZCpTIR8=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "22824614163c54ef5d366b15c8685e24d33763db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
     "plenary-nvim": {
       "flake": false,
       "locked": {
@@ -346,6 +362,7 @@
         "nvim-filetree": "nvim-filetree",
         "nvim-gitsigns": "nvim-gitsigns",
         "nvim-lspconfig": "nvim-lspconfig",
+        "nvim-treesitter": "nvim-treesitter",
         "plenary-nvim": "plenary-nvim",
         "web-devicons": "web-devicons"
       }

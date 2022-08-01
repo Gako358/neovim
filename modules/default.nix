@@ -5,7 +5,7 @@
     ./basic
     ./theme
 
-    # ./treesitter
+    ./treesitter
     ./lsp
 
     ./cmp
