@@ -24,10 +24,10 @@
     };
 
     # LSP
-    nvim-treesitter = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      flake = false;
-    };
+    # nvim-treesitter = {
+    #   url = "github:nvim-treesitter/nvim-treesitter";
+    #   flake = false;
+    # };
     nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
       flake = false;
