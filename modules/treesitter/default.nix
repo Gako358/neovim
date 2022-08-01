@@ -21,7 +21,6 @@ in {
     in {  
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-treesitter
-        (nvim-treesitter.withPlugins (plugins: unstable.tree-sitter.allGrammars))
       ];
 
       vim.configRC = ''
