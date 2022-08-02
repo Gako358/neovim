@@ -127,6 +127,22 @@
         "type": "github"
       }
     },
+    "indent-blankline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658908280,
+        "narHash": "sha256-La+gz7TiCTXRJxFXE0KLT3m3iUEKJrkyJH8XMpREgg4=",
+        "owner": "lukas-reineke",
+        "repo": "indent-blankline.nvim",
+        "rev": "c15bbe9f23d88b5c0b4ca45a446e01a0a3913707",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lukas-reineke",
+        "repo": "indent-blankline.nvim",
+        "type": "github"
+      }
+    },
     "lightspeed": {
       "flake": false,
       "locked": {
@@ -184,11 +200,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1659410002,
-        "narHash": "sha256-hn8+oiCYAUovI7gXZsn83TW1KZCduNbnwQ9j9NqGnHI=",
+        "lastModified": 1659436377,
+        "narHash": "sha256-8NwG2LjFzA0ED6rRLwPvcX+tGAgFvJpcYsuwO+Llm88=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "0a049c322fda5f2bb124429086c2713ff99c7142",
+        "rev": "8ce7e7409f10f0a90ed8aa3f6f179c4b5d44eacb",
         "type": "github"
       },
       "original": {
@@ -367,6 +383,7 @@
         "cmp-treesitter": "cmp-treesitter",
         "github-copilot": "github-copilot",
         "github-theme": "github-theme",
+        "indent-blankline": "indent-blankline",
         "lightspeed": "lightspeed",
         "lualine": "lualine",
         "luasnip": "luasnip",

@@ -15,6 +15,7 @@
     ./filetree
     ./bufferline
     ./lualine
+    ./blanklines
     ./gitsigns
   ];
 }
