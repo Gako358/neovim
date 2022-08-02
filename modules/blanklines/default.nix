@@ -9,7 +9,7 @@ in {
   options.vim.blanklines = {
     enable =mkOption {
       type = types.bool;
-      description = "Enable blank lines plugin: [indent-blanklines]";
+      description = "Enable blank lines plugin: [indent-blankline]";
     };
   };
 
@@ -21,7 +21,7 @@ in {
       else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
-        indent-blanklines
+        indent-blankline
       ];
 
       vim.luaConfigRC = ''
