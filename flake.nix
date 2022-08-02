@@ -130,6 +130,8 @@
       neovim-nightly = neovim.defaultPackage.${top.system};
     };
 
+    buildPluginOverlay = lib.buildPluginOverlay;
+
     pluginOverlay = top: last: let
       buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
         pname = name;
@@ -145,11 +147,14 @@
       cfg = { };
       overlays = [
         pluginOverlay
+        buildPluginOverlay
         externalBitsOverlay
       ];
     };
 
-    lib = import ./lib;
+    lib = 
+      import 
+      ./lib;
 
     mkNeoVimPkg = pkgs: lib.neovimBuilder {
         inherit pkgs;

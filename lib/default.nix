@@ -106,4 +106,5 @@ rec {
       };
     };
   };
+  buildPluginOverlay = import ./buildPlugin.nix;
 }
