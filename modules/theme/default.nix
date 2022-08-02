@@ -6,7 +6,7 @@ let
   cfg = config.vim.theme.onedark;
 in {
 
-  options.vim.theme.github-theme = {
+  options.vim.theme.onedark = {
     enable = mkEnableOption "Enable onedark theme";
 
   };
