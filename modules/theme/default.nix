@@ -57,6 +57,7 @@ in {
                 background = true,    -- use background color for virtual text
             },
         }
+        require('onedark').load()
       '';
     
     });
