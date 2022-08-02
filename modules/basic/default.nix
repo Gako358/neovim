@@ -132,6 +132,8 @@ in {
     let 
       writeIf = cond: msg: if cond then msg else "";
     in {
+
+    vim.startPlugins = with pkgs.neovimPlugins; [plenary-nvim];
     
     vim.nmap = if (cfg.disableArrows) then {
       "<up>" = "<nop>";

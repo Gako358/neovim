@@ -203,8 +203,6 @@
           vim.lsp.rust = true;
           vim.lsp.typescript = true;
 
-          vim.telescope.enable = true;
-
           vim.autocomplete.enable = true;
 
           vim.autopairs.enable = true;
@@ -212,6 +210,8 @@
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
           vim.gitsigns.enable = true;
+
+          vim.telescope.enable = true;
         };
       };
 
