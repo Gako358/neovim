@@ -111,22 +111,6 @@
         "type": "github"
       }
     },
-    "github-theme": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1658829336,
-        "narHash": "sha256-BXbuee35rV0j9Qy4ak+Iw3Pv0bLj0nbheHqoPBDfN5s=",
-        "owner": "projekt0n",
-        "repo": "github-nvim-theme",
-        "rev": "6c9b575a6bd28ddce3ca282955c77d426c20cec3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "projekt0n",
-        "repo": "github-nvim-theme",
-        "type": "github"
-      }
-    },
     "indent-blankline": {
       "flake": false,
       "locked": {
@@ -162,11 +146,11 @@
     "lualine": {
       "flake": false,
       "locked": {
-        "lastModified": 1659287518,
-        "narHash": "sha256-M79XNfBFPFi7eRmDVOyQqLE6Tm6Qle0nxkx+P9hqlik=",
+        "lastModified": 1659445833,
+        "narHash": "sha256-jJlPdYM3jxMiM1+AfC3ibQg1XFKEIWtP9Oap72lE1mM=",
         "owner": "nvim-lualine",
         "repo": "lualine.nvim",
-        "rev": "c880c8cfedd461c3bc93540f5aab4e8447bfcb2f",
+        "rev": "e37d5d325da9c472c73d97bd0210c480c5d9babc",
         "type": "github"
       },
       "original": {
@@ -200,11 +184,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1659436377,
-        "narHash": "sha256-8NwG2LjFzA0ED6rRLwPvcX+tGAgFvJpcYsuwO+Llm88=",
+        "lastModified": 1659444800,
+        "narHash": "sha256-sFeiheANy6jgliHG5qkjwZM5RbQA6nU5Y4Fuf9ctibU=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "8ce7e7409f10f0a90ed8aa3f6f179c4b5d44eacb",
+        "rev": "0806c882cdeb1d07006c7dec843cec68dc3fe7f4",
         "type": "github"
       },
       "original": {
@@ -216,11 +200,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1659344384,
-        "narHash": "sha256-EQcTdYvTynl34FoVu52+oT5ov+Se9rJw6W/l0V1lUZY=",
+        "lastModified": 1659375087,
+        "narHash": "sha256-6KeFtLofaF6J3R1W+FkqPcYB0i1pCKl0QB8DTBE8toA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "551e65e946d7261f956175845a739072dd2ac6e0",
+        "rev": "07c6ff07ce85fde644679aa36560ee67404b2804",
         "type": "github"
       },
       "original": {
@@ -297,11 +281,11 @@
     "nvim-filetree": {
       "flake": false,
       "locked": {
-        "lastModified": 1659396597,
-        "narHash": "sha256-1mJEPRg5/jyMIEZIfocnIHsIX9RQOWz2Y9oCKfJTlQY=",
+        "lastModified": 1659441591,
+        "narHash": "sha256-E/qrH25+06C8o7trXO5ktthOODGmJPl12N4iqhrJJsc=",
         "owner": "kyazdani42",
         "repo": "nvim-tree.lua",
-        "rev": "cfc4692a3fd5e5afa7321b878eb8364e7617d7b7",
+        "rev": "1685484738377927c4a97a90a4dc031e54c29997",
         "type": "github"
       },
       "original": {
@@ -345,16 +329,32 @@
     "nvim-treesitter": {
       "flake": false,
       "locked": {
-        "lastModified": 1659427807,
-        "narHash": "sha256-R1eUgr4RYWghKe9swvKyMmHQOGGoOH1lz6Sd7qKDolA=",
+        "lastModified": 1659471003,
+        "narHash": "sha256-Ls5YKjGE0aexGxlbki3NElB6XyCE5cU4kh7IX3bQ5ts=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "f7ac82c48e7e21e5f3623ac4ca9ed5b3ff870a06",
+        "rev": "867cf9494df4d1b0140e54ffb68f01df48df1e78",
         "type": "github"
       },
       "original": {
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
+    "onedark": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659283015,
+        "narHash": "sha256-YQhv5rGyh7K6YLibQ04vSOj87kiyy8Yj12mPMt9fjvI=",
+        "owner": "navarasu",
+        "repo": "onedark.nvim",
+        "rev": "0b0868b946371c67cc030c029cbe7338cbec1dec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "navarasu",
+        "repo": "onedark.nvim",
         "type": "github"
       }
     },
@@ -382,7 +382,6 @@
         "cmp-path": "cmp-path",
         "cmp-treesitter": "cmp-treesitter",
         "github-copilot": "github-copilot",
-        "github-theme": "github-theme",
         "indent-blankline": "indent-blankline",
         "lightspeed": "lightspeed",
         "lualine": "lualine",
@@ -397,6 +396,7 @@
         "nvim-gitsigns": "nvim-gitsigns",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
+        "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
         "telescope": "telescope",
         "web-devicons": "web-devicons"

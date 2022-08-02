@@ -12,8 +12,8 @@
     ### Vim plugins ###
 
     # Theme
-    github-theme = {
-      url = "github:projekt0n/github-nvim-theme";
+    onedark = {
+      url = "github:navarasu/onedark.nvim";
       flake = false;
     };
 
@@ -119,7 +119,7 @@
   outputs = { self, nixpkgs, neovim, ... }@inputs:
   let
     plugins = [
-      "github-theme"
+      "onedark"
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
@@ -196,7 +196,7 @@
           vim.viAlias = true;
           vim.vimAlias = true;
           vim.autoIndent = true;
-          vim.theme.github-theme.enable = true;
+          vim.theme.onedark.enable = true;
 
           vim.treesitter.enable = true;
           vim.lsp.enable = true;
