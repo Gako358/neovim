@@ -64,6 +64,22 @@
         "type": "github"
       }
     },
+    "cmp-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1654770534,
+        "narHash": "sha256-k2/NCdyvMmeDFDnEmjTYywfvDqsowGU93sQuj69pJqs=",
+        "owner": "ray-x",
+        "repo": "cmp-treesitter",
+        "rev": "c2886bbb09ef6daf996a258db29546cc1e7c12a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ray-x",
+        "repo": "cmp-treesitter",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1644229661,
@@ -348,6 +364,7 @@
         "cmp-luasnip": "cmp-luasnip",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
+        "cmp-treesitter": "cmp-treesitter",
         "github-copilot": "github-copilot",
         "github-theme": "github-theme",
         "lightspeed": "lightspeed",
@@ -364,7 +381,24 @@
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
         "plenary-nvim": "plenary-nvim",
+        "telescope": "telescope",
         "web-devicons": "web-devicons"
+      }
+    },
+    "telescope": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659370386,
+        "narHash": "sha256-ovofqBG9HDBrDBBgNaukTDgeZqxjRBjo0rNKz2cycLY=",
+        "owner": "nvim-telescope",
+        "repo": "telescope.nvim",
+        "rev": "75a5e5065376d9103fc4bafc3ae6327304cee6e9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope.nvim",
+        "type": "github"
       }
     },
     "web-devicons": {

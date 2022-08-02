@@ -72,6 +72,10 @@
       url = "github:terrortylor/nvim-comment";
       flake = false;
     };
+    cmp-treesitter = {
+      url = "github:ray-x/cmp-treesitter";
+      flake = false;
+    };
 
     # CORE PLUGINS
     nvim-autopairs = {
@@ -100,6 +104,12 @@
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
+
+    # TELESCOPE
+    telescope = {
+      url = "github:nvim-telescope/telescope.nvim";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, neovim, ... }@inputs:
@@ -118,12 +128,14 @@
       "cmp-luasnip"
       "lightspeed"
       "nvim-comment"
+      "cmp-treesitter"
       "nvim-autopairs"
       "web-devicons"
       "nvim-bufferline"
       "nvim-gitsigns"
       "lualine"
       "nvim-filetree"
+      "telescope"
     ];
 
     externalBitsOverlay = top: last: {
@@ -190,6 +202,8 @@
           vim.lsp.nix = true;
           vim.lsp.rust = true;
           vim.lsp.typescript = true;
+
+          vim.telescope.enable = true;
 
           vim.autocomplete.enable = true;
 

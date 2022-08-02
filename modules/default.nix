@@ -6,6 +6,7 @@
     ./theme
 
     ./treesitter
+    ./telescope
     ./lsp
 
     ./cmp

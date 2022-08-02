@@ -28,6 +28,7 @@ in {
         cmp-path
         cmp-buffer
         cmp-luasnip
+        cmp-treesitter
       ];
 
       vim.luaConfigRC = ''
@@ -157,7 +158,8 @@ in {
             end, { "i", "s" }),
           },
           sources = {
-            { name = "nvim_lsp", priority = 99 },
+            { name = "nvim_lsp"},
+            { name = "treesitter"},
             { name = "luasnip" },
             { name = "buffer" },
             { name = "path" },
