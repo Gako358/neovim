@@ -24,6 +24,7 @@ in {
         nvim-comment
         nvim-cmp
         luasnip
+        dab
         cmp-nvim-lsp
         cmp-path
         cmp-buffer
