@@ -98,10 +98,6 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
-    indent-blankline = {
-      url = "github:lukas-reineke/indent-blankline.nvim";
-      flake = false;
-    };
 
     # FILETREE
     nvim-filetree = {
@@ -138,7 +134,6 @@
       "nvim-bufferline"
       "nvim-gitsigns"
       "lualine"
-      "indent-blankline"
       "nvim-filetree"
       "telescope"
     ];
@@ -215,7 +210,6 @@
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
           vim.gitsigns.enable = true;
-          vim.blanklines.enable = true;
 
           vim.telescope.enable = true;
         };
