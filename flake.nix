@@ -23,12 +23,6 @@
       flake = false;
     };
 
-    # Dab Debugging
-    dab = {
-      url = "github:mfussenegger/nvim-dap";
-      flake = false;
-    };
-
     # LSP
     nvim-treesitter = {
       url = "github:nvim-treesitter/nvim-treesitter";
@@ -123,7 +117,6 @@
     plugins = [
       "onedark"
       "plenary-nvim"
-      "dab"
       "nvim-treesitter"
       "nvim-lspconfig"
       "github-copilot"
