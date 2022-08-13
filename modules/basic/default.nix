@@ -135,6 +135,7 @@ in {
 
     vim.startPlugins = with pkgs.neovimPlugins; [
       plenary-nvim
+      vimtex
     ];
     
     vim.nmap = if (cfg.disableArrows) then {
@@ -190,7 +191,7 @@ in {
       -----------------------------------------------------------
       -- Abbrev Management
       -----------------------------------------------------------
-      cmd [[
+      vim.cmd [[
         cnoreabbrev W! w!
         cnoreabbrev Q! q!
         cnoreabbrev Qall! qall!
