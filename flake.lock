@@ -382,6 +382,7 @@
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
         "telescope": "telescope",
+        "vimtex": "vimtex",
         "web-devicons": "web-devicons"
       }
     },
@@ -398,6 +399,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "vimtex": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660254251,
+        "narHash": "sha256-IycHHMM8Ncmlr7CtQTpcVCK78TYjW9GK2d2TAArVs58=",
+        "owner": "lervag",
+        "repo": "vimtex",
+        "rev": "791cf0e4aaeef7cf1e9f4b6540feb61befaf0c62",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lervag",
+        "repo": "vimtex",
         "type": "github"
       }
     },
