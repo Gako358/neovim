@@ -29,6 +29,7 @@ in {
         cmp-buffer
         cmp-luasnip
         cmp-treesitter
+        vimtex
       ];
 
       vim.luaConfigRC = ''
