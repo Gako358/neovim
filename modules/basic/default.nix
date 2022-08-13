@@ -164,11 +164,44 @@ in {
       "<A-Left>" = ":vertical resize -1<CR>";
       "<A-Right>" = ":vertical resize +1<CR>";
 
+      "<leader>lp" = ":VimtexCompile<CR>";
+      "<leader>lv" = ":VimtexView<CR>";
+
     } else {};
 
     vim.luaConfigRC = ''
+      -----------------------------------------------------------
+      -- Copilot Management
+      -----------------------------------------------------------
       vim.g.copilot_no_tab_map = true
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
+      -----------------------------------------------------------
+      -- VimTeX Management
+      -----------------------------------------------------------
+      vim.g.vimtex_view_method = 'evince'
+      vim.g.vimtex_compiler_method = 'latexmk'
+      vim.g.tex_flavor = 'latex'
+      vim.g.vimtex_quickfix_mode = 1
+      vim.cmd [[
+        let g:vimtex_compiler_latexmk = {'build_dir': 'ac'}
+      ]]
+
+      -----------------------------------------------------------
+      -- Abbrev Management
+      -----------------------------------------------------------
+      cmd [[
+        cnoreabbrev W! w!
+        cnoreabbrev Q! q!
+        cnoreabbrev Qall! qall!
+        cnoreabbrev Wq wq
+        cnoreabbrev Wa wa
+        cnoreabbrev wQ wq
+        cnoreabbrev WQ wq
+        cnoreabbrev W w
+        cnoreabbrev Q q
+        cnoreabbrev Qall qall
+      ]]
     '';
 
     vim.configRC = ''
