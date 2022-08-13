@@ -15,6 +15,9 @@
     ./filetree
     ./bufferline
     ./lualine
+    ./keys
+    ./toggleterm
+    ./sessions
     ./gitsigns
   ];
 }

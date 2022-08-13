@@ -32,8 +32,24 @@
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
+    null-ls = {
+      url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
+    trouble = {
+      url = "github:folke/trouble.nvim";
+      flake = false;
+    };
+    rust-tools = {
+      url = "github:simrat39/rust-tools.nvim";
+      flake = false;
+    };
+    nvim-dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
 
-    # COPILOT
+    # COPILOT Only needed on initial install
     github-copilot = {
       url = "github:github/copilot.vim";
       flake = false;
@@ -77,6 +93,12 @@
       flake = false;
     };
 
+    # Rust crates
+    crates-nvim = {
+      url = "github:Saecki/crates.nvim";
+      flake = false;
+    };
+
     # CORE PLUGINS
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
@@ -112,13 +134,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, neovim, ... }@inputs:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    neovim,
+    ...
+  } @ inputs: let
     plugins = [
       "onedark"
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
+      "null-ls"
+      "trouble"
+      "rust-tools"
+      "nvim-dap"
       "github-copilot"
       "nvim-cmp"
       "luasnip"
@@ -129,6 +159,7 @@
       "lightspeed"
       "nvim-comment"
       "cmp-treesitter"
+      "crates-nvim"
       "nvim-autopairs"
       "web-devicons"
       "nvim-bufferline"
@@ -155,37 +186,48 @@
         p.tree-sitter-html
         p.tree-sitter-javascript
         p.tree-sitter-css
+        p.tree-sitter-latex
+        p.tree-sitter-lua
+        p.tree-sitter-typescript
+        p.tree-sitter-bash
       ]);
-      buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
-        pname = name;
-        version = "master";
-        src = builtins.getAttr name inputs;
-        postPatch =
-        if (name == "nvim-treesitter")
-        then ''
-          rm -r parser
-          ln -s ${treesitterGrammars} parser
-        ''
-        else "";
-      };
+      buildPlug = name:
+        top.vimUtils.buildVimPluginFrom2Nix {
+          pname = name;
+          version = "master";
+          src = builtins.getAttr name inputs;
+          postPatch =
+            if (name == "nvim-treesitter")
+            then ''
+              rm -r parser
+              ln -s ${treesitterGrammars} parser
+            ''
+            else "";
+        };
     in {
-      neovimPlugins = builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
+      neovimPlugins = builtins.listToAttrs (map (name: {
+          inherit name;
+          value = buildPlug name;
+        })
+        plugins);
     };
-    
-    allPkgs = lib.mkPkgs { 
-      inherit nixpkgs; 
-      cfg = { };
+
+    allPkgs = lib.mkPkgs {
+      inherit nixpkgs;
+      cfg = {};
+      cfg.allowUnfree = true;
       overlays = [
         pluginOverlay
         externalBitsOverlay
       ];
     };
 
-    lib = 
-      import 
+    lib =
+      import
       ./lib;
 
-    mkNeoVimPkg = pkgs: lib.neovimBuilder {
+    mkNeoVimPkg = pkgs:
+      lib.neovimBuilder {
         inherit pkgs;
         config = {
           vim.viAlias = true;
@@ -195,13 +237,20 @@
 
           vim.treesitter.enable = true;
           vim.lsp.enable = true;
+          vim.lsp.trouble.enable = true;
           vim.lsp.python = true;
           vim.lsp.clang = true;
+          vim.lsp.cmake = true;
           vim.lsp.bash = true;
           vim.lsp.lua = true;
           vim.lsp.nix = true;
           vim.lsp.rust = true;
           vim.lsp.typescript = true;
+          vim.lsp.docker = true;
+          vim.lsp.tex = true;
+          vim.lsp.css = true;
+          vim.lsp.html = true;
+          vim.lsp.json = true;
 
           vim.autocomplete.enable = true;
 
@@ -209,16 +258,21 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
+          vim.session.enable = true;
           vim.gitsigns.enable = true;
+
+          vim.keys = {
+            enable = true;
+            whichKey.enable = true;
+          };
+
+          vim.toggleterm.enable = true;
 
           vim.telescope.enable = true;
         };
       };
-
   in {
-
-    apps = lib.withDefaultSystems (sys:
-    {
+    apps = lib.withDefaultSystems (sys: {
       nvim = {
         type = "app";
         program = "${self.defaultPackage."${sys}"}/bin/nvim";

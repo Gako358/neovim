@@ -32,9 +32,16 @@ in {
       ];
 
       vim.luaConfigRC = ''
+
+        -----------------------------------------------------------
+        -- Copilot Management
+        -----------------------------------------------------------
+        vim.g.copilot_no_tab_map = true
+        vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
         local cmp = require 'cmp'
         local luasnip = require 'luasnip'
-        
+
         require("luasnip/loaders/from_vscode").lazy_load()
         require('nvim_comment').setup()
         
@@ -78,6 +85,7 @@ in {
           nvim_lsp = "[ LSP]",
           luasnip = "[ LSnip]",
           nvim_lua = "[ NvimLua]",
+          crates = "[ Crates]",
           latex_symbols = "[ Latex]",
           dictionary = "[韛Dict]",
         }
@@ -159,6 +167,7 @@ in {
           },
           sources = {
             { name = "nvim_lsp"},
+            { name = "crates"},
             { name = "treesitter"},
             { name = "luasnip" },
             { name = "buffer" },
