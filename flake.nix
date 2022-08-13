@@ -160,6 +160,10 @@
         p.tree-sitter-html
         p.tree-sitter-javascript
         p.tree-sitter-css
+        p.tree-sitter-latex
+        p.tree-sitter-lua
+        p.tree-sitter-typescript
+        p.tree-sitter-bash
       ]);
       buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
         pname = name;
