@@ -146,11 +146,11 @@
     "luasnip": {
       "flake": false,
       "locked": {
-        "lastModified": 1660379526,
-        "narHash": "sha256-j4ljdHCLEwt5QKretTiprdo3rh4NMxjJ5ySwZfg3p/k=",
+        "lastModified": 1660395460,
+        "narHash": "sha256-KkPoOqyY8ekNCvjaOno5OUm0eDJ27EFO2WHakJBcplU=",
         "owner": "L3MON4D3",
         "repo": "LuaSnip",
-        "rev": "24e595a16314311dc226e4122242e1095fef63d4",
+        "rev": "b8fa22fc12df7a8c48f5c18156874d40f584265c",
         "type": "github"
       },
       "original": {
@@ -168,11 +168,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1660382262,
-        "narHash": "sha256-o4NAWvHHv93elZYKf6wT2ZCR1CLTLLNHNbLB7q9/9e8=",
+        "lastModified": 1660492411,
+        "narHash": "sha256-9ljeawMzYCx7hdycfwExWwrM6XmdZycnJezEiRszzpY=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "9dec3815d2b8d768ae9d3a8c2a0d3a1e806157e5",
+        "rev": "f38c05bece0948fcadf943bbf80b9d9672da7059",
         "type": "github"
       },
       "original": {
@@ -184,11 +184,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1660346639,
-        "narHash": "sha256-yh3woFPLemwCaF6HGQz/KkdtPRnf9LBwvbZgr0HbVe0=",
+        "lastModified": 1660464579,
+        "narHash": "sha256-kzA9rwh0wS6CwUnFHAQ7dhJCowMPfRbvixVeOKnUmjo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b4110fd26e92b7ee8cf689aaea53c822fe63e206",
+        "rev": "b02538b16f6c5e1dbfce1033b27946e25c019b3b",
         "type": "github"
       },
       "original": {
@@ -217,11 +217,11 @@
     "nvim-bufferline": {
       "flake": false,
       "locked": {
-        "lastModified": 1659948731,
-        "narHash": "sha256-4x5zaU/kV/R68IotgOHwQqiVwgeZsFwggtwgNVzg9Uo=",
+        "lastModified": 1660398205,
+        "narHash": "sha256-19fj++lKn+xV1IfLS/KFo94pTzji2bt9iDo/03VrjzU=",
         "owner": "akinsho",
         "repo": "bufferline.nvim",
-        "rev": "2e5d92efacf40d488c4647a9e3e5100357b184cf",
+        "rev": "dd2addade63c977bae47f1b2abe9ef503df1b4d8",
         "type": "github"
       },
       "original": {
@@ -233,11 +233,11 @@
     "nvim-cmp": {
       "flake": false,
       "locked": {
-        "lastModified": 1658720867,
-        "narHash": "sha256-85oApnwqjFtDHIhWe1IlCuLtsHhxgd54x254DXn7n7M=",
+        "lastModified": 1660495124,
+        "narHash": "sha256-dCDwFAE4HQ3TgI+LHugE5RG+qBHHwPJnx+5ftEJ5j4o=",
         "owner": "hrsh7th",
         "repo": "nvim-cmp",
-        "rev": "706371f1300e7c0acb98b346f80dad2dd9b5f679",
+        "rev": "b1ebdb0a17daaad13606b802780313a32e59781b",
         "type": "github"
       },
       "original": {
@@ -265,11 +265,11 @@
     "nvim-filetree": {
       "flake": false,
       "locked": {
-        "lastModified": 1659926769,
-        "narHash": "sha256-GKgTJyVVb+nQ4GGoEMfdmdtIbYwPZP1Vds+sRumYDrw=",
+        "lastModified": 1660453204,
+        "narHash": "sha256-42JV4p1uNmqXo26lz0U9Andt7vJhkd4EzAGqpfsbqtA=",
         "owner": "kyazdani42",
         "repo": "nvim-tree.lua",
-        "rev": "261a5c380c000e23c4a23dcd55b984c856cdb113",
+        "rev": "b314b3a6992f07f7af5c58521d1e219b032d309e",
         "type": "github"
       },
       "original": {
@@ -281,11 +281,11 @@
     "nvim-gitsigns": {
       "flake": false,
       "locked": {
-        "lastModified": 1660132006,
-        "narHash": "sha256-UjmluMxnRLoYTqL3M62P+WUGNwJnCcmADc/8bNjmxD0=",
+        "lastModified": 1660413870,
+        "narHash": "sha256-6iX6DE4d2QRwfslXp8YpmS9zCkffDFkohwQrgwQwgqg=",
         "owner": "lewis6991",
         "repo": "gitsigns.nvim",
-        "rev": "ce636faddd573c1e6d821250da713e00e99d0f74",
+        "rev": "29468d89e71a0cd04aeb750fcfe75c3163347adf",
         "type": "github"
       },
       "original": {
@@ -405,11 +405,11 @@
     "vimtex": {
       "flake": false,
       "locked": {
-        "lastModified": 1660254251,
-        "narHash": "sha256-IycHHMM8Ncmlr7CtQTpcVCK78TYjW9GK2d2TAArVs58=",
+        "lastModified": 1660416643,
+        "narHash": "sha256-yO/U66MdL7SuUmKqKnlbMQ3F+zvqhjLEhOb6A4+iWHI=",
         "owner": "lervag",
         "repo": "vimtex",
-        "rev": "791cf0e4aaeef7cf1e9f4b6540feb61befaf0c62",
+        "rev": "411a22a6b66aba58252f287829118c5533f16a11",
         "type": "github"
       },
       "original": {
