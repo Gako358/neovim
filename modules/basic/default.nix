@@ -164,9 +164,6 @@ in {
       "<A-Left>" = ":vertical resize -1<CR>";
       "<A-Right>" = ":vertical resize +1<CR>";
 
-      "<leader>lp" = ":vimtexCompile<CR>";
-      "<leader>lv" = ":vimtexView<CR>";
-
     } else {};
 
     vim.luaConfigRC = ''
@@ -175,13 +172,6 @@ in {
       -----------------------------------------------------------
       vim.g.copilot_no_tab_map = true
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
-      -----------------------------------------------------------
-      -- VimTeX Management
-      -----------------------------------------------------------
-      vim.g.vimtex_view_general_viewer = 'evince'
-      vim.g.vimtex_compiler_method = 'latexrun'
-      vim.g.tex_flavor = 'latex'
 
       -----------------------------------------------------------
       -- Abbrev Management

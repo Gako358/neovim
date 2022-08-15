@@ -98,10 +98,6 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
-    vimtex = {
-      url = "github:lervag/vimtex";
-      flake = false;
-    };
 
     # FILETREE
     nvim-filetree = {
@@ -138,7 +134,6 @@
       "nvim-bufferline"
       "nvim-gitsigns"
       "lualine"
-      "vimtex"
       "nvim-filetree"
       "telescope"
     ];
