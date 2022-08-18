@@ -25,6 +25,14 @@
         nvim-lspconfig
       ];
 
+      vim.configRC = ''
+        ${if cfg.nix then ''
+          autocmd filetype nix setlocal tabstop=2 shiftwidth=2 softtabstop=2
+        ''
+        else ""
+        } 
+      '';
+
       vim.luaConfigRC = let
       in ''    
         local opts = { noremap=true, silent=true }
