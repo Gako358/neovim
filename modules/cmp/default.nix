@@ -21,7 +21,7 @@ in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         # github-copilot
         copilot-lua
-        copilot_cmp
+        copilot-cmp
         lightspeed
         nvim-comment
         nvim-cmp
@@ -167,8 +167,8 @@ in {
             end, { "i", "s" }),
           },
           sources = {
-            { name = "copilot"},
-            { name = "nvim_lsp"},
+            { name = "copilot", group_index = 2 },
+            { name = "nvim_lsp" group_index = 2 },
             { name = "treesitter"},
             { name = "luasnip" },
             { name = "buffer" },
