@@ -21,7 +21,7 @@ in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         # github-copilot
         copilot-lua
-        copilot-cmp
+        copilot_cmp
         lightspeed
         nvim-comment
         nvim-cmp
