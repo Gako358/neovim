@@ -20,6 +20,8 @@ in {
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
         github-copilot
+        copilot-lua
+        copilot-cmp
         lightspeed
         nvim-comment
         nvim-cmp
@@ -34,6 +36,13 @@ in {
       vim.luaConfigRC = ''
         local cmp = require 'cmp'
         local luasnip = require 'luasnip'
+
+        require("copilot").setup {
+          cmp = {
+            enabled = true,
+            method = "getCompletionsCycling",
+          }
+        }
         
         require("luasnip/loaders/from_vscode").lazy_load()
         require('nvim_comment').setup()
@@ -158,6 +167,7 @@ in {
             end, { "i", "s" }),
           },
           sources = {
+            { name = "copilot"},
             { name = "nvim_lsp"},
             { name = "treesitter"},
             { name = "luasnip" },
