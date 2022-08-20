@@ -19,7 +19,7 @@ in {
         else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
-        github-copilot
+        # github-copilot
         copilot-lua
         copilot-cmp
         lightspeed
