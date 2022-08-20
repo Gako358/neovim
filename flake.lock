@@ -80,38 +80,6 @@
         "type": "github"
       }
     },
-    "copilot-cmp": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660186814,
-        "narHash": "sha256-9w4WpU+8tk+2CTWwdzBbhHa5igVGSM5g0318lkBNfT0=",
-        "owner": "zbirenbaum",
-        "repo": "copilot-cmp",
-        "rev": "e93c7c8eab2e98c0fe34619cfb7487d13fb756a4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zbirenbaum",
-        "repo": "copilot-cmp",
-        "type": "github"
-      }
-    },
-    "copilot-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1659658362,
-        "narHash": "sha256-71FbWwmuYcxOBD+0UHqjcHHA61qQgO/EKNWVUBS76Ac=",
-        "owner": "zbirenbaum",
-        "repo": "copilot.lua",
-        "rev": "08230e4d9be4807b60543265fae4f34e32ae1555",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zbirenbaum",
-        "repo": "copilot.lua",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1644229661,
@@ -124,6 +92,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "github-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660574774,
+        "narHash": "sha256-kkycy2AWyV8SaADBFAH4tXOu9GFdubRbMti1goCAkKU=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "554460008f18cbffecb9f1e5de58fec8410dc16f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "copilot.vim",
         "type": "github"
       }
     },
@@ -381,8 +365,7 @@
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
         "cmp-treesitter": "cmp-treesitter",
-        "copilot-cmp": "copilot-cmp",
-        "copilot-lua": "copilot-lua",
+        "github-copilot": "github-copilot",
         "lightspeed": "lightspeed",
         "lualine": "lualine",
         "luasnip": "luasnip",

@@ -34,18 +34,8 @@
     };
 
     # COPILOT Only needed on initial install
-    # github-copilot = {
-    #   url = "github:github/copilot.vim";
-    #   flake = false;
-    # };
-
-    copilot-lua = {
-      url = "github:zbirenbaum/copilot.lua";
-      flake = false;
-    };
-
-    copilot-cmp = {
-      url = "github:zbirenbaum/copilot-cmp";
+    github-copilot = {
+      url = "github:github/copilot.vim";
       flake = false;
     };
 
@@ -129,9 +119,7 @@
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
-      # "github-copilot"
-      "copilot-lua"
-      "copilot-cmp"
+      "github-copilot"
       "nvim-cmp"
       "luasnip"
       "cmp-nvim-lsp"
