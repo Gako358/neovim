@@ -8,7 +8,7 @@ in {
   options.vim.session = {
     enable = mkOption {
       type = types.bool;
-      description = "enable auto-session plugin: [auto-session]";
+      description = "enable session plugin: [vim-session]";
     };
   };
 
@@ -20,11 +20,25 @@ in {
       else "";
     in {  
       vim.startPlugins = with pkgs.neovimPlugins; [
-        auto-session
-      ];
-      
+        vim-misc
+        vim-session
+      ];  
+
+      vim.nnoremap = {
+        "<leader>so" = ":OpenSession<Space>";
+        "<leader>ss" = ":SaveSession<Space>";
+        "<leader>sd" = ":DeleteSession<CR>";
+        "<leader>sc" = ":CloseSession<CR>";
+      };
+
       vim.luaConfigRC = ''
-        require'auto-session'.setup {} 
+        -----------------------------------------------------------
+        -- Session Management
+        -----------------------------------------------------------
+        vim.g.session_directory = "~/.config/nvim/sessions"
+        vim.g.session_autoload = "no"
+        vim.g.session_autosave = "no"
+        vim.g.session_command_aliases = 1
       '';
     }
   );

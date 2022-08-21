@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "auto-session": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660145586,
-        "narHash": "sha256-fHqhf7JqDSzCYdognXHwsoRhHDrGRfbQ/Q/SjfOSMlU=",
-        "owner": "rmagatti",
-        "repo": "auto-session",
-        "rev": "9c302e01ebb474f9b19998488060d9f110ef75c5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rmagatti",
-        "repo": "auto-session",
-        "type": "github"
-      }
-    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -376,7 +360,6 @@
     },
     "root": {
       "inputs": {
-        "auto-session": "auto-session",
         "cmp-buffer": "cmp-buffer",
         "cmp-luasnip": "cmp-luasnip",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
@@ -399,6 +382,8 @@
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
         "telescope": "telescope",
+        "vim-misc": "vim-misc",
+        "vim-session": "vim-session",
         "web-devicons": "web-devicons"
       }
     },
@@ -415,6 +400,38 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "vim-misc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1432234435,
+        "narHash": "sha256-0XGugINNYH+o8uPePNz28Nojy1dxdVD8RYU53xA6qWU=",
+        "owner": "xolox",
+        "repo": "vim-misc",
+        "rev": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xolox",
+        "repo": "vim-misc",
+        "type": "github"
+      }
+    },
+    "vim-session": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1446379405,
+        "narHash": "sha256-a+yRjpShuMMHspa2VtqkUUlNyR96TiiAKuldDKAb02Q=",
+        "owner": "xolox",
+        "repo": "vim-session",
+        "rev": "9e9a6088f0554f6940c19889d0b2a8f39d13f2bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xolox",
+        "repo": "vim-session",
         "type": "github"
       }
     },

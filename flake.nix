@@ -98,8 +98,14 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
-    auto-session = {
-      url = "github:rmagatti/auto-session";
+
+    # SESSIONS
+    vim-session = {
+      url = "github:xolox/vim-session";
+      flake = false;
+    };
+    vim-misc = {
+      url = "github:xolox/vim-misc";
       flake = false;
     };
 
@@ -138,7 +144,8 @@
       "nvim-bufferline"
       "nvim-gitsigns"
       "lualine"
-      "auto-session"
+      "vim-session"
+      "vim-misc"
       "nvim-filetree"
       "telescope"
     ];
