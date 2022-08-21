@@ -218,7 +218,7 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
-          vim.session = true;
+          vim.session.enable = true;
           vim.gitsigns.enable = true;
 
           vim.telescope.enable = true;
