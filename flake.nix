@@ -98,6 +98,10 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
+    auto-session = {
+      url = "github:rmagatti/auto-session";
+      flake = false;
+    };
 
     # FILETREE
     nvim-filetree = {
@@ -134,6 +138,7 @@
       "nvim-bufferline"
       "nvim-gitsigns"
       "lualine"
+      "auto-session"
       "nvim-filetree"
       "telescope"
     ];
@@ -213,6 +218,7 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
+          vim.session = true;
           vim.gitsigns.enable = true;
 
           vim.telescope.enable = true;
