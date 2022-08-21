@@ -24,9 +24,7 @@ in {
       ];
       
       vim.luaConfigRC = ''
-        require'auto-session'.setup {
-          log_level = 'error',
-          } 
+        require'auto-session'.setup {} 
       '';
     }
   );
