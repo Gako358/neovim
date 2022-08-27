@@ -14,7 +14,7 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.whichKey.enable) {
-      vim.startPlugins = with pkgs; [
+      vim.startPlugins = with pkgs.neovimPlugins; [
         which-key
       ];
       vim.startLuaConfigRC = ''
