@@ -24,7 +24,7 @@ in {
 
       vim.luaConfigRC = ''
         --setup whichkey
-        require("which-key").setup()
+        require("which-key").setup {}
       '';
   };
 }
