@@ -98,6 +98,10 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
+    which-key = {
+      url = "github:folke/which-key.nvim";
+      flake = false;
+    };
 
     # SESSIONS
     vim-session = {
@@ -144,6 +148,7 @@
       "nvim-bufferline"
       "nvim-gitsigns"
       "lualine"
+      "which-key"
       "vim-session"
       "vim-misc"
       "nvim-filetree"
@@ -225,6 +230,7 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
+          vim.keys.enable = true;
           vim.session.enable = true;
           vim.gitsigns.enable = true;
 
