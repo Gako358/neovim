@@ -8,12 +8,12 @@ in {
   options.vim.keys = {
     enable = mkEnableOption "Key binding plugins";
 
-    whichkey = {
+    whichKey = {
       enable = mkEnableOption "whichkey";
     };
   };
 
-  config = mkIf (cfg.enable && cfg.whichkey.enable) {
+  config = mkIf (cfg.enable && cfg.whichKey.enable) {
       vim.startPlugins = with pkgs; [
         which-key
       ];

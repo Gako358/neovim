@@ -230,9 +230,13 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
-          vim.keys.enable = true;
           vim.session.enable = true;
           vim.gitsigns.enable = true;
+
+          vim.keys = {
+            enable = true;
+            whichKey.enable = true;
+          };
 
           vim.telescope.enable = true;
         };
