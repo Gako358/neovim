@@ -36,6 +36,12 @@ in {
       default = "";
     };
 
+    startLuaConfigRC = mkOption {
+      description = "start of vim lua config";
+      type = types.lines;
+      default = "";
+    };
+
     luaConfigRC = mkOption {
       description = ''vim lua config'';
       type = types.lines;
@@ -157,6 +163,7 @@ in {
       " Lua config from vim.luaConfigRC
       ${wrapLuaConfig cfg.luaConfigRC}
 
+        (concatStringsSep "\n" [cfg.startLuaConfigRC cfg.luaConfigRC])}
         ${builtins.concatStringsSep "\n" nmap}
         ${builtins.concatStringsSep "\n" imap}
         ${builtins.concatStringsSep "\n" vmap}
