@@ -102,6 +102,10 @@
       url = "github:folke/which-key.nvim";
       flake = false;
     };
+    toggleterm = {
+      url = "github:akinsho/toggleterm.nvim";
+      flake = false;
+    };
 
     # SESSIONS
     vim-session = {
@@ -149,6 +153,7 @@
       "nvim-gitsigns"
       "lualine"
       "which-key"
+      "toggleterm"
       "vim-session"
       "vim-misc"
       "nvim-filetree"
@@ -237,6 +242,8 @@
             enable = true;
             whichKey.enable = true;
           };
+
+          vim.toggleterm.enable = true;
 
           vim.telescope.enable = true;
         };
