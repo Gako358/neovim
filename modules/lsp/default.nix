@@ -23,14 +23,14 @@
     config = mkIf cfg.enable {
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-lspconfig
-        (
+      ]
+      ++ (
          if cfg.rust.enable then [
             crates-nvim
             rust-tools
           ]
           else []
-        )
-      ];
+        );
 
       vim.configRC = ''
         ${if cfg.nix then ''
