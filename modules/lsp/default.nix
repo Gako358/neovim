@@ -41,13 +41,13 @@
         ${if cfg.rust then ''
           function! MapRustTools()
             nnoremap <silent><leader>ri <cmd>lua require('rust-tools').hover_actions.hover_actions()<CR>
-            nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
+            nnoremap <silent><leader>rr <cmd>lua require('rust-tools').runnables.runnables()<CR>
             nnoremap <silent><leader>re <cmd>lua require('rust-tools.expand_macro').expand_macro()<CR>
             nnoremap <silent><leader>rc <cmd>lua require('rust-tools.open_cargo_toml').open_cargo_toml()<CR>
             nnoremap <silent><leader>rg <cmd>lua require('rust-tools.crate_graph').view_crate_graph('x11', nil)<CR>
           endfunction
             autocmd filetype rust nnoremap <silent><leader>ri <cmd>lua require('rust-tools').hover_actions.hover_actions()<CR>
-            autocmd filetype rust nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
+            autocmd filetype rust nnoremap <silent><leader>rr <cmd>lua require('rust-tools').runnables.runnables()<CR>
             autocmd filetype rust nnoremap <silent><leader>re <cmd>lua require('rust-tools.expand_macro').expand_macro()<CR>
             autocmd filetype rust nnoremap <silent><leader>rc <cmd>lua require('rust-tools.open_cargo_toml').open_cargo_toml()<CR>
             autocmd filetype rust nnoremap <silent><leader>rg <cmd>lua require('rust-tools.crate_graph').view_crate_graph('x11', nil)<CR>
