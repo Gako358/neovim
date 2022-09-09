@@ -137,22 +137,13 @@
         '' else ""}
 
         ${if cfg.rust then ''
-          local rustopts = {
-            tools = {
-              autoSetHints = true,
-              hover_with_actions = false,
-              inlay_hints = {
-                only_current_line = false,
-              }
-            }
-          }
           require('lspconfig')['rust_analyzer'].setup{
             on_attach = on_attach,
             flags = lsp_flags,
             cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
           }
-          require('crates').setup{}
-          require('rust-tools').setup(rustopts)
+          require('crates').setup()
+          require('rust-tools').setup()
         '' else ""}
          
         ${if cfg.typescript then ''
