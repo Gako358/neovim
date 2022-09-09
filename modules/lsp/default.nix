@@ -73,6 +73,34 @@
           -- This is the default in Nvim 0.7+
           debounce_text_changes = 150,
         }
+        
+        require('rust-tools').setup {
+          tools = {
+            autoSetHints = true,
+            hover_with_actions = true,
+            runnables = {
+              use_telescope = true
+            },
+            inlay_hints = {
+              show_parameter_hints = true,
+              parameter_hints_prefix = "<- ",
+              other_hints_prefix  = "=> ",
+            },
+            hover_actions = {
+              border = {
+                {"╭", "FloatBorder"},
+                {"─", "FloatBorder"},
+                {"╮", "FloatBorder"},
+                {"│", "FloatBorder"},
+                {"╯", "FloatBorder"},
+                {"─", "FloatBorder"},
+                {"╰", "FloatBorder"},
+                {"│", "FloatBorder"},
+              }
+            }
+          },
+        }
+
         ${if cfg.python then ''
           require('lspconfig')['pyright'].setup{
               on_attach = on_attach,
