@@ -115,8 +115,6 @@
               flags = lsp_flags,
               cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
           }
-          require('crates').setup()
-          require('rust-tools').setup()
         '' else ""}
          
         ${if cfg.typescript then ''
