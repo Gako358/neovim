@@ -21,9 +21,9 @@
         rustAnalyserOpts = mkOption {
           type = types.str;
           default = ''
-            ["rust-analyser"] = {
+            ["rust-analyzer"] = {
               experimental = {
-                procAttrMacros = true;
+                procAttrMacros = true,
               },
             },
           '';
@@ -157,15 +157,15 @@
               inlay_hints = {
                 only_current_line = false,
               }
-            }
-          }
-          require('lspconfig')['rust_analyzer'].setup{
+            },
+            require('lspconfig')['rust_analyzer'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"},
               settings = {
                 ${cfg.rust.rustAnalyserOpts}
               }
+            }
           }
           require('crates').setup{}
           require('rust-tools').setup(rustopts)
