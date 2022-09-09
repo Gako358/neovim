@@ -29,6 +29,7 @@
           '';
           description = "rust-analyser options";
         };
+      };
       typescript = mkEnableOption "Enable Typescript/Javascript Support";
     };
 
