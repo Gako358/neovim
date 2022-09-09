@@ -80,6 +80,22 @@
         "type": "github"
       }
     },
+    "crates-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662650787,
+        "narHash": "sha256-qlJ9AOZHt81XwOXLPbTovSmQhUeokwXiwEvlZ4VSSrE=",
+        "owner": "Saecki",
+        "repo": "crates.nvim",
+        "rev": "003442e2448870f6f2fab6ec7ac7b4de21e6d1d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Saecki",
+        "repo": "crates.nvim",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1644229661,
@@ -297,11 +313,11 @@
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1662684077,
-        "narHash": "sha256-X5UFb7zXL5Sj4sIqjbJad5tlwCSBAyvleWt3oeGxGH8=",
+        "lastModified": 1662725217,
+        "narHash": "sha256-7O1n+TbxKotWl8Wws75FEW1CWybiHdg5sV3bpic3Qjo=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "487103c80c6723f0ce4ad34ce8065bdc47dd8fa4",
+        "rev": "8e65dbb6e187604cdaf0e0ef2e90c790760912e7",
         "type": "github"
       },
       "original": {
@@ -365,6 +381,7 @@
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
         "cmp-treesitter": "cmp-treesitter",
+        "crates-nvim": "crates-nvim",
         "github-copilot": "github-copilot",
         "lightspeed": "lightspeed",
         "lualine": "lualine",
@@ -381,12 +398,29 @@
         "nvim-treesitter": "nvim-treesitter",
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
+        "rust-tools": "rust-tools",
         "telescope": "telescope",
         "toggleterm": "toggleterm",
         "vim-misc": "vim-misc",
         "vim-session": "vim-session",
         "web-devicons": "web-devicons",
         "which-key": "which-key"
+      }
+    },
+    "rust-tools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662154544,
+        "narHash": "sha256-zR+6LMgHxzqWuPYuTT5U4HKW+lbgOZ2Zw6LzArRpQ5g=",
+        "owner": "simrat39",
+        "repo": "rust-tools.nvim",
+        "rev": "86a2b4e31f504c00715d0dd082a6b8b5d4afbf03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "simrat39",
+        "repo": "rust-tools.nvim",
+        "type": "github"
       }
     },
     "telescope": {

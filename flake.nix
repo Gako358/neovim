@@ -32,6 +32,10 @@
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
+    rust-tools = {
+      url = "github:simrat39/rust-tools.nvim";
+      flake = false;
+    };
 
     # COPILOT Only needed on initial install
     github-copilot = {
@@ -74,6 +78,12 @@
     };
     cmp-treesitter = {
       url = "github:ray-x/cmp-treesitter";
+      flake = false;
+    };
+
+    # Rust crates
+    crates-nvim = {
+      url = "github:Saecki/crates.nvim";
       flake = false;
     };
 
@@ -137,6 +147,7 @@
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
+      "rust-tools"
       "github-copilot"
       "nvim-cmp"
       "luasnip"
@@ -147,6 +158,7 @@
       "lightspeed"
       "nvim-comment"
       "cmp-treesitter"
+      "crates-nvim"
       "nvim-autopairs"
       "web-devicons"
       "nvim-bufferline"

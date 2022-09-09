@@ -85,6 +85,7 @@ in {
           nvim_lsp = "[ LSP]",
           luasnip = "[ LSnip]",
           nvim_lua = "[ NvimLua]",
+          crates = "[ Crates]",
           latex_symbols = "[ Latex]",
           dictionary = "[韛Dict]",
         }
@@ -166,6 +167,7 @@ in {
           },
           sources = {
             { name = "nvim_lsp"},
+            { name = "crates"},
             { name = "treesitter"},
             { name = "luasnip" },
             { name = "buffer" },

@@ -7,6 +7,7 @@
   in {
     options.vim.lsp = {
       enable = mkOption {
+        formatOnSave = mkEnableOption "format on save";
         type = types.bool;
         description = "enable lsp config [nvim-lspconfig]";
       };
@@ -23,6 +24,13 @@
     config = mkIf cfg.enable {
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-lspconfig
+        (
+         if cfg.rust.enable then [
+            crates-nvim
+            rust-tools
+          ]
+          else []
+        )
       ];
 
       vim.configRC = ''
@@ -31,6 +39,22 @@
         ''
         else ""
         } 
+        ${if cfg.rust.enable then ''
+          function! MapRustTools()
+            nnoremap <silent><leader>ri <cmd>lua require('rust-tools.inlay_hints').toggle_inlay_hints()<CR>
+            nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
+            nnoremap <silent><leader>re <cmd>lua require('rust-tools.expand_macro').expand_macro()<CR>
+            nnoremap <silent><leader>rc <cmd>lua require('rust-tools.open_cargo_toml').open_cargo_toml()<CR>
+            nnoremap <silent><leader>rg <cmd>lua require('rust-tools.crate_graph').view_crate_graph('x11', nil)<CR>
+          endfunction
+            autocmd filetype rust nnoremap <silent><leader>ri <cmd>lua require('rust-tools.inlay_hints').toggle_inlay_hints()<CR>
+            autocmd filetype rust nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
+            autocmd filetype rust nnoremap <silent><leader>re <cmd>lua require('rust-tools.expand_macro').expand_macro()<CR>
+            autocmd filetype rust nnoremap <silent><leader>rc <cmd>lua require('rust-tools.open_cargo_toml').open_cargo_toml()<CR>
+            autocmd filetype rust nnoremap <silent><leader>rg <cmd>lua require('rust-tools.crate_graph').view_crate_graph('x11', nil)<CR>
+        ''
+        else ""
+        }
       '';
 
       vim.luaConfigRC = let
@@ -113,11 +137,22 @@
         '' else ""}
 
         ${if cfg.rust then ''
+          local rustopts = {
+            tools = {
+              autoSetHints = true,
+              hover_with_actions = false,
+              inlay_hints = {
+                only_current_line = false,
+              }
+            }
+          }
           require('lspconfig')['rust_analyzer'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
           }
+          require('crates').setup{}
+          require('rust-tools').setup(rustopts)
         '' else ""}
          
         ${if cfg.typescript then ''
