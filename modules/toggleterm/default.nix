@@ -23,6 +23,10 @@ in {
         toggleterm
       ];
 
+      vim.nnoremap = {
+        "<C-t>" = ":ToggleTerm<CR>";
+      };
+
       vim.luaConfigRC = ''
         require("toggleterm").setup()
       '';
