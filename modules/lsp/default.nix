@@ -146,12 +146,12 @@
               inlay_hints = {
                 only_current_line = false,
               }
-            },
-            require('lspconfig')['rust_analyzer'].setup{
-              on_attach = on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
             }
+          }
+          require('lspconfig')['rust_analyzer'].setup{
+            on_attach = on_attach,
+            flags = lsp_flags,
+            cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
           }
           require('crates').setup{}
           require('rust-tools').setup(rustopts)
