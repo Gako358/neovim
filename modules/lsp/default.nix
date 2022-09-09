@@ -115,7 +115,7 @@
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
-          }
+          },
           require('rust-tools').setup {
             tools = {
               autoSetHints = true,
