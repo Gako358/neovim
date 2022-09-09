@@ -19,7 +19,7 @@ in {
         then msg
         else "";
     in {
-      vim.startPlugins = with.pkgs.neovimPlugins; [
+      vim.startPlugins = with pkgs.neovimPlugins; [
         toggleterm
       ];
 
