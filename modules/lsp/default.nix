@@ -16,9 +16,7 @@
       bash = mkEnableOption "Enable Bash Language Support";
       lua = mkEnableOption "Enable Lua Language Support";
       nix = mkEnableOption "Enable Nix Language Support";
-      rust = {
-        enable = mkEnableOption "Enable Rust Support";
-      };
+      rust = mkEnableOption "Enable Rust Support";
       typescript = mkEnableOption "Enable Typescript/Javascript Support";
     };
 
@@ -27,7 +25,7 @@
         nvim-lspconfig
       ]
       ++ (
-         if cfg.rust.enable 
+         if cfg.rust 
          then [
             crates-nvim
             rust-tools
@@ -41,7 +39,7 @@
         ''
         else ""
         } 
-        ${if cfg.rust.enable then ''
+        ${if cfg.rust then ''
           function! MapRustTools()
             nnoremap <silent><leader>ri <cmd>lua require('rust-tools.inlay_hints').toggle_inlay_hints()<CR>
             nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
@@ -138,7 +136,7 @@
           }
         '' else ""}
 
-        ${if cfg.rust.enable then ''
+        ${if cfg.rust then ''
           local rustopts = {
             tools = {
               autoSetHints = true,

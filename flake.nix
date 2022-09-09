@@ -238,8 +238,8 @@
           vim.lsp.bash = true;
           vim.lsp.lua = true;
           vim.lsp.nix = true;
+          vim.lsp.rust = true;
           vim.lsp.typescript = true;
-          vim.lsp.rust.enable = true;
 
           vim.autocomplete.enable = true;
 
