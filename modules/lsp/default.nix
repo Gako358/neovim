@@ -16,7 +16,19 @@
       bash = mkEnableOption "Enable Bash Language Support";
       lua = mkEnableOption "Enable Lua Language Support";
       nix = mkEnableOption "Enable Nix Language Support";
-      rust = mkEnableOption "Enable Rust Support";
+      rust = {
+        enable = mkEnableOption "Enable Rust Support";
+        rustAnalyserOpts = mkOption {
+          type = types.str;
+          default = ''
+            ["rust-analyser"] = {
+              experimental = {
+                procAttrMacros = true;
+              },
+            },
+          '';
+          description = "rust-analyser options";
+        };
       typescript = mkEnableOption "Enable Typescript/Javascript Support";
     };
 
@@ -25,11 +37,12 @@
         nvim-lspconfig
       ]
       ++ (
-         if cfg.rust.enable then [
+         if cfg.rust.enable 
+         then [
             crates-nvim
             rust-tools
-          ]
-          else []
+         ]
+         else []
         );
 
       vim.configRC = ''
@@ -149,6 +162,9 @@
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
+              settings = {
+                ${cfg.rust.rustAnalyserOpts}
+              }
           }
           require('crates').setup{}
           require('rust-tools').setup(rustopts)
