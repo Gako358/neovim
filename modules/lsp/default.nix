@@ -18,17 +18,6 @@
       nix = mkEnableOption "Enable Nix Language Support";
       rust = {
         enable = mkEnableOption "Enable Rust Support";
-        rustAnalyserOpts = mkOption {
-          type = types.str;
-          default = ''
-            ["rust-analyzer"] = {
-              experimental = {
-                procAttrMacros = true,
-              },
-            },
-          '';
-          description = "rust-analyser options";
-        };
       };
       typescript = mkEnableOption "Enable Typescript/Javascript Support";
     };
@@ -161,10 +150,7 @@
             require('lspconfig')['rust_analyzer'].setup{
               on_attach = on_attach,
               flags = lsp_flags,
-              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"},
-              settings = {
-                ${cfg.rust.rustAnalyserOpts}
-              }
+              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
             }
           }
           require('crates').setup{}
