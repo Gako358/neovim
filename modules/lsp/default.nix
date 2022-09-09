@@ -1,4 +1,4 @@
-  { pkgs, config, lib, ...}:
+ { pkgs, config, lib, ...}:
   with lib;
   with builtins;
 
@@ -23,15 +23,9 @@
     config = mkIf cfg.enable {
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-lspconfig
-      ]
-      ++ (
-         if cfg.rust 
-         then [
-            crates-nvim
-            rust-tools
-         ]
-         else []
-        );
+        rust-tools
+        crates-nvim
+      ];
 
       vim.configRC = ''
         ${if cfg.nix then ''
@@ -39,22 +33,6 @@
         ''
         else ""
         } 
-        ${if cfg.rust then ''
-          function! MapRustTools()
-            nnoremap <silent><leader>ri <cmd>lua require('rust-tools.inlay_hints').toggle_inlay_hints()<CR>
-            nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
-            nnoremap <silent><leader>re <cmd>lua require('rust-tools.expand_macro').expand_macro()<CR>
-            nnoremap <silent><leader>rc <cmd>lua require('rust-tools.open_cargo_toml').open_cargo_toml()<CR>
-            nnoremap <silent><leader>rg <cmd>lua require('rust-tools.crate_graph').view_crate_graph('x11', nil)<CR>
-          endfunction
-            autocmd filetype rust nnoremap <silent><leader>ri <cmd>lua require('rust-tools.inlay_hints').toggle_inlay_hints()<CR>
-            autocmd filetype rust nnoremap <silent><leader>rr <cmd>lua require('rust-tools.runnables').runnables()<CR>
-            autocmd filetype rust nnoremap <silent><leader>re <cmd>lua require('rust-tools.expand_macro').expand_macro()<CR>
-            autocmd filetype rust nnoremap <silent><leader>rc <cmd>lua require('rust-tools.open_cargo_toml').open_cargo_toml()<CR>
-            autocmd filetype rust nnoremap <silent><leader>rg <cmd>lua require('rust-tools.crate_graph').view_crate_graph('x11', nil)<CR>
-        ''
-        else ""
-        }
       '';
 
       vim.luaConfigRC = let
@@ -102,7 +80,6 @@
               cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
           }
         '' else ""}
-
         ${if cfg.clang then ''
           require('lspconfig')['clangd'].setup{
               on_attach = on_attach,
@@ -111,7 +88,6 @@
               filetypes = { "c", "cpp", "objc", "objcpp" };
           }
         '' else ""}
-
         ${if cfg.bash then ''
           require('lspconfig')['bashls'].setup{
               on_attach = on_attach,
@@ -119,7 +95,6 @@
               cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"}
           }
         '' else ""}
-
         ${if cfg.lua then ''
           require('lspconfig')['sumneko_lua'].setup{
               on_attach = on_attach,
@@ -127,7 +102,6 @@
               cmd = {"${pkgs.sumneko-lua-language-server}/bin/sumneko_lua", "start"}
           }
         '' else ""}
-
         ${if cfg.nix then ''
           require('lspconfig')['rnix'].setup{
               on_attach = on_attach,
@@ -135,12 +109,11 @@
               cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
           }
         '' else ""}
-
         ${if cfg.rust then ''
           require('lspconfig')['rust_analyzer'].setup{
-            on_attach = on_attach,
-            flags = lsp_flags,
-            cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
+              on_attach = on_attach,
+              flags = lsp_flags,
+              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
           }
           require('crates').setup()
           require('rust-tools').setup()
