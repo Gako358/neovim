@@ -111,11 +111,6 @@
           }
         '' else ""}
         ${if cfg.rust then ''
-          require('lspconfig')['rust_analyzer'].setup{
-              on_attach = on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
-          },
           require('rust-tools').setup {
             tools = {
               autoSetHints = true,
@@ -140,6 +135,11 @@
                 }
               }
             },
+          }
+          require('lspconfig')['rust_analyzer'].setup{
+              on_attach = on_attach,
+              flags = lsp_flags,
+              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
           }
         '' else ""}
          
