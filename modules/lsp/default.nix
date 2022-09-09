@@ -7,7 +7,6 @@
   in {
     options.vim.lsp = {
       enable = mkOption {
-        formatOnSave = mkEnableOption "format on save";
         type = types.bool;
         description = "enable lsp config [nvim-lspconfig]";
       };
