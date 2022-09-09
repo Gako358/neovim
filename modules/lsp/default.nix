@@ -134,19 +134,20 @@
         ${if cfg.rust then ''
           local opts = {
               tools = { -- rust-tools options
-              -- how to execute terminal commands
-              -- options right now: termopen / quickfix
-              executor = require("rust-tools/executors").termopen,
+                  -- how to execute terminal commands
+                  -- options right now: termopen / quickfix
+                  executor = require("rust-tools/executors").termopen,
 
-              autoSetHints = true,
-              inlinethints = {
-                  auto = true,
-                  only_current_line = false,
+                  autoSetHints = true,
+                  inlinethints = {
+                      auto = true,
+                      only_current_line = false,
+                  },
+                  hover_actions = {
+                      auto = true,
+                  }
               },
-              hover_actions = {
-                  auto = true,
-              }
-          },
+          }
           require('crates').setup()
           require('rust-tools').setup(opts)
           require('lspconfig')['rust_analyzer'].setup{
