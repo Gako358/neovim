@@ -149,7 +149,7 @@
           }
         '' else ""}
 
-        ${if cfg.rust then ''
+        ${if cfg.rust.enable then ''
           local rustopts = {
             tools = {
               autoSetHints = true,
