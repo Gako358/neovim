@@ -109,7 +109,7 @@
 
           ${if cfg.nix then ''
             null_ls.builtins.formatting.alejandra.with({
-                command = "${pkgs.alejandra}/bin/alejandra,
+                command = "${pkgs.alejandra}/bin/alejandra",
             }),
           ''else ""}
 
