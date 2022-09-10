@@ -213,7 +213,7 @@ in {
       ''}
 
       ${writeIf cfg.autoIndent ''
-        set smartindent
+        set autoindent
       ''}
             
       ${writeIf cfg.preventJunkFiles ''
