@@ -32,6 +32,10 @@
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
+    null-ls = {
+      url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
     rust-tools = {
       url = "github:simrat39/rust-tools.nvim";
       flake = false;
@@ -147,6 +151,7 @@
       "plenary-nvim"
       "nvim-treesitter"
       "nvim-lspconfig"
+      "null-ls"
       "rust-tools"
       "github-copilot"
       "nvim-cmp"
@@ -233,6 +238,7 @@
 
           vim.treesitter.enable = true;
           vim.lsp.enable = true;
+          vim.lsp.formatOnSave = true;
           vim.lsp.python = true;
           vim.lsp.clang = true;
           vim.lsp.bash = true;
