@@ -207,7 +207,7 @@ in {
       ${
         if cfg.cmake
         then ''
-          lspconfig.cmake.setup{
+          require('lspconfig')['cmake'].setup{
             on_attach=require'completion'.on_attach;
             cmd = {'${pkgs.cmake-language-server}/bin/cmake-language-server'};
             filetypes = { "cmake"};
@@ -277,7 +277,6 @@ in {
         ''
         else ""
       }
-
       ${
         if cfg.typescript
         then ''
@@ -289,22 +288,20 @@ in {
         ''
         else ""
       }
-
       ${
         if cfg.docker
         then ''
-          lspconfig.dockerls.setup{
+          require('lspconfig')['dockerls'].setup{
             on_attach=require'completion'.on_attach;
             cmd = {'${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-language-server', '--stdio' }
           }
         ''
         else ""
       }
-
       ${
         if cfg.css
         then ''
-          lspconfig.cssls.setup{
+          require('lspconfig')['cssls'].setup{
             on_attach=require'completion'.on_attach;
             cmd = {'${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver', '--stdio' };
             filetypes = { "css", "scss", "less" };
@@ -316,7 +313,7 @@ in {
       ${
         if cfg.html
         then ''
-          lspconfig.html.setup{
+          require('lspconfig')['html'].setup{
             on_attach=require'completion'.on_attach;
             cmd = {'${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' };
             filetypes = { "html", "css", "javascript" };
@@ -328,7 +325,7 @@ in {
       ${
         if cfg.json
         then ''
-          lspconfig.jsonls.setup{
+          require('lspconfig')['jsonls'].setup{
             on_attach=require'completion'.on_attach;
             cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
             filetypes = { "html", "css", "javascript" };
@@ -336,11 +333,10 @@ in {
         ''
         else ""
       }
-
       ${
         if cfg.tex
         then ''
-          lspconfig.texlab.setup{
+          require('lspconfig')['texlab'].setup{
             on_attach=require'completion'.on_attach;
             cmd = {'${pkgs.texlab}/bin/texlab'}
           }
