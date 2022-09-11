@@ -17,11 +17,17 @@ in {
 
     python = mkEnableOption "Enable Python Language Support";
     clang = mkEnableOption "Enable C Language Support";
+    cmake = mkEnableOption "Enable CMake";
     bash = mkEnableOption "Enable Bash Language Support";
     lua = mkEnableOption "Enable Lua Language Support";
     nix = mkEnableOption "Enable Nix Language Support";
     rust = mkEnableOption "Enable Rust Support";
     typescript = mkEnableOption "Enable Typescript/Javascript Support";
+    docker = mkEnableOption "Enable docker support";
+    tex = mkEnableOption "Enable tex support";
+    css = mkEnableOption "Enable css support";
+    html = mkEnableOption "Enable html support";
+    json = mkEnableOption "Enable JSON";
   };
 
   config = mkIf cfg.enable {
@@ -199,6 +205,17 @@ in {
         else ""
       }
       ${
+        if cfg.cmake
+        then ''
+          lspconfig.cmake.setup{
+            on_attach=require'completion'.on_attach;
+            cmd = {'${pkgs.cmake-language-server}/bin/cmake-language-server'};
+            filetypes = { "cmake"};
+          }
+        ''
+        else ""
+      }
+      ${
         if cfg.bash
         then ''
           require('lspconfig')['bashls'].setup{
@@ -268,6 +285,64 @@ in {
               on_attach = on_attach,
               flags = lsp_flags,
               cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" }
+          }
+        ''
+        else ""
+      }
+
+      ${
+        if cfg.docker
+        then ''
+          lspconfig.dockerls.setup{
+            on_attach=require'completion'.on_attach;
+            cmd = {'${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-language-server', '--stdio' }
+          }
+        ''
+        else ""
+      }
+
+      ${
+        if cfg.css
+        then ''
+          lspconfig.cssls.setup{
+            on_attach=require'completion'.on_attach;
+            cmd = {'${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver', '--stdio' };
+            filetypes = { "css", "scss", "less" };
+          }
+        ''
+        else ""
+      }
+
+      ${
+        if cfg.html
+        then ''
+          lspconfig.html.setup{
+            on_attach=require'completion'.on_attach;
+            cmd = {'${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' };
+            filetypes = { "html", "css", "javascript" };
+          }
+        ''
+        else ""
+      }
+
+      ${
+        if cfg.json
+        then ''
+          lspconfig.jsonls.setup{
+            on_attach=require'completion'.on_attach;
+            cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
+            filetypes = { "html", "css", "javascript" };
+          }
+        ''
+        else ""
+      }
+
+      ${
+        if cfg.tex
+        then ''
+          lspconfig.texlab.setup{
+            on_attach=require'completion'.on_attach;
+            cmd = {'${pkgs.texlab}/bin/texlab'}
           }
         ''
         else ""
