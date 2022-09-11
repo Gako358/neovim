@@ -208,7 +208,7 @@ in {
         if cfg.cmake
         then ''
           require('lspconfig')['cmake'].setup{
-            on_attach=require'completion'.on_attach;
+            on_attach = on_attach,
             cmd = {'${pkgs.cmake-language-server}/bin/cmake-language-server'};
             filetypes = { "cmake"};
           }
@@ -292,7 +292,7 @@ in {
         if cfg.docker
         then ''
           require('lspconfig')['dockerls'].setup{
-            on_attach=require'completion'.on_attach;
+            on_attach = on_attach,
             cmd = {'${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-language-server', '--stdio' }
           }
         ''
@@ -302,7 +302,7 @@ in {
         if cfg.css
         then ''
           require('lspconfig')['cssls'].setup{
-            on_attach=require'completion'.on_attach;
+            on_attach = on_attach,
             cmd = {'${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver', '--stdio' };
             filetypes = { "css", "scss", "less" };
           }
@@ -314,7 +314,7 @@ in {
         if cfg.html
         then ''
           require('lspconfig')['html'].setup{
-            on_attach=require'completion'.on_attach;
+            on_attach = on_attach,
             cmd = {'${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' };
             filetypes = { "html", "css", "javascript" };
           }
@@ -326,7 +326,7 @@ in {
         if cfg.json
         then ''
           require('lspconfig')['jsonls'].setup{
-            on_attach=require'completion'.on_attach;
+            on_attach = on_attach,
             cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
             filetypes = { "html", "css", "javascript" };
           }
@@ -337,7 +337,7 @@ in {
         if cfg.tex
         then ''
           require('lspconfig')['texlab'].setup{
-            on_attach=require'completion'.on_attach;
+            on_attach = on_attach,
             cmd = {'${pkgs.texlab}/bin/texlab'}
           }
         ''
