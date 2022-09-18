@@ -13,8 +13,6 @@ in {
       type = types.bool;
       description = "enable lsp config [nvim-lspconfig]";
     };
-    formatOnSave = mkEnableOption "format on save";
-
     python = mkEnableOption "Enable Python Language Support";
     clang = mkEnableOption "Enable C Language Support";
     cmake = mkEnableOption "Enable CMake";
@@ -86,7 +84,7 @@ in {
 
       -- Use an on_attach function to only map the following keys
       -- after the language server attaches to the current buffer
-      local keys_on_attach = function(client, bufnr)
+      local default_on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -141,31 +139,6 @@ in {
       }
 
       }
-
-      vim.g.formatsave = ${
-        if cfg.formatOnSave
-        then "true"
-        else "false"
-      };
-
-      -- Enable formatting
-      format_callback = function(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = augroup,
-          buffer = bufnr,
-          callback = function()
-            if vim.g.formatsave then
-                local params = require'vim.lsp.util'.make_formatting_params({})
-                client.request('textDocument/formatting', params, nil, bufnr)
-            end
-          end
-        })
-      end
-
-      default_on_attach = function(client, bufnr)
-        keys_on_attach(client, bufnr)
-        format_callback(client, bufnr)
-      end
 
       -- Enable null-ls
       require('null-ls').setup({

@@ -148,8 +148,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, neovim, ... }@inputs:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    neovim,
+    ...
+  } @ inputs: let
     plugins = [
       "onedark"
       "plenary-nvim"
@@ -204,36 +208,42 @@
         p.tree-sitter-typescript
         p.tree-sitter-bash
       ]);
-      buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
-        pname = name;
-        version = "master";
-        src = builtins.getAttr name inputs;
-        postPatch =
-        if (name == "nvim-treesitter")
-        then ''
-          rm -r parser
-          ln -s ${treesitterGrammars} parser
-        ''
-        else "";
-      };
+      buildPlug = name:
+        top.vimUtils.buildVimPluginFrom2Nix {
+          pname = name;
+          version = "master";
+          src = builtins.getAttr name inputs;
+          postPatch =
+            if (name == "nvim-treesitter")
+            then ''
+              rm -r parser
+              ln -s ${treesitterGrammars} parser
+            ''
+            else "";
+        };
     in {
-      neovimPlugins = builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
+      neovimPlugins = builtins.listToAttrs (map (name: {
+          inherit name;
+          value = buildPlug name;
+        })
+        plugins);
     };
-    
-    allPkgs = lib.mkPkgs { 
-      inherit nixpkgs; 
-      cfg = { };
+
+    allPkgs = lib.mkPkgs {
+      inherit nixpkgs;
+      cfg = {};
       overlays = [
         pluginOverlay
         externalBitsOverlay
       ];
     };
 
-    lib = 
-      import 
+    lib =
+      import
       ./lib;
 
-    mkNeoVimPkg = pkgs: lib.neovimBuilder {
+    mkNeoVimPkg = pkgs:
+      lib.neovimBuilder {
         inherit pkgs;
         config = {
           vim.viAlias = true;
@@ -243,7 +253,6 @@
 
           vim.treesitter.enable = true;
           vim.lsp.enable = true;
-          vim.lsp.formatOnSave = true;
           vim.lsp.trouble.enable = true;
           vim.lsp.python = true;
           vim.lsp.clang = true;
@@ -278,11 +287,8 @@
           vim.telescope.enable = true;
         };
       };
-
   in {
-
-    apps = lib.withDefaultSystems (sys:
-    {
+    apps = lib.withDefaultSystems (sys: {
       nvim = {
         type = "app";
         program = "${self.defaultPackage."${sys}"}/bin/nvim";
