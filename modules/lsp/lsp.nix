@@ -33,6 +33,7 @@ in {
       [
         nvim-lspconfig
         null-ls
+        nvim-dap
       ]
       ++ (
         if cfg.rust
@@ -44,6 +45,16 @@ in {
       );
 
     vim.configRC = ''
+      vim.nnoremap = {
+        "<leader>do" = "<cmd>lua require'dap'.step_over()<cr>";
+        "<leader>ds" = "<cmd>lua require'dap'.step_into()<cr>";
+        "<leader>dO" = "<cmd>lua require'dap'.step_out()<cr>";
+        "<leader>dc" = "<cmd>lua require'dap'.continue()<cr>";
+        "<leader>db" = "<cmd>lua require'dap'.toggle_breakpoint()<cr>";
+        "<leader>dr" = "<cmd>lua require'dap'.repl.open()<cr>";
+      }
+
+      
       ${
         if cfg.nix
         then ''
@@ -112,10 +123,19 @@ in {
         vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
       end
 
-      -- Seting up null-ls
+      -- Setting up null-ls
       local null_ls = require("null-ls")
       local null_helpers = require("null-ls.helpers")
       local null_methods = require("null-ls.methods")
+
+      -- Setting up debugger
+      local dap = require('dap')
+      -- Loading adapters for CPP, C and Rust
+      dap.adapters.cppdbg = {
+          id = 'cppdbg',
+          type = 'executable',
+          command = {"${pkgs.vscode-extensions.ms-vscode.cpptools}/bin/OpenDebugAD7"},
+      }
 
       local ls_sources = {
         ${
@@ -235,6 +255,32 @@ in {
                   }
               },
           }
+
+          dap.configurations.rust = {
+            {
+              name = "Launch file",
+              type = "cppdbg",
+              request = "launch",
+              program = function()
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+              end,
+              cwd = '${workspaceFolder}',
+              stopAtEntry = true,
+            },
+            {
+              name = 'Attach to gdbserver :1234',
+              type = 'cppdbg',
+              request = 'launch',
+              MIMode = 'gdb',
+              miDebuggerServerAddress = 'localhost:1234',
+              miDebuggerPath = '/usr/bin/gdb',
+              cwd = '${workspaceFolder}',
+              program = function()
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+              end,
+            },
+          }
+          
           require('crates').setup()
           require('rust-tools').setup(rust_opts)
           require('lspconfig')['rust_analyzer'].setup{

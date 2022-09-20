@@ -44,6 +44,10 @@
       url = "github:simrat39/rust-tools.nvim";
       flake = false;
     };
+    nvim-dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
 
     # COPILOT Only needed on initial install
     github-copilot = {
@@ -162,6 +166,7 @@
       "null-ls"
       "trouble"
       "rust-tools"
+      "nvim-dap"
       "github-copilot"
       "nvim-cmp"
       "luasnip"
