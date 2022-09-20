@@ -100,6 +100,9 @@ A list of all plugins that can be enabled
 
 - [nvim-bufferline-lua](https://github.com/akinsho/bufferline.nvim) a buffer line with tab integration
 
+### Terminal
+- [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) a neovim plugin to persist and toggle multiple terminals during an editing session
+
 ### Statuslines
 
 - [lualine.nvim](https://github.com/hoob3rt/lualine.nvim) statusline written in lua.
@@ -135,7 +138,6 @@ A list of all plugins that can be enabled
     - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) a source for builtin LSP client
     - [cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip) a source for vim-vsnip autocomplete
     - [cmp-path](https://github.com/hrsh7th/cmp-path) a source for path autocomplete
-    - [cmp-treesitter](https://github.com/ray-x/cmp-treesitter) treesitter nodes autcomplete
     - [crates.nvim](https://github.com/Saecki/crates.nvim) autocompletion of rust crate versions in `cargo.toml`
 
 ### Snippets
