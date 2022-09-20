@@ -129,13 +129,7 @@ in {
       local null_methods = require("null-ls.methods")
 
       -- Setting up debugger
-      local dap = require('dap')
-      -- Loading adapters for CPP, C and Rust
-      dap.adapters.cppdbg = {
-          id = 'cppdbg',
-          type = 'executable',
-          command = {"${pkgs.vscode-extensions.ms-vscode.cpptools}/bin/OpenDebugAD7"},
-      }
+      local dap = require("dap")
 
       local ls_sources = {
         ${
@@ -254,6 +248,13 @@ in {
                       auto = true,
                   }
               },
+          }
+
+          -- Loading adapters for CPP, C and Rust
+          dap.adapters.cppdbg = {
+              id = 'cppdbg',
+              type = 'executable',
+              command = {"${pkgs.vscode-extensions.ms-vscode.cpptools}/bin/OpenDebugAD7"},
           }
 
           dap.configurations.rust = {
