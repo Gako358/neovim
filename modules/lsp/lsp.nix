@@ -264,7 +264,7 @@ in {
               program = function()
                 return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
               end,
-              cwd = '${workspaceFolder}',
+              cwd = "${"$"}{workspaceFolder}",
               stopAtEntry = true,
             },
             {
@@ -274,7 +274,7 @@ in {
               MIMode = 'gdb',
               miDebuggerServerAddress = 'localhost:1234',
               miDebuggerPath = '/usr/bin/gdb',
-              cwd = '${workspaceFolder}',
+              cwd = "${"$"}{workspaceFolder}",
               program = function()
                 return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
               end,
