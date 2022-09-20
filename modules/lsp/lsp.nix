@@ -52,9 +52,8 @@ in {
         "<leader>dc" = "<cmd>lua require'dap'.continue()<cr>";
         "<leader>db" = "<cmd>lua require'dap'.toggle_breakpoint()<cr>";
         "<leader>dr" = "<cmd>lua require'dap'.repl.open()<cr>";
-      }
-
-      
+      };
+ 
       ${
         if cfg.nix
         then ''
