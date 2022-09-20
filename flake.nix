@@ -237,6 +237,7 @@
     allPkgs = lib.mkPkgs {
       inherit nixpkgs;
       cfg = {};
+      cfg.allowUnfree = true;
       overlays = [
         pluginOverlay
         externalBitsOverlay
