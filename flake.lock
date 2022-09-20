@@ -83,11 +83,11 @@
     "crates-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1663691789,
-        "narHash": "sha256-8+1goxijzCiMc1Qu5qaRh9tWlKeOV4e2b6+sZpUXnwM=",
+        "lastModified": 1663699044,
+        "narHash": "sha256-qCsxJLr41XUcZiFNv7M/DU4opk8RTgqwvwFHOIIU9fg=",
         "owner": "Saecki",
         "repo": "crates.nvim",
-        "rev": "b2a7f17bc4666fe403a29ab098abe5ff4c5ad6e8",
+        "rev": "80949e9c479017640695d593282b477ace2928d8",
         "type": "github"
       },
       "original": {
@@ -294,22 +294,6 @@
         "type": "github"
       }
     },
-    "nvim-dap": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1663612266,
-        "narHash": "sha256-zcz8XZXFIHdBM/dHBEXIOfDE+fRSXfDzKZRzKaEGD/Q=",
-        "owner": "mfussenegger",
-        "repo": "nvim-dap",
-        "rev": "e12496beb5e231ca9148c0a380ec784a607a27df",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mfussenegger",
-        "repo": "nvim-dap",
-        "type": "github"
-      }
-    },
     "nvim-filetree": {
       "flake": false,
       "locked": {
@@ -425,7 +409,6 @@
         "nvim-bufferline": "nvim-bufferline",
         "nvim-cmp": "nvim-cmp",
         "nvim-comment": "nvim-comment",
-        "nvim-dap": "nvim-dap",
         "nvim-filetree": "nvim-filetree",
         "nvim-gitsigns": "nvim-gitsigns",
         "nvim-lspconfig": "nvim-lspconfig",
