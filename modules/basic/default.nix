@@ -164,6 +164,10 @@ in {
       "<A-Left>" = ":vertical resize -1<CR>";
       "<A-Right>" = ":vertical resize +1<CR>";
 
+      "<F7>" = ":setlocal spell<CR>";
+      "<F9>" = ":Copilot disable<CR>";
+      "<F10>" = ":Copilot enable<CR>";
+
     } else {};
 
     vim.luaConfigRC = ''
