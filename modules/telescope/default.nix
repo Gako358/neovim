@@ -31,8 +31,8 @@ in {
         "<leader>fvs" = "<cmd> Telescope git_status<CR>";
         "<leader>fvx" = "<cmd> Telescope git_stash<CR>";
 
-        "<leader>fD" = "<cmd> lua require'plugins.config.telescope'.vim_downloads()<CR>";
-        "<leader>fC" = "<cmd> lua require'plugins.config.telescope'.vim_documents()<CR>"; 
+        "<leader>fD" = "[[<cmd> lua require'plugins.config.telescope'.vim_downloads()<CR>]]";
+        "<leader>fC" = "[[<cmd> lua require'plugins.config.telescope'.vim_documents()<CR>]]"; 
       }
       // (
         if config.vim.lsp.enable
