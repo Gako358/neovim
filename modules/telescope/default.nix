@@ -30,9 +30,6 @@ in {
         "<leader>fvb" = "<cmd> Telescope git_branches<CR>";
         "<leader>fvs" = "<cmd> Telescope git_status<CR>";
         "<leader>fvx" = "<cmd> Telescope git_stash<CR>";
-
-        "<leader>fD" = "[[<cmd> lua require'plugins.config.telescope'.vim_downloads()<CR>]]";
-        "<leader>fC" = "[[<cmd> lua require'plugins.config.telescope'.vim_documents()<CR>]]"; 
       }
       // (
         if config.vim.lsp.enable
@@ -75,30 +72,6 @@ in {
           },
         }
       }
-
-      local M = {}
-      function M.vim_downloads()
-        require("telescope.builtin").grep_string {
-          results_title = "Downloads",
-          path_display = { "smart" },
-          search_dirs = {
-            "~/Downloads/",
-          },
-        }
-      end
-
-      function M.vim_documents()
-        require("telescope.builtin").grep_string {
-          results_title = "Documents",
-          path_display = { "smart" },
-          search_dirs = {
-            "~/Documents/",
-            "~/Documents/Reports/",
-          },
-        }
-      end
-
-      return M
     '';
   };
 }
