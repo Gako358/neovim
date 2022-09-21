@@ -167,6 +167,7 @@ in {
       "<F7>" = ":setlocal spell<CR>";
       "<F9>" = ":Copilot disable<CR>";
       "<F10>" = ":Copilot enable<CR>";
+      "<F11>" = ":Copilot split<CR>";
 
     } else {};
 
