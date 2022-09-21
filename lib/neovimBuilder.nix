@@ -16,6 +16,7 @@ let
   vim = vimOptions.config.vim;
 
 in pkgs.wrapNeovim pkgs.neovim-nightly {
+# in pkgs.wrapNeovim pkgs.neovim-unwrapped {
   viAlias = true;
   vimAlias = true;
   configure = {

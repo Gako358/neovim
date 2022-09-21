@@ -1,13 +1,13 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.lsp;
-in {
+in
+{
   options.vim.lsp = {
     enable = mkOption {
       type = types.bool;
@@ -40,7 +40,7 @@ in {
           rust-tools
           crates-nvim
         ]
-        else []
+        else [ ]
       );
 
     vim.configRC = ''
@@ -75,242 +75,255 @@ in {
       }
     '';
 
-    vim.luaConfigRC = let
-    in ''
-      local lsp_flags = {
-        -- This is the default in Nvim 0.7+
-        debounce_text_changes = 150,
-      }
+    vim.luaConfigRC =
+      let
+      in
+      ''
+        local lsp_flags = {
+          -- This is the default in Nvim 0.7+
+          debounce_text_changes = 150,
+        }
 
-      -- Use an on_attach function to only map the following keys
-      -- after the language server attaches to the current buffer
-      local default_on_attach = function(client, bufnr)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        -- Use an on_attach function to only map the following keys
+        -- after the language server attaches to the current buffer
+        local default_on_attach = function(client, bufnr)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-        -- Mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local bufopts = { noremap=true, silent=true, buffer=bufnr }
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-        vim.keymap.set('n', '<space>wl', function()
-          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, bufopts)
-        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-        vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
-        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
-        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
-      end
+          -- Mappings.
+          -- See `:help vim.lsp.*` for documentation on any of the below functions
+          local bufopts = { noremap=true, silent=true, buffer=bufnr }
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, bufopts)
+          vim.keymap.set('n', '<C-i>', vim.lsp.buf.signature_help, bufopts)
+          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+          vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, bufopts)
+          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+          vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+          vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
+          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
+          vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
+        end
 
-      -- Setting up null-ls
-      local null_ls = require("null-ls")
-      local null_helpers = require("null-ls.helpers")
-      local null_methods = require("null-ls.methods")
+        -- Setting up null-ls
+        local null_ls = require("null-ls")
+        local null_helpers = require("null-ls.helpers")
+        local null_methods = require("null-ls.methods")
 
-      local ls_sources = {
-        ${
-        if cfg.python
-        then ''
-          null_ls.builtins.formatting.black.with({
-              command = "${pkgs.black}/bin/black",
+        local ls_sources = {
+          ${
+          if cfg.python
+          then ''
+            null_ls.builtins.formatting.black.with({
+                command = "${pkgs.black}/bin/black",
+              }),
+          ''
+          else ""
+        }
+
+          ${
+          if cfg.nix
+          then ''
+            null_ls.builtins.formatting.alejandra.with({
+                command = "${pkgs.alejandra}/bin/alejandra",
             }),
-        ''
-        else ""
-      }
+          ''
+          else ""
+        }
+
+        }
+
+        -- Enable null-ls
+        require('null-ls').setup({
+          diagnostics_format = "[#{m}] #{s} (#{c})",
+          debounce = 250,
+          default_timeout = 5000,
+          sources = ls_sources,
+          on_attach= default_on_attach,
+        })
 
         ${
-        if cfg.nix
-        then ''
-          null_ls.builtins.formatting.alejandra.with({
-              command = "${pkgs.alejandra}/bin/alejandra",
-          }),
-        ''
-        else ""
-      }
-
-      }
-
-      -- Enable null-ls
-      require('null-ls').setup({
-        diagnostics_format = "[#{m}] #{s} (#{c})",
-        debounce = 250,
-        default_timeout = 5000,
-        sources = ls_sources,
-        on_attach= default_on_attach,
-      })
-
-      ${
-        if cfg.python
-        then ''
-          require('lspconfig')['pyright'].setup{
+          if cfg.python
+          then ''
+            require('lspconfig')['pyright'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.clang
+          then ''
+            require('lspconfig')['clangd'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
+                filetypes = { "c", "cpp", "objc", "objcpp" };
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.cmake
+          then ''
+            require('lspconfig')['cmake'].setup{
               on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.clang
-        then ''
-          require('lspconfig')['clangd'].setup{
-              on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
-              filetypes = { "c", "cpp", "objc", "objcpp" };
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.cmake
-        then ''
-          require('lspconfig')['cmake'].setup{
-            on_attach = default_on_attach,
-            cmd = {'${pkgs.cmake-language-server}/bin/cmake-language-server'};
-            filetypes = { "cmake"};
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.bash
-        then ''
-          require('lspconfig')['bashls'].setup{
-              on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"}
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.lua
-        then ''
-          require('lspconfig')['sumneko_lua'].setup{
-              on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.sumneko-lua-language-server}/bin/sumneko_lua", "start"}
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.nix
-        then ''
-          require('lspconfig')['rnix'].setup{
-              on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.rust
-        then ''
-          local rust_opts = {
-              tools = { -- rust-tools options
-                  -- how to execute terminal commands
-                  -- options right now: termopen / quickfix
-                  executor = require("rust-tools/executors").termopen,
-
-                  autoSetHints = true,
-                  inlinethints = {
-                      auto = true,
-                      only_current_line = false,
+              cmd = {'${pkgs.cmake-language-server}/bin/cmake-language-server'};
+              filetypes = { "cmake"};
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.bash
+          then ''
+            require('lspconfig')['bashls'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"}
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.lua
+          then ''
+            require('lspconfig')['sumneko_lua'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = {"${pkgs.sumneko-lua-language-server}/bin/lua-language-server"},
+                Lua = {
+                  runtime = {
+                    version = 'LuaJIT',
                   },
-                  hover_actions = {
-                      auto = true,
-                  }
-              },
-          } 
-          require('crates').setup()
-          require('rust-tools').setup(rust_opts)
-          require('lspconfig')['rust_analyzer'].setup{
-              on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.typescript
-        then ''
-          require('lspconfig')['tsserver'].setup{
-              on_attach = default_on_attach,
-              flags = lsp_flags,
-              cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" }
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.docker
-        then ''
-          require('lspconfig')['dockerls'].setup{
-            on_attach = default_on_attach,
-            cmd = {'${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-language-server', '--stdio' }
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.css
-        then ''
-          require('lspconfig')['cssls'].setup{
-            on_attach = default_on_attach,
-            cmd = {'${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver', '--stdio' };
-            filetypes = { "css", "scss", "less" };
-          }
-        ''
-        else ""
-      }
+                  diagnostics = {
+                    globals = {},
+                  },
+                  telemetry = {
+                    enable = false,
+                  };
+                }
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.nix
+          then ''
+            require('lspconfig')['rnix'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.rust
+          then ''
+            local rust_opts = {
+                tools = { -- rust-tools options
+                    -- how to execute terminal commands
+                    -- options right now: termopen / quickfix
+                    executor = require("rust-tools/executors").termopen,
 
-      ${
-        if cfg.html
-        then ''
-          require('lspconfig')['html'].setup{
-            on_attach = default_on_attach,
-            cmd = {'${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' };
-            filetypes = { "html", "css", "javascript" };
-          }
-        ''
-        else ""
-      }
+                    autoSetHints = true,
+                    inlinethints = {
+                        auto = true,
+                        only_current_line = false,
+                    },
+                    hover_actions = {
+                        auto = true,
+                    }
+                },
+            }
+            require('crates').setup()
+            require('rust-tools').setup(rust_opts)
+            require('lspconfig')['rust_analyzer'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = {"${pkgs.rust-analyzer}/bin/rust-analyzer"}
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.typescript
+          then ''
+            require('lspconfig')['tsserver'].setup{
+                on_attach = default_on_attach,
+                flags = lsp_flags,
+                cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" }
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.docker
+          then ''
+            require('lspconfig')['dockerls'].setup{
+              on_attach = default_on_attach,
+              cmd = {'${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-language-server', '--stdio' }
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.css
+          then ''
+            require('lspconfig')['cssls'].setup{
+              on_attach = default_on_attach,
+              cmd = {'${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver', '--stdio' };
+              filetypes = { "css", "scss", "less" };
+            }
+          ''
+          else ""
+        }
 
-      ${
-        if cfg.json
-        then ''
-          require('lspconfig')['jsonls'].setup{
-            on_attach = default_on_attach,
-            cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
-            filetypes = { "html", "css", "javascript" };
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.tex
-        then ''
-          require('lspconfig')['texlab'].setup{
-            on_attach = default_on_attach,
-            cmd = {'${pkgs.texlab}/bin/texlab'}
-          }
-        ''
-        else ""
-      }
-    '';
+        ${
+          if cfg.html
+          then ''
+            require('lspconfig')['html'].setup{
+              on_attach = default_on_attach,
+              cmd = {'${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' };
+              filetypes = { "html", "css", "javascript" };
+            }
+          ''
+          else ""
+        }
+
+        ${
+          if cfg.json
+          then ''
+            require('lspconfig')['jsonls'].setup{
+              on_attach = default_on_attach,
+              cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
+              filetypes = { "html", "css", "javascript" };
+            }
+          ''
+          else ""
+        }
+        ${
+          if cfg.tex
+          then ''
+            require('lspconfig')['texlab'].setup{
+              on_attach = default_on_attach,
+              cmd = {'${pkgs.texlab}/bin/texlab'}
+            }
+          ''
+          else ""
+        }
+      '';
   };
 }

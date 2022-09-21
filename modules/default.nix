@@ -3,21 +3,16 @@
   imports = [
     ./core
     ./basic
-    ./theme
 
+    ./theme
     ./treesitter
     ./telescope
     ./lsp
 
     ./cmp
 
-    ./autopairs
-    ./filetree
-    ./bufferline
-    ./lualine
     ./keys
-    ./toggleterm
-    ./sessions
     ./gitsigns
+    ./visuals
   ];
 }

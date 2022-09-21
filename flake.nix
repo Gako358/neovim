@@ -6,16 +6,13 @@
 
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
+      # url = "github:neovim/neovim/875b58e0941ef62a75992ce0e6496bb7879e0bbe?dir=contrib";
+      # In the case nightly breaks, use the above line to pin to a specific commit
+      # Or pin down another commit that works
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ### Vim plugins ###
-
-    # Theme
-    onedark = {
-      url = "github:navarasu/onedark.nvim";
-      flake = false;
-    };
 
     # Plenary
     plenary-nvim = {
@@ -36,6 +33,22 @@
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
     };
+    lspsaga = {
+      url = "github:tami5/lspsaga.nvim";
+      flake = false;
+    };
+    nvim-lightbulb = {
+      url = "github:kosayoda/nvim-lightbulb";
+      flake = false;
+    };
+    lsp-signature = {
+      url = "github:ray-x/lsp_signature.nvim";
+      flake = false;
+    };
+    nvim-code-action-menu = {
+      url = "github:weilbith/nvim-code-action-menu";
+      flake = false;
+    };
     trouble = {
       url = "github:folke/trouble.nvim";
       flake = false;
@@ -45,7 +58,7 @@
       flake = false;
     };
 
-    # COPILOT Only needed on initial install
+    # COPILOT
     github-copilot = {
       url = "github:github/copilot.vim";
       flake = false;
@@ -76,14 +89,6 @@
       url = "github:saadparwaiz1/cmp_luasnip";
       flake = false;
     };
-    lightspeed = {
-      url = "github:ggandor/lightspeed.nvim";
-      flake = false;
-    };
-    nvim-comment = {
-      url = "github:terrortylor/nvim-comment";
-      flake = false;
-    };
     cmp-treesitter = {
       url = "github:ray-x/cmp-treesitter";
       flake = false;
@@ -95,7 +100,19 @@
       flake = false;
     };
 
-    # CORE PLUGINS
+    # Visuals
+    onedark = {
+      url = "github:navarasu/onedark.nvim";
+      flake = false;
+    };
+    github-nvim-theme = {
+      url = "github:projekt0n/github-nvim-theme";
+      flake = false;
+    };
+    kanagawa = {
+      url = "github:rebelot/kanagawa.nvim";
+      flake = false;
+    };
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
@@ -104,22 +121,28 @@
       url = "github:kyazdani42/nvim-web-devicons";
       flake = false;
     };
-    nvim-bufferline = {
-      url = "github:akinsho/bufferline.nvim";
+    lightspeed = {
+      url = "github:ggandor/lightspeed.nvim";
       flake = false;
     };
+    nvim-comment = {
+      url = "github:terrortylor/nvim-comment";
+      flake = false;
+    };
+    indent-blankline = {
+      url = "github:lukas-reineke/indent-blankline.nvim";
+      flake = false;
+    };
+
+    # GIT
     nvim-gitsigns = {
       url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
-    lualine = {
-      url = "github:nvim-lualine/lualine.nvim";
-      flake = false;
-    };
 
-    # FILETREE
-    nvim-filetree = {
-      url = "github:kyazdani42/nvim-tree.lua";
+    # Help
+    which-key = {
+      url = "github:folke/which-key.nvim";
       flake = false;
     };
 
@@ -214,74 +237,145 @@
         pluginOverlay
         externalBitsOverlay
       ];
-    };
 
-    lib =
-      import
-      ./lib;
-
-    mkNeoVimPkg = pkgs:
-      lib.neovimBuilder {
-        inherit pkgs;
-        config = {
-          vim.viAlias = true;
-          vim.vimAlias = true;
-          vim.autoIndent = true;
-          vim.theme.onedark.enable = true;
-
-          vim.treesitter.enable = true;
-          vim.lsp.enable = true;
-          vim.lsp.trouble.enable = true;
-          vim.lsp.python = true;
-          vim.lsp.clang = true;
-          vim.lsp.cmake = true;
-          vim.lsp.bash = true;
-          vim.lsp.lua = true;
-          vim.lsp.nix = true;
-          vim.lsp.rust = true;
-          vim.lsp.typescript = true;
-          vim.lsp.docker = true;
-          vim.lsp.tex = true;
-          vim.lsp.css = true;
-          vim.lsp.html = true;
-          vim.lsp.json = true;
-
-          vim.autocomplete.enable = true;
-
-          vim.autopairs.enable = true;
-          vim.filetree.enable = true;
-          vim.bufferline.enable = true;
-          vim.lualine.enable = true;
-          vim.session.enable = true;
-          vim.gitsigns.enable = true;
-
-          vim.keys = {
-            enable = true;
-            whichKey.enable = true;
-          };
-
-          vim.toggleterm.enable = true;
-
-          vim.telescope.enable = true;
-        };
+      externalBitsOverlay = top: last: {
+        neovim-nightly = neovim.defaultPackage.${top.system};
       };
-  in {
-    apps = lib.withDefaultSystems (sys: {
-      nvim = {
+
+      pluginOverlay = top: last:
+        let
+          treesitterGrammars = last.tree-sitter.withPlugins (p: [
+            p.tree-sitter-c
+            p.tree-sitter-nix
+            p.tree-sitter-python
+            p.tree-sitter-rust
+            p.tree-sitter-markdown
+            p.tree-sitter-comment
+            p.tree-sitter-toml
+            p.tree-sitter-make
+            p.tree-sitter-html
+            p.tree-sitter-javascript
+            p.tree-sitter-css
+            p.tree-sitter-latex
+            p.tree-sitter-lua
+            p.tree-sitter-typescript
+            p.tree-sitter-bash
+          ]);
+          buildPlug = name:
+            top.vimUtils.buildVimPluginFrom2Nix {
+              pname = name;
+              version = "master";
+              src = builtins.getAttr name inputs;
+              postPatch =
+                if (name == "nvim-treesitter")
+                then ''
+                  rm -r parser
+                  ln -s ${treesitterGrammars} parser
+                ''
+                else "";
+            };
+        in
+        {
+          neovimPlugins = builtins.listToAttrs (map
+            (name: {
+              inherit name;
+              value = buildPlug name;
+            })
+            plugins);
+        };
+
+      allPkgs = lib.mkPkgs {
+        inherit nixpkgs;
+        cfg = { };
+        overlays = [
+          pluginOverlay
+          externalBitsOverlay
+        ];
+      };
+
+      lib =
+        import
+          ./lib;
+
+      mkNeoVimPkg = pkgs:
+        lib.neovimBuilder {
+          inherit pkgs;
+          config = {
+            vim.viAlias = true;
+            vim.vimAlias = true;
+            vim.autoIndent = true;
+
+            vim.treesitter.enable = true;
+            vim.lsp = {
+              enable = true;
+              lspsaga.enable = true;
+              lightbulb.enable = true;
+              lspSignature.enable = true;
+              nvimCodeActionMenu.enable = true;
+              trouble.enable = true;
+
+              # Language servers:
+              python = true;
+              clang = true;
+              cmake = true;
+              bash = true;
+              lua = true;
+              nix = true;
+              rust = true;
+              typescript = true;
+              docker = true;
+              tex = true;
+              css = true;
+              html = true;
+              json = true;
+            };
+
+            vim.theme.scheme = "kanagawa";
+
+            vim.visuals = {
+              enable = true;
+              nvimAutoPairs.enable = true;
+              nvimWebDevicons.enable = true;
+              lightSpeed.enable = true;
+              nvimComment.enable = true;
+              indentBlankline.enable = true; 
+              Focus.enable = true;
+              lazyGit.enable = true;
+              toggleTerm.enable = true;
+              bufferline.enable = true;
+              status.bar = "lualine";
+            };
+
+            vim.autocomplete.enable = true;
+
+            vim.gitsigns.enable = true;
+
+            vim.keys = {
+              enable = true;
+              whichKey.enable = true;
+            };
+
+            vim.telescope.enable = true;
+          };
+        };
+    in
+    {
+      apps = lib.withDefaultSystems (sys: {
+        nvim = {
+          type = "app";
+          program = "${self.defaultPackage."${sys}"}/bin/nvim";
+        };
+      });
+
+      defaultApp = lib.withDefaultSystems (sys: {
         type = "app";
         program = "${self.defaultPackage."${sys}"}/bin/nvim";
-      };
-    });
+      });
 
-    defaultApp = lib.withDefaultSystems (sys: {
-      type = "app";
-      program = "${self.defaultPackage."${sys}"}/bin/nvim";
-    });
+      defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMX);
 
-    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMX);
-
-    packages = lib.withDefaultSystems (sys: {
-      neovimMX = mkNeoVimPkg allPkgs."${sys}";
-    });
-  };
+      packages = lib.withDefaultSystems (sys: {
+        neovimMX = mkNeoVimPkg allPkgs."${sys}";
+      });
+    };
 }
