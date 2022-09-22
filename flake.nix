@@ -288,6 +288,7 @@
             css = true;
             html = true;
             json = true;
+          };
 
           vim.autocomplete.enable = true;
 
