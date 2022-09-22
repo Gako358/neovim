@@ -34,8 +34,7 @@ in {
             open_on_setup = true,
             update_cwd = true,
             view = {
-              width = 32,
-              height = 32,
+              adaptive_size = true,
               side = "left",
             },
             renderer = {
