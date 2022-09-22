@@ -269,9 +269,9 @@
           vim.treesitter.enable = true;
           vim.lsp = {
             enable = true;
-            lspsaga.enable = true;
-            lspSignature.enable = true;
-            nvimCodeActionMenu.enable = true;
+            lspsaga.enable = false;
+            lspSignature.enable = false;
+            nvimCodeActionMenu.enable = false;
             trouble.enable = true;
 
             # Language servers:
