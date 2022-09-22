@@ -13,7 +13,7 @@ in {
     };
 
     disableArrows = mkOption {
-      default = false;
+      default = true;
       description = "Set to prevent arrow keys from moving cursor";
       type = types.bool;
     };
