@@ -19,6 +19,10 @@ in
       nvim-code-action-menu
     ];
 
+    vim.vnoremap = {
+      "<silent><leader>ca" = ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>";
+    };
+
     vim.nnoremap = {
       "<silent><leader>ca" = ":CodeActionMenu<CR>";
     };

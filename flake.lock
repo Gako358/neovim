@@ -143,38 +143,6 @@
         "type": "github"
       }
     },
-    "lsp-signature": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660573480,
-        "narHash": "sha256-wY5TH15J99QjPTuIQ13Xp1byNX5xlxKHVi/A3aiwHZ8=",
-        "owner": "ray-x",
-        "repo": "lsp_signature.nvim",
-        "rev": "e65a63858771db3f086c8d904ff5f80705fd962b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ray-x",
-        "repo": "lsp_signature.nvim",
-        "type": "github"
-      }
-    },
-    "lspsaga": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1663855656,
-        "narHash": "sha256-YftF2OuGf67PRpxR1Mb1k+xYI2AJz8cy/IPhcanp+m4=",
-        "owner": "glepnir",
-        "repo": "lspsaga.nvim",
-        "rev": "ae099d5844b005cec66a66ab30a44d3bf8867af9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "glepnir",
-        "repo": "lspsaga.nvim",
-        "type": "github"
-      }
-    },
     "lualine": {
       "flake": false,
       "locked": {
@@ -216,11 +184,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1663855418,
+        "lastModified": 1663870778,
         "narHash": "sha256-Qh8y0ewHxmRtagq4GNNUxFbRFRcwx2QQ+chiNI1PzB4=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "a867aa45f70e48cfad9f56657f8d2ec3c8fed153",
+        "rev": "0760379b413ca95b80ed2970b49f14ba3b1acbf9",
         "type": "github"
       },
       "original": {
@@ -374,6 +342,22 @@
         "type": "github"
       }
     },
+    "nvim-lightbulb": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1661474119,
+        "narHash": "sha256-nw6H/dS4dHdrobnrfJVa8urWrMnbTWrA5bQJy9xbKXY=",
+        "owner": "kosayoda",
+        "repo": "nvim-lightbulb",
+        "rev": "56b9ce31ec9d09d560fe8787c0920f76bc208297",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kosayoda",
+        "repo": "nvim-lightbulb",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -448,8 +432,6 @@
         "crates-nvim": "crates-nvim",
         "github-copilot": "github-copilot",
         "lightspeed": "lightspeed",
-        "lsp-signature": "lsp-signature",
-        "lspsaga": "lspsaga",
         "lualine": "lualine",
         "luasnip": "luasnip",
         "neovim": "neovim",
@@ -462,6 +444,7 @@
         "nvim-comment": "nvim-comment",
         "nvim-filetree": "nvim-filetree",
         "nvim-gitsigns": "nvim-gitsigns",
+        "nvim-lightbulb": "nvim-lightbulb",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-treesitter": "nvim-treesitter",
         "onedark": "onedark",

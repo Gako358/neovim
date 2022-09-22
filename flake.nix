@@ -36,12 +36,8 @@
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
     };
-    lspsaga = {
-      url = "github:glepnir/lspsaga.nvim";
-      flake = false;
-    };
-    lsp-signature = {
-      url = "github:ray-x/lsp_signature.nvim";
+    nvim-lightbulb = {
+      url = "github:kosayoda/nvim-lightbulb";
       flake = false;
     };
     nvim-code-action-menu = {
@@ -160,172 +156,175 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    neovim,
-    ...
-  } @ inputs: let
-    plugins = [
-      "onedark"
-      "plenary-nvim"
-      "nvim-treesitter"
-      "nvim-lspconfig"
-      "null-ls"
-      "lspsaga"
-      "lsp-signature"
-      "nvim-code-action-menu"
-      "trouble"
-      "rust-tools"
-      "github-copilot"
-      "nvim-cmp"
-      "luasnip"
-      "cmp-nvim-lsp"
-      "cmp-path"
-      "cmp-buffer"
-      "cmp-luasnip"
-      "lightspeed"
-      "nvim-comment"
-      "cmp-treesitter"
-      "crates-nvim"
-      "nvim-autopairs"
-      "web-devicons"
-      "nvim-bufferline"
-      "nvim-gitsigns"
-      "lualine"
-      "which-key"
-      "toggleterm"
-      "vim-session"
-      "vim-misc"
-      "nvim-filetree"
-      "telescope"
-    ];
-
-    externalBitsOverlay = top: last: {
-      neovim-nightly = neovim.defaultPackage.${top.system};
-    };
-
-    pluginOverlay = top: last: let
-      treesitterGrammars = last.tree-sitter.withPlugins (p: [
-        p.tree-sitter-c
-        p.tree-sitter-nix
-        p.tree-sitter-python
-        p.tree-sitter-rust
-        p.tree-sitter-markdown
-        p.tree-sitter-comment
-        p.tree-sitter-toml
-        p.tree-sitter-make
-        p.tree-sitter-html
-        p.tree-sitter-javascript
-        p.tree-sitter-css
-        p.tree-sitter-latex
-        p.tree-sitter-lua
-        p.tree-sitter-typescript
-        p.tree-sitter-bash
-      ]);
-      buildPlug = name:
-        top.vimUtils.buildVimPluginFrom2Nix {
-          pname = name;
-          version = "master";
-          src = builtins.getAttr name inputs;
-          postPatch =
-            if (name == "nvim-treesitter")
-            then ''
-              rm -r parser
-              ln -s ${treesitterGrammars} parser
-            ''
-            else "";
-        };
-    in {
-      neovimPlugins = builtins.listToAttrs (map (name: {
-          inherit name;
-          value = buildPlug name;
-        })
-        plugins);
-    };
-
-    allPkgs = lib.mkPkgs {
-      inherit nixpkgs;
-      cfg = {};
-      overlays = [
-        pluginOverlay
-        externalBitsOverlay
+  outputs =
+    { self
+    , nixpkgs
+    , neovim
+    , ...
+    } @ inputs:
+    let
+      plugins = [
+        "onedark"
+        "plenary-nvim"
+        "nvim-treesitter"
+        "nvim-lspconfig"
+        "null-ls"
+        "nvim-lightbulb"
+        "nvim-code-action-menu"
+        "trouble"
+        "rust-tools"
+        "github-copilot"
+        "nvim-cmp"
+        "luasnip"
+        "cmp-nvim-lsp"
+        "cmp-path"
+        "cmp-buffer"
+        "cmp-luasnip"
+        "lightspeed"
+        "nvim-comment"
+        "cmp-treesitter"
+        "crates-nvim"
+        "nvim-autopairs"
+        "web-devicons"
+        "nvim-bufferline"
+        "nvim-gitsigns"
+        "lualine"
+        "which-key"
+        "toggleterm"
+        "vim-session"
+        "vim-misc"
+        "nvim-filetree"
+        "telescope"
       ];
-    };
 
-    lib =
-      import
-      ./lib;
-
-    mkNeoVimPkg = pkgs:
-      lib.neovimBuilder {
-        inherit pkgs;
-        config = {
-          vim.viAlias = true;
-          vim.vimAlias = true;
-          vim.autoIndent = true;
-          vim.theme.onedark.enable = true;
-
-          vim.treesitter.enable = true;
-          vim.lsp = {
-            enable = true;
-            lspsaga.enable = true;
-            lspSignature.enable = true;
-            nvimCodeActionMenu.enable = true;
-            trouble.enable = true;
-
-            # Language servers:
-            python = true;
-            clang = true;
-            cmake = true;
-            bash = true;
-            lua = true;
-            nix = true;
-            rust = true;
-            typescript = true;
-            docker = true;
-            tex = true;
-            css = true;
-            html = true;
-            json = true;
-          };
-
-          vim.autocomplete.enable = true;
-
-          vim.autopairs.enable = true;
-          vim.filetree.enable = true;
-          vim.bufferline.enable = true;
-          vim.lualine.enable = true;
-          vim.session.enable = false;
-          vim.gitsigns.enable = true;
-
-          vim.keys = {
-            enable = true;
-            whichKey.enable = true;
-          };
-
-          vim.toggleterm.enable = true;
-
-          vim.telescope.enable = true;
-        };
+      externalBitsOverlay = top: last: {
+        neovim-nightly = neovim.defaultPackage.${top.system};
       };
-  in {
-    apps = lib.withDefaultSystems (sys: {
-      nvim = {
+
+      pluginOverlay = top: last:
+        let
+          treesitterGrammars = last.tree-sitter.withPlugins (p: [
+            p.tree-sitter-c
+            p.tree-sitter-nix
+            p.tree-sitter-python
+            p.tree-sitter-rust
+            p.tree-sitter-markdown
+            p.tree-sitter-comment
+            p.tree-sitter-toml
+            p.tree-sitter-make
+            p.tree-sitter-html
+            p.tree-sitter-javascript
+            p.tree-sitter-css
+            p.tree-sitter-latex
+            p.tree-sitter-lua
+            p.tree-sitter-typescript
+            p.tree-sitter-bash
+          ]);
+          buildPlug = name:
+            top.vimUtils.buildVimPluginFrom2Nix {
+              pname = name;
+              version = "master";
+              src = builtins.getAttr name inputs;
+              postPatch =
+                if (name == "nvim-treesitter")
+                then ''
+                  rm -r parser
+                  ln -s ${treesitterGrammars} parser
+                ''
+                else "";
+            };
+        in
+        {
+          neovimPlugins = builtins.listToAttrs (map
+            (name: {
+              inherit name;
+              value = buildPlug name;
+            })
+            plugins);
+        };
+
+      allPkgs = lib.mkPkgs {
+        inherit nixpkgs;
+        cfg = { };
+        overlays = [
+          pluginOverlay
+          externalBitsOverlay
+        ];
+      };
+
+      lib =
+        import
+          ./lib;
+
+      mkNeoVimPkg = pkgs:
+        lib.neovimBuilder {
+          inherit pkgs;
+          config = {
+            vim.viAlias = true;
+            vim.vimAlias = true;
+            vim.autoIndent = true;
+            vim.theme.onedark.enable = true;
+
+            vim.treesitter.enable = true;
+            vim.lsp = {
+              enable = true;
+              lightbulb.enable = true;
+              nvimCodeActionMenu.enable = true;
+              trouble.enable = true;
+
+              # Language servers:
+              python = true;
+              clang = true;
+              cmake = true;
+              bash = true;
+              lua = true;
+              nix = true;
+              rust = true;
+              typescript = true;
+              docker = true;
+              tex = true;
+              css = true;
+              html = true;
+              json = true;
+            };
+
+            vim.autocomplete.enable = true;
+
+            vim.autopairs.enable = true;
+            vim.filetree.enable = true;
+            vim.bufferline.enable = true;
+            vim.lualine.enable = true;
+            vim.session.enable = false;
+            vim.gitsigns.enable = true;
+
+            vim.keys = {
+              enable = true;
+              whichKey.enable = true;
+            };
+
+            vim.toggleterm.enable = true;
+
+            vim.telescope.enable = true;
+          };
+        };
+    in
+    {
+      apps = lib.withDefaultSystems (sys: {
+        nvim = {
+          type = "app";
+          program = "${self.defaultPackage."${sys}"}/bin/nvim";
+        };
+      });
+
+      defaultApp = lib.withDefaultSystems (sys: {
         type = "app";
         program = "${self.defaultPackage."${sys}"}/bin/nvim";
-      };
-    });
+      });
 
-    defaultApp = lib.withDefaultSystems (sys: {
-      type = "app";
-      program = "${self.defaultPackage."${sys}"}/bin/nvim";
-    });
+      defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMX);
 
-    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMX);
-
-    packages = lib.withDefaultSystems (sys: {
-      neovimMX = mkNeoVimPkg allPkgs."${sys}";
-    });
-  };
+      packages = lib.withDefaultSystems (sys: {
+        neovimMX = mkNeoVimPkg allPkgs."${sys}";
+      });
+    };
 }

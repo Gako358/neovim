@@ -6,9 +6,8 @@
 }: {
   imports = [
     ./lsp.nix
-    ./lspsaga.nix
-    ./lsp-signature.nix
-    ./nvim-code-action-menu.nix
     ./trouble.nix
+    ./lightbulb.nix
+    ./nvim-code-action-menu.nix
   ];
 }
