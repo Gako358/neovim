@@ -143,6 +143,38 @@
         "type": "github"
       }
     },
+    "lsp-signature": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660573480,
+        "narHash": "sha256-wY5TH15J99QjPTuIQ13Xp1byNX5xlxKHVi/A3aiwHZ8=",
+        "owner": "ray-x",
+        "repo": "lsp_signature.nvim",
+        "rev": "e65a63858771db3f086c8d904ff5f80705fd962b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ray-x",
+        "repo": "lsp_signature.nvim",
+        "type": "github"
+      }
+    },
+    "lspsaga": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663855656,
+        "narHash": "sha256-YftF2OuGf67PRpxR1Mb1k+xYI2AJz8cy/IPhcanp+m4=",
+        "owner": "glepnir",
+        "repo": "lspsaga.nvim",
+        "rev": "ae099d5844b005cec66a66ab30a44d3bf8867af9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glepnir",
+        "repo": "lspsaga.nvim",
+        "type": "github"
+      }
+    },
     "lualine": {
       "flake": false,
       "locked": {
@@ -184,11 +216,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1663684711,
-        "narHash": "sha256-LrTnWtuYcMVTkQguy7SZCj1b+pJQvVCobQXuhkfk3No=",
+        "lastModified": 1663855418,
+        "narHash": "sha256-Qh8y0ewHxmRtagq4GNNUxFbRFRcwx2QQ+chiNI1PzB4=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "62db91f06cd6effab59e84289889b2a5d75f3e4b",
+        "rev": "a867aa45f70e48cfad9f56657f8d2ec3c8fed153",
         "type": "github"
       },
       "original": {
@@ -200,11 +232,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1663634720,
-        "narHash": "sha256-wMYXWKgysznBUHmvq5fN0uzUTNpnBLREPupM17xP8MY=",
+        "lastModified": 1663846470,
+        "narHash": "sha256-pXdsi67t8Ybk5rTALoIH8PHT9Lr4X/HFB9G1ucCDo2g=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "998f0f7924198b2460458728de59fe738997f28e",
+        "rev": "8fcb549a66d1996c88a63fb9b74a28e4663923c9",
         "type": "github"
       },
       "original": {
@@ -217,11 +249,11 @@
     "null-ls": {
       "flake": false,
       "locked": {
-        "lastModified": 1663600262,
-        "narHash": "sha256-U5dTUfn3huKqK+Ur474ggkOz/PEpVhjoKlVwcg/hLrY=",
+        "lastModified": 1663854462,
+        "narHash": "sha256-koDIfufugWF/bh1hsurX57L9hfmpcVbZ1FBuAx/0ASA=",
         "owner": "jose-elias-alvarez",
         "repo": "null-ls.nvim",
-        "rev": "1533257895fa953c004f88c1d9476af50b721c7d",
+        "rev": "8af89c5fa2b732aaa9c3bf8aed95bccc9c4ce295",
         "type": "github"
       },
       "original": {
@@ -278,6 +310,22 @@
         "type": "github"
       }
     },
+    "nvim-code-action-menu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1653835393,
+        "narHash": "sha256-nG6lasCs7VeJfj5eV/oH9OfJbSaEaAOOM98R72xudCY=",
+        "owner": "weilbith",
+        "repo": "nvim-code-action-menu",
+        "rev": "ee599409ed6ab31f6d7115e9c5c4550336470c14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "weilbith",
+        "repo": "nvim-code-action-menu",
+        "type": "github"
+      }
+    },
     "nvim-comment": {
       "flake": false,
       "locked": {
@@ -297,11 +345,11 @@
     "nvim-filetree": {
       "flake": false,
       "locked": {
-        "lastModified": 1663480849,
-        "narHash": "sha256-/GNQ2kRgz/osxDqovtGwwtYTKtpUz5qq8xpVVkt6ZRQ=",
+        "lastModified": 1663823703,
+        "narHash": "sha256-QY60TDUVmKcFzCAojReZEAbQcyEYgCG4nhgsx74OtVM=",
         "owner": "kyazdani42",
         "repo": "nvim-tree.lua",
-        "rev": "3676e0b124c2a132857e2bbcf7f48f05228f1052",
+        "rev": "0417d9148b6546bf4883b6e9750f992f980afbfe",
         "type": "github"
       },
       "original": {
@@ -400,6 +448,8 @@
         "crates-nvim": "crates-nvim",
         "github-copilot": "github-copilot",
         "lightspeed": "lightspeed",
+        "lsp-signature": "lsp-signature",
+        "lspsaga": "lspsaga",
         "lualine": "lualine",
         "luasnip": "luasnip",
         "neovim": "neovim",
@@ -408,6 +458,7 @@
         "nvim-autopairs": "nvim-autopairs",
         "nvim-bufferline": "nvim-bufferline",
         "nvim-cmp": "nvim-cmp",
+        "nvim-code-action-menu": "nvim-code-action-menu",
         "nvim-comment": "nvim-comment",
         "nvim-filetree": "nvim-filetree",
         "nvim-gitsigns": "nvim-gitsigns",
