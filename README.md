@@ -95,6 +95,8 @@ A list of all plugins that can be enabled
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) common configurations for built-in language server
 - [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim) neovim as a language server to inject LSP diagnostics, code actions, etc.
 - [trouble.nvim](https://github.com/folke/trouble.nvim) pretty list of lsp data
+- [nvim-code-action-menu](https://github.com/weilbith/nvim-code-action-menu) provides a handy pop-up menu for code actions
+- [nvim-lightbulb](https://github.com/kosayoda/nvim-lightbulb) shows a lightbulb in the sign column whenever a codeAction is available
 
 ### Buffers
 
