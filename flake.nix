@@ -296,7 +296,7 @@
           vim.filetree.enable = true;
           vim.bufferline.enable = true;
           vim.lualine.enable = true;
-          vim.session.enable = true;
+          vim.session.enable = false;
           vim.gitsigns.enable = true;
 
           vim.keys = {
