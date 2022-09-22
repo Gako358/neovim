@@ -267,24 +267,27 @@
           vim.theme.onedark.enable = true;
 
           vim.treesitter.enable = true;
-          vim.lsp.enable = true;
-          vim.lspsaga.enable = true;
-          vim.lspSignature.enable = true;
-          vim.nvimCodeActionMenu.enable = true;
-          vim.lsp.trouble.enable = true;
-          vim.lsp.python = true;
-          vim.lsp.clang = true;
-          vim.lsp.cmake = true;
-          vim.lsp.bash = true;
-          vim.lsp.lua = true;
-          vim.lsp.nix = true;
-          vim.lsp.rust = true;
-          vim.lsp.typescript = true;
-          vim.lsp.docker = true;
-          vim.lsp.tex = true;
-          vim.lsp.css = true;
-          vim.lsp.html = true;
-          vim.lsp.json = true;
+          vim.lsp = {
+            enable = true;
+            lspsaga.enable = true;
+            lspSignature.enable = true;
+            nvimCodeActionMenu.enable = true;
+            trouble.enable = true;
+
+            # Language servers:
+            python = true;
+            clang = true;
+            cmake = true;
+            bash = true;
+            lua = true;
+            nix = true;
+            rust = true;
+            typescript = true;
+            docker = true;
+            tex = true;
+            css = true;
+            html = true;
+            json = true;
 
           vim.autocomplete.enable = true;
 
