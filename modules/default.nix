@@ -17,7 +17,6 @@
     ./lualine
     ./keys
     ./toggleterm
-    ./sessions
     ./gitsigns
   ];
 }

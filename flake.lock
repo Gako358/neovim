@@ -453,8 +453,6 @@
         "telescope": "telescope",
         "toggleterm": "toggleterm",
         "trouble": "trouble",
-        "vim-misc": "vim-misc",
-        "vim-session": "vim-session",
         "web-devicons": "web-devicons",
         "which-key": "which-key"
       }
@@ -520,38 +518,6 @@
       "original": {
         "owner": "folke",
         "repo": "trouble.nvim",
-        "type": "github"
-      }
-    },
-    "vim-misc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1432234435,
-        "narHash": "sha256-0XGugINNYH+o8uPePNz28Nojy1dxdVD8RYU53xA6qWU=",
-        "owner": "xolox",
-        "repo": "vim-misc",
-        "rev": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xolox",
-        "repo": "vim-misc",
-        "type": "github"
-      }
-    },
-    "vim-session": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1446379405,
-        "narHash": "sha256-a+yRjpShuMMHspa2VtqkUUlNyR96TiiAKuldDKAb02Q=",
-        "owner": "xolox",
-        "repo": "vim-session",
-        "rev": "9e9a6088f0554f6940c19889d0b2a8f39d13f2bb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xolox",
-        "repo": "vim-session",
         "type": "github"
       }
     },

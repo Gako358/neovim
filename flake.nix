@@ -133,16 +133,6 @@
       flake = false;
     };
 
-    # SESSIONS
-    vim-session = {
-      url = "github:xolox/vim-session";
-      flake = false;
-    };
-    vim-misc = {
-      url = "github:xolox/vim-misc";
-      flake = false;
-    };
-
     # FILETREE
     nvim-filetree = {
       url = "github:kyazdani42/nvim-tree.lua";
@@ -191,8 +181,6 @@
         "lualine"
         "which-key"
         "toggleterm"
-        "vim-session"
-        "vim-misc"
         "nvim-filetree"
         "telescope"
       ];
@@ -294,7 +282,6 @@
             vim.filetree.enable = true;
             vim.bufferline.enable = true;
             vim.lualine.enable = true;
-            vim.session.enable = true;
             vim.gitsigns.enable = true;
 
             vim.keys = {
