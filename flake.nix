@@ -282,7 +282,7 @@
 
             vim.visuals = {
               enable = true;
-              theme.scheme = "onedark";
+              scheme = "onedark";
               nvimAutoPairs.enable = true;
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;
