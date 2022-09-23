@@ -290,7 +290,7 @@
 
             vim.visuals = {
               enable = true;
-              nvimAutopairs.enable = true;
+              nvimAutoPairs.enable = true;
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;
               nvimComment.enable = true;
