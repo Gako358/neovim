@@ -5,8 +5,8 @@
 }:
 with lib;
 with builtins; {
-  options.visuals = {
-    theme = mkOption {
+  options.visuals.theme = {
+    scheme = mkOption {
       type = types.enum [
         "onedark"
         "gruvbox"
@@ -22,6 +22,6 @@ with builtins; {
   imports = [
     ./config.nix
     ./visuals.nix
-    ./onedarl.nix
+    ./onedark.nix
   ];
 }

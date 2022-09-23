@@ -3,15 +3,10 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.visuals;
+  cfg = config.vim.visuals.theme;
 in {
 
-  config = mkIf (cfg.theme == "onedark") 
-  (
-    let
-      # mkVimBool = val: if val then "1" else "0";
-   
-    in {
+  config = mkIf (cfg.scheme == "onedark") {
 
       vim.startPlugins = with pkgs.neovimPlugins; [onedark];
 
@@ -60,7 +55,5 @@ in {
         }
         require('onedark').load()
       '';
-    
-    });
-
+    };
 }
