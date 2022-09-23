@@ -16,7 +16,7 @@ with lib; {
       indentBlankline = {
         enable = mkDefault false;
         listChar = mkDefault "│";
-        fillChar = mkDefault "⋅";
+        fillChar = mkDefault "";
         eolChar = mkDefault "↴";
         showCurrContext = mkDefault true;
       };
