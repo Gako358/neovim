@@ -5,9 +5,13 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.visuals;
+  cfg = config.vim.visuals.theme;
 in
 {
+  options.vim.visuals.theme = {
+    type = types.str;
+    description = "The theme to use for vim";
+  };
   config = mkIf (cfg.scheme == "onedark") {
     vim.startPlugins = with pkgs.neovimPlugins; [ onedark ];
 
