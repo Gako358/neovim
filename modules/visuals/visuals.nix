@@ -9,12 +9,12 @@ with builtins; let
 in
 {
   options.vim.visuals = {
-    enable = mkOptions {
+    enable = mkOption {
       type = types.bool;
       description = "Enable vim visuals";
     };
 
-    nvimAutoPairs.enable = mkOptions {
+    nvimAutoPairs.enable = mkOption {
       type = types.bool;
       description = "Enable auto pairs in nvim [nvim-autopairs]";
     };
