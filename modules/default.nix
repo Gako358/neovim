@@ -11,12 +11,12 @@
 
     ./cmp
 
-    ./autopairs
     ./filetree
     ./bufferline
     ./lualine
     ./keys
     ./toggleterm
     ./gitsigns
+    ./visuals
   ];
 }

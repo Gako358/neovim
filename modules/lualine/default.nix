@@ -19,7 +19,6 @@ in {
         else "";
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [
-        web-devicons
         lualine
       ];
 

@@ -84,14 +84,6 @@
       url = "github:saadparwaiz1/cmp_luasnip";
       flake = false;
     };
-    lightspeed = {
-      url = "github:ggandor/lightspeed.nvim";
-      flake = false;
-    };
-    nvim-comment = {
-      url = "github:terrortylor/nvim-comment";
-      flake = false;
-    };
     cmp-treesitter = {
       url = "github:ray-x/cmp-treesitter";
       flake = false;
@@ -103,7 +95,7 @@
       flake = false;
     };
 
-    # CORE PLUGINS
+    # Visuals PLUGINS
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
@@ -112,18 +104,37 @@
       url = "github:kyazdani42/nvim-web-devicons";
       flake = false;
     };
-    nvim-bufferline = {
-      url = "github:akinsho/bufferline.nvim";
+    lightspeed = {
+      url = "github:ggandor/lightspeed.nvim";
       flake = false;
     };
-    nvim-gitsigns = {
-      url = "github:lewis6991/gitsigns.nvim";
+    nvim-comment = {
+      url = "github:terrortylor/nvim-comment";
+      flake = false;
+    };
+    indent-blankline = {
+      url = "github:lukas-reineke/indent-blankline.nvim";
+      flake = false;
+    };
+
+    # Buffers and Statusline
+    nvim-bufferline = {
+      url = "github:akinsho/bufferline.nvim";
       flake = false;
     };
     lualine = {
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
+
+
+    # GIT
+    nvim-gitsigns = {
+      url = "github:lewis6991/gitsigns.nvim";
+      flake = false;
+    };
+
+    # Help
     which-key = {
       url = "github:folke/which-key.nvim";
       flake = false;
@@ -170,15 +181,16 @@
         "cmp-path"
         "cmp-buffer"
         "cmp-luasnip"
-        "lightspeed"
-        "nvim-comment"
         "cmp-treesitter"
         "crates-nvim"
         "nvim-autopairs"
         "web-devicons"
+        "lightspeed"
+        "nvim-comment"
+        "indent-blankline"
         "nvim-bufferline"
-        "nvim-gitsigns"
         "lualine"
+        "nvim-gitsigns"
         "which-key"
         "toggleterm"
         "nvim-filetree"
@@ -276,9 +288,17 @@
               json = true;
             };
 
+            vim.visuals = {
+              enable = true;
+              nvimAutopairs.enable = true;
+              nvimWebDevicons.enable = true;
+              lightSpeed.enable = true;
+              nvimComment.enable = true;
+              indentBlankline.enable = true; 
+            };
+
             vim.autocomplete.enable = true;
 
-            vim.autopairs.enable = true;
             vim.filetree.enable = true;
             vim.bufferline.enable = true;
             vim.lualine.enable = true;

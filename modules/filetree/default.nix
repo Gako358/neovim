@@ -20,7 +20,6 @@ in {
       in {
         vim.startPlugins = with pkgs.neovimPlugins; [
           nvim-filetree
-          web-devicons
         ];
 
         vim.nnoremap = {
