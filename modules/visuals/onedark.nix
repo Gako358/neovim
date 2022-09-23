@@ -37,7 +37,7 @@ in
 
           -- Custom Highlights --
           colors = {
-            bg0 = "#282828",
+            bg0 = "#23262E",
             purple = "#ff00aa",
             yellow = "#FFE66D",
             blue = "#7cb7ff",
