@@ -11,12 +11,6 @@
 
     ### Vim plugins ###
 
-    # Theme
-    onedark = {
-      url = "github:navarasu/onedark.nvim";
-      flake = false;
-    };
-
     # Plenary
     plenary-nvim = {
       url = "github:nvim-lua/plenary.nvim";
@@ -96,6 +90,10 @@
     };
 
     # Visuals PLUGINS
+    onedark = {
+      url = "github:navarasu/onedark.nvim";
+      flake = false;
+    };
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
@@ -161,7 +159,6 @@
     } @ inputs:
     let
       plugins = [
-        "onedark"
         "plenary-nvim"
         "nvim-treesitter"
         "nvim-lspconfig"
@@ -179,6 +176,7 @@
         "cmp-luasnip"
         "cmp-treesitter"
         "crates-nvim"
+        "onedark"
         "nvim-autopairs"
         "web-devicons"
         "lightspeed"
@@ -258,7 +256,6 @@
             vim.viAlias = true;
             vim.vimAlias = true;
             vim.autoIndent = true;
-            vim.theme.onedark.enable = true;
 
             vim.treesitter.enable = true;
             vim.lsp = {
@@ -285,6 +282,7 @@
 
             vim.visuals = {
               enable = true;
+              theme.scheme = "onedark";
               nvimAutoPairs.enable = true;
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;

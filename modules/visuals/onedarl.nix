@@ -3,15 +3,10 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.theme.onedark;
+  cfg = config.vim.visuals.theme;
 in {
 
-  options.vim.theme.onedark = {
-    enable = mkEnableOption "Enable onedark theme";
-
-  };
-
-  config = mkIf (cfg.enable) 
+  config = mkIf (cfg.scheme == "onedark") 
   (
     let
       # mkVimBool = val: if val then "1" else "0";
@@ -46,7 +41,13 @@ in {
         
             -- Custom Highlights --
             colors = {
-              bg0 = "#282828",                
+              bg0 = "#282828",
+              purple = "ff00aa",
+              yellow = "FFE66D",
+              blue = "7cb7ff",
+              red = "ee5d43",
+              green = "96E072",
+              cyan = "00e8c6",
             }, -- Override default colors
             highlights = {}, -- Override highlight groups
         

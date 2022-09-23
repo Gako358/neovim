@@ -3,7 +3,6 @@
   imports = [
     ./core
     ./basic
-    ./theme
 
     ./treesitter
     ./telescope
