@@ -17,7 +17,7 @@ with lib; {
         enable = mkDefault false;
         listChar = mkDefault "│";
         fillChar = mkDefault "";
-        eolChar = mkDefault "↴";
+        eolChar = mkDefault "";
         showCurrContext = mkDefault true;
       };
     };

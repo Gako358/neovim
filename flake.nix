@@ -139,10 +139,6 @@
       url = "github:folke/which-key.nvim";
       flake = false;
     };
-    toggleterm = {
-      url = "github:akinsho/toggleterm.nvim";
-      flake = false;
-    };
 
     # FILETREE
     nvim-filetree = {
@@ -192,7 +188,6 @@
         "lualine"
         "nvim-gitsigns"
         "which-key"
-        "toggleterm"
         "nvim-filetree"
         "telescope"
       ];
@@ -308,8 +303,6 @@
               enable = true;
               whichKey.enable = true;
             };
-
-            vim.toggleterm.enable = true;
 
             vim.telescope.enable = true;
           };

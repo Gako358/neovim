@@ -468,7 +468,6 @@
         "plenary-nvim": "plenary-nvim",
         "rust-tools": "rust-tools",
         "telescope": "telescope",
-        "toggleterm": "toggleterm",
         "trouble": "trouble",
         "web-devicons": "web-devicons",
         "which-key": "which-key"
@@ -503,22 +502,6 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "type": "github"
-      }
-    },
-    "toggleterm": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1663537490,
-        "narHash": "sha256-AmE4hE0SNZUSZ4A92Wuc6Rb4GZY+znVRIpXR4k8sywc=",
-        "owner": "akinsho",
-        "repo": "toggleterm.nvim",
-        "rev": "2a787c426ef00cb3488c11b14f5dcf892bbd0bda",
-        "type": "github"
-      },
-      "original": {
-        "owner": "akinsho",
-        "repo": "toggleterm.nvim",
         "type": "github"
       }
     },

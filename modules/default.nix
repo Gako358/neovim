@@ -15,7 +15,6 @@
     ./bufferline
     ./lualine
     ./keys
-    ./toggleterm
     ./gitsigns
     ./visuals
   ];
