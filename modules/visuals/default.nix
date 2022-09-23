@@ -5,7 +5,7 @@
 }:
 with lib;
 with builtins; {
-  options.visuals.theme = {
+  options.vim.visuals.theme = {
     scheme = mkOption {
       type = types.enum [
         "onedark"
