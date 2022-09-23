@@ -5,7 +5,7 @@
 }:
 with lib;
 with builtins; {
-  options.visuals.theme = {
+  options.visuals = {
     scheme = mkOption {
       type = types.enum [
         "onedark"
