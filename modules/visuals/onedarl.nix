@@ -3,10 +3,10 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.visuals.theme;
+  cfg = config.vim.visuals;
 in {
 
-  config = mkIf (cfg.scheme == "onedark") 
+  config = mkIf (cfg.theme == "onedark") 
   (
     let
       # mkVimBool = val: if val then "1" else "0";
