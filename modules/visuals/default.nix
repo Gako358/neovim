@@ -2,7 +2,9 @@
 , lib
 , pkgs
 , ...
-}: {
+}:
+with lib;
+with builtins; {
   options.visuals.theme = {
     scheme = mkOption {
       type = types.enum [
@@ -13,7 +15,7 @@
       default = "onedark";
       description = ''
         The color scheme to use for the visuals.
-      '';   
+      '';
     };
   };
 
