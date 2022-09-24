@@ -11,6 +11,8 @@ with builtins; {
       type = types.enum [
         "github"
         "onedark"
+        "gruvbox"
+        "kanagawa"
         "tokyonight"
       ];
       default = "onedark";
@@ -23,8 +25,10 @@ with builtins; {
   imports = [
     ./config.nix
     ./visuals.nix
-    ./onedark.nix
     ./github.nix
+    ./onedark.nix
+    ./gruvbox.nix
+    ./kanagawa.nix
     ./tokyonight.nix
   ];
 }

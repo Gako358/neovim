@@ -36,15 +36,7 @@ in {
           },
 
           -- Custom Highlights --
-          colors = {
-            bg0 = "#23262E",
-            purple = "#ff00aa",
-            yellow = "#FFE66D",
-            blue = "#7cb7ff",
-            red = "#ee5d43",
-            green = "#96E072",
-            cyan = "#00e8c6",
-          }, -- Override default colors
+          colors = {}, -- Override default colors
           highlights = {}, -- Override highlight groups
 
           -- Plugins Config --

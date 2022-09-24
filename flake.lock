@@ -143,6 +143,22 @@
         "type": "github"
       }
     },
+    "gruvbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663251364,
+        "narHash": "sha256-0/4dwzlD4i57eKNeF+sqx0RXMxWq6dGhhQJCZXlRxLY=",
+        "owner": "ellisonleao",
+        "repo": "gruvbox.nvim",
+        "rev": "c632f629026cf41308b4473ab9bb9686318c993c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ellisonleao",
+        "repo": "gruvbox.nvim",
+        "type": "github"
+      }
+    },
     "indent-blankline": {
       "flake": false,
       "locked": {
@@ -156,6 +172,22 @@
       "original": {
         "owner": "lukas-reineke",
         "repo": "indent-blankline.nvim",
+        "type": "github"
+      }
+    },
+    "kanagawa": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662075191,
+        "narHash": "sha256-NiJVuROlFyEEd/DUrWWwaE5CBK3lK1DUw5uocJPg3HI=",
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "rev": "dda1b8c13e0e7588c014064e5e8baf7f2953dd29",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
         "type": "github"
       }
     },
@@ -216,11 +248,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1664007390,
-        "narHash": "sha256-LKf6Ybt1rl2fCtonjP0QZTjLevis2Upr2bTVwThcMxs=",
+        "lastModified": 1664017177,
+        "narHash": "sha256-e5dn2kjxR4VXMvV3Oj6viIARS8Bmtosm4RNglUIeL2U=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "24b5449b3d9b39a436bb8fe935116afa15a9473e",
+        "rev": "f8b656c582c6f0d9cb35523ac2d2f3d0edbcd52b",
         "type": "github"
       },
       "original": {
@@ -464,7 +496,9 @@
         "crates-nvim": "crates-nvim",
         "github-copilot": "github-copilot",
         "github-nvim-theme": "github-nvim-theme",
+        "gruvbox": "gruvbox",
         "indent-blankline": "indent-blankline",
+        "kanagawa": "kanagawa",
         "lightspeed": "lightspeed",
         "lualine": "lualine",
         "luasnip": "luasnip",
