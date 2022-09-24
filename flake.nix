@@ -302,7 +302,7 @@
 
             vim.visuals = {
               enable = true;
-              theme.scheme = "tokyonight";
+              theme.scheme = "onedark";
               nvimAutoPairs.enable = true;
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;
