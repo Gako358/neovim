@@ -39,6 +39,9 @@ in
       }
 
       require'kanagawa'.setup({ overrides = overrides, colors = my_colors })
+    '';
+
+    vim.ConfigRC = ''
       vim.cmd("colorscheme kanagawa")
     '';
   };
