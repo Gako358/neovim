@@ -36,7 +36,9 @@ in {
           },
 
           -- Custom Highlights --
-          colors = {}, -- Override default colors
+          colors = {
+              bg0 = '#272727',
+          }, -- Override default colors
           highlights = {}, -- Override highlight groups
 
           -- Plugins Config --
