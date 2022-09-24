@@ -1,15 +1,15 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.visuals.theme;
-in
-{
+in {
   config = mkIf (cfg.scheme == "onedark") {
-    vim.startPlugins = with pkgs.neovimPlugins; [ onedark ];
+    vim.startPlugins = with pkgs.neovimPlugins; [onedark];
 
     vim.luaConfigRC = ''
       require('onedark').setup  {

@@ -1,16 +1,17 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with builtins; {
   options.vim.visuals.theme = {
     scheme = mkOption {
       type = types.enum [
-        "onedark"
-        "gruvbox"
         "github"
+        "onedark"
+        "tokyonight"
       ];
       default = "onedark";
       description = ''
@@ -23,5 +24,7 @@ with builtins; {
     ./config.nix
     ./visuals.nix
     ./onedark.nix
+    ./github.nix
+    ./tokyonight.nix
   ];
 }

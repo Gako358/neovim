@@ -94,6 +94,14 @@
       url = "github:navarasu/onedark.nvim";
       flake = false;
     };
+    github-nvim-theme = {
+      url = "github:projekt0n/github-nvim-theme";
+      flake = false;
+    };
+    tokyonight = {
+      url = "github:folke/tokyonight.nvim";
+      flake = false;
+    };
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
@@ -177,6 +185,8 @@
         "cmp-treesitter"
         "crates-nvim"
         "onedark"
+        "github-nvim-theme"
+        "tokyonight"
         "nvim-autopairs"
         "web-devicons"
         "lightspeed"
@@ -282,7 +292,7 @@
 
             vim.visuals = {
               enable = true;
-              theme.scheme = "onedark";
+              theme.scheme = "github";
               nvimAutoPairs.enable = true;
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;
