@@ -30,7 +30,6 @@ in
           -- AFTER calling require("kanagawa").setup(config)
           new_color = "teal"
       }
-
       local overrides = {
           -- create a new hl-group using default palette colors and/or new ones
           MyHlGroup1 = { fg = default_colors.waveRed, bg = "#AAAAAA", underline = true, bold = true, guisp="blue" },
@@ -41,7 +40,6 @@ in
           TSKeywordOperator = { bold = true},
           StatusLine = { fg = my_colors.new_color }
       }
-
       require'kanagawa'.setup({ overrides = overrides, colors = my_colors })
     '';
   };
