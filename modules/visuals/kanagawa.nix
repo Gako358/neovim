@@ -11,6 +11,10 @@ in
   config = mkIf (cfg.scheme == "kanagawa") {
     vim.startPlugins = with pkgs.neovimPlugins; [ kanagawa ];
 
+    vim.configRC = ''
+      vim.cmd("colorscheme kanagawa")
+    '';
+
     vim.luaConfigRC = ''
       local default_colors = require("kanagawa.colors").setup()
 
@@ -39,10 +43,6 @@ in
       }
 
       require'kanagawa'.setup({ overrides = overrides, colors = my_colors })
-    '';
-
-    vim.ConfigRC = ''
-      vim.cmd("colorscheme kanagawa")
     '';
   };
 }
