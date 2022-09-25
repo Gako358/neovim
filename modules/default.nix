@@ -2,11 +2,14 @@
 {
   imports = [
     ./basic
+    ./bufferline
     ./code
     ./core
+    ./filetree
     ./git
     ./keys
-    ./utility
+    ./lualine
+    ./telescope
     ./visuals
   ];
 }

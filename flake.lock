@@ -329,11 +329,11 @@
     "nvim-cmp": {
       "flake": false,
       "locked": {
-        "lastModified": 1664110595,
-        "narHash": "sha256-fgz2Qr9IX0IJcZdkDqFKKju+BR/2kjgvmZJrW33Sz3s=",
+        "lastModified": 1664117857,
+        "narHash": "sha256-uyAyE6I6RE3cktwJC05cB5Fqm9DCjYsVjYqCmQOFs1g=",
         "owner": "hrsh7th",
         "repo": "nvim-cmp",
-        "rev": "dd4173fceedc99706276be5eb4ad6c8e81ecfdf7",
+        "rev": "4dd7ab6c26ef92fa2deeb483cd29198455148087",
         "type": "github"
       },
       "original": {
