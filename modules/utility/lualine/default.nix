@@ -2,7 +2,7 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.lualine;
+  cfg = config.vim.utility.lualine;
 in {
   options.vim.lualine = {
     enable = mkOption {

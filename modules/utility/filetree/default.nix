@@ -2,7 +2,7 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.filetree;
+  cfg = config.vim.utility.filetree;
 in {
     options.vim.filetree = {
       enable = mkOption {

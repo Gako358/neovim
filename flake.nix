@@ -277,7 +277,7 @@
             vim.vimAlias = true;
             vim.autoIndent = true;
 
-            vim.treesitter.enable = true;
+            vim.autocomplete.enable = true;
             vim.lsp = {
               enable = true;
               lightbulb.enable = true;
@@ -299,6 +299,19 @@
               html = true;
               json = true;
             };
+            vim.treesitter.enable = true;
+
+            vim.gitsigns.enable = true;
+
+            vim.keys = {
+              enable = true;
+              whichKey.enable = true;
+            };
+
+            vim.utility.bufferline.enable = true;
+            vim.utility.filetree.enable = true;
+            vim.utility.lualine.enable = true;
+            vim.utility.telescope.enable = true;
 
             vim.visuals = {
               enable = true;
@@ -309,20 +322,6 @@
               nvimComment.enable = true;
               indentBlankline.enable = true; 
             };
-
-            vim.autocomplete.enable = true;
-
-            vim.filetree.enable = true;
-            vim.bufferline.enable = true;
-            vim.lualine.enable = true;
-            vim.gitsigns.enable = true;
-
-            vim.keys = {
-              enable = true;
-              whichKey.enable = true;
-            };
-
-            vim.telescope.enable = true;
           };
         };
     in

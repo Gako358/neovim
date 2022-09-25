@@ -6,7 +6,7 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.telescope;
+  cfg = config.vim.utility.telescope;
 in {
   options.vim.telescope = {
     enable = mkEnableOption "enable telescope";

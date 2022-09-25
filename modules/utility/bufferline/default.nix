@@ -3,7 +3,7 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.bufferline;
+  cfg = config.vim.utility.bufferline;
 
 in {
   options.vim.bufferline = {
