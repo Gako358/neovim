@@ -104,16 +104,8 @@
       url = "github:projekt0n/github-nvim-theme";
       flake = false;
     };
-    gruvbox = {
-      url = "github:ellisonleao/gruvbox.nvim";
-      flake = false;
-    };
     kanagawa = {
       url = "github:rebelot/kanagawa.nvim";
-      flake = false;
-    };
-    tokyonight = {
-      url = "github:folke/tokyonight.nvim";
       flake = false;
     };
     nvim-autopairs = {
@@ -194,9 +186,7 @@
         "crates-nvim"
         "onedark"
         "github-nvim-theme"
-        "gruvbox"
         "kanagawa"
-        "tokyonight"
         "nvim-autopairs"
         "web-devicons"
         "lightspeed"
