@@ -146,6 +146,8 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
+
+    # FILE
     nvim-filetree = {
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
@@ -201,8 +203,8 @@
         "nvim-comment"
         "indent-blankline"
         "nvim-bufferline"
-        "nvim-filetree"
         "lualine"
+        "nvim-filetree"
         "nvim-gitsigns"
         "which-key"
       ];
@@ -309,9 +311,11 @@
               indentBlankline.enable = true; 
             };
 
-            vim.filetree.enable = true;
             vim.bufferline.enable = true;
             vim.lualine.enable = true;
+
+            vim.filetree.enable = true;
+
             vim.gitsigns.enable = true;
 
             vim.keys = {
