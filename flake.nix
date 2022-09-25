@@ -83,12 +83,6 @@
       flake = false;
     };
 
-    # TELESCOPE
-    telescope = {
-      url = "github:nvim-telescope/telescope.nvim";
-      flake = false;
-    };
-
     # Rust crates
     crates-nvim = {
       url = "github:Saecki/crates.nvim";
@@ -139,11 +133,6 @@
       flake = false;
     };
 
-    # FILE
-    nvim-filetree = {
-      url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
 
     # GIT
     nvim-gitsigns = {
@@ -154,6 +143,18 @@
     # Help
     which-key = {
       url = "github:folke/which-key.nvim";
+      flake = false;
+    };
+
+    # FILETREE
+    nvim-filetree = {
+      url = "github:kyazdani42/nvim-tree.lua";
+      flake = false;
+    };
+
+    # TELESCOPE
+    telescope = {
+      url = "github:nvim-telescope/telescope.nvim";
       flake = false;
     };
   };
@@ -182,7 +183,6 @@
         "cmp-buffer"
         "cmp-luasnip"
         "cmp-treesitter"
-        "telescope"
         "crates-nvim"
         "onedark"
         "github-nvim-theme"
@@ -194,9 +194,10 @@
         "indent-blankline"
         "nvim-bufferline"
         "lualine"
-        "nvim-filetree"
         "nvim-gitsigns"
         "which-key"
+        "nvim-filetree"
+        "telescope"
       ];
 
       externalBitsOverlay = top: last: {
@@ -266,7 +267,7 @@
             vim.vimAlias = true;
             vim.autoIndent = true;
 
-            vim.autocomplete.enable = true;
+            vim.treesitter.enable = true;
             vim.lsp = {
               enable = true;
               lightbulb.enable = true;
@@ -288,8 +289,6 @@
               html = true;
               json = true;
             };
-            vim.telescope.enable = true;
-            vim.treesitter.enable = true;
 
             vim.theme.scheme = "kanagawa";
 
@@ -302,11 +301,11 @@
               indentBlankline.enable = true; 
             };
 
-            vim.bufferline.enable = true;
-            vim.lualine.enable = true;
+            vim.autocomplete.enable = true;
 
             vim.filetree.enable = true;
-
+            vim.bufferline.enable = true;
+            vim.lualine.enable = true;
             vim.gitsigns.enable = true;
 
             vim.keys = {
@@ -314,6 +313,7 @@
               whichKey.enable = true;
             };
 
+            vim.telescope.enable = true;
           };
         };
     in
