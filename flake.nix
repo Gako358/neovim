@@ -301,9 +301,10 @@
             vim.telescope.enable = true;
             vim.treesitter.enable = true;
 
+            vim.theme.scheme = "kanagawa";
+
             vim.visuals = {
               enable = true;
-              theme.scheme = "kanagawa";
               nvimAutoPairs.enable = true;
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;

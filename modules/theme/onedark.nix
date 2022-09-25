@@ -6,7 +6,7 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.visuals.theme;
+  cfg = config.vim.theme;
 in {
   config = mkIf (cfg.scheme == "onedark") {
     vim.startPlugins = with pkgs.neovimPlugins; [onedark];

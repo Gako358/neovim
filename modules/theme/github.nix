@@ -6,7 +6,7 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.visuals.theme;
+  cfg = config.vim.theme;
 in {
   config = mkIf (cfg.scheme == "github") {
     vim.startPlugins = with pkgs.neovimPlugins; [github-nvim-theme];

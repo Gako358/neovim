@@ -5,7 +5,7 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.visuals.theme;
+  cfg = config.vim.theme;
 in
 {
   config = mkIf (cfg.scheme == "kanagawa") {
