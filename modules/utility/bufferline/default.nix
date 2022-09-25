@@ -3,10 +3,10 @@ with lib;
 with builtins;
 
 let
-  cfg = config.vim.utility.bufferline;
+  cfg = config.vim.bufferline;
 
 in {
-  options.vim.utility.bufferline = {
+  options.vim.bufferline = {
     enable = mkOption {
       type = types.bool;
       description = "Enable bufferline plugin: [nvim-bufferline]";

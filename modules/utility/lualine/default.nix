@@ -2,9 +2,9 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.utility.lualine;
+  cfg = config.vim.lualine;
 in {
-  options.vim.utility.lualine = {
+  options.vim.lualine = {
     enable = mkOption {
       type = types.bool;
       description = "enable statusline plugin: [lualine]";

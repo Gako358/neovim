@@ -2,9 +2,9 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.utility.filetree;
+  cfg = config.vim.filetree;
 in {
-    options.vim.utility.filetree = {
+    options.vim.filetree = {
       enable = mkOption {
         type = types.bool;
           description = "Enable filetree plugin: [nvim-filetree]";

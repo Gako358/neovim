@@ -308,10 +308,10 @@
               whichKey.enable = true;
             };
 
-            vim.utility.bufferline.enable = true;
-            vim.utility.filetree.enable = true;
-            vim.utility.lualine.enable = true;
-            vim.utility.telescope.enable = true;
+            vim.bufferline.enable = true;
+            vim.filetree.enable = true;
+            vim.lualine.enable = true;
+            vim.telescope.enable = true;
 
             vim.visuals = {
               enable = true;
