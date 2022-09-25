@@ -1,9 +1,6 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{ config, lib, pkgs, ... }:
+{
   imports = [
-    ./which-key.nix
+  ./which-key.nix
   ];
 }

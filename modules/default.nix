@@ -1,15 +1,20 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{config, lib, pkgs, ...}:
+{
   imports = [
-    ./basic
-    ./code
     ./core
-    ./git
+    ./basic
+
+    ./treesitter
+    ./telescope
+    ./lsp
+
+    ./cmp
+
+    ./filetree
+    ./bufferline
+    ./lualine
     ./keys
-    ./status
+    ./gitsigns
     ./visuals
   ];
 }
