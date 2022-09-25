@@ -14,6 +14,7 @@
     ./lsp
     ./lualine
     ./telescope
+    ./theme
     ./treesitter
     ./visuals
   ];
