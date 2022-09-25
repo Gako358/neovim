@@ -4,6 +4,8 @@
 , ...
 }: {
   imports = [
-    ./which-key.nix
+    ./bufferline
+    ./filetree
+    ./lualine
   ];
 }
