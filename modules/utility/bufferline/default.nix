@@ -6,7 +6,7 @@ let
   cfg = config.vim.utility.bufferline;
 
 in {
-  options.vim.bufferline = {
+  options.vim.utility.bufferline = {
     enable = mkOption {
       type = types.bool;
       description = "Enable bufferline plugin: [nvim-bufferline]";

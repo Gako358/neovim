@@ -4,7 +4,7 @@ with builtins;
 let
   cfg = config.vim.utility.lualine;
 in {
-  options.vim.lualine = {
+  options.vim.utility.lualine = {
     enable = mkOption {
       type = types.bool;
       description = "enable statusline plugin: [lualine]";

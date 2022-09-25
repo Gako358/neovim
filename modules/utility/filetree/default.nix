@@ -4,7 +4,7 @@ with builtins;
 let
   cfg = config.vim.utility.filetree;
 in {
-    options.vim.filetree = {
+    options.vim.utility.filetree = {
       enable = mkOption {
         type = types.bool;
           description = "Enable filetree plugin: [nvim-filetree]";
