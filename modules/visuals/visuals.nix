@@ -134,7 +134,7 @@ in
         else ""
       }
       ${
-        if cfg.focus.enable
+        if cfg.Focus.enable
         then ''
           vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
           vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', { silent = true })
