@@ -20,6 +20,7 @@ with lib; {
         eolChar = mkDefault "";
         showCurrContext = mkDefault true;
       };
+      Focus.enable = mkDefault false;
     };
   };
 }

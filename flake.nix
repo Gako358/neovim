@@ -47,7 +47,7 @@
       flake = false;
     };
 
-    # COPILOT Only needed on initial install
+    # COPILOT
     github-copilot = {
       url = "github:github/copilot.vim";
       flake = false;
@@ -89,7 +89,7 @@
       flake = false;
     };
 
-    # Visuals PLUGINS
+    # Visuals
     onedark = {
       url = "github:navarasu/onedark.nvim";
       flake = false;
@@ -120,6 +120,10 @@
     };
     indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
+      flake = false;
+    };
+    focus = {
+      url = "github:beauwilliams/focus.nvim";
       flake = false;
     };
 
@@ -192,6 +196,7 @@
         "lightspeed"
         "nvim-comment"
         "indent-blankline"
+        "focus"
         "nvim-bufferline"
         "lualine"
         "nvim-gitsigns"
@@ -299,6 +304,7 @@
               lightSpeed.enable = true;
               nvimComment.enable = true;
               indentBlankline.enable = true; 
+              Focus.enable = true;
             };
 
             vim.autocomplete.enable = true;
