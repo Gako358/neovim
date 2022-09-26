@@ -61,7 +61,7 @@ in
       };
     };
 
-    Focus = mkOption {
+    Focus.enable = mkOption {
       type = types.bool;
       description = "enable focus. required for certain plugins [focus]";
     };
