@@ -159,10 +159,10 @@ in {
       "<C-k>" = "<C-w>k";
       "<C-l>" = "<C-w>l";
 
-      "<A-Up>" = ":resize -1<CR>";
-      "<A-Down>" = ":resize +1<CR>";
-      "<A-Left>" = ":vertical resize -1<CR>";
-      "<A-Right>" = ":vertical resize +1<CR>";
+      "<A-Up>" = ":resize -3<CR>";
+      "<A-Down>" = ":resize +3<CR>";
+      "<A-Left>" = ":vertical resize -3<CR>";
+      "<A-Right>" = ":vertical resize +3<CR>";
 
       "<F7>" = ":setlocal spell<CR>";
       "<F9>" = ":Copilot disable<CR>";
