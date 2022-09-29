@@ -30,8 +30,16 @@
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
     };
+    lspsaga = {
+      url = "github:tami5/lspsaga.nvim";
+      flake = false;
+    };
     nvim-lightbulb = {
       url = "github:kosayoda/nvim-lightbulb";
+      flake = false;
+    };
+    lsp-signature = {
+      url = "github:ray-x/lsp_signature.nvim";
       flake = false;
     };
     nvim-code-action-menu = {
@@ -175,7 +183,9 @@
         "nvim-treesitter"
         "nvim-lspconfig"
         "null-ls"
+        "lspsaga"
         "nvim-lightbulb"
+        "lsp-signature"
         "nvim-code-action-menu"
         "trouble"
         "rust-tools"
@@ -275,7 +285,9 @@
             vim.treesitter.enable = true;
             vim.lsp = {
               enable = true;
+              lspsaga.enable = true;
               lightbulb.enable = true;
+              lspSignature.enable = true;
               nvimCodeActionMenu.enable = true;
               trouble.enable = true;
 
