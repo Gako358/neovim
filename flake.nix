@@ -285,7 +285,7 @@
             vim.treesitter.enable = true;
             vim.lsp = {
               enable = true;
-              lspsaga.enable = true;
+              lspsaga.enable = false;
               lightbulb.enable = true;
               lspSignature.enable = true;
               nvimCodeActionMenu.enable = true;
