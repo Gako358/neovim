@@ -5,7 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
+      # url = "github:neovim/neovim?dir=contrib";
+      url = "github:neovim/neovim/875b58e0941ef62a75992ce0e6496bb7879e0bbe?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -285,7 +286,7 @@
             vim.treesitter.enable = true;
             vim.lsp = {
               enable = true;
-              lspsaga.enable = false;
+              lspsaga.enable = true;
               lightbulb.enable = true;
               lspSignature.enable = true;
               nvimCodeActionMenu.enable = true;
