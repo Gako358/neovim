@@ -65,6 +65,16 @@ in
       type = types.bool;
       description = "enable focus. required for certain plugins [focus]";
     };
+
+    lazyGit.enable = mkOption {
+      type = types.bool;
+      description = "enable lazy git. git manager [lazygit]";
+    };
+
+    toggleTerm.enable = mkOption {
+      type = types.bool;
+      description = "enable toggleterm. terminal emulator [toggleterm]";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -97,6 +107,16 @@ in
       (
         if cfg.Focus.enable
         then focus
+        else null
+      )
+      (
+        if cfg.lazyGit.enable
+        then lazygit
+        else null
+      )
+      (
+        if cfg.toggleTerm.enable
+        then toggleterm
         else null
       )
     ];
@@ -142,6 +162,30 @@ in
           vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', { silent = true })
           vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = true })
           require("focus").setup({hybridnumber = true, excluded_filetypes = {"toggleterm"}})
+        ''
+        else ""
+      }
+      ${
+        if cfg.lazyGit.enable
+        then ''
+          vim.api.nvim_set_keymap('n', '<leader>/', ':LazyGit<CR>', { silent = true })
+        ''
+        else ""
+      }
+      ${
+        if cfg.toggleTerm.enable
+        then ''
+          require("toggleterm").setup {
+            size = 20,
+            open_mapping = [[<c-\>]],
+            hide_numbers = true,
+            shade_terminals = true,
+            start_in_insert = true,
+            persist_size = true,
+            direction = 'horizontal',
+            close_on_exit = true,
+            shell = vim.o.shell,
+          }
         ''
         else ""
       }

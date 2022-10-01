@@ -137,6 +137,14 @@
       url = "github:beauwilliams/focus.nvim";
       flake = false;
     };
+    lazygit = {
+      url = "github:kdheepak/lazygit.nvim";
+      flake = false;
+    };
+    toggleterm = {
+      url = "github:akinsho/toggleterm.nvim";
+      flake = false;
+    };
 
     # Buffers and Statusline
     nvim-bufferline = {
@@ -210,6 +218,8 @@
         "nvim-comment"
         "indent-blankline"
         "focus"
+        "lazygit"
+        "toggleterm"
         "nvim-bufferline"
         "lualine"
         "nvim-gitsigns"
@@ -320,6 +330,8 @@
               nvimComment.enable = true;
               indentBlankline.enable = true; 
               Focus.enable = true;
+              lazyGit.enable = true;
+              toggleTerm.enable = true;
             };
 
             vim.autocomplete.enable = true;
