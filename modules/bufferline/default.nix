@@ -26,8 +26,8 @@ in {
       ];
 
       vim.nnoremap = {
-        "<leader>d" = ":BufferLineCycleNext<CR>";
-        "<leader>a" = ":BufferLineCyclePrev<CR>";
+        "<TAB>" = ":BufferLineCycleNext<CR>";
+        "<S-TAB>" = ":BufferLineCyclePrev<CR>";
         "<leader>bd" = ":BufferLineSortByDirectory<CR>";
         "<leader>bq" = ":bd!<CR>";
         
