@@ -28,19 +28,19 @@ in
       -- you can of course pick whatever colour you want, I picked these colours
       -- because I use Gruvbox and I like them
       local highlights = {
-        {'StatusLine', { fg = '#363646', bg = '#DCD7BA' }},
-        {'StatusLineNC', { fg = '#363646', bg = '#DCD7BA' }},
-        {'Mode', { bg = '#2D4F67', fg = '#1D2021', gui="bold" }},
-        {'LineCol', { bg = '#2D4F67', fg = '#1D2021', gui="bold" }},
-        {'Git', { bg = '#223249', fg = '#DCD7BA' }},
-        {'Filetype', { bg = '#223249', fg = '#DCD7BA' }},
-        {'Filename', { bg = '#363646', fg = '#DCD7BA' }},
-        {'ModeAlt', { bg = '#363646', fg = '#DCD7BA' }},
-        {'GitAlt', { bg = '#363646', fg = '#DCD7BA' }},
-        {'LineColAlt', { bg = '#363646', fg = '#DCD7BA' }},
-        {'FiletypeAlt', { bg = '#363646', fg = '#DCD7BA' }},
+        {'StatusLine', { fg = '#16161D', bg = '#DCD7BA' }},
+        {'StatusLineNC', { fg = '#16161D', bg = '#DCD7BA' }},
+        {'Mode', { bg = '#54546D', fg = '#1D2021', gui="bold" }},
+        {'LineCol', { bg = '#2D4F67', fg = '#DCD7BA', gui="bold" }},
+        {'Git', { bg = '#2D4F67', fg = '#DCD7BA' }},
+        {'Filetype', { bg = '#2D4F67', fg = '#DCD7BA' }},
+        {'Filename', { bg = '#16161D', fg = '#DCD7BA' }},
+        {'ModeAlt', { bg = '#16161D', fg = '#DCD7BA' }},
+        {'GitAlt', { bg = '#16161D', fg = '#DCD7BA' }},
+        {'LineColAlt', { bg = '#16161D', fg = '#DCD7BA' }},
+        {'FiletypeAlt', { bg = '#16161D', fg = '#DCD7BA' }},
         {'diagnosticErr', { bg = '#E82424', fg = '#DCD7BA' }},
-        {'diagnosticAlt', { bg = '#363646', fg = '#DCD7BA' }},
+        {'diagnosticAlt', { bg = '#16161D', fg = '#DCD7BA' }},
       }
 
       for _, highlight in ipairs(highlights) do
@@ -162,35 +162,30 @@ in
         return ' Ln %l, Col %c '
       end
 
-      M.get_lsp_status = function()
-        local count = {}
-        local levels = {
-          errors = "Error",
-          warnings = "Warn",
-          info = "Info",
-          hints = "Hint",
-        }
-        for k, level in pairs(levels) do
-          count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
-        end
-        local errors = ""
-        local warnings = ""
-        local hints = ""
-        local info = ""
-        if count["errors"] ~= 0 then
-          errors = " %#LspDiagnosticsSignError# " .. count["errors"]
-        end
-        if count["warnings"] ~= 0 then
-          warnings = " %#LspDiagnosticsSignWarning# " .. count["warnings"]
-        end
-        if count["hints"] ~= 0 then
-          hints = " %#LspDiagnosticsSignHint# " .. count["hints"]
-        end
-        if count["info"] ~= 0 then
-          info = " %#LspDiagnosticsSignInformation# " .. count["info"]
-        end
-        return errors .. warnings .. hints .. info .. "%#Normal#"
-      end
+      -- Figure out lsp errors
+      -- M.get_lsp_status = function(self)
+      --   local result = {}
+      --   local levels = {
+      --     errors = 'Error',
+      --     warnings = 'Warning',
+      --     info = 'Information',
+      --     hints = 'Hint'
+      --   }
+
+      --   for k, level in pairs(levels) do
+      --     result[k] = vim.lsp.diagnostic.get_count(0, level)
+      --   end
+
+      --   if self:is_truncated(120) then
+      --     return ""
+      --   else
+      --     return string.format(
+      --       "| :%s :%s :%s :%s ",
+      --       result['errors'] or 0, result['warnings'] or 0,
+      --       result['info'] or 0, result['hints'] or 0
+      --     )
+      --   end
+      -- end
 
       M.set_active = function(self)
         local colors = self.colors
@@ -199,8 +194,8 @@ in
         local mode_alt = colors.mode_alt .. self.separators[active_sep][1]
         local git = colors.git .. self:get_git_status()
         local git_alt = colors.git_alt .. self.separators[active_sep][1]
-        local lsp = colors.diagnostic .. self:get_lsp_status()
-        local lsp_alt = colors.diagnostic_alt .. self.separators[active_sep][1]
+        -- local lsp = colors.diagnostic .. self:get_lsp_status()
+        -- local lsp_alt = colors.diagnostic_alt .. self.separators[active_sep][1]
         local filename = colors.file_name .. self:get_filename()
         local filetype_alt = colors.filetype_alt .. self.separators[active_sep][2]
         local filetype = colors.filetype .. self:get_filetype()
@@ -208,7 +203,7 @@ in
         local line_col_alt = colors.line_col_alt .. self.separators[active_sep][2]
 
         return table.concat({
-          colors.active, mode, mode_alt, git, git_alt, lsp, lsp_alt,
+          colors.active, mode, mode_alt, git, git_alt,
           "%=", filename, "%=",
           filetype_alt, filetype, line_col_alt, line_col
         })
