@@ -165,9 +165,11 @@ in {
       "<A-Right>" = ":vertical resize +3<CR>";
 
       "<F7>" = ":setlocal spell<CR>";
-      "<F9>" = ":Copilot disable<CR>";
-      "<F10>" = ":Copilot enable<CR>";
-      "<F11>" = ":Copilot split<CR>";
+      "<leader>cpd" = ":Copilot disable<CR>";
+      "<leader>cpe" = ":Copilot enable<CR>";
+      "<leader>cps" = ":Copilot split<CR>";
+
+      "<C-n>" = ":Vexplore<CR>";
 
     } else {};
 

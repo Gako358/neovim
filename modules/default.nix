@@ -11,9 +11,7 @@
 
     ./cmp
 
-    ./filetree
     ./bufferline
-    ./lualine
     ./keys
     ./gitsigns
     ./visuals

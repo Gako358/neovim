@@ -146,16 +146,11 @@
       flake = false;
     };
 
-    # Buffers and Statusline
+    # Buffers
     nvim-bufferline = {
       url = "github:akinsho/bufferline.nvim";
       flake = false;
     };
-    lualine = {
-      url = "github:nvim-lualine/lualine.nvim";
-      flake = false;
-    };
-
 
     # GIT
     nvim-gitsigns = {
@@ -166,12 +161,6 @@
     # Help
     which-key = {
       url = "github:folke/which-key.nvim";
-      flake = false;
-    };
-
-    # FILETREE
-    nvim-filetree = {
-      url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
 
@@ -221,10 +210,8 @@
         "lazygit"
         "toggleterm"
         "nvim-bufferline"
-        "lualine"
         "nvim-gitsigns"
         "which-key"
-        "nvim-filetree"
         "telescope"
       ];
 
@@ -332,13 +319,12 @@
               Focus.enable = true;
               lazyGit.enable = true;
               toggleTerm.enable = true;
+              statusline.enable = true;
             };
 
             vim.autocomplete.enable = true;
 
-            vim.filetree.enable = true;
             vim.bufferline.enable = true;
-            vim.lualine.enable = true;
             vim.gitsigns.enable = true;
 
             vim.keys = {
