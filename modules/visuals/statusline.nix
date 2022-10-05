@@ -36,10 +36,11 @@ in
         {'Filetype', { bg = '#223249', fg = '#DCD7BA' }},
         {'Filename', { bg = '#363646', fg = '#DCD7BA' }},
         {'ModeAlt', { bg = '#363646', fg = '#DCD7BA' }},
-        {'GitAlt', { bg = '#363646', fg = '#76946A' }},
+        {'GitAlt', { bg = '#363646', fg = '#DCD7BA' }},
         {'LineColAlt', { bg = '#363646', fg = '#DCD7BA' }},
         {'FiletypeAlt', { bg = '#363646', fg = '#DCD7BA' }},
         {'diagnosticErr', { bg = '#E82424', fg = '#DCD7BA' }},
+        {'diagnosticAlt', { bg = '#363646', fg = '#DCD7BA' }},
       }
 
       for _, highlight in ipairs(highlights) do
@@ -72,6 +73,7 @@ in
         line_col      = '%#LineCol#',
         line_col_alt  = '%#LineColAlt#',
         diagnostic    = '%#diagnosticErr#',
+        diagnostic_alt= '%#diagnosticAlt#',
       }
 
       M.trunc_width = setmetatable({
@@ -198,6 +200,7 @@ in
         local git = colors.git .. self:get_git_status()
         local git_alt = colors.git_alt .. self.separators[active_sep][1]
         local lsp = colors.diagnostic .. self:get_lsp_status()
+        local lsp_alt = colors.diagnostic_alt .. self.separators[active_sep][1]
         local filename = colors.file_name .. self:get_filename()
         local filetype_alt = colors.filetype_alt .. self.separators[active_sep][2]
         local filetype = colors.filetype .. self:get_filetype()
@@ -205,7 +208,7 @@ in
         local line_col_alt = colors.line_col_alt .. self.separators[active_sep][2]
 
         return table.concat({
-          colors.active, mode, mode_alt, git, git_alt,
+          colors.active, mode, mode_alt, git, git_alt, lsp, lsp_alt,
           "%=", filename, "%=",
           filetype_alt, filetype, line_col_alt, line_col
         })
