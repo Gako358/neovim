@@ -5,14 +5,10 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.visuals.statusline;
+  cfg = config.vim.visuals.status;
 in
 {
-  options.vim.visuals.statusline = {
-    enable = mkEnableOption "enable custom statusline";
-  };
-
-  config = mkIf (cfg.enable) {
+  config = mkIf (cfg.bar == "statusline") {
     vim.luaConfigRC = ''
       local fn = vim.fn
       local api = vim.api

@@ -319,7 +319,7 @@
               Focus.enable = true;
               lazyGit.enable = true;
               toggleTerm.enable = true;
-              statusline.enable = true;
+              status.bar = "winbar";
             };
 
             vim.autocomplete.enable = true;
