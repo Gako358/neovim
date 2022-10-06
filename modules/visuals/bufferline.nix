@@ -54,7 +54,6 @@ in
         require("bufferline").setup{
            options = {
               numbers = "both",
-              indicator_icon = '▎',
               buffer_close_icon = '',
               modified_icon = '●',
               close_icon = '',
