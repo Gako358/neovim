@@ -20,6 +20,8 @@ with builtins; {
   imports = [
     ./config.nix
     ./visuals.nix
+    ./winbar.nix
     ./statusline.nix
+    ./bufferline.nix
   ];
 }

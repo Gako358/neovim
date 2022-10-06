@@ -319,12 +319,12 @@
               Focus.enable = true;
               lazyGit.enable = true;
               toggleTerm.enable = true;
+              bufferline.enable = true;
               status.bar = "winbar";
             };
 
             vim.autocomplete.enable = true;
 
-            vim.bufferline.enable = true;
             vim.gitsigns.enable = true;
 
             vim.keys = {

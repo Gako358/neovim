@@ -11,7 +11,6 @@
 
     ./cmp
 
-    ./bufferline
     ./keys
     ./gitsigns
     ./visuals

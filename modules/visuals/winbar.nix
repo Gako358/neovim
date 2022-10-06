@@ -21,11 +21,11 @@ in
         local line_no = "%10([%l/%L%)]"
 
         return string.format(
-          "%s%s%s",
+          "%s%s%s%s",
           file_name,
           modified,
           right_align,
-          line_no,
+          line_no
         )
       end
 
