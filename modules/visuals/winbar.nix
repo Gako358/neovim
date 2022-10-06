@@ -10,8 +10,8 @@ in
 {
   config = mkIf (cfg.bar == "winbar") {
     vim.configRC = ''
-      set laststatus=0
       set cmdheight=0
+      set laststatus=0
     '';
 
     vim.luaConfigRC = ''
