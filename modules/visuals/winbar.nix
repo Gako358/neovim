@@ -23,8 +23,7 @@ in
         local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
 
         return string.format(
-          "%s%s%s%s%s",
-          mode,
+          "%s%s%s%s",
           right_align,
           modified,
           file_type,
