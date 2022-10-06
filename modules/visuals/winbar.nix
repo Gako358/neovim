@@ -20,9 +20,11 @@ in
         local file_type = " %y"
         local right_align = "%="
         local line_no = "%10([%l/%L%)]"
+        local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
 
         return string.format(
-          "%s%s%s%s",
+          "%s%s%s%s%s",
+          mode,
           right_align,
           modified,
           file_type,
