@@ -16,18 +16,20 @@ in
         red = '#ca1243',
         grey = '#a0a1a7',
         black = '#383a42',
-        white = '#f3f3f3',
+        white = '#dcd7ba',
         light_green = '#83a598',
         orange = '#fe8019',
         green = '#8ec07c',
+        dark = '#272727',
+        blue = '#2D4F67',
       }
 
       local theme = {
         normal = {
-          a = { fg = colors.white, bg = colors.black },
-          b = { fg = colors.white, bg = colors.grey },
-          c = { fg = colors.black, bg = colors.white },
-          z = { fg = colors.white, bg = colors.black },
+          a = { fg = colors.white, bg = colors.blue },
+          b = { fg = colors.dark, bg = colors.grey },
+          c = { fg = colors.black, bg = colors.dark },
+          z = { fg = colors.white, bg = colors.blue },
         },
         insert = { a = { fg = colors.black, bg = colors.light_green } },
         visual = { a = { fg = colors.black, bg = colors.orange } },
@@ -48,7 +50,7 @@ in
         for name, section in pairs(sections) do
           local left = name:sub(9, 10) < 'x'
           for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
-            table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
+            table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.dark } })
           end
           for id, comp in ipairs(section) do
             if type(comp) ~= 'table' then
