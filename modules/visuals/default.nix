@@ -9,6 +9,7 @@ with builtins; {
     bar = mkOption {
       type = types.enum [
         "statusline"
+        "lualine"
         "winbar"
       ];
       default = "statusline";
@@ -21,6 +22,7 @@ with builtins; {
     ./config.nix
     ./visuals.nix
     ./winbar.nix
+    ./lualine.nix
     ./statusline.nix
     ./bufferline.nix
   ];

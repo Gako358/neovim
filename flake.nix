@@ -145,10 +145,12 @@
       url = "github:akinsho/toggleterm.nvim";
       flake = false;
     };
-
-    # Buffers
     nvim-bufferline = {
       url = "github:akinsho/bufferline.nvim";
+      flake = false;
+    };
+    lualine = {
+      url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
 
@@ -210,6 +212,7 @@
         "lazygit"
         "toggleterm"
         "nvim-bufferline"
+        "lualine"
         "nvim-gitsigns"
         "which-key"
         "telescope"
@@ -320,7 +323,7 @@
               lazyGit.enable = true;
               toggleTerm.enable = true;
               bufferline.enable = true;
-              status.bar = "winbar";
+              status.bar = "lualine";
             };
 
             vim.autocomplete.enable = true;
