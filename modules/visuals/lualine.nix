@@ -28,7 +28,7 @@ in
         normal = {
           a = { fg = colors.white, bg = colors.blue },
           b = { fg = colors.dark, bg = colors.grey },
-          c = { fg = colors.black, bg = colors.dark },
+          c = { fg = colors.white, bg = colors.dark },
           z = { fg = colors.white, bg = colors.blue },
         },
         insert = { a = { fg = colors.black, bg = colors.light_green } },
