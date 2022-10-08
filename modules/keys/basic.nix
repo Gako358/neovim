@@ -35,12 +35,17 @@ in {
 
       "<C-n>" = ":Vexplore<CR>";
 
+      # Move and center
       "<C-d>" = "<C-d>zz";
       "<C-u>" = "<C-u>zz";
+
+      # Search and replace
+      "<leader>s" = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>";
 
     } else {};
 
     vim.vnoremap = if (cfg.coreKeys) then {
+      # Move line up and down
       "J" = ":m '>+1<CR>gv=gv";
       "K" = ":m '<-2<CR>gv=gv";
 
