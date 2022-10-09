@@ -133,8 +133,10 @@ in {
       writeIf = cond: msg: if cond then msg else "";
     in {
 
+    # Plugins without config and start with priority
     vim.startPlugins = with pkgs.neovimPlugins; [
       plenary-nvim
+      undotree
     ];
     
     vim.nmap = if (cfg.disableArrows) then {

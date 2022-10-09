@@ -160,6 +160,12 @@
       flake = false;
     };
 
+    # Undo tree
+    undotree = {
+      url = "github:mbbill/undotree";
+      flake = false;
+    };
+
     # Help
     which-key = {
       url = "github:folke/which-key.nvim";
@@ -214,6 +220,7 @@
         "nvim-bufferline"
         "lualine"
         "nvim-gitsigns"
+        "undotree"
         "which-key"
         "telescope"
       ];
