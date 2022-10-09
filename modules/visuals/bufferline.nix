@@ -32,6 +32,8 @@ in
         "<S-TAB>" = ":BufferLineCyclePrev<CR>";
         "<leader>bd" = ":BufferLineSortByDirectory<CR>";
         "<leader>bq" = ":bd!<CR>";
+        "<leader>ba" = ":qa!<CR>";
+        "<leader>dd" = ":BufferLineCloseRight<CR>";
 
         "<silent><leader>bc" = ":BufferLinePick<CR>";
         "<silent><leader>bse" = ":BufferLineSortByExtension<CR>";

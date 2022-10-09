@@ -8,11 +8,9 @@ with builtins; {
   options.vim.theme = {
     scheme = mkOption {
       type = types.enum [
-        "github"
-        "onedark"
-        "kanagawa"
+        "borealis"
       ];
-      default = "onedark";
+      default = "borealis";
       description = ''
         The color scheme to use for the visuals.
       '';
@@ -20,8 +18,6 @@ with builtins; {
   };
 
   imports = [
-    ./github.nix
-    ./onedark.nix
-    ./kanagawa.nix
+    ./borealis.nix
   ];
 }

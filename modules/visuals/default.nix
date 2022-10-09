@@ -11,19 +11,24 @@ with builtins; {
         "statusline"
         "lualine"
         "winbar"
+        "none"
       ];
-      default = "statusline";
+      default = "none";
       description = ''
         The bar to use for the statusline.
       '';
     };
   };
   imports = [
+    ./bufferline.nix
     ./config.nix
+    ./filetree.nix
+    ./glow.nix
+    ./lualine.nix
+    ./nobar.nix
+    ./noice.nix
+    ./statusline.nix
     ./visuals.nix
     ./winbar.nix
-    ./lualine.nix
-    ./statusline.nix
-    ./bufferline.nix
   ];
 }

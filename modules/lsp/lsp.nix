@@ -114,6 +114,10 @@ in
           vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
         end
 
+        -- Offset encoding
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.offsetEncoding = {"utf-16"}
+
         -- Setting up null-ls
         local null_ls = require("null-ls")
         local null_helpers = require("null-ls.helpers")
@@ -139,7 +143,18 @@ in
           ''
           else ""
         }
-
+          ${
+          if cfg.typescript
+          then ''
+            null_ls.builtins.diagnostics.eslint.with({
+                command = "${pkgs.nodePackages.eslint}/bin/eslint",
+            }),
+            null_ls.builtins.formatting.prettier.with({
+              command = "${pkgs.nodePackages.prettier}/bin/prettier",
+            }),
+          ''
+          else ""
+        }
         }
 
         -- Enable null-ls
@@ -166,6 +181,7 @@ in
           if cfg.clang
           then ''
             require('lspconfig')['clangd'].setup{
+                capabilities = capabilities,
                 on_attach = default_on_attach,
                 flags = lsp_flags,
                 cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
@@ -208,7 +224,10 @@ in
                     version = 'LuaJIT',
                   },
                   diagnostics = {
-                    globals = {},
+                    globals = { "vim" },
+                  },
+                  workspace = {
+                    library = vim.api.nvim_get_runtime_file("lua", true),
                   },
                   telemetry = {
                     enable = false,
@@ -221,10 +240,12 @@ in
         ${
           if cfg.nix
           then ''
-            require('lspconfig')['rnix'].setup{
+            -- require('lspconfig')['rnix'].setup{
+            require('lspconfig')['nil_ls'].setup{
                 on_attach = default_on_attach,
                 flags = lsp_flags,
-                cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
+                -- cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
+                cmd = {"${pkgs.nil}/bin/nil"}
             }
           ''
           else ""

@@ -1,10 +1,13 @@
-{ pkgs, config, lib, ... }:
+{ pkgs
+, config
+, lib
+, ...
+}:
 with lib;
-with builtins;
-let
+with builtins; let
   cfg = config.vim.keys;
-
-in {
+in
+{
   options.vim.keys = {
     enable = mkEnableOption "Key binding plugins";
 
@@ -14,17 +17,24 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.whichKey.enable) {
-      vim.startPlugins = with pkgs.neovimPlugins; [
-        which-key
-      ];
-      vim.startLuaConfigRC = ''
-        -- Set variable so other plugins can register mappings
-        local wk = require("which-key")
-      '';
+    vim.startPlugins = with pkgs.neovimPlugins; [
+      which-key
+    ];
+    vim.startLuaConfigRC = ''
+      -- Set variable so other plugins can register mappings
+      local wk = require("which-key")
+    '';
 
-      vim.luaConfigRC = ''
-        --setup whichkey
-        require("which-key").setup {}
-      '';
+    vim.luaConfigRC = ''
+      --setup whichkey
+      require("which-key").setup {
+        plugins = {
+          spelling = {
+            enabled = true,
+            suggestions = 20,
+          },
+        },
+      }
+    '';
   };
 }
