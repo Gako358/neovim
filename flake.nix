@@ -20,6 +20,10 @@
       flake = false;
     };
 
+    rnix-lsp = {
+      url = "github:nix-community/rnix-lsp";
+    };
+
     # LSP
     nvim-treesitter = {
       url = "github:nvim-treesitter/nvim-treesitter";
@@ -183,6 +187,7 @@
     { self
     , nixpkgs
     , neovim
+    , rnix-lsp
     , ...
     } @ inputs:
     let
@@ -227,6 +232,7 @@
 
       externalBitsOverlay = top: last: {
         neovim-nightly = neovim.defaultPackage.${top.system};
+        rnix-lsp = rnix-lsp.defaultPackage.${top.system};
       };
 
       pluginOverlay = top: last:
@@ -325,7 +331,7 @@
               nvimWebDevicons.enable = true;
               lightSpeed.enable = true;
               nvimComment.enable = true;
-              indentBlankline.enable = true; 
+              indentBlankline.enable = true;
               Focus.enable = true;
               lazyGit.enable = true;
               toggleTerm.enable = true;
