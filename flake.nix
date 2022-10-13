@@ -137,10 +137,6 @@
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
-    focus = {
-      url = "github:beauwilliams/focus.nvim";
-      flake = false;
-    };
     lazygit = {
       url = "github:kdheepak/lazygit.nvim";
       flake = false;
@@ -219,7 +215,6 @@
         "lightspeed"
         "nvim-comment"
         "indent-blankline"
-        "focus"
         "lazygit"
         "toggleterm"
         "nvim-bufferline"
@@ -332,7 +327,6 @@
               lightSpeed.enable = true;
               nvimComment.enable = true;
               indentBlankline.enable = true;
-              Focus.enable = true;
               lazyGit.enable = true;
               toggleTerm.enable = true;
               bufferline.enable = true;

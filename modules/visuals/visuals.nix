@@ -61,11 +61,6 @@ in
       };
     };
 
-    Focus.enable = mkOption {
-      type = types.bool;
-      description = "enable focus. required for certain plugins [focus]";
-    };
-
     lazyGit.enable = mkOption {
       type = types.bool;
       description = "enable lazy git. git manager [lazygit]";
@@ -102,11 +97,6 @@ in
       (
         if cfg.indentBlankline.enable
         then indent-blankline
-        else null
-      )
-      (
-        if cfg.Focus.enable
-        then focus
         else null
       )
       (
@@ -150,18 +140,6 @@ in
             show_current_context = ${boolToString cfg.indentBlankline.showCurrContext},
             show_end_of_line = true,
           }
-        ''
-        else ""
-      }
-      ${
-        if cfg.Focus.enable
-        then ''
-          vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
-          vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', { silent = true })
-          vim.api.nvim_set_keymap('n', '<leader>j', ':FocusSplitDown<CR>', { silent = true })
-          vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', { silent = true })
-          vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = true })
-          require("focus").setup({hybridnumber = true, excluded_filetypes = {"toggleterm"}})
         ''
         else ""
       }

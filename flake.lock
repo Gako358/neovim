@@ -111,22 +111,6 @@
         "type": "github"
       }
     },
-    "focus": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1665534839,
-        "narHash": "sha256-MpGDxBJ0IMMAIxuzFkxIgKtAn56NvpjfTNMVhnBhhsE=",
-        "owner": "beauwilliams",
-        "repo": "focus.nvim",
-        "rev": "3d9df42aa4f9b572348418207b752f81adea09a5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "beauwilliams",
-        "repo": "focus.nvim",
-        "type": "github"
-      }
-    },
     "github-copilot": {
       "flake": false,
       "locked": {
@@ -583,7 +567,6 @@
         "cmp-path": "cmp-path",
         "cmp-treesitter": "cmp-treesitter",
         "crates-nvim": "crates-nvim",
-        "focus": "focus",
         "github-copilot": "github-copilot",
         "github-nvim-theme": "github-nvim-theme",
         "indent-blankline": "indent-blankline",
