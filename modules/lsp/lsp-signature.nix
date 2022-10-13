@@ -20,8 +20,8 @@ in
     vim.luaConfigRC = ''
       -- Enable lsp signature viewer
       cfg = {
-        max_height = 7,
-        max_width = 55,
+        max_height = 4,
+        max_width = 73,
         floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
 
         floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
