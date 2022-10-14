@@ -5,7 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
+      /* url = "github:neovim/neovim?dir=contrib"; */
+      url = "github:neovim/neovim/85c7d4f7a92326dcd70317b048bafe96c8051701?dir=contrib";
       # url = "github:neovim/neovim/875b58e0941ef62a75992ce0e6496bb7879e0bbe?dir=contrib";
       # In the case nightly breaks, use the above line to pin to a specific commit
       # Or pin down another commit that works
