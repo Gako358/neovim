@@ -5,10 +5,10 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.gitsigns;
+  cfg = config.vim.git.gitsigns;
 in
 {
-  options.vim.gitsigns = {
+  options.vim.git.gitsigns = {
     enable = mkOption {
       type = types.bool;
       description = "enable git plugin: [nvim-gitsigns]";

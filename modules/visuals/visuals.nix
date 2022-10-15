@@ -61,11 +61,6 @@ in
       };
     };
 
-    lazyGit.enable = mkOption {
-      type = types.bool;
-      description = "enable lazy git. git manager [lazygit]";
-    };
-
     toggleTerm.enable = mkOption {
       type = types.bool;
       description = "enable toggleterm. terminal emulator [toggleterm]";
@@ -97,11 +92,6 @@ in
       (
         if cfg.indentBlankline.enable
         then indent-blankline
-        else null
-      )
-      (
-        if cfg.lazyGit.enable
-        then lazygit
         else null
       )
       (
@@ -140,13 +130,6 @@ in
             show_current_context = ${boolToString cfg.indentBlankline.showCurrContext},
             show_end_of_line = true,
           }
-        ''
-        else ""
-      }
-      ${
-        if cfg.lazyGit.enable
-        then ''
-          vim.api.nvim_set_keymap('n', '<leader>/', ':LazyGit<CR>', { silent = true })
         ''
         else ""
       }

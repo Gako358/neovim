@@ -1,5 +1,8 @@
-{config, lib, pkgs, ...}:
-{
+{ config
+, lib
+, pkgs
+, ...
+}: {
   imports = [
     ./core
     ./basic
@@ -12,7 +15,7 @@
     ./cmp
 
     ./keys
-    ./gitsigns
+    ./git
     ./visuals
   ];
 }
