@@ -41,8 +41,6 @@ in
           "<leader>cpe" = ":Copilot enable<CR>";
           "<leader>cps" = ":Copilot split<CR>";
 
-          "<C-n>" = ":Vexplore<CR>";
-
           # Move and center
           "<C-d>" = "<C-d>zz";
           "<C-u>" = "<C-u>zz";
