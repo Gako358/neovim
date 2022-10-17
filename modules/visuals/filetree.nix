@@ -39,7 +39,6 @@ in {
           update_cwd = true,
           view = {
             width = 32,
-            height = 32,
             side = "left",
           },
           renderer = {
