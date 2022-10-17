@@ -130,16 +130,16 @@
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
-    lazygit = {
-      url = "github:kdheepak/lazygit.nvim";
-      flake = false;
-    };
     toggleterm = {
       url = "github:akinsho/toggleterm.nvim";
       flake = false;
     };
     nvim-bufferline = {
       url = "github:akinsho/bufferline.nvim";
+      flake = false;
+    };
+    nvim-tree = {
+      url = "github:nvim-tree/nvim-tree.lua";
       flake = false;
     };
     lualine = {
@@ -150,6 +150,10 @@
     # GIT
     nvim-gitsigns = {
       url = "github:lewis6991/gitsigns.nvim";
+      flake = false;
+    };
+    lazygit = {
+      url = "github:kdheepak/lazygit.nvim";
       flake = false;
     };
 
@@ -206,11 +210,12 @@
         "lightspeed"
         "nvim-comment"
         "indent-blankline"
-        "lazygit"
         "toggleterm"
         "nvim-bufferline"
+        "nvim-tree"
         "lualine"
         "nvim-gitsigns"
+        "lazygit"
         "undotree"
         "which-key"
         "telescope"
@@ -318,6 +323,7 @@
               indentBlankline.enable = true;
               toggleTerm.enable = true;
               bufferline.enable = true;
+              filetree.enable = true;
               status.bar = "lualine";
             };
 

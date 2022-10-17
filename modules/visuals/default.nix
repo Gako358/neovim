@@ -22,6 +22,7 @@ with builtins; {
     ./config.nix
     ./visuals.nix
     ./winbar.nix
+    ./filetree.nix
     ./lualine.nix
     ./statusline.nix
     ./bufferline.nix
