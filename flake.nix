@@ -6,8 +6,7 @@
 
     neovim = {
       /* url = "github:neovim/neovim?dir=contrib"; */
-      url = "github:neovim/neovim/85c7d4f7a92326dcd70317b048bafe96c8051701?dir=contrib";
-      # url = "github:neovim/neovim/875b58e0941ef62a75992ce0e6496bb7879e0bbe?dir=contrib";
+      url = "github:neovim/neovim/85c7d4f7a92326dcd70317b048bafe96c8051701?dir=contrib"; # 0.8.0
       # In the case nightly breaks, use the above line to pin to a specific commit
       # Or pin down another commit that works
       inputs.nixpkgs.follows = "nixpkgs";
@@ -146,6 +145,18 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
+    noice = {
+      url = "github:folke/noice.nvim";
+      flake = false;
+    };
+    nui = {
+      url = "github:MunifTanjim/nui.nvim";
+      flake = false;
+    };
+    notify = {
+      url = "github:rcarriga/nvim-notify";
+      flake = false;
+    };
 
     # GIT
     nvim-gitsigns = {
@@ -214,6 +225,9 @@
         "nvim-bufferline"
         "nvim-tree"
         "lualine"
+        "noice"
+        "nui"
+        "notify"
         "nvim-gitsigns"
         "lazygit"
         "undotree"
@@ -324,6 +338,7 @@
               toggleTerm.enable = true;
               bufferline.enable = true;
               filetree.enable = true;
+              noice.enable = true;
               status.bar = "lualine";
             };
 

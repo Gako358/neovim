@@ -26,5 +26,6 @@ with builtins; {
     ./lualine.nix
     ./statusline.nix
     ./bufferline.nix
+    ./noice.nix
   ];
 }
