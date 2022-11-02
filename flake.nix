@@ -246,10 +246,13 @@
         let
           treesitterGrammars = last.tree-sitter.withPlugins (p: [
             p.tree-sitter-c
+            p.tree-sitter-vim
+            p.tree-sitter-regex
             p.tree-sitter-nix
             p.tree-sitter-python
             p.tree-sitter-rust
             p.tree-sitter-markdown
+            p.tree-sitter-markdown-inline
             p.tree-sitter-comment
             p.tree-sitter-toml
             p.tree-sitter-make
