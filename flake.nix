@@ -103,8 +103,8 @@
       url = "github:navarasu/onedark.nvim";
       flake = false;
     };
-    github-nvim-theme = {
-      url = "github:projekt0n/github-nvim-theme";
+    borealis = {
+      url = "github:gako358/borealis";
       flake = false;
     };
     kanagawa = {
@@ -216,7 +216,7 @@
         "cmp-treesitter"
         "crates-nvim"
         "onedark"
-        "github-nvim-theme"
+        "borealis"
         "kanagawa"
         "nvim-autopairs"
         "web-devicons"
@@ -331,7 +331,7 @@
               json = true;
             };
 
-            vim.theme.scheme = "kanagawa";
+            vim.theme.scheme = "borealis";
 
             vim.visuals = {
               enable = true;

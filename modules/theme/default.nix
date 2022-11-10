@@ -8,9 +8,9 @@ with builtins; {
   options.vim.theme = {
     scheme = mkOption {
       type = types.enum [
-        "github"
-        "onedark"
+        "borealis"
         "kanagawa"
+        "onedark"
       ];
       default = "onedark";
       description = ''
@@ -20,8 +20,8 @@ with builtins; {
   };
 
   imports = [
-    ./github.nix
-    ./onedark.nix
+    ./borealis.nix
     ./kanagawa.nix
+    ./onedark.nix
   ];
 }
