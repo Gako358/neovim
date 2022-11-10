@@ -104,7 +104,7 @@
       flake = false;
     };
     borealis = {
-      url = "github:gako358/borealis";
+      url = "github:Gako358/borealis";
       flake = false;
     };
     kanagawa = {
@@ -331,7 +331,7 @@
               json = true;
             };
 
-            vim.theme.scheme = "borealis";
+            vim.theme.scheme = "onedark";
 
             vim.visuals = {
               enable = true;

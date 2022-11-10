@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "borealis": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668115487,
+        "narHash": "sha256-H+SiHjIrDZidMbuhEi7rIbD1YD/xiVKRkoBRFg9hkEo=",
+        "owner": "Gako358",
+        "repo": "borealis",
+        "rev": "36124b523d94ab4498ee26fb9865c7c0eca67e35",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gako358",
+        "repo": "borealis",
+        "type": "github"
+      }
+    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -124,22 +140,6 @@
       "original": {
         "owner": "github",
         "repo": "copilot.vim",
-        "type": "github"
-      }
-    },
-    "github-nvim-theme": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1665384859,
-        "narHash": "sha256-cd9a8s2WIijsi4nvP1iu7/Dz7Mq8fxwFT0qOPuvyy00=",
-        "owner": "projekt0n",
-        "repo": "github-nvim-theme",
-        "rev": "a0632f9fa9b696896d4b427de0c84c1e9f192204",
-        "type": "github"
-      },
-      "original": {
-        "owner": "projekt0n",
-        "repo": "github-nvim-theme",
         "type": "github"
       }
     },
@@ -595,6 +595,7 @@
     },
     "root": {
       "inputs": {
+        "borealis": "borealis",
         "cmp-buffer": "cmp-buffer",
         "cmp-luasnip": "cmp-luasnip",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
@@ -602,7 +603,6 @@
         "cmp-treesitter": "cmp-treesitter",
         "crates-nvim": "crates-nvim",
         "github-copilot": "github-copilot",
-        "github-nvim-theme": "github-nvim-theme",
         "indent-blankline": "indent-blankline",
         "kanagawa": "kanagawa",
         "lazygit": "lazygit",

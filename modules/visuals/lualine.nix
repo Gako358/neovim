@@ -12,34 +12,10 @@ in
     vim.startPlugins = with pkgs.neovimPlugins; [ lualine ];
 
     vim.luaConfigRC = ''
-      local colors = {
-        red = '#ca1243',
-        grey = '#a0a1a7',
-        black = '#383a42',
-        white = '#dcd7ba',
-        light_green = '#83a598',
-        orange = '#fe8019',
-        green = '#8ec07c',
-        dark = '#272727',
-        blue = '#2D4F67',
-      }
-
-      local theme = {
-        normal = {
-          a = { fg = colors.white, bg = colors.blue },
-          b = { fg = colors.dark, bg = colors.grey },
-          c = { fg = colors.white, bg = colors.dark },
-          z = { fg = colors.white, bg = colors.blue },
-        },
-        insert = { a = { fg = colors.black, bg = colors.light_green } },
-        visual = { a = { fg = colors.black, bg = colors.orange } },
-        replace = { a = { fg = colors.black, bg = colors.green } },
-      }
-
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = theme,
+          theme = 'onedark',
           component_separators = { left = '', right = ''},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {
