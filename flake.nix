@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     neovim = {
-      /* url = "github:neovim/neovim?dir=contrib"; */
-      url = "github:neovim/neovim/85c7d4f7a92326dcd70317b048bafe96c8051701?dir=contrib"; # 0.8.0
+      url = "github:neovim/neovim?dir=contrib";
+      # url = "github:neovim/neovim/85c7d4f7a92326dcd70317b048bafe96c8051701?dir=contrib"; # 0.8.0
       # In the case nightly breaks, use the above line to pin to a specific commit
       # Or pin down another commit that works
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,9 +26,9 @@
 
     # LSP
     nvim-treesitter = {
-      /* url = "github:nvim-treesitter/nvim-treesitter"; */
+      url = "github:nvim-treesitter/nvim-treesitter";
       # pinning to a specific commit because of error on querys on python
-      url = "github:nvim-treesitter/nvim-treesitter/8f927a4d50716e534c5845e835625962adf878e1";
+      /* url = "github:nvim-treesitter/nvim-treesitter/8f927a4d50716e534c5845e835625962adf878e1"; */
       flake = false;
     };
     nvim-lspconfig = {
@@ -104,7 +104,7 @@
       flake = false;
     };
     borealis = {
-      url = "github:Gako358/borealis";
+      url = "github:Gako358/borealis.nvim";
       flake = false;
     };
     kanagawa = {
