@@ -12,10 +12,48 @@ in
     vim.startPlugins = with pkgs.neovimPlugins; [ lualine ];
 
     vim.luaConfigRC = ''
+      local colors = {
+        gray     = '#3C3C3C',
+        lightred = '#D16969',
+        blue     = '#569CD6',
+        pink     = '#C586C0',
+        black    = '#262626',
+        white    = '#D4D4D4',
+        green    = '#608B4E',
+      }
+
+      local theme = {
+        normal = {
+          a = { fg = colors.black, bg = colors.blue, gui = 'bold' },
+          b = { fg = colors.white, bg = colors.black },
+          c = { fg = colors.white, bg = colors.black },
+        },
+        insert = {
+          a = { fg = colors.black, bg = colors.green, gui = 'bold' },
+          b = { fg = colors.white, bg = colors.black },
+          c = { fg = colors.white, bg = colors.black },
+        },
+        visual = {
+          a = { fg = colors.black, bg = colors.pink, gui = 'bold' },
+          b = { fg = colors.white, bg = colors.black },
+          c = { fg = colors.white, bg = colors.black },
+        },
+        replace = {
+          a = { fg = colors.black, bg = colors.lightred, gui = 'bold' },
+          b = { fg = colors.white, bg = colors.black },
+          c = { fg = colors.white, bg = colors.black },
+        },
+        command = {
+          a = { fg = colors.black, bg = colors.gray, gui = 'bold' },
+          b = { fg = colors.white, bg = colors.black },
+          c = { fg = colors.white, bg = colors.black },
+        },
+      }
+
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'auto',
+          theme = theme,
           component_separators = { left = '', right = ''},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {
