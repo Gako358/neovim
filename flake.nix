@@ -99,16 +99,8 @@
     };
 
     # Visuals
-    onedark = {
-      url = "github:navarasu/onedark.nvim";
-      flake = false;
-    };
     borealis = {
       url = "github:Gako358/borealis.nvim";
-      flake = false;
-    };
-    kanagawa = {
-      url = "github:rebelot/kanagawa.nvim";
       flake = false;
     };
     nvim-autopairs = {
@@ -215,9 +207,7 @@
         "cmp-luasnip"
         "cmp-treesitter"
         "crates-nvim"
-        "onedark"
         "borealis"
-        "kanagawa"
         "nvim-autopairs"
         "web-devicons"
         "lightspeed"
@@ -331,7 +321,7 @@
               json = true;
             };
 
-            vim.theme.scheme = "onedark";
+            vim.theme.scheme = "borealis";
 
             vim.visuals = {
               enable = true;

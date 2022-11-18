@@ -9,10 +9,8 @@ with builtins; {
     scheme = mkOption {
       type = types.enum [
         "borealis"
-        "kanagawa"
-        "onedark"
       ];
-      default = "onedark";
+      default = "borealis";
       description = ''
         The color scheme to use for the visuals.
       '';
@@ -21,7 +19,5 @@ with builtins; {
 
   imports = [
     ./borealis.nix
-    ./kanagawa.nix
-    ./onedark.nix
   ];
 }
