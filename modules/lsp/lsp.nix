@@ -139,7 +139,18 @@ in
           ''
           else ""
         }
-
+          ${
+          if cfg.typescript
+          then ''
+            null_ls.builtins.diagnostics.eslint.with({
+                command = "${pkgs.nodePackages.eslint}/bin/eslint",
+            }),
+            null_ls.builtins.formatting.prettier.with({
+              command = "${pkgs.nodePackages.prettier}/bin/prettier",
+            }),
+          ''
+          else ""
+        }
         }
 
         -- Enable null-ls
