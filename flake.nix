@@ -375,7 +375,9 @@
       });
 
       overlays.default = self: super: {
-        neovim = self.neovimMX;
+        inherit (allPkgs) neovim-nightly rnix-lsp;
+        neovimMX = mkNeoVimPkg allPkgs;
+        neovimPlugins = self.neovimPlugins;
       };
 
       devShells = lib.withDefaultSystems (sys: {
