@@ -28,7 +28,9 @@
     nvim-treesitter = {
       url = "github:nvim-treesitter/nvim-treesitter";
       # pinning to a specific commit because of error on querys on python
-      /* url = "github:nvim-treesitter/nvim-treesitter/8f927a4d50716e534c5845e835625962adf878e1"; */
+      /*
+        url = "github:nvim-treesitter/nvim-treesitter/8f927a4d50716e534c5845e835625962adf878e1";
+      */
       flake = false;
     };
     nvim-lspconfig = {
@@ -369,6 +371,14 @@
       defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMX);
 
       packages = lib.withDefaultSystems (sys: {
+        neovimMX = mkNeoVimPkg allPkgs."${sys}";
+      });
+
+      overlays.default = self: super: {
+        neovim = self.neovimMX;
+      };
+
+      devShells = lib.withDefaultSystems (sys: {
         neovimMX = mkNeoVimPkg allPkgs."${sys}";
       });
     };
