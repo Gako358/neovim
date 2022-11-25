@@ -1,6 +1,6 @@
 # My personal neovim config for Nix
-This is my personal neovim config. 
-Feel free to take bits of it to build your own or run it yourself. 
+This is my personal neovim config.\
+Feel free to take bits of it to build your own or run it yourself.\
 Is is a build based upon [Will Taylors config](https://github.com/wiltaylor/neovim-flake).
 
 ## Screenshot
