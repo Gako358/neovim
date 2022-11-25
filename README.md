@@ -4,7 +4,7 @@ Feel free to take bits of it to build your own or run it yourself.
 Is is a build based upon [Will Taylors config](https://github.com/wiltaylor/neovim-flake).
 
 ## Screenshot
-![screenshot](https://github.com/Gako358/Dotfiles/blob/main/Pictures/Images/vim.png)
+![screenshot](https://github.com/Gako358/archive/blob/main/Pictures/Images/vim.png)
 
 # How to use
 Clone the repo and run the following from the directory:
