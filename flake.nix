@@ -100,11 +100,13 @@
       flake = false;
     };
 
-    # Visuals
+    # Theme
     borealis = {
       url = "github:Gako358/borealis.nvim";
       flake = false;
     };
+
+    # Visuals
     nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
@@ -151,6 +153,10 @@
     };
     notify = {
       url = "github:rcarriga/nvim-notify";
+      flake = false;
+    };
+    glow-nvim = {
+      url = "github:ellisonleao/glow.nvim";
       flake = false;
     };
 
@@ -222,6 +228,7 @@
         "noice"
         "nui"
         "notify"
+        "glow-nvim"
         "nvim-gitsigns"
         "lazygit"
         "undotree"
@@ -336,6 +343,7 @@
               bufferline.enable = true;
               filetree.enable = true;
               noice.enable = true;
+              glow.enable = true;
               status.bar = "lualine";
             };
 

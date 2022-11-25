@@ -19,13 +19,14 @@ with builtins; {
     };
   };
   imports = [
+    ./bufferline.nix
     ./config.nix
+    ./filetree.nix
+    ./glow.nix
+    ./lualine.nix
+    ./noice.nix
+    ./statusline.nix
     ./visuals.nix
     ./winbar.nix
-    ./filetree.nix
-    ./lualine.nix
-    ./statusline.nix
-    ./bufferline.nix
-    ./noice.nix
   ];
 }
