@@ -143,6 +143,22 @@
         "type": "github"
       }
     },
+    "glow-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665163771,
+        "narHash": "sha256-aglnSFU/RN0zgRllRFeNw2MciQugNIUdEiNUgt6hiXQ=",
+        "owner": "ellisonleao",
+        "repo": "glow.nvim",
+        "rev": "9038d7cdd76a930973b6158d800c8dbc02236a4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ellisonleao",
+        "repo": "glow.nvim",
+        "type": "github"
+      }
+    },
     "indent-blankline": {
       "flake": false,
       "locked": {
@@ -569,6 +585,7 @@
         "cmp-treesitter": "cmp-treesitter",
         "crates-nvim": "crates-nvim",
         "github-copilot": "github-copilot",
+        "glow-nvim": "glow-nvim",
         "indent-blankline": "indent-blankline",
         "lazygit": "lazygit",
         "lightspeed": "lightspeed",
