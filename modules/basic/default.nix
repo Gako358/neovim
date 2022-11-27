@@ -19,7 +19,7 @@ in {
     };
 
     hideSearchHighlight = mkOption {
-      default = true;
+      default = false;
       description = "Hide search highlight so it doesn't stay highlighted";
       type = types.bool;
     };

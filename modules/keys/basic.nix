@@ -50,6 +50,9 @@ in
 
           # Undotree
           "<leader>u" = ":UndotreeToggle<CR>";
+
+          # Clear Search
+          "<leader>cc" = ":noh<CR>";
         }
         else { };
 
