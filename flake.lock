@@ -3,11 +3,11 @@
     "borealis": {
       "flake": false,
       "locked": {
-        "lastModified": 1669630671,
-        "narHash": "sha256-5lg+HDLiJsGL77yCnhD9XXnBNbllf3pRIHsGjglLegM=",
+        "lastModified": 1669662370,
+        "narHash": "sha256-j5BRONE8eiqpcjW093V++P3V5k5Q2WHNlaQntgvC2Rk=",
         "owner": "Gako358",
         "repo": "borealis.nvim",
-        "rev": "90d35a250b51af674b7a070a217a7fd449e7008f",
+        "rev": "a70c59ea62e0247ebfd033c414c4d2da79e64a32",
         "type": "github"
       },
       "original": {
