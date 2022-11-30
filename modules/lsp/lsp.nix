@@ -114,6 +114,10 @@ in
           vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
         end
 
+        -- Offset encoding
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.offsetEncoding = {"utf-16"}
+
         -- Setting up null-ls
         local null_ls = require("null-ls")
         local null_helpers = require("null-ls.helpers")
@@ -177,6 +181,7 @@ in
           if cfg.clang
           then ''
             require('lspconfig')['clangd'].setup{
+                capabilities = capabilities,
                 on_attach = default_on_attach,
                 flags = lsp_flags,
                 cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
