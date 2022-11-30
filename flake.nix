@@ -344,7 +344,7 @@
               filetree.enable = true;
               noice.enable = true;
               glow.enable = true;
-              status.bar = "lualine";
+              status.bar = "none";
             };
 
             vim.autocomplete.enable = true;

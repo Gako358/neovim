@@ -11,8 +11,9 @@ with builtins; {
         "statusline"
         "lualine"
         "winbar"
+        "none"
       ];
-      default = "statusline";
+      default = "none";
       description = ''
         The bar to use for the statusline.
       '';
@@ -24,6 +25,7 @@ with builtins; {
     ./filetree.nix
     ./glow.nix
     ./lualine.nix
+    ./nobar.nix
     ./noice.nix
     ./statusline.nix
     ./visuals.nix
