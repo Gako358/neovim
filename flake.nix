@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
@@ -22,6 +23,11 @@
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
+    };
+    nil = {
+      url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     # LSP
@@ -192,8 +198,10 @@
   outputs =
     { self
     , nixpkgs
+    , flake-utils
     , neovim
     , rnix-lsp
+    , nil
     , ...
     } @ inputs:
     let
@@ -239,6 +247,7 @@
       externalBitsOverlay = top: last: {
         neovim-nightly = neovim.defaultPackage.${top.system};
         rnix-lsp = rnix-lsp.defaultPackage.${top.system};
+        nil-lsp = nil.defaultPackage.${top.system};
       };
 
       pluginOverlay = top: last:

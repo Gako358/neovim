@@ -240,10 +240,12 @@ in
         ${
           if cfg.nix
           then ''
-            require('lspconfig')['rnix'].setup{
+            -- require('lspconfig')['rnix'].setup{
+            require('lspconfig')['nil_ls'].setup{
                 on_attach = default_on_attach,
                 flags = lsp_flags,
-                cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
+                -- cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
+                cmd = {"${pkgs.nil}/bin/nil"}
             }
           ''
           else ""
