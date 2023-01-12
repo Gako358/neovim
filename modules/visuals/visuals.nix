@@ -1,155 +1,215 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.visuals;
-in
-{
+in {
   options.vim.visuals = {
-    enable = mkOption {
-      type = types.bool;
-      description = "Enable vim visuals";
-    };
+    enable = mkEnableOption "visual enhancements.";
 
-    nvimAutoPairs.enable = mkOption {
-      type = types.bool;
-      description = "Enable auto pairs in nvim [nvim-autopairs]";
-    };
+    nvimWebDevicons.enable = mkEnableOption "dev icons. Required for certain plugins [nvim-web-devicons].";
+    kommentary.enable = mkEnableOption "commenting plugin [kommentary].";
+    todoComments.enable = mkEnableOption "todo comments [todo-comments].";
 
-    nvimWebDevicons.enable = mkOption {
-      type = types.bool;
-      description = "enable dev icons. required for certain plugins [nvim-web-devicons]";
-    };
+    cursorWordline = {
+      enable = mkEnableOption "word and delayed line highlight [nvim-cursorline].";
 
-    lightSpeed.enable = mkOption {
-      type = types.bool;
-      description = "enable light speed. required for certain plugins [lightspeed]";
-    };
-
-    nvimComment.enable = mkOption {
-      type = types.bool;
-      description = "enable nvim comment. required for certain plugins [nvim-comment]";
+      lineTimeout = mkOption {
+        description = "Time in milliseconds for cursorline to appear.";
+        type = types.int;
+        default = 500;
+      };
     };
 
     indentBlankline = {
-      enable = mkOption {
-        type = types.bool;
-        description = "enable indent blankline. required for certain plugins [indent-blankline.nvim]";
-      };
+      enable = mkEnableOption "indentation guides [indent-blankline].";
 
       listChar = mkOption {
+        description = "Character for indentation line.";
         type = types.str;
-        description = "character for indentation line";
+        default = "│";
       };
 
       fillChar = mkOption {
-        type = types.str;
-        description = "character to fill indents";
+        description = "Character to fill indents";
+        type = with types; nullOr types.str;
+        default = "⋅";
       };
 
       eolChar = mkOption {
-        type = types.str;
-        description = "character to fill end of line";
+        description = "Character at end of line";
+        type = with types; nullOr types.str;
+        default = "↴";
+      };
+
+      showEndOfLine = mkOption {
+        description = nvim.nmd.asciiDoc ''
+          Displays the end of line character set by <<opt-vim.visuals.indentBlankline.eolChar>> instead of the
+          indent guide on line returns.
+        '';
+        type = types.bool;
+        default = cfg.indentBlankline.eolChar != null;
+        defaultText = literalExpression "config.vim.visuals.indentBlankline.eolChar != null";
       };
 
       showCurrContext = mkOption {
+        description = "Highlight current context from treesitter";
         type = types.bool;
-        description = "show current context";
+        default = config.vim.treesitter.enable;
+        defaultText = literalExpression "config.vim.treesitter.enable";
+      };
+
+      useTreesitter = mkOption {
+        description = "Use treesitter to calculate indentation when possible.";
+        type = types.bool;
+        default = config.vim.treesitter.enable;
+        defaultText = literalExpression "config.vim.treesitter.enable";
       };
     };
 
     toggleTerm.enable = mkOption {
+      description = "Toggle terminal with <c-t>";
       type = types.bool;
-      description = "enable toggleterm. terminal emulator [toggleterm]";
+      default = literalExpression "config.vim.git.lazygit.enable";
+    };
+
+    noice = {
+      enable = mkEnableOption "Noice configuration.";
+
+      presets = {
+        bottomSearch = mkOption {
+          default = true;
+          description = "Use a classic bottom cmdline for search";
+          type = types.bool;
+        };
+
+        commandPalette = mkOption {
+          default = true;
+          description = "Position the cmdline and popupmenu together";
+          type = types.bool;
+        };
+
+        longMessageToSplit = mkOption {
+          default = true;
+          description = "Long messages will be sent to a split";
+          type = types.bool;
+        };
+
+        incRename = mkOption {
+          default = false;
+          description = "Enables an input dialog for inc-rename.nvim";
+          type = types.bool;
+        };
+
+        lspDocBorder = mkOption {
+          default = false;
+          description = "Add a border to hover docs and signature help";
+          type = types.bool;
+        };
+      };
     };
   };
 
-  config = mkIf cfg.enable {
-    vim.startPlugins = with pkgs.neovimPlugins; [
-      (
-        if cfg.nvimAutoPairs.enable
-        then nvim-autopairs
-        else null
-      )
-      (
-        if cfg.nvimWebDevicons.enable
-        then web-devicons
-        else null
-      )
-      (
-        if cfg.lightSpeed.enable
-        then lightspeed
-        else null
-      )
-      (
-        if cfg.nvimComment.enable
-        then nvim-comment
-        else null
-      )
-      (
-        if cfg.indentBlankline.enable
-        then indent-blankline
-        else null
-      )
-      (
-        if cfg.toggleTerm.enable
-        then toggleterm
-        else null
-      )
-    ];
+  config = mkIf cfg.enable (mkMerge [
+    (mkIf cfg.indentBlankline.enable {
+      vim.startPlugins = ["indent-blankline"];
+      vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''
+        vim.opt.list = true
 
-    vim.luaConfigRC = ''
-      ${
-        if cfg.nvimAutoPairs.enable
-        then ''
-          require'nvim-autopairs'.setup {}
-        ''
-        else ""
-      }
-      ${
-        if cfg.indentBlankline.enable
-        then ''
-          -- highlight error: https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-          vim.wo.colorcolumn = "99999"
-          vim.opt.list = true
-          ${
-            if cfg.indentBlankline.eolChar == ""
-            then ""
-            else ''vim.opt.listchars:append({ eol = "${cfg.indentBlankline.eolChar}" })''
-          }
-          ${
-            if cfg.indentBlankline.fillChar == ""
-            then ""
-            else ''vim.opt.listchars:append({ space = "${cfg.indentBlankline.fillChar}"})''
-          }
-          require("indent_blankline").setup {
-            char = "${cfg.indentBlankline.listChar}",
-            show_current_context = ${boolToString cfg.indentBlankline.showCurrContext},
-            show_end_of_line = true,
-          }
-        ''
-        else ""
-      }
-      ${
-        if cfg.toggleTerm.enable
-        then ''
-          require("toggleterm").setup {
-            size = 20,
-            open_mapping = [[<c-\>]],
-            hide_numbers = true,
-            shade_terminals = true,
-            start_in_insert = true,
-            persist_size = true,
-            direction = 'horizontal',
-            close_on_exit = true,
-            shell = vim.o.shell,
-          }
-        ''
-        else ""
-      }
-    '';
-  };
+        ${optionalString (cfg.indentBlankline.eolChar != null) ''
+          vim.opt.listchars:append({ eol = "${cfg.indentBlankline.eolChar}" })
+        ''}
+        ${optionalString (cfg.indentBlankline.fillChar != null) ''
+          vim.opt.listchars:append({ space = "${cfg.indentBlankline.fillChar}" })
+        ''}
+
+        require("indent_blankline").setup {
+          enabled = true,
+          char = "${cfg.indentBlankline.listChar}",
+          show_end_of_line = ${boolToString cfg.indentBlankline.showEndOfLine},
+
+          use_treesitter = ${boolToString cfg.indentBlankline.useTreesitter},
+          show_current_context = ${boolToString cfg.indentBlankline.showCurrContext},
+        }
+      '';
+    })
+    (mkIf cfg.cursorWordline.enable {
+      vim.startPlugins = ["nvim-cursorline"];
+      vim.luaConfigRC.cursorline = nvim.dag.entryAnywhere ''
+        vim.g.cursorline_timeout = ${toString cfg.cursorWordline.lineTimeout}
+      '';
+    })
+    (mkIf cfg.nvimWebDevicons.enable {
+      vim.startPlugins = ["nvim-web-devicons"];
+    })
+    (mkIf cfg.kommentary.enable {
+      vim.startPlugins = ["kommentary"];
+      vim.luaConfigRC.kommentary = nvim.dag.entryAnywhere ''
+        require("kommentary.config").configure_language("default", {
+          prefer_single_line_comments = true,
+          use_consistent_indentation = true,
+          ignore_whitespace = true,
+        })
+      '';
+    })
+    (mkIf cfg.todoComments.enable {
+      vim.startPlugins = ["todo-comments"];
+      vim.luaConfigRC.todo-comments = nvim.dag.entryAnywhere ''
+        require("todo-comments").setup {}
+      '';
+    })
+    (mkIf cfg.toggleTerm.enable {
+      vim.startPlugins = ["toggleterm"];
+      vim.luaConfigRC.toggleterm = nvim.dag.entryAnywhere ''
+        require("toggleterm").setup {
+          size = 20,
+          open_mapping = [[<c-t>]],
+          shade_filetypes = {},
+          shade_terminals = true,
+          shading_factor = 1,
+          start_in_insert = true,
+          insert_mappings = true,
+          persist_size = true,
+          direction = "float",
+          float_opts = {
+            border = "double",
+          },
+          close_on_exit = true,
+          shell = vim.o.shell,
+        }
+      '';
+    })
+    (mkIf cfg.noice.enable {
+      vim.startPlugins = [
+        "noice"
+        "nui"
+        "notify"
+      ];
+      vim.luaConfigRC.noice = nvim.dag.entryAnywhere ''
+        require("noice").setup({
+          lsp = {
+            override = {
+              ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+              ["vim.lsp.util.stylize_markdown"] = true,
+              ["cmp.entry.get_documentation"] = true,
+            },
+            signature = {
+              enabled = false,
+            },
+          },
+          presets = {
+            bottom_search = ${boolToString cfg.noice.presets.bottomSearch},
+            command_palette = ${boolToString cfg.noice.presets.commandPalette},
+            long_message_to_split = ${boolToString cfg.noice.presets.longMessageToSplit},
+            inc_rename = ${boolToString cfg.noice.presets.incRename},
+            lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
+          },
+        })
+      '';
+    })
+  ]);
 }

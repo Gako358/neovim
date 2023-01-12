@@ -15,7 +15,7 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.trouble.enable) {
-    vim.startPlugins = with pkgs.neovimPlugins; [trouble];
+    vim.startPlugins = ["trouble"];
 
     vim.nnoremap = {
       "<leader>xx" = "<cmd>TroubleToggle<CR>";
@@ -26,7 +26,7 @@ in {
       "<leader>xl" = "<cmd>TroubleToggle loclist<CR>";
     };
 
-    vim.luaConfigRC = ''
+    vim.luaConfigRC.trouble = nvim.dag.entryAnywhere ''
       -- Enable trouble diagnostics viewer
       require("trouble").setup {}
     '';

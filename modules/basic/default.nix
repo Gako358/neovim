@@ -1,170 +1,156 @@
-{ pkgs, lib, config, ...}:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim;
 in {
   options.vim = {
     colourTerm = mkOption {
+      type = types.bool;
       default = true;
       description = "Set terminal up for 256 colours";
-      type = types.bool;
     };
 
     disableArrows = mkOption {
-      default = true;
-      description = "Set to prevent arrow keys from moving cursor";
       type = types.bool;
+      default = false;
+      description = "Set to prevent arrow keys from moving cursor";
     };
 
     hideSearchHighlight = mkOption {
+      type = types.bool;
       default = false;
       description = "Hide search highlight so it doesn't stay highlighted";
-      type = types.bool;
     };
 
     scrollOffset = mkOption {
+      type = types.int;
       default = 8;
       description = "Start scrolling this number of lines from the top or bottom of the page.";
-      type = types.int;
     };
 
     wordWrap = mkOption {
-      default = false;
-      description = "Enable word wrapping.";
       type = types.bool;
+      default = true;
+      description = "Enable word wrapping.";
     };
 
     syntaxHighlighting = mkOption {
+      type = types.bool;
       default = true;
       description = "Enable syntax highlighting";
-      type = types.bool;
     };
 
     mapLeaderSpace = mkOption {
+      type = types.bool;
       default = true;
       description = "Map the space key to leader key";
-      type = types.bool;
     };
 
     useSystemClipboard = mkOption {
+      type = types.bool;
       default = true;
       description = "Make use of the clipboard for default yank and paste operations. Don't use * and +";
-      type = types.bool;
     };
 
     mouseSupport = mkOption {
+      type = with types; enum ["a" "n" "v" "i" "c"];
       default = "a";
       description = "Set modes for mouse support. a - all, n - normal, v - visual, i - insert, c - command";
-      type = types.str;
     };
 
     lineNumberMode = mkOption {
+      type = with types; enum ["relative" "number" "relNumber" "none"];
       default = "relNumber";
       description = "How line numbers are displayed. none, relative, number, relNumber";
-      type = with types; enum ["relative" "number" "relNumber" "none"];
     };
 
     preventJunkFiles = mkOption {
-      default = true;
-      description = "Prevent swapfile, backupfile from being created";
       type = types.bool;
+      default = false;
+      description = "Prevent swapfile, backupfile from being created";
     };
 
     tabWidth = mkOption {
-      default = 2;
-      description = "Set the width of tabs to 2";
       type = types.int;
+      default = 4;
+      description = "Set the width of tabs";
     };
 
     autoIndent = mkOption {
+      type = types.bool;
       default = true;
       description = "Enable auto indent";
-      type = types.bool;
     };
 
     cmdHeight = mkOption {
-      default = 2;
-      description = "Hight of the command pane";
       type = types.int;
+      default = 1;
+      description = "Height of the command pane";
     };
 
     updateTime = mkOption {
+      type = types.int;
       default = 300;
       description = "The number of milliseconds till Cursor Hold event is fired";
-      type = types.int;
     };
 
     showSignColumn = mkOption {
+      type = types.bool;
       default = true;
       description = "Show the sign column";
-      type = types.bool;
     };
 
     bell = mkOption {
+      type = types.enum ["none" "visual" "on"];
       default = "none";
       description = "Set how bells are handled. Options: on, visual or none";
-      type = types.enum [ "none" "visual" "on" ];
     };
 
     mapTimeout = mkOption {
+      type = types.int;
       default = 500;
       description = "Timeout in ms that neovim will wait for mapped action to complete";
-      type = types.int;
     };
 
     splitBelow = mkOption {
+      type = types.bool;
       default = true;
       description = "New splits will open below instead of on top";
-      type = types.bool;
     };
 
     splitRight = mkOption {
+      type = types.bool;
       default = true;
       description = "New splits will open to the right";
-      type = types.bool;
     };
-
   };
 
-  config = (
-    let 
-      writeIf = cond: msg: if cond then msg else "";
-    in {
+  config = {
+    vim.startPlugins = ["plenary-nvim"];
 
-    # Plugins without config and start with priority
-    vim.startPlugins = with pkgs.neovimPlugins; [
-      plenary-nvim
-      undotree
-    ];
-    
-    vim.nmap = if (cfg.disableArrows) then {
+    vim.nmap = mkIf cfg.disableArrows {
       "<up>" = "<nop>";
       "<down>" = "<nop>";
       "<left>" = "<nop>";
       "<right>" = "<nop>";
-    } else {};
+    };
 
-    vim.imap = if (cfg.disableArrows) then {
+    vim.imap = mkIf cfg.disableArrows {
       "<up>" = "<nop>";
       "<down>" = "<nop>";
       "<left>" = "<nop>";
       "<right>" = "<nop>";
-    } else {};
+    };
 
-    vim.nnoremap = if (cfg.mapLeaderSpace) then {
-      "<space>" = "<nop>";
-    } else {};
+    vim.nnoremap = mkIf cfg.mapLeaderSpace {"<space>" = "<nop>";};
 
-    vim.luaConfigRC = ''
-      vim.g.copilot_no_tab_map = true
-      vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-    '';
-
-    vim.configRC = ''
-
-      "Settings that are set for everything
+    vim.configRC.basic = nvim.dag.entryAfter ["globalsScript"] ''
+      " Settings that are set for everything
       set encoding=utf-8
       set mouse=${cfg.mouseSupport}
       set tabstop=${toString cfg.tabWidth}
@@ -176,81 +162,64 @@ in {
       set shortmess+=c
       set tm=${toString cfg.mapTimeout}
       set hidden
-
-      ${writeIf cfg.splitBelow ''
+      ${optionalString cfg.splitBelow ''
         set splitbelow
       ''}
-
-      ${writeIf cfg.splitRight ''
+      ${optionalString cfg.splitRight ''
         set splitright
       ''}
-
-      ${writeIf cfg.showSignColumn ''
+      ${optionalString cfg.showSignColumn ''
         set signcolumn=yes
       ''}
-
-      ${writeIf cfg.autoIndent ''
+      ${optionalString cfg.autoIndent ''
         set autoindent
       ''}
-            
-      ${writeIf cfg.preventJunkFiles ''
+
+      ${optionalString cfg.preventJunkFiles ''
         set noswapfile
         set nobackup
         set nowritebackup
       ''}
-
-      ${writeIf (cfg.bell == "none") ''
+      ${optionalString (cfg.bell == "none") ''
         set noerrorbells
         set novisualbell
       ''}
-
-      ${writeIf (cfg.bell == "on") ''
+      ${optionalString (cfg.bell == "on") ''
         set novisualbell
       ''}
-
-      ${writeIf (cfg.bell == "visual") ''
+      ${optionalString (cfg.bell == "visual") ''
         set noerrorbells
       ''}
-
-      ${writeIf (cfg.lineNumberMode == "relative") ''
+      ${optionalString (cfg.lineNumberMode == "relative") ''
         set relativenumber
       ''}
-
-      ${writeIf (cfg.lineNumberMode == "number") ''
+      ${optionalString (cfg.lineNumberMode == "number") ''
         set number
       ''}
-
-      ${writeIf (cfg.lineNumberMode == "relNumber") ''
+      ${optionalString (cfg.lineNumberMode == "relNumber") ''
         set number relativenumber
       ''}
-
-      ${writeIf cfg.useSystemClipboard ''
+      ${optionalString cfg.useSystemClipboard ''
         set clipboard+=unnamedplus
       ''}
-
-      ${writeIf cfg.mapLeaderSpace ''
+      ${optionalString cfg.mapLeaderSpace ''
         let mapleader=" "
         let maplocalleader=" "
       ''}
-
-      ${writeIf cfg.syntaxHighlighting ''
-        syntax on 
+      ${optionalString cfg.syntaxHighlighting ''
+        syntax on
       ''}
-
-      ${writeIf (cfg.wordWrap == false) ''
+      ${optionalString (!cfg.wordWrap) ''
         set nowrap
       ''}
-
-      ${writeIf cfg.hideSearchHighlight ''
+      ${optionalString cfg.hideSearchHighlight ''
         set nohlsearch
         set incsearch
       ''}
-
-      ${writeIf cfg.colourTerm ''
+      ${optionalString cfg.colourTerm ''
         set termguicolors
         set t_Co=256
       ''}
-
     '';
-  });
+  };
 }

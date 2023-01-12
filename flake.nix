@@ -1,102 +1,192 @@
 {
-  description = "MerrinX's NeoVim config";
-
+  description = "MerrinX Neovim Configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      # url = "github:neovim/neovim/85c7d4f7a92326dcd70317b048bafe96c8051701?dir=contrib"; # 0.8.0
-      # In the case nightly breaks, use the above line to pin to a specific commit
-      # Or pin down another commit that works
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ### Vim plugins ###
-
-    # Plenary
-    plenary-nvim = {
-      url = "github:nvim-lua/plenary.nvim";
-      flake = false;
-    };
-
-    rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
-    };
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
-    # LSP
-    nvim-treesitter = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      # pinning to a specific commit because of error on querys on python
-      /*
-        url = "github:nvim-treesitter/nvim-treesitter/8f927a4d50716e534c5845e835625962adf878e1";
-      */
-      flake = false;
-    };
+    # LSP plugins
     nvim-lspconfig = {
-      url = "github:neovim/nvim-lspconfig";
+      url = "github:neovim/nvim-lspconfig?ref=v0.1.4";
       flake = false;
     };
-    null-ls = {
-      url = "github:jose-elias-alvarez/null-ls.nvim";
+    lspsaga = {
+      url = "github:tami5/lspsaga.nvim";
       flake = false;
     };
-    nvim-lightbulb = {
-      url = "github:kosayoda/nvim-lightbulb";
-      flake = false;
-    };
-    nvim-code-action-menu = {
-      url = "github:weilbith/nvim-code-action-menu";
+    lspkind = {
+      url = "github:onsails/lspkind-nvim";
       flake = false;
     };
     trouble = {
       url = "github:folke/trouble.nvim";
       flake = false;
     };
+    nvim-treesitter-context = {
+      url = "github:nvim-treesitter/nvim-treesitter-context";
+      flake = false;
+    };
+    nvim-lightbulb = {
+      url = "github:kosayoda/nvim-lightbulb";
+      flake = false;
+    };
+    fidget = {
+      url = "github:j-hui/fidget.nvim";
+      flake = false;
+    };
+    nvim-code-action-menu = {
+      url = "github:weilbith/nvim-code-action-menu";
+      flake = false;
+    };
+    lsp-signature = {
+      url = "github:ray-x/lsp_signature.nvim";
+      flake = false;
+    };
+    null-ls = {
+      url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
+    sqls-nvim = {
+      url = "github:nanotee/sqls.nvim";
+      flake = false;
+    };
     rust-tools = {
       url = "github:simrat39/rust-tools.nvim";
       flake = false;
     };
-
-    # COPILOT
-    github-copilot = {
-      url = "github:github/copilot.vim";
+    nvim-jdtls = {
+      url = "github:mfussenegger/nvim-jdtls";
       flake = false;
     };
 
-    # CMP
+    # Copying/Registers
+    registers = {
+      url = "github:tversteeg/registers.nvim";
+      flake = false;
+    };
+    nvim-neoclip = {
+      url = "github:AckslD/nvim-neoclip.lua";
+      flake = false;
+    };
+
+    # Telescope
+    telescope = {
+      url = "github:nvim-telescope/telescope.nvim";
+      flake = false;
+    };
+
+    # Langauge server (use master instead of nixpkgs)
+    rnix-lsp.url = "github:nix-community/rnix-lsp";
+    nil = {
+      url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
+    # Filetrees
+    nvim-tree-lua = {
+      url = "github:kyazdani42/nvim-tree.lua";
+      flake = false;
+    };
+
+    # Tablines
+    nvim-bufferline-lua = {
+      url = "github:akinsho/nvim-bufferline.lua?ref=v3.0.1";
+      flake = false;
+    };
+
+    # Statuslines
+    lualine = {
+      url = "github:hoob3rt/lualine.nvim";
+      flake = false;
+    };
+
+    # Autocompletes
+    nvim-compe = {
+      url = "github:hrsh7th/nvim-compe";
+      flake = false;
+    };
     nvim-cmp = {
       url = "github:hrsh7th/nvim-cmp";
-      flake = false;
-    };
-    luasnip = {
-      url = "github:L3MON4D3/LuaSnip";
-      flake = false;
-    };
-    cmp-nvim-lsp = {
-      url = "github:hrsh7th/cmp-nvim-lsp";
-      flake = false;
-    };
-    cmp-path = {
-      url = "github:hrsh7th/cmp-path";
       flake = false;
     };
     cmp-buffer = {
       url = "github:hrsh7th/cmp-buffer";
       flake = false;
     };
-    cmp-luasnip = {
-      url = "github:saadparwaiz1/cmp_luasnip";
+    cmp-nvim-lsp = {
+      url = "github:hrsh7th/cmp-nvim-lsp";
+      flake = false;
+    };
+    cmp-vsnip = {
+      url = "github:hrsh7th/cmp-vsnip";
+      flake = false;
+    };
+    cmp-path = {
+      url = "github:hrsh7th/cmp-path";
       flake = false;
     };
     cmp-treesitter = {
       url = "github:ray-x/cmp-treesitter";
+      flake = false;
+    };
+
+    # Copilot
+    github-copilot = {
+      url = "github:github/copilot.vim";
+      flake = false;
+    };
+
+    #chatGPT
+    chatgpt = {
+      url = "github:jackMort/ChatGPT.nvim";
+      flake = false;
+    };
+
+    # snippets
+    vim-vsnip = {
+      url = "github:hrsh7th/vim-vsnip";
+      flake = false;
+    };
+
+    # Autopairs
+    nvim-autopairs = {
+      url = "github:windwp/nvim-autopairs";
+      flake = false;
+    };
+    nvim-ts-autotag = {
+      url = "github:windwp/nvim-ts-autotag";
+      flake = false;
+    };
+
+    # Commenting
+    kommentary = {
+      url = "github:b3nj5m1n/kommentary";
+      flake = false;
+    };
+    todo-comments = {
+      url = "github:folke/todo-comments.nvim";
+      flake = false;
+    };
+
+    # Buffer tools
+    bufdelete-nvim = {
+      url = "github:famiu/bufdelete.nvim";
+      flake = false;
+    };
+
+    # Themes
+    borealis = {
+      url = "github:Gako358/borealis.nvim";
+      flake = false;
+    };
+
+    tokyonight = {
+      url = "github:folke/tokyonight.nvim";
+      flake = false;
+    };
+
+    onedark = {
+      url = "github:navarasu/onedark.nvim";
       flake = false;
     };
 
@@ -106,47 +196,29 @@
       flake = false;
     };
 
-    # Theme
-    borealis = {
-      url = "github:Gako358/borealis.nvim";
-      flake = false;
-    };
-
     # Visuals
-    nvim-autopairs = {
-      url = "github:windwp/nvim-autopairs";
-      flake = false;
-    };
-    web-devicons = {
-      url = "github:kyazdani42/nvim-web-devicons";
-      flake = false;
-    };
-    lightspeed = {
-      url = "github:ggandor/lightspeed.nvim";
-      flake = false;
-    };
-    nvim-comment = {
-      url = "github:terrortylor/nvim-comment";
+    nvim-cursorline = {
+      url = "github:yamatsum/nvim-cursorline";
       flake = false;
     };
     indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
+    nvim-web-devicons = {
+      url = "github:kyazdani42/nvim-web-devicons";
+      flake = false;
+    };
+    gitsigns-nvim = {
+      url = "github:lewis6991/gitsigns.nvim";
+      flake = false;
+    };
     toggleterm = {
       url = "github:akinsho/toggleterm.nvim";
       flake = false;
     };
-    nvim-bufferline = {
-      url = "github:akinsho/bufferline.nvim";
-      flake = false;
-    };
-    nvim-tree = {
-      url = "github:nvim-tree/nvim-tree.lua";
-      flake = false;
-    };
-    lualine = {
-      url = "github:nvim-lualine/lualine.nvim";
+    lazygit = {
+      url = "github:kdheepak/lazygit.nvim";
       flake = false;
     };
     noice = {
@@ -161,238 +233,251 @@
       url = "github:rcarriga/nvim-notify";
       flake = false;
     };
-    glow-nvim = {
-      url = "github:ellisonleao/glow.nvim";
-      flake = false;
-    };
 
-    # GIT
-    nvim-gitsigns = {
-      url = "github:lewis6991/gitsigns.nvim";
-      flake = false;
-    };
-    lazygit = {
-      url = "github:kdheepak/lazygit.nvim";
-      flake = false;
-    };
-
-    # Undo tree
-    undotree = {
-      url = "github:mbbill/undotree";
-      flake = false;
-    };
-
-    # Help
+    # Key binding help
     which-key = {
       url = "github:folke/which-key.nvim";
       flake = false;
     };
 
-    # TELESCOPE
-    telescope = {
-      url = "github:nvim-telescope/telescope.nvim";
+    # Markdown
+    glow-nvim = {
+      url = "github:ellisonleao/glow.nvim";
+      flake = false;
+    };
+
+    # Plenary (required by crates-nvim)
+    plenary-nvim = {
+      url = "github:nvim-lua/plenary.nvim";
+      flake = false;
+    };
+
+    open-browser = {
+      url = "github:tyru/open-browser.vim";
       flake = false;
     };
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , flake-utils
-    , neovim
-    , rnix-lsp
-    , nil
-    , ...
-    } @ inputs:
-    let
-      plugins = [
-        "plenary-nvim"
-        "nvim-treesitter"
-        "nvim-lspconfig"
-        "null-ls"
-        "nvim-lightbulb"
-        "nvim-code-action-menu"
-        "trouble"
-        "rust-tools"
-        "github-copilot"
-        "nvim-cmp"
-        "luasnip"
-        "cmp-nvim-lsp"
-        "cmp-path"
-        "cmp-buffer"
-        "cmp-luasnip"
-        "cmp-treesitter"
-        "crates-nvim"
-        "borealis"
-        "nvim-autopairs"
-        "web-devicons"
-        "lightspeed"
-        "nvim-comment"
-        "indent-blankline"
-        "toggleterm"
-        "nvim-bufferline"
-        "nvim-tree"
-        "lualine"
-        "noice"
-        "nui"
-        "notify"
-        "glow-nvim"
-        "nvim-gitsigns"
-        "lazygit"
-        "undotree"
-        "which-key"
-        "telescope"
-      ];
+  outputs = {
+    nixpkgs,
+    flake-utils,
+    ...
+  } @ inputs: let
+    # Plugin must be same as input name
+    availablePlugins = [
+      "nvim-treesitter-context"
+      "gitsigns-nvim"
+      "toggleterm"
+      "lazygit"
+      "noice"
+      "nui"
+      "notify"
+      "plenary-nvim"
+      "nvim-lspconfig"
+      "lspsaga"
+      "lspkind"
+      "nvim-lightbulb"
+      "fidget"
+      "lsp-signature"
+      "nvim-tree-lua"
+      "nvim-bufferline-lua"
+      "lualine"
+      "nvim-compe"
+      "nvim-autopairs"
+      "nvim-ts-autotag"
+      "kommentary"
+      "todo-comments"
+      "nvim-web-devicons"
+      "tokyonight"
+      "bufdelete-nvim"
+      "nvim-cmp"
+      "cmp-nvim-lsp"
+      "cmp-buffer"
+      "cmp-vsnip"
+      "cmp-path"
+      "cmp-treesitter"
+      "github-copilot"
+      "chatgpt"
+      "crates-nvim"
+      "vim-vsnip"
+      "nvim-code-action-menu"
+      "trouble"
+      "null-ls"
+      "which-key"
+      "indent-blankline"
+      "nvim-cursorline"
+      "sqls-nvim"
+      "glow-nvim"
+      "telescope"
+      "rust-tools"
+      "nvim-jdtls"
+      "borealis"
+      "onedark"
+      "open-browser"
+    ];
+    rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
 
-      externalBitsOverlay = top: last: {
-        neovim-nightly = neovim.defaultPackage.${top.system};
-        rnix-lsp = rnix-lsp.defaultPackage.${top.system};
-        nil-lsp = nil.defaultPackage.${top.system};
+    neovimConfiguration = {modules ? [], ...} @ args:
+      import ./modules
+      (args // {modules = [{config.build.rawPlugins = rawPlugins;}] ++ modules;});
+
+    nvimBin = pkg: "${pkg}/bin/nvim";
+
+    buildPkg = pkgs: modules: (neovimConfiguration {
+      inherit pkgs modules;
+    });
+
+    nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
+
+    mainConfig = isMaximal: let
+      overrideable = nixpkgs.lib.mkOverride 1200; # between mkOptionDefault and mkDefault
+    in {
+      config = {
+        build.viAlias = overrideable false;
+        build.vimAlias = overrideable true;
+        vim.languages = {
+          enableLSP = overrideable true;
+          enableFormat = overrideable true;
+          enableTreesitter = overrideable true;
+          enableExtraDiagnostics = overrideable true;
+
+          clang.enable = overrideable true;
+          css.enable = overrideable true;
+          html.enable = overrideable true;
+          java.enable = overrideable true;
+          kotlin.enable = overrideable true;
+          lua.enable = overrideable true;
+          markdown.enable = overrideable true;
+          nix.enable = overrideable true;
+          python.enable = overrideable true;
+          rust = {
+            enable = overrideable true;
+            crates.enable = overrideable true;
+          };
+          sql = {
+            enable = overrideable true;
+            extraDiagnostics.enable = overrideable false;
+          };
+          ts.enable = overrideable true;
+        };
+        vim.lsp = {
+          formatOnSave = overrideable true;
+          lspkind.enable = overrideable true;
+          lightbulb.enable = overrideable true;
+          lspsaga.enable = overrideable false;
+          nvimCodeActionMenu.enable = overrideable true;
+          trouble.enable = overrideable true;
+          lspSignature.enable = overrideable true;
+        };
+        vim.visuals = {
+          enable = overrideable true;
+          nvimWebDevicons.enable = overrideable true;
+          kommentary.enable = overrideable true;
+          todoComments.enable = overrideable true;
+          indentBlankline = {
+            enable = overrideable true;
+            fillChar = overrideable null;
+            eolChar = overrideable null;
+            showCurrContext = overrideable true;
+          };
+          cursorWordline = {
+            enable = overrideable true;
+            lineTimeout = overrideable 0;
+          };
+          toggleTerm = {
+            enable = overrideable true;
+          };
+          noice = {
+            enable = overrideable true;
+          };
+        };
+        vim.statusline.lualine = {
+          enable = overrideable true;
+          theme = overrideable "borealis";
+        };
+        vim.theme = {
+          enable = overrideable true;
+          name = overrideable "borealis";
+        };
+        vim.chatgpt.enable = overrideable true;
+        vim.autopairs.enable = overrideable true;
+        vim.autocomplete = {
+          enable = overrideable true;
+          type = overrideable "nvim-cmp";
+        };
+        vim.filetree.nvimTreeLua.enable = overrideable true;
+        vim.tabline.nvimBufferline.enable = overrideable true;
+        vim.treesitter.context.enable = overrideable true;
+        vim.keys = {
+          enable = overrideable true;
+          whichKey.enable = overrideable true;
+        };
+        vim.telescope.enable = overrideable true;
+        vim.git = {
+          enable = overrideable true;
+          gitsigns.enable = overrideable true;
+          gitsigns.codeActions = overrideable true;
+          lazygit.enable = overrideable true;
+        };
+      };
+    };
+
+    nixConfig = mainConfig false;
+    maximalConfig = mainConfig true;
+  in
+    {
+      lib = {
+        nvim = nvimLib;
+        inherit neovimConfiguration;
       };
 
-      pluginOverlay = top: last:
-        let
-          treesitterGrammars = last.tree-sitter.withPlugins (p: [
-            p.tree-sitter-c
-            p.tree-sitter-vim
-            p.tree-sitter-regex
-            p.tree-sitter-nix
-            p.tree-sitter-python
-            p.tree-sitter-rust
-            p.tree-sitter-markdown
-            p.tree-sitter-markdown-inline
-            p.tree-sitter-comment
-            p.tree-sitter-toml
-            p.tree-sitter-make
-            p.tree-sitter-html
-            p.tree-sitter-javascript
-            p.tree-sitter-css
-            p.tree-sitter-latex
-            p.tree-sitter-lua
-            p.tree-sitter-typescript
-            p.tree-sitter-bash
-          ]);
-          buildPlug = name:
-            top.vimUtils.buildVimPluginFrom2Nix {
-              pname = name;
-              version = "master";
-              src = builtins.getAttr name inputs;
-              postPatch =
-                if (name == "nvim-treesitter")
-                then ''
-                  rm -r parser
-                  ln -s ${treesitterGrammars} parser
-                ''
-                else "";
-            };
-        in
-        {
-          neovimPlugins = builtins.listToAttrs (map
-            (name: {
-              inherit name;
-              value = buildPlug name;
-            })
-            plugins);
-        };
-
-      allPkgs = lib.mkPkgs {
-        inherit nixpkgs;
-        cfg = { };
+      overlays.default = final: prev: {
+        inherit neovimConfiguration;
+        neovim-nix = buildPkg prev [nixConfig];
+        neovim-maximal = buildPkg prev [maximalConfig];
+      };
+    }
+    // (flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {
+        inherit system;
         overlays = [
-          pluginOverlay
-          externalBitsOverlay
+          (final: prev: {
+            rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
+            nil = inputs.nil.packages.${system}.default;
+          })
         ];
       };
 
-      lib =
-        import
-          ./lib;
+      nixPkg = buildPkg pkgs [nixConfig];
+      maximalPkg = buildPkg pkgs [maximalConfig];
 
-      mkNeoVimPkg = pkgs:
-        lib.neovimBuilder {
-          inherit pkgs;
-          config = {
-            vim.viAlias = true;
-            vim.vimAlias = true;
-            vim.autoIndent = true;
-
-            vim.treesitter.enable = true;
-            vim.lsp = {
-              enable = true;
-              lightbulb.enable = true;
-              nvimCodeActionMenu.enable = true;
-              trouble.enable = true;
-
-              # Language servers:
-              python = true;
-              clang = true;
-              cmake = true;
-              bash = true;
-              lua = true;
-              nix = true;
-              rust = true;
-              typescript = true;
-              docker = true;
-              tex = true;
-              css = true;
-              html = true;
-              json = true;
-            };
-
-            vim.theme.scheme = "borealis";
-
-            vim.visuals = {
-              enable = true;
-              nvimAutoPairs.enable = true;
-              nvimWebDevicons.enable = true;
-              lightSpeed.enable = true;
-              nvimComment.enable = true;
-              indentBlankline.enable = true;
-              toggleTerm.enable = true;
-              bufferline.enable = true;
-              filetree.enable = true;
-              noice.enable = true;
-              glow.enable = true;
-              status.bar = "lualine";
-            };
-
-            vim.autocomplete.enable = true;
-
-            vim.git = {
-              gitsigns.enable = true;
-              lazygit.enable = true;
-            };
-
-            vim.keys = {
-              enable = true;
-              whichKey.enable = true;
-            };
-
-            vim.telescope.enable = true;
+      devPkg = buildPkg pkgs [nixConfig {config.vim.languages.html.enable = pkgs.lib.mkForce true;}];
+    in {
+      apps =
+        rec {
+          nix = {
+            type = "app";
+            program = nvimBin nixPkg;
           };
+          maximal = {
+            type = "app";
+            program = nvimBin maximalPkg;
+          };
+          default = nix;
+        }
+        // pkgs.lib.optionalAttrs (!(builtins.elem system ["aarch64-darwin" "x86_64-darwin"])) {
         };
-    in
-    {
-      apps = lib.withDefaultSystems (sys: {
-        nvim = {
-          type = "app";
-          program = "${self.defaultPackage."${sys}"}/bin/nvim";
+
+      devShells.default = pkgs.mkShell {nativeBuildInputs = [devPkg];};
+
+      packages =
+        {
+          default = nixPkg;
+          nix = nixPkg;
+          maximal = maximalPkg;
+        }
+        // pkgs.lib.optionalAttrs (!(builtins.elem system ["aarch64-darwin" "x86_64-darwin"])) {
         };
-      });
-
-      defaultApp = lib.withDefaultSystems (sys: {
-        type = "app";
-        program = "${self.defaultPackage."${sys}"}/bin/nvim";
-      });
-
-      defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimMX);
-
-      packages = lib.withDefaultSystems (sys: {
-        neovimMX = mkNeoVimPkg allPkgs."${sys}";
-      });
-
-      devShells = lib.withDefaultSystems (sys: {
-        neovimMX = mkNeoVimPkg allPkgs."${sys}";
-      });
-    };
+      defaultPackage = nixPkg;
+    }));
 }

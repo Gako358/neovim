@@ -1,7 +1,6 @@
-{ config, lib, pkgs, ... }:
 {
   imports = [
-  ./basic.nix
-  ./which-key.nix
+    ./basic.nix
+    ./which-key.nix
   ];
 }

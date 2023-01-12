@@ -1,39 +1,38 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.visuals.bufferline;
-in
-{
-  options.vim.visuals.bufferline = {
-    enable = mkOption {
-      type = types.bool;
-      description = "Enable bufferline plugin: [nvim-bufferline]";
-    };
+  cfg = config.vim.tabline.nvimBufferline;
+in {
+  options.vim.tabline.nvimBufferline = {
+    enable = mkEnableOption "nvim-bufferline-lua";
   };
 
   config = mkIf cfg.enable (
     let
-      writeIf = cond: msg:
-        if cond
-        then msg
-        else "";
-    in
-    {
-      vim.startPlugins = with pkgs.neovimPlugins; [
-        nvim-bufferline
+      mouse = {
+        right = "'vertical sbuffer %d'";
+        close = ''
+          function(bufnum)
+            require("bufdelete").bufdelete(bufnum, false)
+          end
+        '';
+      };
+    in {
+      vim.startPlugins = [
+        (assert config.vim.visuals.nvimWebDevicons.enable == true; "nvim-bufferline-lua")
+        "bufdelete-nvim"
       ];
 
       vim.nnoremap = {
-        "<S-w>" = ":BufferLineCycleNext<CR>";
-        "<S-TAB>" = ":BufferLineCyclePrev<CR>";
-        "<leader>bd" = ":BufferLineSortByDirectory<CR>";
-        "<leader>bq" = ":bd!<CR>";
-        "<leader>ba" = ":qa!<CR>";
-        "<leader>dd" = ":BufferLineCloseRight<CR>";
+        "<Up>" = ":BufferLineCycleNext<CR>";
+        "<Down>" = ":BufferLineCyclePrev<CR>";
+        "<leader>qr" = ":BufferLineCloseRight<CR>";
+        "<leader>ql" = ":BufferLineCloseLeft<CR>";
 
         "<silent><leader>bc" = ":BufferLinePick<CR>";
         "<silent><leader>bse" = ":BufferLineSortByExtension<CR>";
@@ -52,10 +51,16 @@ in
         "<silent><leader>b9" = "<Cmd>BufferLineGoToBuffer 9<CR>";
       };
 
-      vim.luaConfigRC = ''
+      vim.luaConfigRC.nvimBufferline = nvim.dag.entryAnywhere ''
         require("bufferline").setup{
            options = {
               numbers = "both",
+              close_command = ${mouse.close},
+              right_mouse_command = ${mouse.right},
+              indicator = {
+                indicator_icon = '▎',
+                style = 'icon',
+              },
               buffer_close_icon = '',
               modified_icon = '●',
               close_icon = '',

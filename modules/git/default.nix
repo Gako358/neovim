@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./lazygit.nix
     ./gitsigns.nix
+    ./lazygit.nix
   ];
 }

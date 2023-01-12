@@ -1,13 +1,13 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.git.lazygit;
-in
-{
+in {
   options.vim.git.lazygit = {
     enable = mkOption {
       type = types.bool;
@@ -15,21 +15,11 @@ in
     };
   };
 
-  config = mkIf cfg.enable (
-    let
-      writeIf = cond: msg:
-        if cond
-        then msg
-        else "";
-    in
-    {
-      vim.startPlugins = with pkgs.neovimPlugins; [
-        lazygit
-      ];
+  config = mkIf cfg.enable {
+    vim.startPlugins = ["lazygit"];
 
-      vim.luaConfigRC = ''
-        vim.api.nvim_set_keymap('n', '<leader>/', ':LazyGit<CR>', { silent = true })
-      '';
-    }
-  );
+    vim.luaConfigRC.lazygit = nvim.dag.entryAnywhere ''
+      vim.api.nvim_set_keymap('n', '<leader>/', ':LazyGit<CR>', { silent = true })
+    '';
+  };
 }
