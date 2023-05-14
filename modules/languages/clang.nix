@@ -26,13 +26,13 @@ with builtins; let
   defaultFormat = "clang-format";
   formats = {
     clang-format = {
-      package = pkgs.vimPlugins.vim-clang-format;
+      package = pkgs.clang-tools;
       nullConfig = ''
         table.insert(
           ls_sources,
           null_ls.builtins.formatting.clang_format.with({
             command = "${cfg.format.package}/bin/clang-format";
-            filetypes = {"c", "cpp", "cs"};
+            filetypes = {"c", "cpp", "cs", "*.h", "*.hpp", "*.cc"};
           })
         )
       '';

@@ -5,56 +5,68 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # LSP plugins
-    nvim-lspconfig = {
-      url = "github:neovim/nvim-lspconfig?ref=v0.1.4";
-      flake = false;
-    };
-    lspsaga = {
-      url = "github:tami5/lspsaga.nvim";
-      flake = false;
-    };
-    lspkind = {
-      url = "github:onsails/lspkind-nvim";
-      flake = false;
-    };
-    trouble = {
-      url = "github:folke/trouble.nvim";
-      flake = false;
-    };
-    nvim-treesitter-context = {
-      url = "github:nvim-treesitter/nvim-treesitter-context";
+    fidget = {
+      url = "github:j-hui/fidget.nvim";
       flake = false;
     };
     nvim-lightbulb = {
       url = "github:kosayoda/nvim-lightbulb";
       flake = false;
     };
-    fidget = {
-      url = "github:j-hui/fidget.nvim";
-      flake = false;
-    };
-    nvim-code-action-menu = {
-      url = "github:weilbith/nvim-code-action-menu";
-      flake = false;
-    };
     lsp-signature = {
       url = "github:ray-x/lsp_signature.nvim";
+      flake = false;
+    };
+    nvim-lspconfig = {
+      url = "github:neovim/nvim-lspconfig?ref=v0.1.4";
+      flake = false;
+    };
+    lspkind = {
+      url = "github:onsails/lspkind-nvim";
+      flake = false;
+    };
+    lspsaga = {
+      url = "github:tami5/lspsaga.nvim";
       flake = false;
     };
     null-ls = {
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
     };
-    sqls-nvim = {
-      url = "github:nanotee/sqls.nvim";
+    nvim-code-action-menu = {
+      url = "github:weilbith/nvim-code-action-menu";
+      flake = false;
+    };
+    trouble = {
+      url = "github:folke/trouble.nvim";
+      flake = false;
+    };
+
+    # LSP tools
+    nvim-treesitter-context = {
+      url = "github:nvim-treesitter/nvim-treesitter-context";
+      flake = false;
+    };
+    nvim-jdtls = {
+      url = "github:mfussenegger/nvim-jdtls";
       flake = false;
     };
     rust-tools = {
       url = "github:simrat39/rust-tools.nvim";
       flake = false;
     };
-    nvim-jdtls = {
-      url = "github:mfussenegger/nvim-jdtls";
+    sqls-nvim = {
+      url = "github:nanotee/sqls.nvim";
+      flake = false;
+    };
+
+    # Debugging
+    nvim-dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    nvim-dap-ui = {
+      url = "github:rcarriga/nvim-dap-ui";
       flake = false;
     };
 
@@ -265,31 +277,26 @@
   } @ inputs: let
     # Plugin must be same as input name
     availablePlugins = [
-      "nvim-treesitter-context"
-      "gitsigns-nvim"
-      "toggleterm"
-      "lazygit"
-      "noice"
-      "nui"
-      "notify"
-      "plenary-nvim"
-      "nvim-lspconfig"
-      "lspsaga"
-      "lspkind"
-      "nvim-lightbulb"
       "fidget"
+      "nvim-lightbulb"
       "lsp-signature"
+      "nvim-lspconfig"
+      "lspkind"
+      "lspsaga"
+      "null-ls"
+      "nvim-code-action-menu"
+      "trouble"
+      "nvim-treesitter-context"
+      "nvim-jdtls"
+      "rust-tools"
+      "sqls-nvim"
+      "nvim-dap"
+      "nvim-dap-ui"
+      "telescope"
       "nvim-tree-lua"
       "nvim-bufferline-lua"
       "lualine"
       "nvim-compe"
-      "nvim-autopairs"
-      "nvim-ts-autotag"
-      "kommentary"
-      "todo-comments"
-      "nvim-web-devicons"
-      "tokyonight"
-      "bufdelete-nvim"
       "nvim-cmp"
       "cmp-nvim-lsp"
       "cmp-buffer"
@@ -298,21 +305,28 @@
       "cmp-treesitter"
       "github-copilot"
       "chatgpt"
-      "crates-nvim"
       "vim-vsnip"
-      "nvim-code-action-menu"
-      "trouble"
-      "null-ls"
-      "which-key"
-      "indent-blankline"
-      "nvim-cursorline"
-      "sqls-nvim"
-      "glow-nvim"
-      "telescope"
-      "rust-tools"
-      "nvim-jdtls"
+      "nvim-autopairs"
+      "nvim-ts-autotag"
+      "kommentary"
+      "todo-comments"
+      "bufdelete-nvim"
       "borealis"
+      "tokyonight"
       "onedark"
+      "crates-nvim"
+      "nvim-cursorline"
+      "indent-blankline"
+      "nvim-web-devicons"
+      "gitsigns-nvim"
+      "toggleterm"
+      "lazygit"
+      "noice"
+      "nui"
+      "notify"
+      "which-key"
+      "glow-nvim"
+      "plenary-nvim"
       "open-browser"
     ];
     rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
@@ -368,6 +382,11 @@
           nvimCodeActionMenu.enable = overrideable true;
           trouble.enable = overrideable true;
           lspSignature.enable = overrideable true;
+        };
+        vim.debugging = {
+          enable = overrideable true;
+          dap.enable = overrideable true;
+          dapUI.enable = overrideable true;
         };
         vim.visuals = {
           enable = overrideable true;

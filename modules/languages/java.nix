@@ -22,6 +22,21 @@ with builtins; let
           return root_dir
         end
 
+        java_on_attach = function(client, bufnr)
+          attach_keymaps(client, bufnr)
+          local opts = { noremap=true, silent=true, buffer = bufnr }
+          vim.keymap.set("n", "<leader>jo", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
+          vim.keymap.set("n", "<leader>jrv", "<Cmd>lua require'jdtls'.extract_variable()<CR>", opts)
+          vim.keymap.set("x", "<leader>jrv", "<Esc><Cmd>lua require'jdtls'.extract_variable(true)<CR>", opts)
+          vim.keymap.set("n", "<leader>jrc", "<Cmd>lua require'jdtls'.extract_constant()<CR>", opts)
+          vim.keymap.set("x", "<leader>jrc", "<Esc><Cmd>lua require'jdtls'.extract_constant(true)<CR>", opts)
+          vim.keymap.set("x", "<leader>jrm", "<Esc><Cmd>lua require'jdtls'.extract_method(true)<CR>", opts)
+
+          require('jdtls').setup_dap { hotcodereplace = 'auto' }
+          -- require('jdtls.dap').setup_dap_main_class_configs()
+          vim.lsp.codelens.refresh()
+        end
+
         local workspace_folder = home .. "/.cache/jdtls/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
         local jdtls_config_dir = home .. "/.config/jdtls_config"
         os.execute("mkdir -p " .. jdtls_config_dir)
@@ -31,7 +46,7 @@ with builtins; let
 
         lspconfig.jdtls.setup{
           capabilities = capabilities;
-          on_attach = attach_keymaps,
+          on_attach = java_on_attach,
           root_dir = get_root_dir,
           cmd = {
             '${cfg.lsp.package}/bin/jdt-language-server',
