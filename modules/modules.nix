@@ -10,6 +10,7 @@
     ./chatgpt
     ./completion
     ./core
+    ./debugging
     ./filetree
     ./git
     ./keys
