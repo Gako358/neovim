@@ -11,12 +11,12 @@ with builtins; let
   defaultServer = "lua";
   servers = {
     lua = {
-      package = pkgs.sumneko-lua-language-server;
+      package = pkgs.lua-language-server;
       lspConfig = ''
-        lspconfig.sumneko_lua.setup{
+        lspconfig.lua_ls.setup{
           capabilities = capabilities;
           on_attach = attach_keymaps,
-          cmd = { "${cfg.lsp.package}/bin/sumneko-lua-language-server" },
+          cmd = { "${cfg.lsp.package}/bin/lua-language-server" },
           Lua = {
             runtime = {
               version = 'LuaJIT',
@@ -35,6 +35,22 @@ with builtins; let
       '';
     };
   };
+
+  defaultFormat = "lua-format";
+  formats = {
+    lua-format = {
+      package = pkgs.luaformatter;
+      nullConfig = ''
+        table.insert(
+          ls_sources,
+          null_ls.builtins.formatting.lua_format.with({
+            command = "${cfg.format.package}/bin/lua-format";
+          })
+        )
+      '';
+    };
+  };
+
 in {
   options.vim.languages.lua = {
     enable = mkEnableOption "Lua language support";
@@ -65,6 +81,24 @@ in {
         default = servers.${cfg.lsp.server}.package;
       };
     };
+
+    format = {
+      enable = mkOption {
+        description = "Enable Lua formatting";
+        type = types.bool;
+        default = config.vim.languages.enableFormat;
+      };
+      type = mkOption {
+        description = "Lua formatter to use";
+        type = with types; enum (attrNames formats);
+        default = defaultFormat;
+      };
+      package = mkOption {
+        description = "Lua formatter package";
+        type = types.package;
+        default = formats.${cfg.format.type}.package;
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -75,6 +109,10 @@ in {
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.lua-lsp = servers.${cfg.lsp.server}.lspConfig;
+    })
+    (mkIf cfg.format.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources.lua-format = formats.${cfg.format.type}.nullConfig;
     })
   ]);
 }
