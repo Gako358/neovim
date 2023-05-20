@@ -18,7 +18,8 @@
       flake = false;
     };
     nvim-lspconfig = {
-      url = "github:neovim/nvim-lspconfig?ref=v0.1.4";
+      # url = "github:neovim/nvim-lspconfig?ref=v0.1.4";
+      url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
     lspkind = {
@@ -192,16 +193,6 @@
       flake = false;
     };
 
-    tokyonight = {
-      url = "github:folke/tokyonight.nvim";
-      flake = false;
-    };
-
-    onedark = {
-      url = "github:navarasu/onedark.nvim";
-      flake = false;
-    };
-
     # Rust crates
     crates-nvim = {
       url = "github:Saecki/crates.nvim";
@@ -312,8 +303,6 @@
       "todo-comments"
       "bufdelete-nvim"
       "borealis"
-      "tokyonight"
-      "onedark"
       "crates-nvim"
       "nvim-cursorline"
       "indent-blankline"

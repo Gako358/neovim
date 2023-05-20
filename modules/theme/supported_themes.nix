@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{lib, ...}:
 with lib;
 with builtins; let
   themeSubmodule.options = {
@@ -21,9 +16,6 @@ with builtins; let
       type = types.str;
     };
   };
-
-  cfg = config.vim.theme;
-  style = cfg.style;
 in {
   options.vim.theme = {
     supportedThemes = mkOption {
@@ -38,28 +30,6 @@ in {
         -- Borealis theme
         require('borealis').load()
       '';
-    };
-
-    onedark = {
-      setup = ''
-        -- OneDark theme
-        require('onedark').setup {
-          style = "${cfg.style}"
-        }
-        require('onedark').load()
-      '';
-      styles = ["dark" "darker" "cool" "deep" "warm" "warmer"];
-      defaultStyle = "dark";
-    };
-
-    tokyonight = {
-      setup = ''
-        -- need to set style before colorscheme to apply
-        vim.g.tokyonight_style = '${cfg.style}'
-        vim.cmd[[colorscheme tokyonight]]
-      '';
-      styles = ["day" "night" "storm"];
-      defaultStyle = "night";
     };
   };
 }

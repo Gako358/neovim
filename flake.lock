@@ -3,11 +3,11 @@
     "borealis": {
       "flake": false,
       "locked": {
-        "lastModified": 1683411994,
-        "narHash": "sha256-ve5KoKK2bw15FoLSwtvESTVjyWVD7Z0Q++ncvW1YcQ0=",
+        "lastModified": 1684623074,
+        "narHash": "sha256-Pz+2btBZ87fbFCPrrGr+p8i73rz5qOTYCYBDxKx92OY=",
         "owner": "Gako358",
         "repo": "borealis.nvim",
-        "rev": "ecba9c2d8479962d842da79ee260679e6125d4e2",
+        "rev": "3f7807b31829b688fd21e7b5d0c658a52174c43e",
         "type": "github"
       },
       "original": {
@@ -643,16 +643,15 @@
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1671465698,
-        "narHash": "sha256-yYFAqT4XaImry/JUB34GMp60llHWkmTCZl2hdGR148U=",
+        "lastModified": 1684461833,
+        "narHash": "sha256-KUysqbNzLHOOfcZVWTDIrtcZaRNL2MIRaz4kqIspR08=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "22c87d6f48c4fb1daf33476450d0b14a64230809",
+        "rev": "6f1d124bbcf03c4c410c093143a86415f46d16a0",
         "type": "github"
       },
       "original": {
         "owner": "neovim",
-        "ref": "v0.1.4",
         "repo": "nvim-lspconfig",
         "type": "github"
       }
@@ -734,22 +733,6 @@
       "original": {
         "owner": "kyazdani42",
         "repo": "nvim-web-devicons",
-        "type": "github"
-      }
-    },
-    "onedark": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1683327179,
-        "narHash": "sha256-Cyzix6wdnLly7DTgVUBwervTGguc65vL5LTyyy+HDxg=",
-        "owner": "navarasu",
-        "repo": "onedark.nvim",
-        "rev": "f6e82074761473d30a722f5d90c60282de1ac41d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "navarasu",
-        "repo": "onedark.nvim",
         "type": "github"
       }
     },
@@ -866,7 +849,6 @@
         "nvim-treesitter-context": "nvim-treesitter-context",
         "nvim-ts-autotag": "nvim-ts-autotag",
         "nvim-web-devicons": "nvim-web-devicons",
-        "onedark": "onedark",
         "open-browser": "open-browser",
         "plenary-nvim": "plenary-nvim",
         "registers": "registers",
@@ -876,7 +858,6 @@
         "telescope": "telescope",
         "todo-comments": "todo-comments",
         "toggleterm": "toggleterm",
-        "tokyonight": "tokyonight",
         "trouble": "trouble",
         "vim-vsnip": "vim-vsnip",
         "which-key": "which-key"
@@ -999,22 +980,6 @@
       "original": {
         "owner": "akinsho",
         "repo": "toggleterm.nvim",
-        "type": "github"
-      }
-    },
-    "tokyonight": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1683480785,
-        "narHash": "sha256-iSPPwXkTUCtDG5GsQzaFmo+9o/E4XLiGDGLhOeRrN9E=",
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
-        "rev": "df13e3268a44f142999fa166572fe95a650a0b37",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
         "type": "github"
       }
     },
