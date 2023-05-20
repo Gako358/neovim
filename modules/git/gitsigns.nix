@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -25,6 +24,34 @@ in {
 
         vim.luaConfigRC.gitsigns = nvim.dag.entryAnywhere ''
           require('gitsigns').setup {
+            watch_gitdir = {
+            interval = 1000,
+            follow_files = true
+            },
+            attach_to_untracked = true,
+            current_line_blame = false,
+            current_line_blame_opts = {
+              virt_text = true,
+              virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+              delay = 1000,
+              ignore_whitespace = false,
+            },
+            current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+            sign_priority = 6,
+            update_debounce = 100,
+            status_formatter = nil, -- Use default
+            max_file_length = 1000, -- Disable if file is longer than this (in lines)
+            preview_config = {
+              -- Options passed to nvim_open_win
+              border = 'single',
+              style = 'minimal',
+              relative = 'cursor',
+              row = 0,
+              col = 1
+            },
+            yadm = {
+              enable = false
+            },
             keymaps = {
               noremap = true,
 
@@ -39,6 +66,7 @@ in {
               ['n <leader>gR'] = '<cmd>Gitsigns reset_buffer<CR>',
               ['n <leader>gp'] = '<cmd>Gitsigns preview_hunk<CR>',
               ['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
+              ['n <leader>gl'] = '<cmd>Gitsigns toggle_current_line_blame<CR>',
               ['n <leader>gS'] = '<cmd>Gitsigns stage_buffer<CR>',
               ['n <leader>gU'] = '<cmd>Gitsigns reset_buffer_index<CR>',
               ['n <leader>gts'] = ':Gitsigns toggle_signs<CR>',
