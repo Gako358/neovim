@@ -31,6 +31,10 @@ with builtins; let
           vim.keymap.set("n", "<leader>jrc", "<Cmd>lua require'jdtls'.extract_constant()<CR>", opts)
           vim.keymap.set("x", "<leader>jrc", "<Esc><Cmd>lua require'jdtls'.extract_constant(true)<CR>", opts)
           vim.keymap.set("x", "<leader>jrm", "<Esc><Cmd>lua require'jdtls'.extract_method(true)<CR>", opts)
+
+          require('jdtls').setup_dap { hotcodereplace = 'auto' }
+          -- require('jdtls.dap').setup_dap_main_class_configs()
+          vim.lsp.codelens.refresh()
         end
 
         local workspace_folder = home .. "/.cache/jdtls/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
