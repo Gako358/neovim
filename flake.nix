@@ -383,6 +383,11 @@
           trouble.enable = overrideable true;
           lspSignature.enable = overrideable true;
         };
+        vim.debugging = {
+          enable = overrideable true;
+          dap.enable = overrideable true;
+          dapUI.enable = overrideable true;
+        };
         vim.visuals = {
           enable = overrideable true;
           nvimWebDevicons.enable = overrideable true;
