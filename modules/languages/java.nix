@@ -68,7 +68,6 @@ with builtins; let
           null_ls.builtins.formatting.google_java_format.with({
             command = "${cfg.format.package}/bin/google-java-format";
             args = {
-              "-",
               "--aosp",
               "--skip-sorting-imports",
               "--skip-removing-unused-imports",
