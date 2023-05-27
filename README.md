@@ -1,24 +1,35 @@
 # My personal neovim config for Nix
-Feel free to take bits of it to build your own or run it yourself.\
+
+Welcome to my Neovim configuration crafted for Nix. Feel free to use it as is or extract pieces to help construct your own unique setup.
 
 ![screenshot](https://github.com/Gako358/archive/blob/main/images/config/nvim.png)
 
-# How to use this flake
-Clone the repo and run the following from the directory:
+# Usage
+
+To utilize this configuration, clone the repo and run the following command from the directory:
+
 ```
 nix run .#
 ```
+
 or
+
 ```
 nix run github:gako358/neovim#.
 ```
 
-# How to update plugins
-```
+## Plugin Updates
+
+```shell
 nix flake update
 ```
 
-# Folder structure
+```shell
+nix flake lock --update-input 'Name-of-input'
+```
+
+## Repository Structure
+
 ```
 |-[modules] -- Contains modules which are used to configure neovim
 |-flake.nix -- Flake file
@@ -40,6 +51,7 @@ Most languages use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to
 - [nvim-ts-autotag](https://github.com/ellisonleao/glow.nvim/issues/44) for autoclosing and renaming html tags. Works with html, tsx, vue, svelte, and php
 
 ### Java
+
 ** LSP Server**: [jdtls](https://github.com/mfussenegger/nvim-jdtls)
 
 **Formatting**: [java-google-formater](https://github.com/google/google-java-format)
@@ -85,12 +97,9 @@ Using [eslint](https://github.com/prettier/prettier) through null-ls.
 
 Disabled lsp server formatting, using [prettier](https://github.com/prettier/prettier) through null-ls.
 
+## Plugins
 
-
-
-## All Plugins
-
-A list of all plugins that can be enabled
+This configuration includes a variety of plugins designed to enhance your Neovim experience, from LSP and Autopairs, to Completions, Git, Themes, and more. For a complete list and description of all plugins:
 
 ### LSP
 
@@ -104,7 +113,6 @@ A list of all plugins that can be enabled
 - [nvim-code-action-menu](https://github.com/weilbith/nvim-code-action-menu) provides a handy pop-up menu for code actions
 - [trouble.nvim](https://github.com/folke/trouble.nvim) pretty list of lsp data
 
-
 ### Autopairs
 
 - [nvim-autopairs](https://github.com/windwp/nvim-autopairs) an autopair plugin for neovim
@@ -116,11 +124,11 @@ A list of all plugins that can be enabled
 ### Completions
 
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) a completion engine that utilizes sources (replaces nvim-compe)
-    - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) a source for buffer words
-    - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) a source for builtin LSP client
-    - [cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip) a source for vim-vsnip autocomplete
-    - [cmp-path](https://github.com/hrsh7th/cmp-path) a source for path autocomplete
-    - [crates.nvim](https://github.com/Saecki/crates.nvim) autocompletion of rust crate versions in `cargo.toml`
+  - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) a source for buffer words
+  - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) a source for builtin LSP client
+  - [cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip) a source for vim-vsnip autocomplete
+  - [cmp-path](https://github.com/hrsh7th/cmp-path) a source for path autocomplete
+  - [crates.nvim](https://github.com/Saecki/crates.nvim) autocompletion of rust crate versions in `cargo.toml`
 
 ### Filetrees
 
@@ -139,6 +147,7 @@ A list of all plugins that can be enabled
 - [lualine.nvim](https://github.com/hoob3rt/lualine.nvim) statusline written in lua.
 
 ### Terminal
+
 - [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) a neovim plugin to persist and toggle multiple terminals during an editing session
 
 ### Themes
@@ -161,21 +170,18 @@ A list of all plugins that can be enabled
 - [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim) for indentation guides
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) Plugins and colors for icons. Requires patched font
 
-
-
-
 ## Dependencies
 
 - [plenary](https://github.com/nvim-lua/plenary.nvim) which is a dependency of some plugins, installed automatically if needed
 
-
 ## TODO
+
 1. Kotlin LSP and null-ls formating with diagnostics.
 2. Lua LSP debug server.
 
-
 # License
-The files and scripts in this repository are licensed under the MIT License, which is a very
-permissive license allowing you to use, modify, copy, distribute, sell, give away, etc. the software.
-In other words, do what you want with it. The only requirement with the MIT License is that the license
-and copyright notice must be provided with the software.
+
+> The files and scripts in this repository are licensed under the MIT License, which is a very
+> permissive license allowing you to use, modify, copy, distribute, sell, give away, etc. the software.
+> In other words, do what you want with it. The only requirement with the MIT License is that the license
+> and copyright notice must be provided with the software.
