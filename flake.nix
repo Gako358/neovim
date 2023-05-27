@@ -364,10 +364,10 @@
           ts.enable = overrideable true;
         };
         vim.lsp = {
-          formatOnSave = overrideable true;
+          formatOnSave = overrideable false;
           lspkind.enable = overrideable true;
           lightbulb.enable = overrideable true;
-          lspsaga.enable = overrideable false;
+          lspsaga.enable = overrideable true;
           nvimCodeActionMenu.enable = overrideable true;
           trouble.enable = overrideable true;
           lspSignature.enable = overrideable true;
