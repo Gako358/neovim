@@ -18,7 +18,6 @@
       flake = false;
     };
     nvim-lspconfig = {
-      # url = "github:neovim/nvim-lspconfig?ref=v0.1.4";
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
@@ -101,12 +100,6 @@
       flake = false;
     };
 
-    # Tablines
-    nvim-bufferline-lua = {
-      url = "github:akinsho/nvim-bufferline.lua?ref=v3.0.1";
-      flake = false;
-    };
-
     # Statuslines
     lualine = {
       url = "github:hoob3rt/lualine.nvim";
@@ -165,6 +158,12 @@
       flake = false;
     };
 
+    # dropbar
+    dropbar-nvim = {
+      url = "github:Bekaboo/dropbar.nvim";
+      flake = false;
+    };
+
     # Commenting
     kommentary = {
       url = "github:b3nj5m1n/kommentary";
@@ -172,12 +171,6 @@
     };
     todo-comments = {
       url = "github:folke/todo-comments.nvim";
-      flake = false;
-    };
-
-    # Buffer tools
-    bufdelete-nvim = {
-      url = "github:famiu/bufdelete.nvim";
       flake = false;
     };
 
@@ -279,7 +272,6 @@
       "nvim-dap-ui"
       "telescope"
       "nvim-tree-lua"
-      "nvim-bufferline-lua"
       "lualine"
       "nvim-compe"
       "nvim-cmp"
@@ -292,9 +284,9 @@
       "vim-vsnip"
       "nvim-autopairs"
       "nvim-ts-autotag"
+      "dropbar-nvim"
       "kommentary"
       "todo-comments"
-      "bufdelete-nvim"
       "borealis"
       "crates-nvim"
       "nvim-cursorline"
@@ -331,6 +323,27 @@
       config = {
         build.viAlias = overrideable false;
         build.vimAlias = overrideable true;
+        vim.autopairs.enable = overrideable true;
+        vim.autocomplete = {
+          enable = overrideable true;
+          type = overrideable "nvim-cmp";
+        };
+        vim.debugging = {
+          enable = overrideable true;
+          dap.enable = overrideable true;
+          dapUI.enable = overrideable true;
+        };
+        vim.filetree.nvimTreeLua.enable = overrideable true;
+        vim.git = {
+          enable = overrideable true;
+          gitsigns.enable = overrideable true;
+          gitsigns.codeActions = overrideable true;
+          lazygit.enable = overrideable true;
+        };
+        vim.keys = {
+          enable = overrideable true;
+          whichKey.enable = overrideable true;
+        };
         vim.languages = {
           enableLSP = overrideable true;
           enableFormat = overrideable true;
@@ -365,30 +378,26 @@
           trouble.enable = overrideable true;
           lspSignature.enable = overrideable true;
         };
-        vim.debugging = {
-          enable = overrideable true;
-          dap.enable = overrideable true;
-          dapUI.enable = overrideable true;
-        };
         vim.visuals = {
           enable = overrideable true;
           nvimWebDevicons.enable = overrideable true;
-          kommentary.enable = overrideable true;
-          todoComments.enable = overrideable true;
+          cursorWordline = {
+            enable = overrideable true;
+            lineTimeout = overrideable 0;
+          };
+          dropbar.enable = overrideable false;
           indentBlankline = {
             enable = overrideable true;
             fillChar = overrideable null;
             eolChar = overrideable null;
             showCurrContext = overrideable true;
           };
-          cursorWordline = {
-            enable = overrideable true;
-            lineTimeout = overrideable 0;
-          };
-          toggleTerm = {
-            enable = overrideable true;
-          };
+          kommentary.enable = overrideable true;
           noice = {
+            enable = overrideable true;
+          };
+          todoComments.enable = overrideable true;
+          toggleTerm = {
             enable = overrideable true;
           };
         };
@@ -400,25 +409,8 @@
           enable = overrideable true;
           name = overrideable "borealis";
         };
-        vim.autopairs.enable = overrideable true;
-        vim.autocomplete = {
-          enable = overrideable true;
-          type = overrideable "nvim-cmp";
-        };
-        vim.filetree.nvimTreeLua.enable = overrideable true;
-        vim.tabline.nvimBufferline.enable = overrideable true;
-        vim.treesitter.context.enable = overrideable true;
-        vim.keys = {
-          enable = overrideable true;
-          whichKey.enable = overrideable true;
-        };
         vim.telescope.enable = overrideable true;
-        vim.git = {
-          enable = overrideable true;
-          gitsigns.enable = overrideable true;
-          gitsigns.codeActions = overrideable true;
-          lazygit.enable = overrideable true;
-        };
+        vim.treesitter.context.enable = overrideable true;
       };
     };
 

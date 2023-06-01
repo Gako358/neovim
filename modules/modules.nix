@@ -17,7 +17,6 @@
     ./lsp
     ./snippets
     ./statusline
-    ./tabline
     ./telescope
     ./theme
     ./treesitter
