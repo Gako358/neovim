@@ -7,7 +7,6 @@
     ./autopairs
     ./basic
     ./build
-    ./chatgpt
     ./completion
     ./core
     ./debugging

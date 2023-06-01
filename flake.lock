@@ -32,22 +32,6 @@
         "type": "github"
       }
     },
-    "chatgpt": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1683703527,
-        "narHash": "sha256-NbttSDFPxZnoTAznCfG12vv9lPoFyCtVmgoKkUAWloQ=",
-        "owner": "jackMort",
-        "repo": "ChatGPT.nvim",
-        "rev": "5a6287cdd90838c727cb8ac8dbd4787702445680",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jackMort",
-        "repo": "ChatGPT.nvim",
-        "type": "github"
-      }
-    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -808,7 +792,6 @@
       "inputs": {
         "borealis": "borealis",
         "bufdelete-nvim": "bufdelete-nvim",
-        "chatgpt": "chatgpt",
         "cmp-buffer": "cmp-buffer",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
