@@ -117,10 +117,6 @@ This configuration includes a variety of plugins designed to enhance your Neovim
 
 - [nvim-autopairs](https://github.com/windwp/nvim-autopairs) an autopair plugin for neovim
 
-### Buffers
-
-- [nvim-bufferline-lua](https://github.com/akinsho/bufferline.nvim) a buffer line with tab integration
-
 ### Completions
 
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) a completion engine that utilizes sources (replaces nvim-compe)

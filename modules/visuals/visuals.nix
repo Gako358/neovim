@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -12,8 +11,6 @@ in {
     enable = mkEnableOption "visual enhancements.";
 
     nvimWebDevicons.enable = mkEnableOption "dev icons. Required for certain plugins [nvim-web-devicons].";
-    kommentary.enable = mkEnableOption "commenting plugin [kommentary].";
-    todoComments.enable = mkEnableOption "todo comments [todo-comments].";
 
     cursorWordline = {
       enable = mkEnableOption "word and delayed line highlight [nvim-cursorline].";
@@ -24,6 +21,8 @@ in {
         default = 500;
       };
     };
+
+    dropbar.enable = mkEnableOption "dropbar [dropbar-nvim].";
 
     indentBlankline = {
       enable = mkEnableOption "indentation guides [indent-blankline].";
@@ -71,12 +70,6 @@ in {
       };
     };
 
-    toggleTerm.enable = mkOption {
-      description = "Toggle terminal with <c-t>";
-      type = types.bool;
-      default = literalExpression "config.vim.git.lazygit.enable";
-    };
-
     noice = {
       enable = mkEnableOption "Noice configuration.";
 
@@ -112,9 +105,30 @@ in {
         };
       };
     };
+
+    kommentary.enable = mkEnableOption "commenting plugin [kommentary].";
+    todoComments.enable = mkEnableOption "todo comments [todo-comments].";
+
+    toggleTerm.enable = mkOption {
+      description = "Toggle terminal with <c-t>";
+      type = types.bool;
+      default = literalExpression "config.vim.git.lazygit.enable";
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
+    (mkIf cfg.nvimWebDevicons.enable {
+      vim.startPlugins = ["nvim-web-devicons"];
+    })
+    (mkIf cfg.cursorWordline.enable {
+      vim.startPlugins = ["nvim-cursorline"];
+      vim.luaConfigRC.cursorline = nvim.dag.entryAnywhere ''
+        vim.g.cursorline_timeout = ${toString cfg.cursorWordline.lineTimeout}
+      '';
+    })
+    (mkIf cfg.dropbar.enable {
+      vim.startPlugins = ["dropbar-nvim"];
+    })
     (mkIf cfg.indentBlankline.enable {
       vim.startPlugins = ["indent-blankline"];
       vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''
@@ -137,15 +151,6 @@ in {
         }
       '';
     })
-    (mkIf cfg.cursorWordline.enable {
-      vim.startPlugins = ["nvim-cursorline"];
-      vim.luaConfigRC.cursorline = nvim.dag.entryAnywhere ''
-        vim.g.cursorline_timeout = ${toString cfg.cursorWordline.lineTimeout}
-      '';
-    })
-    (mkIf cfg.nvimWebDevicons.enable {
-      vim.startPlugins = ["nvim-web-devicons"];
-    })
     (mkIf cfg.kommentary.enable {
       vim.startPlugins = ["kommentary"];
       vim.luaConfigRC.kommentary = nvim.dag.entryAnywhere ''
@@ -154,33 +159,6 @@ in {
           use_consistent_indentation = true,
           ignore_whitespace = true,
         })
-      '';
-    })
-    (mkIf cfg.todoComments.enable {
-      vim.startPlugins = ["todo-comments"];
-      vim.luaConfigRC.todo-comments = nvim.dag.entryAnywhere ''
-        require("todo-comments").setup {}
-      '';
-    })
-    (mkIf cfg.toggleTerm.enable {
-      vim.startPlugins = ["toggleterm"];
-      vim.luaConfigRC.toggleterm = nvim.dag.entryAnywhere ''
-        require("toggleterm").setup {
-          size = 20,
-          open_mapping = [[<c-t>]],
-          shade_filetypes = {},
-          shade_terminals = true,
-          shading_factor = 1,
-          start_in_insert = true,
-          insert_mappings = true,
-          persist_size = true,
-          direction = "float",
-          float_opts = {
-            border = "double",
-          },
-          close_on_exit = true,
-          shell = vim.o.shell,
-        }
       '';
     })
     (mkIf cfg.noice.enable {
@@ -209,6 +187,33 @@ in {
             lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
           },
         })
+      '';
+    })
+    (mkIf cfg.todoComments.enable {
+      vim.startPlugins = ["todo-comments"];
+      vim.luaConfigRC.todo-comments = nvim.dag.entryAnywhere ''
+        require("todo-comments").setup {}
+      '';
+    })
+    (mkIf cfg.toggleTerm.enable {
+      vim.startPlugins = ["toggleterm"];
+      vim.luaConfigRC.toggleterm = nvim.dag.entryAnywhere ''
+        require("toggleterm").setup {
+          size = 20,
+          open_mapping = [[<c-t>]],
+          shade_filetypes = {},
+          shade_terminals = true,
+          shading_factor = 1,
+          start_in_insert = true,
+          insert_mappings = true,
+          persist_size = true,
+          direction = "float",
+          float_opts = {
+            border = "double",
+          },
+          close_on_exit = true,
+          shell = vim.o.shell,
+        }
       '';
     })
   ]);
