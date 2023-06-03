@@ -371,6 +371,9 @@
             enable = overrideable true;
             crates.enable = overrideable true;
           };
+          scala = {
+            enable = overrideable false;
+          };
           sql = {
             enable = overrideable true;
             extraDiagnostics.enable = overrideable false;
