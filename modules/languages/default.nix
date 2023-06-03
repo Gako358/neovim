@@ -18,6 +18,7 @@ in {
     ./markdown.nix
     ./python.nix
     ./rust.nix
+    ./scala.nix
     ./sql.nix
     ./ts.nix
   ];
