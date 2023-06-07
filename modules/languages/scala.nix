@@ -13,22 +13,41 @@ with builtins; let
     metals = {
       package = pkgs.metals;
       lspConfig = ''
-        lspconfig.jdtls.setup{
-          capabilities = capabilities;
-          on_attach = attached_keymaps,
-          cmd = {
-            '${cfg.lsp.package}/bin/metals',
-          };
-          init_options = {
-            compilerOptions = {
-              snippetAutoIndent = false;
-            },
-            isHttpEnabled = true,
-            statusBarProvider = "show-message",
-          };
-          message_level = 4,
-          root_dir = lspconfig.util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml", "gradlew", "gradle"),
-        };
+        -- Scala nvim-metals config
+        vim.keymap.set("n", "<leader>cm", "<Cmd>lua require('metals').commands()<CR>", opts)
+        vim.keymap.set("n", "<leader>cs", "<Cmd>lua require('metals').toggle_setting('showImplicitArguments')<CR>", opts)
+        vim.keymap.set("n", "<leader>ch", "<Cmd>lua require('metals').worksheet_hover()<CR>", opts)
+        vim.keymap.set("n", "<leader>cd", "<Cmd>lua require('metals').open_all_diagnostics()<CR>", opts)
+        metals_config = require('metals').bare_config()
+        metals_config.capabilities = capabilities
+        metals_config.on_attach = attached_keymaps
+
+        metals_config.settings = {
+           metalsBinaryPath = "${cfg.lsp.package}/bin/metals",
+           showImplicitArguments = true,
+           showImplicitConversionsAndClasses = true,
+           showInferredType = true,
+           excludedPackages = {
+             "akka.actor.typed.javadsl",
+             "com.github.swagger.akka.javadsl"
+           }
+        }
+
+        metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+          vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = {
+              prefix = '',
+            }
+          }
+        )
+
+        -- without doing this, autocommands that deal with filetypes prohibit messages from being shown
+        vim.opt_global.shortmess:remove("F")
+
+        vim.cmd([[augroup lsp]])
+        vim.cmd([[autocmd!]])
+        vim.cmd([[autocmd FileType java,scala,sbt lua require('metals').initialize_or_attach(metals_config)]])
+        vim.cmd([[augroup end]])
       '';
     };
   };
@@ -50,8 +69,6 @@ with builtins; let
       '';
     };
   };
-  # TODO: Add support for nvim-metals
-  # scalameta/nvim-metals
 in {
   options.vim.languages.scala = {
     enable = mkEnableOption "Scala language support";
@@ -109,7 +126,7 @@ in {
     })
 
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = ["nvim-jdtls"];
+      vim.startPlugins = ["nvim-metals"];
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.scala-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
