@@ -59,6 +59,10 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
+    nvim-metals = {
+      url = "github:scalameta/nvim-metals";
+      flake = false;
+    };
 
     # Debugging
     nvim-dap = {
@@ -272,6 +276,7 @@
       "nvim-jdtls"
       "rust-tools"
       "sqls-nvim"
+      "nvim-metals"
       "nvim-dap"
       "nvim-dap-ui"
       "telescope"
@@ -372,7 +377,7 @@
             crates.enable = overrideable true;
           };
           scala = {
-            enable = overrideable false;
+            enable = overrideable true;
           };
           sql = {
             enable = overrideable true;
