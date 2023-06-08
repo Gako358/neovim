@@ -365,6 +365,8 @@
 
           clang.enable = overrideable true;
           css.enable = overrideable true;
+          dhall.enable = overrideable true;
+          haskell.enable = overrideable true;
           html.enable = overrideable true;
           java.enable = overrideable true;
           kotlin.enable = overrideable true;

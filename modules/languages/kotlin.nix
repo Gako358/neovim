@@ -121,7 +121,6 @@ in {
     })
 
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = ["nvim-jdtls"];
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.kotlin-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
