@@ -10,6 +10,8 @@ in {
   imports = [
     ./clang.nix
     ./css.nix
+    ./dhall.nix
+    ./haskell.nix
     ./html.nix
     ./java.nix
     ./kotlin.nix
