@@ -50,6 +50,16 @@ Most languages use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to
 
 - [nvim-ts-autotag](https://github.com/ellisonleao/glow.nvim/issues/44) for autoclosing and renaming html tags. Works with html, tsx, vue, svelte, and php
 
+### Dhall
+
+**LSP Server**: [dhall-lsp-server](https://github.com/dhall-lang/dhall-haskell/tree/main/dhall-lsp-server)
+
+### Haskell
+
+**LSP Server**: [haskell-language-server](https://github.com/haskell/haskell-language-server)
+
+**Formatting**: [cabal-fmt](https://github.com/phadej/cabal-fmt}
+
 ### Java
 
 ** LSP Server**: [jdtls](https://github.com/mfussenegger/nvim-jdtls)
@@ -85,6 +95,10 @@ Rust analyzer provides builtin formatting with [rustfmt](https://github.com/rust
 - [rust-tools](https://github.com/simrat39/rust-tools.nvim)
 - [crates.nvim](https://github.com/Saecki/crates.nvim)
 
+### Scala
+
+**LSP Server**: [metals](https://github.com/scalameta/nvim-metals}
+
 ### Typescript
 
 **LSP Server**: [typescript-language-server](https://github.com/typescript-language-server/typescript-language-server)
@@ -116,6 +130,10 @@ This configuration includes a variety of plugins designed to enhance your Neovim
 ### Autopairs
 
 - [nvim-autopairs](https://github.com/windwp/nvim-autopairs) an autopair plugin for neovim
+
+### ChatGPT
+
+- [ChatGPT.nvim](https://github.com/jackMort/ChatGPT.nvim) a plugin for generating text with GPT-3.5 Turbo
 
 ### Completions
 
@@ -169,11 +187,6 @@ This configuration includes a variety of plugins designed to enhance your Neovim
 ## Dependencies
 
 - [plenary](https://github.com/nvim-lua/plenary.nvim) which is a dependency of some plugins, installed automatically if needed
-
-## TODO
-
-1. Kotlin LSP and null-ls formating with diagnostics.
-2. Lua LSP debug server.
 
 # License
 
