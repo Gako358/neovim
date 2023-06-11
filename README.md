@@ -97,7 +97,7 @@ Rust analyzer provides builtin formatting with [rustfmt](https://github.com/rust
 
 ### Scala
 
-**LSP Server**: [metals](https://github.com/scalameta/nvim-metals}
+**LSP Server**: [metals](https://github.com/scalameta/nvim-metals)
 
 ### Typescript
 
