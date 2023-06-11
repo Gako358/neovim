@@ -58,7 +58,7 @@ Most languages use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to
 
 **LSP Server**: [haskell-language-server](https://github.com/haskell/haskell-language-server)
 
-**Formatting**: [cabal-fmt](https://github.com/phadej/cabal-fmt}
+**Formatting**: [cabal-fmt](https://github.com/phadej/cabal-fmt)
 
 ### Java
 
