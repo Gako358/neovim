@@ -8,19 +8,18 @@ with lib;
 with builtins; let
   cfg = config.vim.languages.clang;
 
-  defaultServer = "ccls";
+  defaultServer = "clangd";
   servers = {
-    ccls = {
-      package = pkgs.ccls;
+    clangd = {
+      package = pkgs.clang-tools;
       lspConfig = ''
-        lspconfig.ccls.setup{
-          capabilities = capabilities;
+        local clangd_capabilities = capabilities;
+        clangd_capabilities.textDocument.semanticHighlighting = true;
+        clangd_capabilities.offsetEncoding = "utf-16";
+        lspconfig.clangd.setup{
+          capabilities = clangd_capabilities,
           on_attach = attach_keymaps,
-          cmd = {
-            "${pkgs.ccls}/bin/ccls",
-            "--offset-encoding=utf-8",
-          };
-          ${optionalString (cfg.lsp.opts != null) "init_options = ${cfg.lsp.cclsOpts}"}
+          cmd = {"${pkgs.clang-tools}/bin/clangd"};
         }
       '';
     };
@@ -79,11 +78,6 @@ in {
         description = "clang LSP server package";
         type = types.package;
         default = servers.${cfg.lsp.server}.package;
-      };
-      opts = mkOption {
-        description = "Options to pass to clang LSP server";
-        type = with types; nullOr str;
-        default = null;
       };
     };
 
