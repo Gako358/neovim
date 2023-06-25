@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -12,7 +11,6 @@ in {
   imports = [
     ./lspconfig.nix
     ./null-ls.nix
-
     ./lspkind.nix
     ./lspsaga.nix
     ./nvim-code-action-menu.nix

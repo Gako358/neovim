@@ -16,7 +16,10 @@ with builtins; let
         lspconfig.ccls.setup{
           capabilities = capabilities;
           on_attach = attach_keymaps,
-          cmd = {"${pkgs.ccls}/bin/ccls"};
+          cmd = {
+            "${pkgs.ccls}/bin/ccls",
+            "--offset-encoding=utf-8",
+          };
           ${optionalString (cfg.lsp.opts != null) "init_options = ${cfg.lsp.cclsOpts}"}
         }
       '';
