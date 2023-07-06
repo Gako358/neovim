@@ -258,6 +258,22 @@
         "type": "github"
       }
     },
+    "lightspeed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666361611,
+        "narHash": "sha256-P8j8SY6Cvv7zAXfAP3IY7CYj6RC8k+hV3SUbJy69J5k=",
+        "owner": "ggandor",
+        "repo": "lightspeed.nvim",
+        "rev": "299eefa6a9e2d881f1194587c573dad619fdb96f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggandor",
+        "repo": "lightspeed.nvim",
+        "type": "github"
+      }
+    },
     "lsp-signature": {
       "flake": false,
       "locked": {
@@ -476,22 +492,6 @@
       "original": {
         "owner": "windwp",
         "repo": "nvim-autopairs",
-        "type": "github"
-      }
-    },
-    "nvim-chatgpt": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1685123344,
-        "narHash": "sha256-rRr4hbdSLrtxH8vwkA1ek35AQTR+EBP/8XeF6kKqZEA=",
-        "owner": "jackMort",
-        "repo": "ChatGPT.nvim",
-        "rev": "af509fceb70cab1867a611f3d8fad6d3e7760fb0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jackMort",
-        "repo": "ChatGPT.nvim",
         "type": "github"
       }
     },
@@ -821,6 +821,7 @@
         "indent-blankline": "indent-blankline",
         "kommentary": "kommentary",
         "lazygit": "lazygit",
+        "lightspeed": "lightspeed",
         "lsp-signature": "lsp-signature",
         "lspkind": "lspkind",
         "lspsaga": "lspsaga",
@@ -832,7 +833,6 @@
         "nui": "nui",
         "null-ls": "null-ls",
         "nvim-autopairs": "nvim-autopairs",
-        "nvim-chatgpt": "nvim-chatgpt",
         "nvim-cmp": "nvim-cmp",
         "nvim-code-action-menu": "nvim-code-action-menu",
         "nvim-compe": "nvim-compe",

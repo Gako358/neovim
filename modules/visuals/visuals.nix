@@ -70,6 +70,23 @@ in {
       };
     };
 
+    kommentary.enable = mkEnableOption "commenting plugin [kommentary].";
+    lightspeed = {
+      enable = mkEnableOption "lightspeed motion plugin [lightspeed].";
+
+      ignoreCase = mkOption {
+        description = "Ignore case when searching for characters";
+        type = types.bool;
+        default = false;
+      };
+
+      jumpToUniqueChars = mkOption {
+        description = "Safety timeout for jump to unique chars";
+        type = types.int;
+        default = 500;
+      };
+    };
+
     noice = {
       enable = mkEnableOption "Noice configuration.";
 
@@ -106,7 +123,6 @@ in {
       };
     };
 
-    kommentary.enable = mkEnableOption "commenting plugin [kommentary].";
     todoComments.enable = mkEnableOption "todo comments [todo-comments].";
 
     toggleTerm.enable = mkOption {
@@ -158,6 +174,15 @@ in {
           prefer_single_line_comments = true,
           use_consistent_indentation = true,
           ignore_whitespace = true,
+        })
+      '';
+    })
+    (mkIf cfg.lightspeed.enable {
+      vim.startPlugins = ["lightspeed"];
+      vim.luaConfigRC.lightspeed = nvim.dag.entryAnywhere ''
+        require("lightspeed").setup({
+          ignore_case = ${boolToString cfg.lightspeed.ignoreCase},
+          jump_to_unique_chars = ${toString cfg.lightspeed.jumpToUniqueChars},
         })
       '';
     })
