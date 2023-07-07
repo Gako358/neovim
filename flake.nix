@@ -140,12 +140,6 @@
       flake = false;
     };
 
-    # Copilot
-    github-copilot = {
-      url = "github:github/copilot.vim";
-      flake = false;
-    };
-
     # snippets
     vim-vsnip = {
       url = "github:hrsh7th/vim-vsnip";
