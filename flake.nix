@@ -145,11 +145,6 @@
       url = "github:github/copilot.vim";
       flake = false;
     };
-    nvim-chatgpt = {
-      url = "github:jackMort/ChatGPT.nvim";
-      flake = false;
-    };
-
     # snippets
     vim-vsnip = {
       url = "github:hrsh7th/vim-vsnip";
@@ -290,7 +285,6 @@
       "cmp-path"
       "cmp-treesitter"
       "github-copilot"
-      "nvim-chatgpt"
       "vim-vsnip"
       "nvim-autopairs"
       "nvim-ts-autotag"
@@ -337,9 +331,6 @@
         vim.autocomplete = {
           enable = overrideable true;
           type = overrideable "nvim-cmp";
-        };
-        vim.chatgpt = {
-          enable = overrideable true;
         };
         vim.debugging = {
           enable = overrideable true;
