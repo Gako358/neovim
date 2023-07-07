@@ -167,16 +167,6 @@
       flake = false;
     };
 
-    # Commenting
-    kommentary = {
-      url = "github:b3nj5m1n/kommentary";
-      flake = false;
-    };
-    todo-comments = {
-      url = "github:folke/todo-comments.nvim";
-      flake = false;
-    };
-
     # Themes
     borealis = {
       url = "github:Gako358/borealis.nvim";
@@ -189,29 +179,35 @@
       flake = false;
     };
 
-    # Visuals
-    nvim-cursorline = {
-      url = "github:yamatsum/nvim-cursorline";
-      flake = false;
-    };
-    indent-blankline = {
-      url = "github:lukas-reineke/indent-blankline.nvim";
-      flake = false;
-    };
-    nvim-web-devicons = {
-      url = "github:kyazdani42/nvim-web-devicons";
-      flake = false;
-    };
+    # Git
     gitsigns-nvim = {
       url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
-    toggleterm = {
-      url = "github:akinsho/toggleterm.nvim";
-      flake = false;
-    };
     lazygit = {
       url = "github:kdheepak/lazygit.nvim";
+      flake = false;
+    };
+
+    # Visuals
+    indent-blankline = {
+      url = "github:lukas-reineke/indent-blankline.nvim";
+      flake = false;
+    };
+    kommentary = {
+      url = "github:b3nj5m1n/kommentary";
+      flake = false;
+    };
+    lightspeed = {
+      url = "github:ggandor/lightspeed.nvim";
+      flake = false;
+    };
+    nvim-cursorline = {
+      url = "github:yamatsum/nvim-cursorline";
+      flake = false;
+    };
+    nvim-web-devicons = {
+      url = "github:kyazdani42/nvim-web-devicons";
       flake = false;
     };
     noice = {
@@ -224,6 +220,14 @@
     };
     notify = {
       url = "github:rcarriga/nvim-notify";
+      flake = false;
+    };
+    todo-comments = {
+      url = "github:folke/todo-comments.nvim";
+      flake = false;
+    };
+    toggleterm = {
+      url = "github:akinsho/toggleterm.nvim";
       flake = false;
     };
 
@@ -288,20 +292,21 @@
       "vim-vsnip"
       "nvim-autopairs"
       "nvim-ts-autotag"
-      "dropbar-nvim"
-      "kommentary"
-      "todo-comments"
       "borealis"
       "crates-nvim"
-      "nvim-cursorline"
-      "indent-blankline"
-      "nvim-web-devicons"
       "gitsigns-nvim"
-      "toggleterm"
       "lazygit"
+      "dropbar-nvim"
+      "indent-blankline"
+      "lightspeed"
+      "nvim-cursorline"
+      "nvim-web-devicons"
+      "kommentary"
       "noice"
       "nui"
       "notify"
+      "todo-comments"
+      "toggleterm"
       "which-key"
       "glow-nvim"
       "plenary-nvim"
@@ -402,6 +407,7 @@
             showCurrContext = overrideable true;
           };
           kommentary.enable = overrideable true;
+          lightspeed.enable = overrideable true;
           noice = {
             enable = overrideable true;
           };

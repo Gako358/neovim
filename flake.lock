@@ -258,6 +258,22 @@
         "type": "github"
       }
     },
+    "lightspeed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666361611,
+        "narHash": "sha256-P8j8SY6Cvv7zAXfAP3IY7CYj6RC8k+hV3SUbJy69J5k=",
+        "owner": "ggandor",
+        "repo": "lightspeed.nvim",
+        "rev": "299eefa6a9e2d881f1194587c573dad619fdb96f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggandor",
+        "repo": "lightspeed.nvim",
+        "type": "github"
+      }
+    },
     "lsp-signature": {
       "flake": false,
       "locked": {
@@ -805,6 +821,7 @@
         "indent-blankline": "indent-blankline",
         "kommentary": "kommentary",
         "lazygit": "lazygit",
+        "lightspeed": "lightspeed",
         "lsp-signature": "lsp-signature",
         "lspkind": "lspkind",
         "lspsaga": "lspsaga",
