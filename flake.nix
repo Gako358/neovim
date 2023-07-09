@@ -191,16 +191,16 @@
     };
 
     # Visuals
+    flash = {
+      url = "github:folke/flash.nvim";
+      flake = false;
+    };
     indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
     kommentary = {
       url = "github:b3nj5m1n/kommentary";
-      flake = false;
-    };
-    lightspeed = {
-      url = "github:ggandor/lightspeed.nvim";
       flake = false;
     };
     nvim-cursorline = {
@@ -298,8 +298,8 @@
       "gitsigns-nvim"
       "lazygit"
       "dropbar-nvim"
+      "flash"
       "indent-blankline"
-      "lightspeed"
       "nvim-cursorline"
       "nvim-web-devicons"
       "kommentary"
@@ -401,6 +401,7 @@
             lineTimeout = overrideable 0;
           };
           dropbar.enable = overrideable false;
+          flash.enable = overrideable true;
           indentBlankline = {
             enable = overrideable true;
             fillChar = overrideable null;
@@ -408,7 +409,6 @@
             showCurrContext = overrideable true;
           };
           kommentary.enable = overrideable true;
-          lightspeed.enable = overrideable true;
           noice = {
             enable = overrideable true;
           };
