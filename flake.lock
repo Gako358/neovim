@@ -162,22 +162,6 @@
         "type": "github"
       }
     },
-    "flash": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1688762891,
-        "narHash": "sha256-8oqXMSPLNz8afHUUrgs00bcvgwU9VHJmHdKldpnN9vQ=",
-        "owner": "folke",
-        "repo": "flash.nvim",
-        "rev": "a8da6ff212c1885ecde26af477207742959c67d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "flash.nvim",
-        "type": "github"
-      }
-    },
     "github-copilot": {
       "flake": false,
       "locked": {
@@ -815,7 +799,6 @@
         "dropbar-nvim": "dropbar-nvim",
         "fidget": "fidget",
         "flake-utils": "flake-utils",
-        "flash": "flash",
         "github-copilot": "github-copilot",
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-nvim": "glow-nvim",

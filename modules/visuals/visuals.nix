@@ -23,8 +23,6 @@ in {
     };
 
     dropbar.enable = mkEnableOption "dropbar [dropbar-nvim].";
-    flash.enable = mkEnableOption "flash on yank [flash].";
-
     indentBlankline = {
       enable = mkEnableOption "indentation guides [indent-blankline].";
 
@@ -130,12 +128,6 @@ in {
     })
     (mkIf cfg.dropbar.enable {
       vim.startPlugins = ["dropbar-nvim"];
-    })
-    (mkIf cfg.flash.enable {
-      vim.startPlugins = ["flash"];
-      vim.luaConfigRC.flash = nvim.dag.entryAnywhere ''
-        require("flash"):setup()
-      '';
     })
     (mkIf cfg.indentBlankline.enable {
       vim.startPlugins = ["indent-blankline"];

@@ -191,10 +191,6 @@
     };
 
     # Visuals
-    flash = {
-      url = "github:folke/flash.nvim";
-      flake = false;
-    };
     indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
@@ -298,7 +294,6 @@
       "gitsigns-nvim"
       "lazygit"
       "dropbar-nvim"
-      "flash"
       "indent-blankline"
       "nvim-cursorline"
       "nvim-web-devicons"
@@ -401,7 +396,6 @@
             lineTimeout = overrideable 0;
           };
           dropbar.enable = overrideable false;
-          flash.enable = overrideable true;
           indentBlankline = {
             enable = overrideable true;
             fillChar = overrideable null;
