@@ -383,7 +383,7 @@
           formatOnSave = overrideable false;
           lspkind.enable = overrideable true;
           lightbulb.enable = overrideable true;
-          lspsaga.enable = overrideable false;
+          lspsaga.enable = overrideable true;
           nvimCodeActionMenu.enable = overrideable true;
           trouble.enable = overrideable true;
           lspSignature.enable = overrideable true;
