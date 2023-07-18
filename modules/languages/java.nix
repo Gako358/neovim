@@ -16,10 +16,12 @@ with builtins; let
         -- Java workspace setup
         local home = os.getenv("HOME")
         local jdtls = require('jdtls')
-        local root_markers = {'gradlew', 'pom.xml', 'mvnw', '.git'}
-        local root_dir = require('jdtls.setup').find_root(root_markers)
+        local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle", ".project" }
+        local root_dir = jdtls.setup.find_root(root_markers)
+
+        -- Function to set root_dir to the parent directory of the .git folder
         local function get_root_dir()
-          return root_dir
+          return lspconfig.util.root_pattern(unpack(root_markers))(vim.fn.expand('%:p:h'))
         end
 
         java_on_attach = function(client, bufnr)
@@ -44,27 +46,45 @@ with builtins; let
         -- Copy from nix store to config dir
         os.execute("cp -r ${cfg.lsp.package}/config_linux/* " .. jdtls_config_dir)
 
+
         lspconfig.jdtls.setup{
           capabilities = capabilities;
           on_attach = java_on_attach,
-          root_dir = get_root_dir,
+          -- root_dir = get_root_dir,
           cmd = {
-            '${cfg.lsp.package}/bin/jdt-language-server',
-            '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-            '-Dosgi.bundles.defaultStartLevel=4',
-            '-Declipse.product=org.eclipse.jdt.ls.core.product',
-            '-Dlog.protocol=true',
-            '-Dlog.level=ALL',
-            '-Xms1g',
-            '--add-modules=ALL-SYSTEM',
-            '--add-opens',
-            'java.base/java.util=ALL-UNNAMED',
-            '--add-opens',
-            'java.base/java.lang=ALL-UNNAMED',
-            '-jar',
-            '-configuration', jdtls_config_dir,
-            '-data', workspace_folder,
+            "${cfg.lsp.package}/bin/jdt-language-server",
+            "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+            "-Dosgi.bundles.defaultStartLevel=4",
+            "-Declipse.product=org.eclipse.jdt.ls.core.product",
+            "-Dlog.protocol=true",
+            "-Dlog.level=ALL",
+            "-Xms1g",
+            "--add-modules=ALL-SYSTEM",
+            "--add-opens",
+            "java.base/java.util=ALL-UNNAMED",
+            "--add-opens",
+            "java.base/java.lang=ALL-UNNAMED",
+            "-jar",
+            "-configuration", jdtls_config_dir,
+            "-data", workspace_folder,
           };
+          root_dir = get_root_dir;
+          settings = {
+            java = {
+              referencesCodeLens = {enabled = true};
+              signatureHelp = { enabled = true };
+              implementationsCodeLens = { enabled = true };
+              contentProvider = { preferred = 'fernflower' };
+            },
+          };
+          handlers = {
+            ["language/status"] = function(_, result)
+              if result.value == "error" then
+                vim.lsp.diagnostic.set_loclist({open_loclist = false})
+              end
+            end
+          };
+          filetypes = { "java" };
         }
       '';
     };
