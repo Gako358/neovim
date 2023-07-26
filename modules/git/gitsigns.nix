@@ -40,7 +40,7 @@ in {
             sign_priority = 6,
             update_debounce = 100,
             status_formatter = nil, -- Use default
-            max_file_length = 1000, -- Disable if file is longer than this (in lines)
+            max_file_length = 3000, -- Disable if file is longer than this (in lines)
             preview_config = {
               -- Options passed to nvim_open_win
               border = 'single',
