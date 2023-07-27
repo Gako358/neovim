@@ -50,7 +50,6 @@ with builtins; let
         lspconfig.jdtls.setup{
           capabilities = capabilities;
           on_attach = java_on_attach,
-          -- root_dir = get_root_dir,
           cmd = {
             "${cfg.lsp.package}/bin/jdt-language-server",
             "-Declipse.application=org.eclipse.jdt.ls.core.id1",
