@@ -15,7 +15,7 @@ with builtins; let
       lspConfig = ''
         local clangd_capabilities = capabilities;
         clangd_capabilities.textDocument.semanticHighlighting = true;
-        clangd_capabilities.offsetEncoding = "utf-16";
+        clangd_capabilities.offsetEncoding = {"utf-16"};
         lspconfig.clangd.setup{
           capabilities = clangd_capabilities,
           on_attach = attach_keymaps,
