@@ -75,10 +75,11 @@ in {
         scala_on_attach = function(client, bufnr)
           attach_keymaps(client, bufnr)
           local opts = { noremap=true, silent=true, buffer = bufnr }
-          vim.keymap.set("n", "<leader>cm", "<Cmd>lua require('metals').commands()<CR>", opts)
-          vim.keymap.set("n", "<leader>cs", "<Cmd>lua require('metals').toggle_setting('showImplicitArguments')<CR>", opts)
-          vim.keymap.set("n", "<leader>ch", "<Cmd>lua require('metals').worksheet_hover()<CR>", opts)
-          vim.keymap.set("n", "<leader>cd", "<Cmd>lua require('metals').open_all_diagnostics()<CR>", opts)
+          vim.keymap.set("n", "<leader>cgs", "<cmd>MetalsGotoSuperMethod<CR>")
+          vim.keymap.set("n", "<leader>cib", "<Cmd>MetalsImportsBuild<CR>", opts)
+          vim.keymap.set("n", "<leader>co", "<Cmd>MetalsOrganizeImports<CR>", opts)
+          vim.keymap.set("n", "<leader>cd", "<Cmd>MetalsRunDoctor<CR>", opts)
+          vim.keymap.set("n", "<leader>ci", "<Cmd>MetalsInfo<CR>", opts)
         end
 
         metals_config.capabilities = capabilities;
