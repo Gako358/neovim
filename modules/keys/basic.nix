@@ -33,9 +33,8 @@ in {
         "<leader>cpe" = ":Copilot enable<CR>";
         "<leader>cps" = ":Copilot split<CR>";
 
-        # Next buffer using shift tab and control tab
-        "<S-Tab>" = ":bprevious<CR>";
-        "<Tab>" = ":bnext<CR>";
+        # Return to last edit buffer.
+        "<S-Tab>" = ":e #<CR>";
 
         # Move and center
         "<C-d>" = "<C-d>zz";

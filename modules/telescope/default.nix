@@ -21,9 +21,11 @@ in {
       {
         "<leader>ff" = "<cmd> Telescope find_files<CR>";
         "<leader>fg" = "<cmd> Telescope live_grep<CR>";
-        "<leader>fb" = "<cmd> Telescope buffers<CR>";
         "<leader>fh" = "<cmd> Telescope help_tags<CR>";
         "<leader>ft" = "<cmd> Telescope<CR>";
+
+        # Buffers
+        "<Tab>" = "<cmd> Telescope buffers<CR>";
 
         "<leader>fvcw" = "<cmd> Telescope git_commits<CR>";
         "<leader>fvcb" = "<cmd> Telescope git_bcommits<CR>";
