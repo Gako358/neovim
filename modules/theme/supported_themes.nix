@@ -25,10 +25,10 @@ in {
   };
 
   config.vim.theme.supportedThemes = {
-    borealis = {
+    tokyonight = {
       setup = ''
-        -- Borealis theme
-        require('borealis').load()
+        -- tokyo theme
+        require('tokyonight').load()
       '';
     };
   };

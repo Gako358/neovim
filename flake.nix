@@ -163,8 +163,8 @@
     };
 
     # Themes
-    borealis = {
-      url = "github:Gako358/borealis.nvim";
+    tokyonight = {
+      url = "github:folke/tokyonight.nvim";
       flake = false;
     };
 
@@ -284,6 +284,10 @@
       "nvim-autopairs"
       "nvim-ts-autotag"
       "borealis"
+      "dropbar-nvim"
+      "kommentary"
+      "todo-comments"
+      "tokyonight"
       "crates-nvim"
       "gitsigns-nvim"
       "lazygit"
@@ -407,11 +411,11 @@
         };
         vim.statusline.lualine = {
           enable = overrideable true;
-          theme = overrideable "borealis";
+          theme = overrideable "tokyonight";
         };
         vim.theme = {
           enable = overrideable true;
-          name = overrideable "borealis";
+          name = overrideable "tokyonight";
         };
         vim.telescope.enable = overrideable true;
         vim.treesitter.context.enable = overrideable true;

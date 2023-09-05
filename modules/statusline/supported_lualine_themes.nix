@@ -1,5 +1,5 @@
 [
-  "borealis"
+  "tokyo"
   "tokyonight"
   "onedark"
 ]
