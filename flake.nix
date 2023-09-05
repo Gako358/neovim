@@ -279,7 +279,6 @@
       "cmp-vsnip"
       "cmp-path"
       "cmp-treesitter"
-      "github-copilot"
       "vim-vsnip"
       "nvim-autopairs"
       "nvim-ts-autotag"

@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "borealis": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1693501569,
-        "narHash": "sha256-sQ+BkdON6AhU1VzGbc7bPvnM4rADcORXIoCDB5g0K20=",
-        "owner": "Gako358",
-        "repo": "borealis.nvim",
-        "rev": "b1983094db715000959f41887beece71e48ce04a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Gako358",
-        "repo": "borealis.nvim",
-        "type": "github"
-      }
-    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -159,22 +143,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "github-copilot": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1682717291,
-        "narHash": "sha256-6xIOngHzmBrgNfl0JI5dUkRLGlq2Tf+HsUj5gha/Ppw=",
-        "owner": "github",
-        "repo": "copilot.vim",
-        "rev": "1358e8e45ecedc53daf971924a0541ddf6224faf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "github",
-        "repo": "copilot.vim",
         "type": "github"
       }
     },
@@ -798,7 +766,6 @@
         "dropbar-nvim": "dropbar-nvim",
         "fidget": "fidget",
         "flake-utils": "flake-utils",
-        "github-copilot": "github-copilot",
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-nvim": "glow-nvim",
         "indent-blankline": "indent-blankline",

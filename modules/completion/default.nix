@@ -91,7 +91,6 @@ in {
       "cmp-buffer"
       "cmp-vsnip"
       "cmp-path"
-      "github-copilot"
     ];
 
     vim.autocomplete.sources = {
