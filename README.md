@@ -1,8 +1,9 @@
 # My personal neovim config for Nix
 
-Welcome to my Neovim configuration crafted for Nix. Feel free to use it as is or extract pieces to help construct your own unique setup.
+Welcome to my Neovim configuration crafted for Nix.
+Feel free to use it as is or extract pieces to help construct your own unique setup.
 
-![screenshot](https://github.com/Gako358/archive/blob/main/images/config/nvim.png)
+![screenshot](https://github.com/Gako358/archive/blob/main/images/config/neovim.png)
 
 # Usage
 
