@@ -377,7 +377,9 @@
             enable = overrideable true;
             extraDiagnostics.enable = overrideable false;
           };
+          tailwind.enable = overrideable true;
           ts.enable = overrideable true;
+          vue.enable = overrideable true;
         };
         vim.lsp = {
           formatOnSave = overrideable false;

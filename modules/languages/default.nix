@@ -22,7 +22,9 @@ in {
     ./rust.nix
     ./scala.nix
     ./sql.nix
+    ./tailwind.nix
     ./ts.nix
+    ./vue.nix
   ];
 
   options.vim.languages = {
