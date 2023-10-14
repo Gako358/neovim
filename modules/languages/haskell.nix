@@ -22,21 +22,6 @@ with builtins; let
       '';
     };
   };
-
-  defaultFormat = "cabal-fmt";
-  formats = {
-    cabal-fmt = {
-      package = pkgs.haskellPackages.cabal-fmt;
-      nullConfig = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.cabal_fmt.with({
-            command = "${cfg.format.package}/bin/cabal-fmt";
-          })
-        )
-      '';
-    };
-  };
 in {
   options.vim.languages.haskell = {
     enable = mkEnableOption "Haskell language support";
@@ -67,24 +52,6 @@ in {
         default = servers.${cfg.lsp.server}.package;
       };
     };
-
-    format = {
-      enable = mkOption {
-        description = "Enable Haskell formatting";
-        type = types.bool;
-        default = config.vim.languages.enableFormat;
-      };
-      type = mkOption {
-        description = "Haskell formatter to use";
-        type = with types; enum (attrNames formats);
-        default = defaultFormat;
-      };
-      package = mkOption {
-        description = "Haskell formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
-      };
-    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -96,11 +63,6 @@ in {
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.haskell-lsp = servers.${cfg.lsp.server}.lspConfig;
-    })
-
-    (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.haskell-format = formats.${cfg.format.type}.nullConfig;
     })
   ]);
 }

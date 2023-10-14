@@ -357,7 +357,7 @@
 
           clang.enable = overrideable true;
           css.enable = overrideable true;
-          dhall.enable = overrideable true;
+          dhall.enable = overrideable false;
           haskell.enable = overrideable true;
           html.enable = overrideable true;
           java.enable = overrideable true;
@@ -379,7 +379,7 @@
           };
           tailwind.enable = overrideable true;
           ts.enable = overrideable true;
-          vue.enable = overrideable true;
+          vue.enable = overrideable false;
         };
         vim.lsp = {
           formatOnSave = overrideable false;

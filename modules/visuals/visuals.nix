@@ -141,13 +141,8 @@ in {
           vim.opt.listchars:append({ space = "${cfg.indentBlankline.fillChar}" })
         ''}
 
-        require("indent_blankline").setup {
+        require("ibl").setup {
           enabled = true,
-          char = "${cfg.indentBlankline.listChar}",
-          show_end_of_line = ${boolToString cfg.indentBlankline.showEndOfLine},
-
-          use_treesitter = ${boolToString cfg.indentBlankline.useTreesitter},
-          show_current_context = ${boolToString cfg.indentBlankline.showCurrContext},
         }
       '';
     })

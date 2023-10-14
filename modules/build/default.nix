@@ -74,7 +74,7 @@ in {
 
   config = let
     buildPlug = name:
-      pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+      pkgs.vimUtils.buildVimPlugin rec {
         pname = name;
         version = "master";
         src = assert asserts.assertMsg (name != "nvim-treesitter") "Use buildTreesitterPlug for building nvim-treesitter.";
