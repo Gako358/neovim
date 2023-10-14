@@ -9,13 +9,13 @@ with builtins; let
   cfg = config.vim.languages.sql;
   sqlfluffDefault = pkgs.sqlfluff;
 
-  defaultServer = "sqls";
+  defaultServer = "sqlls";
   servers = {
-    sqls = {
+    sqlls = {
       package = pkgs.sqls;
       lspConfig = ''
         local root_dir = require('lspconfig/util').root_pattern('.git', 'flake.nix')(vim.fn.getcwd())
-        lspconfig.sqls.setup {
+        lspconfig.sqlls.setup {
           capabilities = capabilities;
           on_attach = attach_keymaps,
           cmd = { "${cfg.lsp.package}/bin/sqls", "-config", string.format("%s/config.yml", root_dir) };

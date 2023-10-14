@@ -14,8 +14,11 @@ with builtins; let
       package = pkgs.nodePackages."@tailwindcss/language-server";
       lspConfig = ''
         lspconfig.tailwindcss.setup{
-          on_attach = attach_keymaps,
-          cmd = {'${cfg.lsp.package}/bin/tailwind-language-server'};
+          cmd = {'${cfg.lsp.package}/bin/tailwindcss-language-server'};
+          filetypes = {'css', 'scss', 'less', 'html', 'vue', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'};
+          root_dir = require('lspconfig/util').root_pattern('tailwind.config.js', 'tailwind.config.ts', 'tailwind.config.lua', 'package.json');
+          on_attach = attach_keymaps;
+          capabilities = capabilities;
         }
       '';
     };
