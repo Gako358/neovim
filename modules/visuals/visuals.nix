@@ -22,7 +22,6 @@ in {
       };
     };
 
-    dropbar.enable = mkEnableOption "dropbar [dropbar-nvim].";
     indentBlankline = {
       enable = mkEnableOption "indentation guides [indent-blankline].";
 
@@ -108,12 +107,6 @@ in {
     };
 
     todoComments.enable = mkEnableOption "todo comments [todo-comments].";
-
-    toggleTerm.enable = mkOption {
-      description = "Toggle terminal with <c-t>";
-      type = types.bool;
-      default = literalExpression "config.vim.git.lazygit.enable";
-    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -126,23 +119,48 @@ in {
         vim.g.cursorline_timeout = ${toString cfg.cursorWordline.lineTimeout}
       '';
     })
-    (mkIf cfg.dropbar.enable {
-      vim.startPlugins = ["dropbar-nvim"];
-    })
     (mkIf cfg.indentBlankline.enable {
       vim.startPlugins = ["indent-blankline"];
       vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''
         vim.opt.list = true
+        local highlight = {
+            "RainbowRed",
+            "RainbowYellow",
+            "RainbowBlue",
+            "RainbowOrange",
+            "RainbowGreen",
+            "RainbowViolet",
+            "RainbowCyan",
+        }
 
-        ${optionalString (cfg.indentBlankline.eolChar != null) ''
-          vim.opt.listchars:append({ eol = "${cfg.indentBlankline.eolChar}" })
-        ''}
-        ${optionalString (cfg.indentBlankline.fillChar != null) ''
-          vim.opt.listchars:append({ space = "${cfg.indentBlankline.fillChar}" })
-        ''}
+        local hooks = require "ibl.hooks"
+        -- create the highlight groups in the highlight setup hook, so they are reset
+        -- every time the colorscheme changes
+        hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+            vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+            vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+            vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+            vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+            vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+            vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+            vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+        end)
 
         require("ibl").setup {
-          enabled = true,
+          -- indent = { highlight = highlight, char = "|" },
+          indent = {
+            highlight = highlight,
+            char = "▏",
+            tab_char = ".",
+          },
+          whitespace = {
+            highlight = highlight,
+            remove_blankline_trail = false,
+          },
+          scope = {
+            show_start = false,
+            show_end = false,
+          },
         }
       '';
     })
@@ -188,27 +206,6 @@ in {
       vim.startPlugins = ["todo-comments"];
       vim.luaConfigRC.todo-comments = nvim.dag.entryAnywhere ''
         require("todo-comments").setup {}
-      '';
-    })
-    (mkIf cfg.toggleTerm.enable {
-      vim.startPlugins = ["toggleterm"];
-      vim.luaConfigRC.toggleterm = nvim.dag.entryAnywhere ''
-        require("toggleterm").setup {
-          size = 20,
-          open_mapping = [[<c-t>]],
-          shade_filetypes = {},
-          shade_terminals = true,
-          shading_factor = 1,
-          start_in_insert = true,
-          insert_mappings = true,
-          persist_size = true,
-          direction = "float",
-          float_opts = {
-            border = "double",
-          },
-          close_on_exit = true,
-          shell = vim.o.shell,
-        }
       '';
     })
   ]);

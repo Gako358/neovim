@@ -162,12 +162,6 @@
       flake = false;
     };
 
-    # dropbar
-    dropbar-nvim = {
-      url = "github:Bekaboo/dropbar.nvim";
-      flake = false;
-    };
-
     # Themes
     borealis = {
       url = "github:Gako358/borealis.nvim";
@@ -221,10 +215,6 @@
     };
     todo-comments = {
       url = "github:folke/todo-comments.nvim";
-      flake = false;
-    };
-    toggleterm = {
-      url = "github:akinsho/toggleterm.nvim";
       flake = false;
     };
 
@@ -293,7 +283,6 @@
       "crates-nvim"
       "gitsigns-nvim"
       "lazygit"
-      "dropbar-nvim"
       "indent-blankline"
       "nvim-cursorline"
       "nvim-web-devicons"
@@ -302,7 +291,6 @@
       "nui"
       "notify"
       "todo-comments"
-      "toggleterm"
       "which-key"
       "glow-nvim"
       "plenary-nvim"
@@ -397,21 +385,14 @@
             enable = overrideable true;
             lineTimeout = overrideable 0;
           };
-          dropbar.enable = overrideable false;
           indentBlankline = {
             enable = overrideable true;
-            fillChar = overrideable null;
-            eolChar = overrideable null;
-            showCurrContext = overrideable true;
           };
           kommentary.enable = overrideable true;
           noice = {
             enable = overrideable true;
           };
           todoComments.enable = overrideable true;
-          toggleTerm = {
-            enable = overrideable true;
-          };
         };
         vim.statusline.lualine = {
           enable = overrideable true;
