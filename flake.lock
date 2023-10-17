@@ -112,22 +112,6 @@
         "type": "github"
       }
     },
-    "dropbar-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1696677306,
-        "narHash": "sha256-oSYQ5Ogxg/F7rXH0AadHCJkt9jf62x9t49OTDwJe4XE=",
-        "owner": "Bekaboo",
-        "repo": "dropbar.nvim",
-        "rev": "79309dccd5e5b94f9ddf5ee8587691d2bfea2858",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Bekaboo",
-        "repo": "dropbar.nvim",
-        "type": "github"
-      }
-    },
     "fidget": {
       "flake": false,
       "locked": {
@@ -796,7 +780,6 @@
         "cmp-treesitter": "cmp-treesitter",
         "cmp-vsnip": "cmp-vsnip",
         "crates-nvim": "crates-nvim",
-        "dropbar-nvim": "dropbar-nvim",
         "fidget": "fidget",
         "flake-utils": "flake-utils",
         "github-copilot": "github-copilot",
@@ -839,7 +822,6 @@
         "sqls-nvim": "sqls-nvim",
         "telescope": "telescope",
         "todo-comments": "todo-comments",
-        "toggleterm": "toggleterm",
         "trouble": "trouble",
         "vim-vsnip": "vim-vsnip",
         "which-key": "which-key"
@@ -946,22 +928,6 @@
       "original": {
         "owner": "folke",
         "repo": "todo-comments.nvim",
-        "type": "github"
-      }
-    },
-    "toggleterm": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1696244719,
-        "narHash": "sha256-y+xMqHUJEBvZuE2+JRlfqZX9enWV0+qyTzuwU9PAK6c=",
-        "owner": "akinsho",
-        "repo": "toggleterm.nvim",
-        "rev": "c80844fd52ba76f48fabf83e2b9f9b93273f418d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "akinsho",
-        "repo": "toggleterm.nvim",
         "type": "github"
       }
     },
