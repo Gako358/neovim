@@ -1,5 +1,0 @@
-[
-  "borealis"
-  "tokyonight"
-  "onedark"
-]

@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -32,7 +31,8 @@ with builtins; let
       '';
     };
   };
-in {
+in
+{
   options.vim.languages.css = {
     enable = mkEnableOption "CSS language support";
 

@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -81,7 +80,8 @@ with builtins; let
       package = pkgs.nixpkgs-fmt;
     };
   };
-in {
+in
+{
   options.vim.languages.nix = {
     enable = mkEnableOption "Nix language support";
 
@@ -140,7 +140,7 @@ in {
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
 
     (mkIf cfg.lsp.enable {

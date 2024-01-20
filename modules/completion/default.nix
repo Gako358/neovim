@@ -7,7 +7,6 @@
 with lib;
 with builtins; let
   cfg = config.vim.autocomplete;
-  lspkindEnabled = config.vim.lsp.enable && config.vim.lsp.lspkind.enable;
   builtSources =
     concatMapStringsSep
     "\n"
@@ -24,10 +23,7 @@ with builtins; let
         else "${n} = '${v}',")
       cfg.sources);
 
-  dagPlacement =
-    if lspkindEnabled
-    then nvim.dag.entryAfter ["lspkind"]
-    else nvim.dag.entryAnywhere;
+  dagPlacement = nvim.dag.entryAnywhere;
 in {
   options.vim = {
     autocomplete = {
@@ -89,14 +85,12 @@ in {
     vim.startPlugins = [
       "nvim-cmp"
       "cmp-buffer"
-      "cmp-vsnip"
       "cmp-path"
       "github-copilot"
     ];
 
     vim.autocomplete.sources = {
       "nvim-cmp" = null;
-      "vsnip" = "[VSnip]";
       "buffer" = "[Buffer]";
       "crates" = "[Crates]";
       "path" = "[Path]";
@@ -115,10 +109,6 @@ in {
       vim.g.copilot_no_tab_map = true
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
-      ${optionalString lspkindEnabled ''
-        lspkind_opts.before = ${cfg.formatting.format}
-      ''}
-
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -128,7 +118,7 @@ in {
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
       end
 
-      local cmp = require'cmp'
+      local cmp = require('cmp')
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -174,22 +164,13 @@ in {
         },
         formatting = {
           format =
-      ${
-        if lspkindEnabled
-        then "lspkind.cmp_format(lspkind_opts)"
-        else cfg.formatting.format
-      },
+      ${cfg.formatting.format},
         }
       })
-      ${optionalString (config.vim.autopairs.enable && config.vim.autopairs.type == "nvim-autopairs") ''
+      ${optionalString (config.vim.visuals.autopairs.enable && config.vim.visuals.autopairs.type == "nvim-autopairs") ''
         local cmp_autopairs = require('nvim-autopairs.completion.cmp')
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { text = ""} }))
       ''}
     '');
-
-    vim.snippets.vsnip.enable =
-      if (cfg.type == "nvim-cmp")
-      then true
-      else config.vim.snippets.vsnip.enable;
   };
 }

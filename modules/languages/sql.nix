@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -42,23 +41,8 @@ with builtins; let
       '';
     };
   };
-
-  defaultDiagnostics = ["sqlfluff"];
-  diagnostics = {
-    sqlfluff = {
-      package = sqlfluffDefault;
-      nullConfig = pkg: ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.sqlfluff.with({
-            command = "${pkg}/bin/sqlfluff",
-            extra_args = {"--dialect", "${cfg.dialect}"}
-          })
-        )
-      '';
-    };
-  };
-in {
+in
+{
   options.vim.languages.sql = {
     enable = mkEnableOption "SQL language support";
 
@@ -112,29 +96,16 @@ in {
         default = formats.${cfg.format.type}.package;
       };
     };
-
-    extraDiagnostics = {
-      enable = mkOption {
-        description = "Enable extra SQL diagnostics";
-        type = types.bool;
-        default = config.vim.languages.enableExtraDiagnostics;
-      };
-      types = lib.nvim.types.diagnostics {
-        langDesc = "SQL";
-        inherit diagnostics;
-        inherit defaultDiagnostics;
-      };
-    };
   };
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
 
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = ["sqls-nvim"];
+      vim.startPlugins = [ "sqls-nvim" ];
 
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.sql-lsp = servers.${cfg.lsp.server}.lspConfig;
@@ -143,15 +114,6 @@ in {
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
       vim.lsp.null-ls.sources."sql-format" = formats.${cfg.format.type}.nullConfig;
-    })
-
-    (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
-        lang = "sql";
-        config = cfg.extraDiagnostics.types;
-        inherit diagnostics;
-      };
     })
   ]);
 }

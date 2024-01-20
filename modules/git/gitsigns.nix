@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.git;
-in {
+in
+{
   options.vim.git = {
     enable = mkEnableOption "Git support";
 
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.gitsigns.enable (mkMerge [
       {
-        vim.startPlugins = ["gitsigns-nvim"];
+        vim.startPlugins = [ "gitsigns-nvim" ];
 
         vim.luaConfigRC.gitsigns = nvim.dag.entryAnywhere ''
           require('gitsigns').setup {

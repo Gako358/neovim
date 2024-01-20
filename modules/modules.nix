@@ -4,18 +4,14 @@
   check ? true,
 }: let
   modules = [
-    ./autopairs
     ./basic
     ./build
     ./completion
     ./core
-    ./debugging
-    ./filetree
     ./git
     ./keys
     ./languages
     ./lsp
-    ./snippets
     ./statusline
     ./telescope
     ./theme

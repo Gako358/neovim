@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -40,7 +39,8 @@ with builtins; let
       '';
     };
   };
-in {
+in
+{
   options.vim.languages.clang = {
     enable = mkEnableOption "C/C++ language support";
 
@@ -107,7 +107,7 @@ in {
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.cPackage cfg.treesitter.cppPackage];
+      vim.treesitter.grammars = [ cfg.treesitter.cPackage cfg.treesitter.cppPackage ];
     })
 
     (mkIf cfg.lsp.enable {

@@ -1,27 +1,25 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.visuals;
-in {
+in
+{
   options.vim.visuals = {
     enable = mkEnableOption "visual enhancements.";
 
     nvimWebDevicons.enable = mkEnableOption "dev icons. Required for certain plugins [nvim-web-devicons].";
+    autopairs = {
+      enable = mkEnableOption "auto pairs [nvim-autopairs]";
 
-    cursorWordline = {
-      enable = mkEnableOption "word and delayed line highlight [nvim-cursorline].";
-
-      lineTimeout = mkOption {
-        description = "Time in milliseconds for cursorline to appear.";
-        type = types.int;
-        default = 500;
+      type = mkOption {
+        type = types.enum ["nvim-autopairs"];
+        default = "nvim-autopairs";
+        description = "Set the autopairs type. Options: nvim-autopairs [nvim-autopairs]";
       };
     };
-
     indentBlankline = {
       enable = mkEnableOption "indentation guides [indent-blankline].";
 
@@ -111,16 +109,16 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.nvimWebDevicons.enable {
-      vim.startPlugins = ["nvim-web-devicons"];
+      vim.startPlugins = [ "nvim-web-devicons" ];
     })
-    (mkIf cfg.cursorWordline.enable {
-      vim.startPlugins = ["nvim-cursorline"];
-      vim.luaConfigRC.cursorline = nvim.dag.entryAnywhere ''
-        vim.g.cursorline_timeout = ${toString cfg.cursorWordline.lineTimeout}
+    (mkIf cfg.autopairs.enable {
+      vim.startPlugins = [ "nvim-autopairs" ];
+      vim.luaConfigRC.autopairs = nvim.dag.entryAnywhere ''
+        require("nvim-autopairs").setup{}
       '';
     })
     (mkIf cfg.indentBlankline.enable {
-      vim.startPlugins = ["indent-blankline"];
+      vim.startPlugins = [ "indent-blankline" ];
       vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''
         vim.opt.list = true
         local highlight = {
@@ -165,7 +163,7 @@ in {
       '';
     })
     (mkIf cfg.kommentary.enable {
-      vim.startPlugins = ["kommentary"];
+      vim.startPlugins = [ "kommentary" ];
       vim.luaConfigRC.kommentary = nvim.dag.entryAnywhere ''
         require("kommentary.config").configure_language("default", {
           prefer_single_line_comments = true,
@@ -203,7 +201,7 @@ in {
       '';
     })
     (mkIf cfg.todoComments.enable {
-      vim.startPlugins = ["todo-comments"];
+      vim.startPlugins = [ "todo-comments" ];
       vim.luaConfigRC.todo-comments = nvim.dag.entryAnywhere ''
         require("todo-comments").setup {}
       '';
