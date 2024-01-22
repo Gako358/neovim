@@ -8,6 +8,7 @@
     ./build
     ./completion
     ./core
+    ./debug
     ./git
     ./keys
     ./languages

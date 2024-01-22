@@ -69,6 +69,12 @@ with builtins; let
               "-data", workspace_folder,
             };
             root_dir = get_root_dir;
+            init_options = {
+              bundles = {
+                vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-*.jar", 1),
+                vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test/server/*.jar", 1)
+              };
+            };
             settings = {
               java = {
                 referencesCodeLens = {enabled = true};
@@ -157,6 +163,14 @@ in {
         default = formats.${cfg.format.type}.package;
       };
     };
+
+    debug = {
+      enable = mkOption {
+        description = "Enable Java debugging";
+        type = types.bool;
+        default = config.vim.languages.enableDebug;
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -174,6 +188,10 @@ in {
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
       vim.lsp.null-ls.sources.java-format = formats.${cfg.format.type}.nullConfig;
+    })
+
+    (mkIf cfg.debug.enable {
+      vim.debug.enable = true;
     })
   ]);
 }

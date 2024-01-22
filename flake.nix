@@ -52,6 +52,20 @@
       flake = false;
     };
 
+    # Debug
+    plugins-nvim-dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    plugins-nvim-dap-ui = {
+      url = "github:rcarriga/nvim-dap-ui";
+      flake = false;
+    };
+    plugins-nvim-dap-virtual-text = {
+      url = "github:theHamsta/nvim-dap-virtual-text";
+      flake = false;
+    };
+
     # Telescope
     plugins-telescope = {
       url = "github:nvim-telescope/telescope.nvim";
@@ -87,6 +101,10 @@
     };
     plugins-cmp-treesitter = {
       url = "github:ray-x/cmp-treesitter";
+      flake = false;
+    };
+    plugins-cmp-dap = {
+      url = "github:rcarriga/cmp-dap";
       flake = false;
     };
 
@@ -215,6 +233,7 @@
         };
         vim.languages = {
           enableLSP = true;
+          enableDebug = true;
           enableFormat = true;
           enableTreesitter = true;
           enableExtraDiagnostics = true;
@@ -242,6 +261,7 @@
           formatOnSave = false;
           trouble.enable = true;
         };
+        vim.debug.ui.enable = true;
         vim.visuals = {
           enable = true;
           nvimWebDevicons.enable = true;

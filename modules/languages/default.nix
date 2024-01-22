@@ -31,5 +31,6 @@ in
     enableTreesitter = mkEnable "treesitter";
     enableFormat = mkEnable "formatting";
     enableExtraDiagnostics = mkEnable "extra diagnostics";
+    enableDebug = mkEnable "debug";
   };
 }

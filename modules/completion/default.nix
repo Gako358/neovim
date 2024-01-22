@@ -6,6 +6,7 @@
 with lib;
 with builtins; let
   cfg = config.vim.autocomplete;
+  debugEnabled = config.vim.debug.enable;
 
   builtSources =
     concatMapStringsSep
@@ -78,13 +79,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = [
-      "nvim-cmp"
-      "cmp-buffer"
-      "cmp-vsnip"
-      "cmp-path"
-      "github-copilot"
-    ];
+    vim.startPlugins =
+      [
+        "nvim-cmp"
+        "cmp-buffer"
+        "cmp-vsnip"
+        "cmp-path"
+        "github-copilot"
+      ]
+      ++ optional debugEnabled "cmp-dap";
 
     vim.autocomplete.sources = {
       "nvim-cmp" = null;
@@ -171,11 +174,23 @@ in {
           formatting = {
             format = ${cfg.formatting.format},
           },
+          ${optionalString debugEnabled ''
+          enabled = function()
+            return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+              or require("cmp_dap").is_dap_buffer()
+          end,
+        ''}
         })
 
         ${optionalString (config.vim.visuals.autopairs.enable && config.vim.visuals.autopairs.type == "nvim-autopairs") ''
           local cmp_autopairs = require('nvim-autopairs.completion.cmp')
           cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { text = ""} }))
+        ''}
+
+        ${optionalString debugEnabled ''
+          cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+            sources = { name = "dap" };
+          })
         ''}
       '');
 
