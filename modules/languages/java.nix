@@ -52,9 +52,10 @@ with builtins; let
             capabilities = capabilities;
             on_attach = java_on_attach,
             cmd = {
-              "${cfg.lsp.package}/bin/jdt-language-server",
+              "${cfg.lsp.package}/bin/jdtls",
               "-Declipse.application=org.eclipse.jdt.ls.core.id1",
               "-Dosgi.bundles.defaultStartLevel=4",
+              "-Dosgi.sharedConfiguration.area=${pkgs.jdt-language-server}/share/config",
               "-Declipse.product=org.eclipse.jdt.ls.core.product",
               "-Dlog.protocol=true",
               "-Dlog.level=ALL",
