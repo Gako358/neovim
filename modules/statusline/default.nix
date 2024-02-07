@@ -19,7 +19,7 @@ in {
     theme = mkOption {
       description = "Theme for lualine";
       type = types.str;
-      default = "borealis";
+      default = "tokyonight";
     };
 
     sectionSeparator = {

@@ -95,22 +95,6 @@
         "type": "github"
       }
     },
-    "plugins-borealis": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1693501569,
-        "narHash": "sha256-sQ+BkdON6AhU1VzGbc7bPvnM4rADcORXIoCDB5g0K20=",
-        "owner": "Gako358",
-        "repo": "borealis.nvim",
-        "rev": "b1983094db715000959f41887beece71e48ce04a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Gako358",
-        "repo": "borealis.nvim",
-        "type": "github"
-      }
-    },
     "plugins-cmp-buffer": {
       "flake": false,
       "locked": {
@@ -671,6 +655,22 @@
         "type": "github"
       }
     },
+    "plugins-tokyonight": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706697570,
+        "narHash": "sha256-mzCdcf7FINhhVLUIPv/eLohm4qMG9ndRJ5H4sFU2vO0=",
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "rev": "610179f7f12db3d08540b6cc61434db2eaecbcff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "type": "github"
+      }
+    },
     "plugins-trouble": {
       "flake": false,
       "locked": {
@@ -744,7 +744,6 @@
         "flake-utils": "flake-utils",
         "nil": "nil",
         "nixpkgs": "nixpkgs",
-        "plugins-borealis": "plugins-borealis",
         "plugins-cmp-buffer": "plugins-cmp-buffer",
         "plugins-cmp-dap": "plugins-cmp-dap",
         "plugins-cmp-nvim-lsp": "plugins-cmp-nvim-lsp",
@@ -780,6 +779,7 @@
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
         "plugins-todo-comments": "plugins-todo-comments",
+        "plugins-tokyonight": "plugins-tokyonight",
         "plugins-trouble": "plugins-trouble",
         "plugins-vim-vsnip": "plugins-vim-vsnip",
         "plugins-which-key": "plugins-which-key",

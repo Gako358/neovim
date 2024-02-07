@@ -121,8 +121,8 @@
     };
 
     # Themes
-    plugins-borealis = {
-      url = "github:Gako358/borealis.nvim";
+    plugins-tokyonight = {
+      url = "github:folke/tokyonight.nvim";
       flake = false;
     };
 
@@ -278,7 +278,7 @@
         };
         vim.statusline.lualine = {
           enable = true;
-          theme = "borealis";
+          theme = "tokyonight";
         };
         vim.theme.enable = true;
         vim.telescope.enable = true;
