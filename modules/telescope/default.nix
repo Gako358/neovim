@@ -44,6 +44,7 @@ in {
           "<leader>flD" = "<cmd> Telescope lsp_definitions<CR>";
           "<leader>flt" = "<cmd> Telescope lsp_type_definitions<CR>";
           "<leader>fld" = "<cmd> Telescope diagnostics<CR>";
+          "<leader>fla" = "<cmd> Telescope lsp_code_action<CR>";
         }
         else {}
       )
