@@ -19,7 +19,7 @@ with builtins; let
         ''
           lspconfig.hls.setup{
             capabilities = capabilities;
-            on_attach = attach_keymaps,
+            on_attach = default_on_attach,
             cmd = {'${cfg.lsp.package}/bin/haskell-language-server-wrapper', '--lsp'};
             root_dir = lspconfig.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml");
           }

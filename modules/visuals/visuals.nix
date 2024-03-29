@@ -218,6 +218,10 @@ in {
               lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
             },
           })
+
+          require("notify").setup({
+            background_colour = "#000000"
+          })
         '';
     })
     (mkIf cfg.todoComments.enable {

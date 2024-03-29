@@ -7,7 +7,6 @@
 with lib;
 with builtins; let
   cfg = config.vim.languages.sql;
-  sqlfluffDefault = pkgs.sqlfluff;
 
   defaultServer = "sqlls";
   servers = {
@@ -28,22 +27,6 @@ with builtins; let
             end;
           }
         '';
-    };
-  };
-
-  defaultFormat = "sqlfluff";
-  formats = {
-    sqlfluff = {
-      package = sqlfluffDefault;
-      nullConfig = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.sqlfluff.with({
-            command = "${cfg.format.package}/bin/sqlfluff",
-            extra_args = {"--dialect", "${cfg.dialect}"}
-          })
-        )
-      '';
     };
   };
 in {
@@ -82,24 +65,6 @@ in {
         default = servers.${cfg.lsp.server}.package;
       };
     };
-
-    format = {
-      enable = mkOption {
-        description = "Enable SQL formatting";
-        type = types.bool;
-        default = config.vim.languages.enableFormat;
-      };
-      type = mkOption {
-        description = "SQL formatter to use";
-        type = with types; enum (attrNames formats);
-        default = defaultFormat;
-      };
-      package = mkOption {
-        description = "SQL formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
-      };
-    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -113,11 +78,6 @@ in {
 
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.sql-lsp = servers.${cfg.lsp.server}.lspConfig;
-    })
-
-    (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources."sql-format" = formats.${cfg.format.type}.nullConfig;
     })
   ]);
 }

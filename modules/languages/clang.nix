@@ -22,7 +22,7 @@ with builtins; let
           clangd_capabilities.offsetEncoding = {"utf-16"};
           lspconfig.clangd.setup{
             capabilities = clangd_capabilities,
-            on_attach = attach_keymaps,
+            on_attach = default_on_attach,
             cmd = {"${pkgs.clang-tools}/bin/clangd"};
           }
         '';

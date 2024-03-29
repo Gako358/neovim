@@ -1,12 +1,12 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.keys;
-in
-{
+in {
   options.vim.keys = {
     coreKeys = mkOption {
       default = true;
@@ -41,12 +41,12 @@ in
         "<C-u>" = "<C-u>zz";
 
         # Search and replace
-        "<leader>s" = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>";
+        "<leader>sr" = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>";
 
         # Clear Search
-        "<leader>cc" = ":noh<CR>";
+        "<leader>dv" = ":noh<CR>";
       }
-      else { };
+      else {};
 
     vim.vnoremap =
       if (cfg.coreKeys)
@@ -55,6 +55,6 @@ in
         "J" = ":m '>+1<CR>gv=gv";
         "K" = ":m '<-2<CR>gv=gv";
       }
-      else { };
+      else {};
   };
 }

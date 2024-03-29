@@ -1,12 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.git;
-in
-{
+in {
   options.vim.git = {
     enable = mkEnableOption "Git support";
 
@@ -20,7 +20,7 @@ in
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.gitsigns.enable (mkMerge [
       {
-        vim.startPlugins = [ "gitsigns-nvim" ];
+        vim.startPlugins = ["gitsigns-nvim"];
 
         vim.luaConfigRC.gitsigns = nvim.dag.entryAnywhere ''
           require('gitsigns').setup {
@@ -75,30 +75,7 @@ in
               end, {expr=true})
 
               -- actions
-              map('n', '<leader>gs', gs.stage_hunk)
-              map('v', '<leader>gs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-
-              map('n', '<leader>gr', gs.reset_hunk)
-              map('v', '<leader>gr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-
-              map('n', '<leader>gp', gs.preview_hunk)
-              map('n', '<leader>gu', gs.undo_stage_hunk)
-
-              map('n', '<leader>gS', gs.stage_buffer)
-              map('n', '<leader>gR', gs.reset_buffer)
-
-              map('n', '<leader>gd', gs.diffthis)
-              map('n', '<leader>gD', function() gs.diffthis('~') end)
-
-              map('n', '<leader>gb', function() gs.blame_line{full=true} end)
-
-              -- Toggles
-              map('n', '<leader>gtd', gs.toggle_deleted)
-              map('n', '<leader>gtb', gs.toggle_current_line_blame)
-              map('n', '<leader>gts', gs.toggle_signs)
-              map('n', '<leader>gtn', gs.toggle_numhl)
-              map('n', '<leader>gtl', gs.toggle_linehl)
-              map('n', '<leader>gtw', gs.toggle_word_diff)
+              map('n', '<leader>gtb', function() gs.blame_line{full=true} end)
 
               -- Text objects
               map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

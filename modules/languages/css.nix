@@ -18,7 +18,7 @@ with builtins; let
         */
         ''
           lspconfig.cssls.setup{
-            on_attach = attach_keymaps,
+            on_attach = default_on_attach,
             cmd = {'${cfg.lsp.package}/bin/vscode-css-languageserver-bin'};
             filetypes = {'css', 'scss', 'less'};
             settings = {

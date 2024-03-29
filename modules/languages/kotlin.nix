@@ -19,7 +19,7 @@ with builtins; let
         ''
           lspconfig.kotlin_language_server.setup{
             capabilities = capabilities;
-            on_attach = attach_keymaps,
+            on_attach = default_on_attach,
             cmd = {'${cfg.lsp.package}/bin/kotlin-language-server'};
           }
         '';

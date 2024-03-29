@@ -19,7 +19,7 @@ with builtins; let
         ''
           lspconfig.lua_ls.setup{
             capabilities = capabilities;
-            on_attach = attach_keymaps,
+            on_attach = default_on_attach,
             cmd = { "${cfg.lsp.package}/bin/lua-language-server" },
             Lua = {
               runtime = {

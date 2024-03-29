@@ -7,6 +7,7 @@
     ./basic
     ./build
     ./completion
+    ./copilot
     ./core
     ./debug
     ./git
@@ -14,7 +15,6 @@
     ./languages
     ./lsp
     ./snippets
-    ./statusline
     ./telescope
     ./theme
     ./treesitter

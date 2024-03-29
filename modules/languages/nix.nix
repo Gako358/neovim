@@ -13,26 +13,6 @@ with builtins; let
 
   defaultServer = "nil";
   servers = {
-    rnix = {
-      package = pkgs.rnix-lsp;
-      internalFormatter = cfg.format.type == "nixpkgs-fmt";
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          lspconfig.rnix.setup{
-            capabilities = capabilities,
-          ${
-            if (cfg.format.enable && cfg.format.type == "nixpkgs-fmt")
-            then useFormat
-            else noFormat
-          },
-            cmd = {"${cfg.lsp.package}/bin/rnix-lsp"},
-          }
-        '';
-    };
-
     nil = {
       package = pkgs.nil;
       internalFormatter = true;

@@ -5,7 +5,6 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # Langauge server (use master instead of nixpkgs)
-    rnix-lsp.url = "github:nix-community/rnix-lsp";
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,16 +64,14 @@
       url = "github:theHamsta/nvim-dap-virtual-text";
       flake = false;
     };
+    plugins-nvim-nio = {
+      url = "github:nvim-neotest/nvim-nio";
+      flake = false;
+    };
 
     # Telescope
     plugins-telescope = {
       url = "github:nvim-telescope/telescope.nvim";
-      flake = false;
-    };
-
-    # Statuslines
-    plugins-lualine = {
-      url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
 
@@ -119,10 +116,14 @@
       url = "github:github/copilot.vim";
       flake = false;
     };
+    plugins-copilot-chat = {
+      url = "github:CopilotC-Nvim/CopilotChat.nvim";
+      flake = false;
+    };
 
     # Themes
-    plugins-tokyonight = {
-      url = "github:folke/tokyonight.nvim";
+    plugins-rose-pine = {
+      url = "github:rose-pine/neovim";
       flake = false;
     };
 
@@ -220,6 +221,9 @@
           enable = true;
           type = "nvim-cmp";
         };
+        vim.copilot.chat = {
+          enable = true;
+        };
         vim.git = {
           enable = true;
           gitsigns.enable = true;
@@ -258,7 +262,7 @@
           ts.enable = true;
         };
         vim.lsp = {
-          formatOnSave = false;
+          formatOnSave = true;
           trouble.enable = true;
         };
         vim.debug.ui.enable = true;
@@ -275,10 +279,6 @@
           };
           nvimtree.enable = true;
           todoComments.enable = true;
-        };
-        vim.statusline.lualine = {
-          enable = true;
-          theme = "tokyonight";
         };
         vim.theme.enable = true;
         vim.telescope.enable = true;

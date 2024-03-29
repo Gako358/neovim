@@ -79,11 +79,11 @@ in {
           scala_on_attach = function(client, bufnr)
             attach_keymaps(client, bufnr)
             local opts = { noremap=true, silent=true, buffer = bufnr }
-            vim.keymap.set("n", "<leader>cgs", "<cmd>MetalsGotoSuperMethod<CR>")
-            vim.keymap.set("n", "<leader>cib", "<Cmd>MetalsImportsBuild<CR>", opts)
-            vim.keymap.set("n", "<leader>co", "<Cmd>MetalsOrganizeImports<CR>", opts)
-            vim.keymap.set("n", "<leader>cd", "<Cmd>MetalsRunDoctor<CR>", opts)
-            vim.keymap.set("n", "<leader>ci", "<Cmd>MetalsInfo<CR>", opts)
+            vim.keymap.set("n", "<leader>sgD", "<cmd>MetalsGotoSuperMethod<CR>")
+            vim.keymap.set("n", "<leader>si", "<Cmd>MetalsImportsBuild<CR>", opts)
+            vim.keymap.set("n", "<leader>so", "<Cmd>MetalsOrganizeImports<CR>", opts)
+            vim.keymap.set("n", "<leader>sd", "<Cmd>MetalsRunDoctor<CR>", opts)
+            vim.keymap.set("n", "<leader>si", "<Cmd>MetalsInfo<CR>", opts)
           end
 
           metals_config.capabilities = capabilities;
