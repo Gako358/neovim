@@ -23,7 +23,7 @@ in {
       */
       ''
         -- Enable fidget
-        require'fidget'.setup()
+        require'fidget'.setup({window = { blend = 0 },})
       '';
   };
 }
