@@ -22,7 +22,7 @@ in {
       ''
         require("CopilotChat").setup({
           window = {
-            layout = "float",
+            layout = "vertical",
             title = "Copilot Chat",
           },
         })
