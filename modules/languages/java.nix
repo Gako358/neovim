@@ -86,9 +86,10 @@ with builtins; let
             };
             handlers = {
               ["language/status"] = function(_, result)
-                if result.value == "error" then
-                  vim.lsp.diagnostic.set_loclist({open_loclist = false})
-                end
+                vim.print('***')
+              end,
+              ['$/progress'] = function(_, result, ctx)
+                vim.print('---')
               end
             };
             filetypes = { "java" };

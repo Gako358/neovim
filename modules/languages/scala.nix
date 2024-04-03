@@ -61,8 +61,6 @@ in {
             showImplicitConversionsAndClasses = true,
              showInferredType = true,
              excludedPackages = {
-               "akka.actor.typed.javadsl",
-               "com.github.swagger.akka.javadsl"
              }
           }
           metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

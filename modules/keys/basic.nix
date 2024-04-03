@@ -29,9 +29,6 @@ in {
         "<A-Right>" = ":vertical resize +3<CR>";
 
         "<F7>" = ":setlocal spell<CR>";
-        "<leader>cpd" = ":Copilot disable<CR>";
-        "<leader>cpe" = ":Copilot enable<CR>";
-        "<leader>cps" = ":Copilot split<CR>";
 
         # Return to last edit buffer.
         "<S-Tab>" = ":e #<CR>";

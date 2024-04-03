@@ -20,7 +20,8 @@ with builtins; let
           lspconfig.tsserver.setup {
             capabilities = capabilities;
             on_attach = default_on_attach,
-            cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" }
+            cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
+            filetypes = {"typescript", "javascript"}
           }
         '';
     };
@@ -43,26 +44,6 @@ with builtins; let
             })
           )
         '';
-    };
-  };
-
-  # TODO: specify packages
-  defaultDiagnostics = ["eslint"];
-  diagnostics = {
-    eslint = {
-      package = pkgs.nodePackages.eslint;
-      nullConfig = pkg:
-      /*
-      lua
-      */
-      ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.eslint.with({
-            command = "${pkg}/bin/eslint",
-          })
-        )
-      '';
     };
   };
 in {
@@ -114,19 +95,6 @@ in {
         default = formats.${cfg.format.type}.package;
       };
     };
-
-    extraDiagnostics = {
-      enable = mkOption {
-        description = "Enable extra Typescript/Javascript diagnostics";
-        type = types.bool;
-        default = config.vim.languages.enableExtraDiagnostics;
-      };
-      types = lib.nvim.types.diagnostics {
-        langDesc = "Typescript/Javascript";
-        inherit diagnostics;
-        inherit defaultDiagnostics;
-      };
-    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -143,15 +111,6 @@ in {
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
       vim.lsp.null-ls.sources.ts-format = formats.${cfg.format.type}.nullConfig;
-    })
-
-    (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
-        lang = "ts";
-        config = cfg.extraDiagnostics.types;
-        inherit diagnostics;
-      };
     })
   ]);
 }

@@ -131,7 +131,11 @@ in {
   };
 
   config = {
-    vim.startPlugins = ["plenary-nvim"];
+    vim.startPlugins = [
+      "plenary-nvim"
+      "nvim-nio"
+      "nui"
+    ];
 
     vim.nmap = mkIf cfg.disableArrows {
       "<up>" = "<nop>";

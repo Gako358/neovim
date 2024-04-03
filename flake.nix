@@ -16,12 +16,24 @@
       url = "github:j-hui/fidget.nvim";
       flake = false;
     };
+    plugins-nvim-lightbulb = {
+      url = "github:kosayoda/nvim-lightbulb";
+      flake = false;
+    };
     plugins-nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
+    plugins-lspkind = {
+      url = "github:onsails/lspkind-nvim";
+      flake = false;
+    };
     plugins-null-ls = {
       url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
+    plugins-lsp-signature = {
+      url = "github:ray-x/lsp_signature.nvim";
       flake = false;
     };
     plugins-trouble = {
@@ -48,6 +60,20 @@
     };
     plugins-sqls-nvim = {
       url = "github:nanotee/sqls.nvim";
+      flake = false;
+    };
+
+    # SQL
+    plugins-vim-dadbod = {
+      url = "github:tpope/vim-dadbod";
+      flake = false;
+    };
+    plugins-vim-dadbod-ui = {
+      url = "github:kristijanhusak/vim-dadbod-ui";
+      flake = false;
+    };
+    plugins-vim-dadbod-completion = {
+      url = "github:kristijanhusak/vim-dadbod-completion";
       flake = false;
     };
 
@@ -112,12 +138,18 @@
     };
 
     # Copilot
-    plugins-github-copilot = {
-      url = "github:github/copilot.vim";
+    plugins-copilot = {
+      url = "github:zbirenbaum/copilot.lua";
       flake = false;
     };
     plugins-copilot-chat = {
       url = "github:CopilotC-Nvim/CopilotChat.nvim";
+      flake = false;
+    };
+
+    # Markdown
+    plugins-glow-nvim = {
+      url = "github:ellisonleao/glow.nvim";
       flake = false;
     };
 
@@ -134,10 +166,6 @@
     };
     plugins-lazygit = {
       url = "github:kdheepak/lazygit.nvim";
-      flake = false;
-    };
-    plugins-octo-nvim = {
-      url = "github:pwntester/octo.nvim";
       flake = false;
     };
 
@@ -229,7 +257,6 @@
           gitsigns.enable = true;
           gitsigns.codeActions = true;
           lazygit.enable = true;
-          octo.enable = true;
         };
         vim.keys = {
           enable = true;
@@ -260,12 +287,18 @@
           sql.enable = true;
           tailwind.enable = true;
           ts.enable = true;
+          vue.enable = true;
         };
         vim.lsp = {
           formatOnSave = true;
+          fidget.enable = true;
+          lightbulb.enable = true;
+          lspkind.enable = true;
+          lspSignature.enable = true;
           trouble.enable = true;
         };
         vim.debug.ui.enable = true;
+        vim.sql.enable = true;
         vim.visuals = {
           enable = true;
           nvimWebDevicons.enable = true;

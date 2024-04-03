@@ -12,7 +12,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = ["copilot-chat"];
+    vim.startPlugins = [
+      "copilot"
+      "copilot-chat"
+    ];
 
     vim.luaConfigRC.chat =
       nvim.dag.entryAnywhere
@@ -20,6 +23,16 @@ in {
       lua
       */
       ''
+        require("copilot").setup({
+          suggestion = {
+            keymap = {
+              accept = "<C-j>",
+              next = "<M-n>",
+            },
+          },
+        })
+
+
         require("CopilotChat").setup({
           window = {
             layout = "vertical",

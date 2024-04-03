@@ -23,7 +23,13 @@ in {
       */
       ''
         -- Enable fidget
-        require'fidget'.setup({window = { blend = 0 },})
+        require'fidget'.setup({
+          notification = {
+            window = {
+              winblend = 0
+            },
+          },
+        })
       '';
   };
 }

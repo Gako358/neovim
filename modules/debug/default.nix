@@ -25,7 +25,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      vim.startPlugins = ["nvim-dap" "nvim-nio"];
+      vim.startPlugins = ["nvim-dap"];
 
       vim.luaConfigRC.dap-setup =
         nvim.dag.entryAnywhere

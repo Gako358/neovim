@@ -15,6 +15,7 @@
     ./languages
     ./lsp
     ./snippets
+    ./sql
     ./telescope
     ./theme
     ./treesitter
