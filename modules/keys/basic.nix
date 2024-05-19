@@ -28,7 +28,7 @@ in {
         "<A-Left>" = ":vertical resize -3<CR>";
         "<A-Right>" = ":vertical resize +3<CR>";
 
-        "<F7>" = ":setlocal spell<CR>";
+        "<F4>" = ":setlocal spell<CR>";
 
         # Return to last edit buffer.
         "<S-Tab>" = ":e #<CR>";

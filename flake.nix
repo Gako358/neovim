@@ -153,9 +153,9 @@
       flake = false;
     };
 
-    # Themes
-    plugins-rose-pine = {
-      url = "github:rose-pine/neovim";
+    # theme
+    plugins-nightfox = {
+      url = "github:EdenEast/nightfox.nvim";
       flake = false;
     };
 
@@ -170,16 +170,16 @@
     };
 
     # Visuals
+    plugins-lualine = {
+      url = "github:hoob3rt/lualine.nvim";
+      flake = false;
+    };
     plugins-nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
     };
     plugins-indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
-      flake = false;
-    };
-    plugins-kommentary = {
-      url = "github:b3nj5m1n/kommentary";
       flake = false;
     };
     plugins-nvim-cursorline = {
@@ -204,10 +204,6 @@
     };
     plugins-nvim-tree-lua = {
       url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
-    plugins-todo-comments = {
-      url = "github:folke/todo-comments.nvim";
       flake = false;
     };
 
@@ -297,21 +293,26 @@
           lspSignature.enable = true;
           trouble.enable = true;
         };
-        vim.debug.ui.enable = true;
+        vim.debug = {
+          virtualText.enable = true;
+          ui.enable = true;
+        };
         vim.sql.enable = true;
         vim.visuals = {
           enable = true;
+          lualine = {
+            enable = true;
+            theme = "nightfox";
+          };
           nvimWebDevicons.enable = true;
           autopairs.enable = true;
           indentBlankline = {
             enable = true;
           };
-          kommentary.enable = true;
           noice = {
             enable = true;
           };
           nvimtree.enable = true;
-          todoComments.enable = true;
         };
         vim.theme.enable = true;
         vim.telescope.enable = true;

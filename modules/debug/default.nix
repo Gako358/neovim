@@ -47,13 +47,16 @@ in {
           }
 
           vim.keymap.set("n", "<leader>do", dap.repl.open)
-          vim.keymap.set("n", "<leader>dc", dap.continue)
-          vim.keymap.set("n", "<leader>dsn", dap.step_over)
-          vim.keymap.set("n", "<leader>dsi", dap.step_into)
-          vim.keymap.set("n", "<leader>dso", dap.step_out)
           vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+          vim.keymap.set("n", "<leader>dm", dap.run_to_cursor)
           vim.keymap.set("n", "<leader>dB", function() require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
           vim.keymap.set("n", "<leader>dp", function() require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+
+          vim.keymap.set("n", "<F9>", dap.continue)
+          vim.keymap.set("n", "<F10>", dap.step_into)
+          vim.keymap.set("n", "<F11>", dap.step_over)
+          vim.keymap.set("n", "<F8>", dap.step_out)
+          vim.keymap.set("n", "<F7>", dap.restart)
         '';
     }
     (mkIf cfg.virtualText.enable {

@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -13,6 +12,12 @@ in {
       type = types.bool;
       default = true;
       description = "Set terminal up for 256 colours";
+    };
+
+    transparentBackground = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Set the background to transparent";
     };
 
     disableArrows = mkOption {
@@ -223,6 +228,9 @@ in {
       ${optionalString cfg.colourTerm ''
         set termguicolors
         set t_Co=256
+      ''}
+      ${optionalString cfg.transparentBackground ''
+        hi Normal guibg=NONE ctermbg=NONE
       ''}
     '';
   };

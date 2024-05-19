@@ -66,8 +66,6 @@ in {
       };
     };
 
-    kommentary.enable = mkEnableOption "commenting plugin [kommentary].";
-
     noice = {
       enable = mkEnableOption "Noice configuration.";
 
@@ -103,8 +101,6 @@ in {
         };
       };
     };
-
-    todoComments.enable = mkEnableOption "todo comments [todo-comments].";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -172,21 +168,6 @@ in {
           }
         '';
     })
-    (mkIf cfg.kommentary.enable {
-      vim.startPlugins = ["kommentary"];
-      vim.luaConfigRC.kommentary =
-        nvim.dag.entryAnywhere
-        /*
-        lua
-        */
-        ''
-          require("kommentary.config").configure_language("default", {
-            prefer_single_line_comments = true,
-            use_consistent_indentation = true,
-            ignore_whitespace = true,
-          })
-        '';
-    })
     (mkIf cfg.noice.enable {
       vim.startPlugins = [
         "noice"
@@ -227,17 +208,6 @@ in {
           require("notify").setup({
             background_colour = "#00000000"
           })
-        '';
-    })
-    (mkIf cfg.todoComments.enable {
-      vim.startPlugins = ["todo-comments"];
-      vim.luaConfigRC.todo-comments =
-        nvim.dag.entryAnywhere
-        /*
-        lua
-        */
-        ''
-          require("todo-comments").setup {}
         '';
     })
   ]);
