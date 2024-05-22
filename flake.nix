@@ -202,8 +202,8 @@
       url = "github:rcarriga/nvim-notify";
       flake = false;
     };
-    plugins-nvim-tree-lua = {
-      url = "github:kyazdani42/nvim-tree.lua";
+    plugins-oil = {
+      url = "github:stevearc/oil.nvim";
       flake = false;
     };
 
@@ -312,7 +312,7 @@
           noice = {
             enable = true;
           };
-          nvimtree.enable = true;
+          oil.enable = true;
         };
         vim.theme.enable = true;
         vim.telescope.enable = true;
