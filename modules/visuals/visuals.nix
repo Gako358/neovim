@@ -101,6 +101,8 @@ in {
         };
       };
     };
+
+    oil.enable = mkEnableOption "Oil filetree [oil]";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -208,6 +210,18 @@ in {
           require("notify").setup({
             background_colour = "#00000000"
           })
+        '';
+    })
+    (mkIf cfg.oil.enable {
+      vim.startPlugins = ["oil"];
+      vim.luaConfigRC.oil =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          require("oil").setup()
+          vim.keymap.set("n", "<BS>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
         '';
     })
   ]);

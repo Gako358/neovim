@@ -586,22 +586,6 @@
         "type": "github"
       }
     },
-    "plugins-nvim-tree-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712366921,
-        "narHash": "sha256-6pbOeklf+otsJIjt9IUyUfuTAedShnwERYq1IfhyrJs=",
-        "owner": "kyazdani42",
-        "repo": "nvim-tree.lua",
-        "rev": "81eb8d519233c105f30dc0a278607e62b20502fd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kyazdani42",
-        "repo": "nvim-tree.lua",
-        "type": "github"
-      }
-    },
     "plugins-nvim-web-devicons": {
       "flake": false,
       "locked": {
@@ -615,6 +599,22 @@
       "original": {
         "owner": "kyazdani42",
         "repo": "nvim-web-devicons",
+        "type": "github"
+      }
+    },
+    "plugins-oil": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716410771,
+        "narHash": "sha256-nsKp7Ln3VSXrZVghRNjFxDugoSwJfoOPWGLL2Ife5VQ=",
+        "owner": "stevearc",
+        "repo": "oil.nvim",
+        "rev": "2cb39e838e9dcd8b374f09a3a87a2e5ec9d372f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "oil.nvim",
         "type": "github"
       }
     },
@@ -816,8 +816,8 @@
         "plugins-nvim-lspconfig": "plugins-nvim-lspconfig",
         "plugins-nvim-metals": "plugins-nvim-metals",
         "plugins-nvim-nio": "plugins-nvim-nio",
-        "plugins-nvim-tree-lua": "plugins-nvim-tree-lua",
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
+        "plugins-oil": "plugins-oil",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
         "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
