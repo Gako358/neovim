@@ -19,28 +19,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = ["nightfox"];
+    vim.startPlugins = ["tokyonight"];
     vim.luaConfigRC.themeSetup = nvim.dag.entryBefore ["theme"] cfg.extraConfig;
     vim.luaConfigRC.theme =
       /*
       lua
       */
       ''
-        require("nightfox").setup({
-          options = {
-            transparent = true,
-            styles = {
-              comments = "italic",
-              strings = "italic",
-            },
-          },
-          groups = {
-            all = {
-              NormalFloat = { fg = "fg1", bg = "NONE",},
-            },
-          },
+        require("tokyonight").setup({
+          style = "storm",
+          transparent = true,
         })
-        vim.cmd("colorscheme nightfox")
+        vim.cmd[[colorscheme tokyonight]]
       '';
   };
 }

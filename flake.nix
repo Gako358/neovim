@@ -154,8 +154,8 @@
     };
 
     # theme
-    plugins-nightfox = {
-      url = "github:EdenEast/nightfox.nvim";
+    plugins-tokyonight = {
+      url = "github:folke/tokyonight.nvim";
       flake = false;
     };
 
@@ -166,6 +166,10 @@
     };
     plugins-lazygit = {
       url = "github:kdheepak/lazygit.nvim";
+      flake = false;
+    };
+    plugins-undotree = {
+      url = "github:jiaoshijie/undotree";
       flake = false;
     };
 
@@ -298,11 +302,12 @@
           ui.enable = true;
         };
         vim.sql.enable = true;
+        vim.undo.enable = true;
         vim.visuals = {
           enable = true;
           lualine = {
             enable = true;
-            theme = "nightfox";
+            theme = "tokyonight";
           };
           nvimWebDevicons.enable = true;
           autopairs.enable = true;

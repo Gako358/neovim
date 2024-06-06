@@ -19,6 +19,7 @@
     ./telescope
     ./theme
     ./treesitter
+    ./undo
     ./visuals
   ];
 
