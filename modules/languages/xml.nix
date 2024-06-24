@@ -6,30 +6,30 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.languages.python;
+  cfg = config.vim.languages.xml;
 
-  defaultServer = "pyright";
+  defaultServer = "lemminx";
   servers = {
-    pyright = {
-      package = pkgs.pyright;
+    lemminx = {
+      package = pkgs.lemminx;
       lspConfig =
         /*
         lua
         */
         ''
-          lspconfig.pyright.setup{
+          lspconfig.lemminx.setup{
             capabilities = capabilities;
-            on_attach = default_on_attach;
-            cmd = {"${cfg.lsp.package}/bin/pyright-langserver", "--stdio"}
+            on_attach = default_on_attach,
+            cmd = { "${cfg.lsp.package}/bin/lemminx" },
           }
         '';
     };
   };
 
-  defaultFormat = "black";
+  defaultFormat = "tidy";
   formats = {
-    black = {
-      package = pkgs.black;
+    tidy = {
+      package = pkgs.html-tidy;
       nullConfig =
         /*
         lua
@@ -37,39 +37,39 @@ with builtins; let
         ''
           table.insert(
             ls_sources,
-            null_ls.builtins.formatting.black.with({
-              command = "${cfg.format.package}/bin/black",
+            null_ls.builtins.formatting.tidy.with({
+              command = "${cfg.format.package}/bin/tidy";
             })
           )
         '';
     };
   };
 in {
-  options.vim.languages.python = {
-    enable = mkEnableOption "Python language support";
+  options.vim.languages.xml = {
+    enable = mkEnableOption "Xml language support";
 
     treesitter = {
       enable = mkOption {
-        description = "Enable Python treesitter";
+        description = "Enable Xml treesitter";
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      package = nvim.types.mkGrammarOption pkgs "python";
+      package = nvim.types.mkGrammarOption pkgs "xml";
     };
 
     lsp = {
       enable = mkOption {
-        description = "Enable Python LSP support";
+        description = "XML LSP support";
         type = types.bool;
         default = config.vim.languages.enableLSP;
       };
       server = mkOption {
-        description = "Python LSP server to use";
-        type = with types; enum (attrNames servers);
+        description = "XML LSP server";
+        type = types.str;
         default = defaultServer;
       };
       package = mkOption {
-        description = "Python LSP server package";
+        description = "XML lsp package";
         type = types.package;
         default = servers.${cfg.lsp.server}.package;
       };
@@ -77,36 +77,35 @@ in {
 
     format = {
       enable = mkOption {
-        description = "Enable Python formatting";
+        description = "Enable XML formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
       type = mkOption {
-        description = "Python formatter to use";
+        description = "XML formatter to use";
         type = with types; enum (attrNames formats);
         default = defaultFormat;
       };
       package = mkOption {
-        description = "Python formatter package";
+        description = "XML formatter package";
         type = types.package;
         default = formats.${cfg.format.type}.package;
       };
     };
   };
+
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
       vim.treesitter.grammars = [cfg.treesitter.package];
     })
-
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.python-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig.sources.xml-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
-
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.python-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.null-ls.sources.xml-format = formats.${cfg.format.type}.nullConfig;
     })
   ]);
 }

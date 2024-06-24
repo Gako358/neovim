@@ -20,10 +20,12 @@ in {
     ./python.nix
     ./rust.nix
     ./scala.nix
+    ./shell.nix
     ./sql.nix
     ./tailwind.nix
     ./ts.nix
     ./vue.nix
+    ./xml.nix
   ];
 
   options.vim.languages = {

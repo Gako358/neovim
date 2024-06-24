@@ -284,10 +284,12 @@
             crates.enable = true;
           };
           scala.enable = true;
+          shell.enable = true;
           sql.enable = true;
           tailwind.enable = true;
           ts.enable = true;
           vue.enable = true;
+          xml.enable = true;
         };
         vim.lsp = {
           formatOnSave = true;

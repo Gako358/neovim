@@ -6,30 +6,30 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.languages.python;
+  cfg = config.vim.languages.shell;
 
-  defaultServer = "pyright";
+  defaultServer = "bashls";
   servers = {
-    pyright = {
-      package = pkgs.pyright;
+    bashls = {
+      package = pkgs.bash-language-server;
       lspConfig =
         /*
         lua
         */
         ''
-          lspconfig.pyright.setup{
+          lspconfig.bashls.setup{
             capabilities = capabilities;
-            on_attach = default_on_attach;
-            cmd = {"${cfg.lsp.package}/bin/pyright-langserver", "--stdio"}
+            on_attach = default_on_attach,
+            cmd = { "${cfg.lsp.package}/bin/bash-language-server" },
           }
         '';
     };
   };
 
-  defaultFormat = "black";
+  defaultFormat = "shfmt";
   formats = {
-    black = {
-      package = pkgs.black;
+    shfmt = {
+      package = pkgs.shfmt;
       nullConfig =
         /*
         lua
@@ -37,39 +37,39 @@ with builtins; let
         ''
           table.insert(
             ls_sources,
-            null_ls.builtins.formatting.black.with({
-              command = "${cfg.format.package}/bin/black",
+            null_ls.builtins.formatting.shfmt.with({
+              command = "${cfg.format.package}/bin/shfmt";
             })
           )
         '';
     };
   };
 in {
-  options.vim.languages.python = {
-    enable = mkEnableOption "Python language support";
+  options.vim.languages.shell = {
+    enable = mkEnableOption "Shell language support";
 
     treesitter = {
       enable = mkOption {
-        description = "Enable Python treesitter";
+        description = "Enable Shell treesitter";
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      package = nvim.types.mkGrammarOption pkgs "python";
+      package = nvim.types.mkGrammarOption pkgs "bash";
     };
 
     lsp = {
       enable = mkOption {
-        description = "Enable Python LSP support";
+        description = "Shell LSP support";
         type = types.bool;
         default = config.vim.languages.enableLSP;
       };
       server = mkOption {
-        description = "Python LSP server to use";
-        type = with types; enum (attrNames servers);
+        description = "Shell LSP server";
+        type = types.str;
         default = defaultServer;
       };
       package = mkOption {
-        description = "Python LSP server package";
+        description = "Shell lsp package";
         type = types.package;
         default = servers.${cfg.lsp.server}.package;
       };
@@ -77,36 +77,35 @@ in {
 
     format = {
       enable = mkOption {
-        description = "Enable Python formatting";
+        description = "Enable Shell formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
       type = mkOption {
-        description = "Python formatter to use";
+        description = "Shell formatter to use";
         type = with types; enum (attrNames formats);
         default = defaultFormat;
       };
       package = mkOption {
-        description = "Python formatter package";
+        description = "Shell formatter package";
         type = types.package;
         default = formats.${cfg.format.type}.package;
       };
     };
   };
+
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
       vim.treesitter.grammars = [cfg.treesitter.package];
     })
-
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.python-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig.sources.bash-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
-
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.python-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.null-ls.sources.bash-format = formats.${cfg.format.type}.nullConfig;
     })
   ]);
 }
