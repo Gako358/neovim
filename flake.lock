@@ -173,11 +173,11 @@
     "plugins-copilot-chat": {
       "flake": false,
       "locked": {
-        "lastModified": 1721236422,
-        "narHash": "sha256-v/ZMyAKDK9z3KaPJ6n2ubDnsHBueQaw2rvXcdQIaCxc=",
+        "lastModified": 1722259020,
+        "narHash": "sha256-i7Mldd26WqpOCSBdPdwB8kJqqWOZvyCqViWnG33prUE=",
         "owner": "CopilotC-Nvim",
         "repo": "CopilotChat.nvim",
-        "rev": "92bc7b5e564c23b12b2ed41dd7657fdafe39d95f",
+        "rev": "4a5e07185b37d3132e5541d8fa42aa874b774476",
         "type": "github"
       },
       "original": {

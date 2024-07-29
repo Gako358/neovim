@@ -34,7 +34,7 @@ in {
 
 
         require("CopilotChat").setup({
-          model = "gpt-4",
+          model = "gpt-4o",
           context = "buffers",
           window = {
             layout = "float",
