@@ -114,80 +114,84 @@ Disabled lsp server formatting, using [prettier](https://github.com/prettier/pre
 
 ## Plugins
 
-This configuration includes a variety of plugins designed to enhance your Neovim experience, from LSP and Autopairs, to Completions, Git, Themes, and more. For a complete list and description of all plugins:
+### LSP Plugins
 
-### LSP
+- **[fidget.nvim](https://github.com/j-hui/fidget.nvim)**: Standalone UI for nvim-lsp progress.
+- **[nvim-lightbulb](https://github.com/kosayoda/nvim-lightbulb)**: VSCode-like code actions.
+- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)**: Quickstart configurations for the Nvim LSP client.
+- **[lspkind-nvim](https://github.com/onsails/lspkind-nvim)**: VSCode-like pictograms for neovim lsp completion items.
+- **[null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)**: Use Neovim as a language server to inject LSP diagnostics, code actions, and more.
+- **[lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)**: LSP signature hint as you type.
+- **[trouble.nvim](https://github.com/folke/trouble.nvim)**: A pretty diagnostics, references, telescope results, quickfix and location list.
 
-- [fidget-nvim](https://github.com/j-hui/fidget.nvim) Standalone UI for nvim-lsp progress. Eye candy for the impatient.
-- [nvim-lightbulb](https://github.com/kosayoda/nvim-lightbulb) shows a lightbulb in the sign column whenever a codeAction is available.
-- [lsp-signature](https://github.com/ray-x/lsp_signature.nvim) Show function signature when you type.
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) common configurations for built-in language server
-- [lspkind-nvim](https://github.com/onsails/lspkind.nvim) This tiny plugin adds vscode-like pictograms to neovim built-in lsp.
-- [lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim) Neovim lsp enhance plugin.
-- [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim) neovim as a language server to inject LSP diagnostics, code actions, etc.
-- [nvim-code-action-menu](https://github.com/weilbith/nvim-code-action-menu) provides a handy pop-up menu for code actions
-- [trouble.nvim](https://github.com/folke/trouble.nvim) pretty list of lsp data
+### LSP Tools
 
-### Autopairs
+- **[crates.nvim](https://github.com/Saecki/crates.nvim)**: Rust dependency management.
+- **[nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls)**: Java LSP support.
+- **[nvim-metals](https://github.com/scalameta/nvim-metals)**: Scala LSP support.
+- **[rust-tools.nvim](https://github.com/simrat39/rust-tools.nvim)**: Tools for better development in Rust using Neovim's builtin LSP.
+- **[sqls.nvim](https://github.com/nanotee/sqls.nvim)**: SQL language server support.
 
-- [nvim-autopairs](https://github.com/windwp/nvim-autopairs) an autopair plugin for neovim
+### Debugging
 
-### ChatGPT
+- **[nvim-dap](https://github.com/mfussenegger/nvim-dap)**: Debug Adapter Protocol client implementation for Neovim.
+- **[nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)**: A UI for nvim-dap.
+- **[nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)**: Virtual text support for nvim-dap.
+- **[nvim-nio](https://github.com/nvim-neotest/nvim-nio)**: Neovim IO library.
 
-- [ChatGPT.nvim](https://github.com/jackMort/ChatGPT.nvim) a plugin for generating text with GPT-3.5 Turbo
+### Telescope
 
-### Completions
+- **[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)**: Highly extendable fuzzy finder over lists.
 
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) a completion engine that utilizes sources (replaces nvim-compe)
-  - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) a source for buffer words
-  - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) a source for builtin LSP client
-  - [cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip) a source for vim-vsnip autocomplete
-  - [cmp-path](https://github.com/hrsh7th/cmp-path) a source for path autocomplete
-  - [crates.nvim](https://github.com/Saecki/crates.nvim) autocompletion of rust crate versions in `cargo.toml`
+### Autocompletion
 
-### Filetrees
-
-- [nvim-tree-lua](https://github.com/kyazdani42/nvim-tree.lua) a file explorer tree written in lua. Using
-
-### Git
-
-- [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) a variety of git decorations
+- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)**: A completion plugin for neovim coded in Lua.
+- **[cmp-buffer](https://github.com/hrsh7th/cmp-buffer)**: nvim-cmp source for buffer words.
+- **[cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)**: nvim-cmp source for neovim's built-in LSP.
+- **[cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip)**: nvim-cmp source for vim-vsnip.
+- **[cmp-path](https://github.com/hrsh7th/cmp-path)**: nvim-cmp source for filesystem paths.
+- **[cmp-treesitter](https://github.com/ray-x/cmp-treesitter)**: nvim-cmp source for treesitter.
+- **[cmp-dap](https://github.com/rcarriga/cmp-dap)**: nvim-cmp source for nvim-dap.
 
 ### Snippets
 
-- [vim-vsnip](https://github.com/hrsh7th/vim-vsnip) a snippet plugin that supports LSP/VSCode's snippet format
+- **[vim-vsnip](https://github.com/hrsh7th/vim-vsnip)**: Snippet plugin for vim/nvim that supports LSP/VSCode's snippet format.
 
-### Statuslines
+### Copilot
 
-- [lualine.nvim](https://github.com/hoob3rt/lualine.nvim) statusline written in lua.
+- **[copilot.lua](https://github.com/zbirenbaum/copilot.lua)**: Lua plugin for GitHub Copilot.
+- **[CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim)**: Chat interface for GitHub Copilot.
 
-### Terminal
+### Markdown
 
-- [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) a neovim plugin to persist and toggle multiple terminals during an editing session
+- **[glow.nvim](https://github.com/ellisonleao/glow.nvim)**: Markdown preview using glow.
 
-### Themes
+### Git
 
-- [borealis](https://github.com/Gako358/borealis.nvim) a dark colorscheme with multiple options
-
-### Treesitter
-
-- Nix installation of treesitter
-- [nvim-treesitter-context](https://github.com/romgrk/nvim-treesitter-context) a context bar using tree-sitter
-- [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) uses treesitter to autoclose/rename html tags
-
-### Utilities
-
-- [telescope](https://github.com/nvim-telescope/telescope.nvim) an extendable fuzzy finder of lists. Working ripgrep and fd
-- [which-key](https://github.com/folke/which-key.nvim) a popup that displays possible keybindings of command being typed
+- **[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)**: Git integration for buffers.
+- **[lazygit.nvim](https://github.com/kdheepak/lazygit.nvim)**: Plugin for calling lazygit from within neovim.
+- **[undotree](https://github.com/jiaoshijie/undotree)**: Undo tree visualizer for Neovim.
 
 ### Visuals
 
-- [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim) for indentation guides
-- [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) Plugins and colors for icons. Requires patched font
+- **[rose-pine](https://github.com/rose-pine/neovim)**: All natural pine, faux fur and a bit of soho vibes for the classy minimalist.
+- **[lualine.nvim](https://github.com/hoob3rt/lualine.nvim)**: A blazing fast and easy to configure neovim statusline plugin.
+- **[nvim-autopairs](https://github.com/windwp/nvim-autopairs)**: A super powerful autopair plugin for Neovim.
+- **[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)**: Indent guides for Neovim.
+- **[nvim-cursorline](https://github.com/yamatsum/nvim-cursorline)**: Highlight the current line and word under the cursor.
+- **[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)**: Lua fork of vim-web-devicons for neovim.
+- **[noice.nvim](https://github.com/folke/noice.nvim)**: Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
+- **[nui.nvim](https://github.com/MunifTanjim/nui.nvim)**: UI Component Library for Neovim.
+- **[nvim-notify](https://github.com/rcarriga/nvim-notify)**: A fancy, configurable, notification manager for NeoVim.
+- **[ranger.nvim](https://github.com/kelly-lin/ranger.nvim)**: Ranger integration for Neovim.
 
-## Dependencies
+### Key Binding Help
 
-- [plenary](https://github.com/nvim-lua/plenary.nvim) which is a dependency of some plugins, installed automatically if needed
+- **[which-key.nvim](https://github.com/folke/which-key.nvim)**: Neovim plugin that shows a popup with possible keybindings of the command you started typing.
+
+### Utility
+
+- **[plenary.nvim](https://github.com/nvim-lua/plenary.nvim)**: All the lua functions you don't want to write twice.
 
 # License
 
