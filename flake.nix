@@ -154,6 +154,10 @@
     };
 
     # Visuals
+    plugins-rose-pine = {
+      url = "github:rose-pine/neovim";
+      flake = false;
+    };
     plugins-lualine = {
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
@@ -286,7 +290,11 @@
         vim.undo.enable = true;
         vim.visuals = {
           enable = true;
-          lualine.enable = true;
+          theme.enable = true;
+          lualine = {
+            enable = true;
+            theme = "rose-pine";
+          };
           nvimWebDevicons.enable = true;
           autopairs.enable = true;
           indentBlankline = {

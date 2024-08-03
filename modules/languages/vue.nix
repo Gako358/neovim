@@ -36,7 +36,11 @@ in {
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      package = nvim.types.mkGrammarOption pkgs "vue";
+      packages = mkOption {
+        description = "Tree-sitter grammars for Vue and TypeScript";
+        type = types.listOf types.package;
+        default = [pkgs.vimPlugins.nvim-treesitter.builtGrammars.vue pkgs.vimPlugins.nvim-treesitter.builtGrammars.typescript];
+      };
     };
 
     lsp = {
@@ -61,7 +65,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = cfg.treesitter.packages;
     })
 
     (mkIf cfg.lsp.enable {

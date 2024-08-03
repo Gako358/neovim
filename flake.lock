@@ -618,6 +618,22 @@
         "type": "github"
       }
     },
+    "plugins-rose-pine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721944041,
+        "narHash": "sha256-JQSe5h+yrQW/1ZBEmfc5B1q+TY7zlOMbKw4FhCoUmfI=",
+        "owner": "rose-pine",
+        "repo": "neovim",
+        "rev": "e4b08d74b7272cb21e4e9c71b8b9e0830fd722fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rose-pine",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
     "plugins-rust-tools": {
       "flake": false,
       "locked": {
@@ -770,6 +786,7 @@
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
         "plugins-ranger": "plugins-ranger",
+        "plugins-rose-pine": "plugins-rose-pine",
         "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
