@@ -102,7 +102,7 @@ in {
       };
     };
 
-    oil.enable = mkEnableOption "Oil filetree [oil]";
+    ranger.enable = mkEnableOption "Ranger filetree [ranger]";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -212,16 +212,21 @@ in {
           })
         '';
     })
-    (mkIf cfg.oil.enable {
-      vim.startPlugins = ["oil"];
-      vim.luaConfigRC.oil =
+    (mkIf cfg.ranger.enable {
+      vim.startPlugins = ["ranger"];
+      vim.luaConfigRC.ranger =
         nvim.dag.entryAnywhere
         /*
         lua
         */
         ''
-          require("oil").setup()
-          vim.keymap.set("n", "<BS>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+          require("ranger-nvim").setup({ replace_netrw = true })
+              vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+                noremap = true,
+                callback = function()
+                  require("ranger-nvim").open(true)
+                end,
+              })
         '';
     })
   ]);

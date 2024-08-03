@@ -153,12 +153,6 @@
       flake = false;
     };
 
-    # theme
-    plugins-tokyonight = {
-      url = "github:folke/tokyonight.nvim";
-      flake = false;
-    };
-
     # Git
     plugins-gitsigns-nvim = {
       url = "github:lewis6991/gitsigns.nvim";
@@ -206,8 +200,8 @@
       url = "github:rcarriga/nvim-notify";
       flake = false;
     };
-    plugins-oil = {
-      url = "github:stevearc/oil.nvim";
+    plugins-ranger = {
+      url = "github:kelly-lin/ranger.nvim";
       flake = false;
     };
 
@@ -307,10 +301,7 @@
         vim.undo.enable = true;
         vim.visuals = {
           enable = true;
-          lualine = {
-            enable = true;
-            theme = "tokyonight";
-          };
+          lualine.enable = true;
           nvimWebDevicons.enable = true;
           autopairs.enable = true;
           indentBlankline = {
@@ -319,9 +310,8 @@
           noice = {
             enable = true;
           };
-          oil.enable = true;
+          ranger.enable = true;
         };
-        vim.theme.enable = true;
         vim.telescope.enable = true;
       };
     };

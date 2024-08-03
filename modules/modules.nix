@@ -17,7 +17,6 @@
     ./snippets
     ./sql
     ./telescope
-    ./theme
     ./treesitter
     ./undo
     ./visuals

@@ -586,22 +586,6 @@
         "type": "github"
       }
     },
-    "plugins-oil": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1718504339,
-        "narHash": "sha256-nbFPPIU1kr6EIvsf7G/nXLj5rkNbIkZ8fLk2b7I4r/I=",
-        "owner": "stevearc",
-        "repo": "oil.nvim",
-        "rev": "64a3a555b40d96faae488ed6cf5d0f8b38520891",
-        "type": "github"
-      },
-      "original": {
-        "owner": "stevearc",
-        "repo": "oil.nvim",
-        "type": "github"
-      }
-    },
     "plugins-plenary-nvim": {
       "flake": false,
       "locked": {
@@ -615,6 +599,22 @@
       "original": {
         "owner": "nvim-lua",
         "repo": "plenary.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-ranger": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707517578,
+        "narHash": "sha256-8vsSMRRfz6Nj0YIpjGdSwg+iq8Qa7yGbhOmDfWLOgB0=",
+        "owner": "kelly-lin",
+        "repo": "ranger.nvim",
+        "rev": "d3b032feee6b3b0cf923222f260523e2bd7f3ad3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kelly-lin",
+        "repo": "ranger.nvim",
         "type": "github"
       }
     },
@@ -663,22 +663,6 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-tokyonight": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1717670776,
-        "narHash": "sha256-16/H5Oy6iQLmVrMA6zxHJkE4s4CQAoAAqA2pbZiCOWA=",
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
-        "rev": "9d88650502bc331f43eb0bef6286e58144ac5a96",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
         "type": "github"
       }
     },
@@ -832,12 +816,11 @@
         "plugins-nvim-metals": "plugins-nvim-metals",
         "plugins-nvim-nio": "plugins-nvim-nio",
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
-        "plugins-oil": "plugins-oil",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
+        "plugins-ranger": "plugins-ranger",
         "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
-        "plugins-tokyonight": "plugins-tokyonight",
         "plugins-trouble": "plugins-trouble",
         "plugins-undotree": "plugins-undotree",
         "plugins-vim-dadbod": "plugins-vim-dadbod",
