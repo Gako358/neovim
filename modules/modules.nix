@@ -15,7 +15,6 @@
     ./languages
     ./lsp
     ./snippets
-    ./sql
     ./telescope
     ./treesitter
     ./undo

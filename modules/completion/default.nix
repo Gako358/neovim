@@ -190,12 +190,6 @@ in {
             sources = { name = "dap" };
           })
         ''}
-
-        ${optionalString sqlEnabled ''
-          cmp.setup.filetype({ "sql" }, {
-            sources = { name = "vim-dadbod-completion" };
-          })
-        ''}
       '');
 
     vim.snippets.vsnip.enable =

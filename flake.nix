@@ -63,20 +63,6 @@
       flake = false;
     };
 
-    # SQL
-    plugins-vim-dadbod = {
-      url = "github:tpope/vim-dadbod";
-      flake = false;
-    };
-    plugins-vim-dadbod-ui = {
-      url = "github:kristijanhusak/vim-dadbod-ui";
-      flake = false;
-    };
-    plugins-vim-dadbod-completion = {
-      url = "github:kristijanhusak/vim-dadbod-completion";
-      flake = false;
-    };
-
     # Debug
     plugins-nvim-dap = {
       url = "github:mfussenegger/nvim-dap";
@@ -297,7 +283,6 @@
           virtualText.enable = true;
           ui.enable = true;
         };
-        vim.sql.enable = true;
         vim.undo.enable = true;
         vim.visuals = {
           enable = true;
