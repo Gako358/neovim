@@ -16,13 +16,13 @@ in {
 
     transparentBackground = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Set the background to transparent";
     };
 
     disableArrows = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Set to prevent arrow keys from moving cursor";
     };
 
@@ -151,6 +151,14 @@ in {
       default = true;
       description = "Set custom status line with repeated '─' character";
     };
+
+    keys = {
+      coreKeys = mkOption {
+        default = true;
+        description = "Setup core keybindings";
+        type = types.bool;
+      };
+    };
   };
 
   config = {
@@ -174,7 +182,41 @@ in {
       "<right>" = "<nop>";
     };
 
-    vim.nnoremap = mkIf cfg.mapLeaderSpace {"<space>" = "<nop>";};
+    vim.nnoremap = mkMerge [
+      (mkIf cfg.mapLeaderSpace {"<space>" = "<nop>";})
+      (mkIf cfg.keys.coreKeys {
+        "<C-h>" = "<C-w>h";
+        "<C-j>" = "<C-w>j";
+        "<C-k>" = "<C-w>k";
+        "<C-l>" = "<C-w>l";
+
+        "<A-Up>" = ":resize -3<CR>";
+        "<A-Down>" = ":resize +3<CR>";
+        "<A-Left>" = ":vertical resize -3<CR>";
+        "<A-Right>" = ":vertical resize +3<CR>";
+
+        "<F4>" = ":setlocal spell<CR>";
+
+        # Return to last edit buffer.
+        "<S-Tab>" = ":e #<CR>";
+
+        # Move and center
+        "<C-d>" = "<C-d>zz";
+        "<C-u>" = "<C-u>zz";
+
+        # Search and replace
+        "<leader>sr" = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>";
+
+        # Clear Search
+        "<leader>dv" = ":noh<CR>";
+      })
+    ];
+
+    vim.vnoremap = mkIf cfg.keys.coreKeys {
+      # Move line up and down
+      "J" = ":m '>+1<CR>gv=gv";
+      "K" = ":m '<-2<CR>gv=gv";
+    };
 
     vim.configRC.basic = nvim.dag.entryAfter ["globalsScript"] ''
       " Settings that are set for everything
