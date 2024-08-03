@@ -174,8 +174,6 @@ Disabled lsp server formatting, using [prettier](https://github.com/prettier/pre
 
 ### Visuals
 
-- **[rose-pine](https://github.com/rose-pine/neovim)**: All natural pine, faux fur and a bit of soho vibes for the classy minimalist.
-- **[lualine.nvim](https://github.com/hoob3rt/lualine.nvim)**: A blazing fast and easy to configure neovim statusline plugin.
 - **[nvim-autopairs](https://github.com/windwp/nvim-autopairs)**: A super powerful autopair plugin for Neovim.
 - **[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)**: Indent guides for Neovim.
 - **[nvim-cursorline](https://github.com/yamatsum/nvim-cursorline)**: Highlight the current line and word under the cursor.

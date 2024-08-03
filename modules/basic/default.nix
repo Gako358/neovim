@@ -133,6 +133,24 @@ in {
       default = true;
       description = "New splits will open to the right";
     };
+
+    hideStatusLine = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Hide the status line";
+    };
+
+    linkStatusLine = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Link StatusLine and StatusLineNC to Normal";
+    };
+
+    customStatusLine = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Set custom status line with repeated '─' character";
+    };
   };
 
   config = {
@@ -231,6 +249,16 @@ in {
       ''}
       ${optionalString cfg.transparentBackground ''
         hi Normal guibg=NONE ctermbg=NONE
+      ''}
+      ${optionalString cfg.hideStatusLine ''
+        set laststatus=0
+      ''}
+      ${optionalString cfg.linkStatusLine ''
+        hi! link StatusLine Normal
+        hi! link StatusLineNC Normal
+      ''}
+      ${optionalString cfg.customStatusLine ''
+        set statusline=%{repeat('─',winwidth('.'))}
       ''}
     '';
   };

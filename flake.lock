@@ -314,22 +314,6 @@
         "type": "github"
       }
     },
-    "plugins-lualine": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712310396,
-        "narHash": "sha256-WcH2dWdRDgMkwBQhcgT+Z/ArMdm+VbRhmQftx4t2kNI=",
-        "owner": "hoob3rt",
-        "repo": "lualine.nvim",
-        "rev": "0a5a66803c7407767b799067986b4dc3036e1983",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hoob3rt",
-        "repo": "lualine.nvim",
-        "type": "github"
-      }
-    },
     "plugins-noice": {
       "flake": false,
       "locked": {
@@ -618,22 +602,6 @@
         "type": "github"
       }
     },
-    "plugins-rose-pine": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1721944041,
-        "narHash": "sha256-JQSe5h+yrQW/1ZBEmfc5B1q+TY7zlOMbKw4FhCoUmfI=",
-        "owner": "rose-pine",
-        "repo": "neovim",
-        "rev": "e4b08d74b7272cb21e4e9c71b8b9e0830fd722fe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rose-pine",
-        "repo": "neovim",
-        "type": "github"
-      }
-    },
     "plugins-rust-tools": {
       "flake": false,
       "locked": {
@@ -767,7 +735,6 @@
         "plugins-lazygit": "plugins-lazygit",
         "plugins-lsp-signature": "plugins-lsp-signature",
         "plugins-lspkind": "plugins-lspkind",
-        "plugins-lualine": "plugins-lualine",
         "plugins-noice": "plugins-noice",
         "plugins-notify": "plugins-notify",
         "plugins-nui": "plugins-nui",
@@ -786,7 +753,6 @@
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
         "plugins-ranger": "plugins-ranger",
-        "plugins-rose-pine": "plugins-rose-pine",
         "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
