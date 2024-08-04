@@ -176,12 +176,13 @@ Disabled lsp server formatting, using [prettier](https://github.com/prettier/pre
 
 - **[nvim-autopairs](https://github.com/windwp/nvim-autopairs)**: A super powerful autopair plugin for Neovim.
 - **[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)**: Indent guides for Neovim.
-- **[nvim-cursorline](https://github.com/yamatsum/nvim-cursorline)**: Highlight the current line and word under the cursor.
+- **[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)**: A blazing fast and easy to configure Neovim statusline written in Lua.
 - **[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)**: Lua fork of vim-web-devicons for neovim.
 - **[noice.nvim](https://github.com/folke/noice.nvim)**: Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
 - **[nui.nvim](https://github.com/MunifTanjim/nui.nvim)**: UI Component Library for Neovim.
 - **[nvim-notify](https://github.com/rcarriga/nvim-notify)**: A fancy, configurable, notification manager for NeoVim.
 - **[ranger.nvim](https://github.com/kelly-lin/ranger.nvim)**: Ranger integration for Neovim.
+- **[theme](https://github.com/EdenEast/nightfox.nvim)**: A soft dark, fully customizable Neovim theme.
 
 ### Key Binding Help
 

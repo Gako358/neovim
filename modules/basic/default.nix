@@ -136,20 +136,26 @@ in {
 
     hideStatusLine = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Hide the status line";
     };
 
     linkStatusLine = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Link StatusLine and StatusLineNC to Normal";
     };
 
     customStatusLine = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Set custom status line with repeated '─' character";
+    };
+
+    list = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable the display of whitespace characters";
     };
 
     keys = {
@@ -301,6 +307,9 @@ in {
       ''}
       ${optionalString cfg.customStatusLine ''
         set statusline=%{repeat('─',winwidth('.'))}
+      ''}
+      ${optionalString cfg.list ''
+        set list
       ''}
     '';
   };

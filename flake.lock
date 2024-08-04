@@ -314,6 +314,22 @@
         "type": "github"
       }
     },
+    "plugins-lualine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721024646,
+        "narHash": "sha256-uNDRynWs7fXDDzDFKvE31oDetv3aabiJfr/r/84z9Sg=",
+        "owner": "hoob3rt",
+        "repo": "lualine.nvim",
+        "rev": "544dd1583f9bb27b393f598475c89809c4d5e86b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hoob3rt",
+        "repo": "lualine.nvim",
+        "type": "github"
+      }
+    },
     "plugins-noice": {
       "flake": false,
       "locked": {
@@ -407,22 +423,6 @@
       "original": {
         "owner": "hrsh7th",
         "repo": "nvim-cmp",
-        "type": "github"
-      }
-    },
-    "plugins-nvim-cursorline": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1650034925,
-        "narHash": "sha256-Uhw65p1KBjs8KsVOmTzuiu3XKclxBob8AVdWEt30C/8=",
-        "owner": "yamatsum",
-        "repo": "nvim-cursorline",
-        "rev": "804f0023692653b2b2368462d67d2a87056947f9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yamatsum",
-        "repo": "nvim-cursorline",
         "type": "github"
       }
     },
@@ -650,6 +650,22 @@
         "type": "github"
       }
     },
+    "plugins-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721661222,
+        "narHash": "sha256-2efugsL7pbQ78XxwWRybnfxhuqe7LSUgpTlwcJJTAX0=",
+        "owner": "EdenEast",
+        "repo": "nightfox.nvim",
+        "rev": "d3e8b1acc095baf57af81bb5e89fe7c4359eb619",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EdenEast",
+        "repo": "nightfox.nvim",
+        "type": "github"
+      }
+    },
     "plugins-trouble": {
       "flake": false,
       "locked": {
@@ -735,13 +751,13 @@
         "plugins-lazygit": "plugins-lazygit",
         "plugins-lsp-signature": "plugins-lsp-signature",
         "plugins-lspkind": "plugins-lspkind",
+        "plugins-lualine": "plugins-lualine",
         "plugins-noice": "plugins-noice",
         "plugins-notify": "plugins-notify",
         "plugins-nui": "plugins-nui",
         "plugins-null-ls": "plugins-null-ls",
         "plugins-nvim-autopairs": "plugins-nvim-autopairs",
         "plugins-nvim-cmp": "plugins-nvim-cmp",
-        "plugins-nvim-cursorline": "plugins-nvim-cursorline",
         "plugins-nvim-dap": "plugins-nvim-dap",
         "plugins-nvim-dap-ui": "plugins-nvim-dap-ui",
         "plugins-nvim-dap-virtual-text": "plugins-nvim-dap-virtual-text",
@@ -756,6 +772,7 @@
         "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
+        "plugins-theme": "plugins-theme",
         "plugins-trouble": "plugins-trouble",
         "plugins-undotree": "plugins-undotree",
         "plugins-vim-vsnip": "plugins-vim-vsnip",

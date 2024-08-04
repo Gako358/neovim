@@ -4,7 +4,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    # Langauge server (use master instead of nixpkgs)
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -162,12 +161,8 @@
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
-    plugins-nvim-cursorline = {
-      url = "github:yamatsum/nvim-cursorline";
-      flake = false;
-    };
-    plugins-nvim-web-devicons = {
-      url = "github:kyazdani42/nvim-web-devicons";
+    plugins-lualine = {
+      url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
     plugins-noice = {
@@ -182,8 +177,16 @@
       url = "github:rcarriga/nvim-notify";
       flake = false;
     };
+    plugins-nvim-web-devicons = {
+      url = "github:kyazdani42/nvim-web-devicons";
+      flake = false;
+    };
     plugins-ranger = {
       url = "github:kelly-lin/ranger.nvim";
+      flake = false;
+    };
+    plugins-theme = {
+      url = "github:EdenEast/nightfox.nvim";
       flake = false;
     };
 
@@ -282,15 +285,20 @@
         vim.undo.enable = true;
         vim.visuals = {
           enable = true;
-          nvimWebDevicons.enable = true;
           autopairs.enable = true;
           indentBlankline = {
             enable = true;
           };
+          lualine = {
+            enable = true;
+            theme = "nightfox";
+          };
           noice = {
             enable = true;
           };
+          nvimWebDevicons.enable = true;
           ranger.enable = true;
+          theme.enable = true;
         };
         vim.telescope.enable = true;
       };

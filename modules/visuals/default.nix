@@ -10,7 +10,6 @@ in {
   options.vim.visuals = {
     enable = mkEnableOption "visual enhancements.";
 
-    nvimWebDevicons.enable = mkEnableOption "dev icons. Required for certain plugins [nvim-web-devicons].";
     autopairs = {
       enable = mkEnableOption "auto pairs [nvim-autopairs]";
 
@@ -20,6 +19,7 @@ in {
         description = "Set the autopairs type. Options: nvim-autopairs [nvim-autopairs]";
       };
     };
+
     indentBlankline = {
       enable = mkEnableOption "indentation guides [indent-blankline].";
 
@@ -66,6 +66,148 @@ in {
       };
     };
 
+    lualine = {
+      enable = mkEnableOption "lualine statusline.";
+      icons = mkOption {
+        description = "Enable icons for lualine";
+        type = types.bool;
+        default = true;
+      };
+
+      theme = mkOption {
+        description = "Theme for lualine";
+        type = types.str;
+        default = "auto";
+        defaultText = ''`config.vim.theme.name` if theme supports lualine else "auto"'';
+      };
+
+      sectionSeparator = {
+        left = mkOption {
+          description = "Section separator for left side";
+          type = types.str;
+          default = "";
+        };
+
+        right = mkOption {
+          description = "Section separator for right side";
+          type = types.str;
+          default = "";
+        };
+      };
+
+      componentSeparator = {
+        left = mkOption {
+          description = "Component separator for left side";
+          type = types.str;
+          default = "⏽";
+        };
+
+        right = mkOption {
+          description = "Component separator for right side";
+          type = types.str;
+          default = "⏽";
+        };
+      };
+
+      activeSection = {
+        a = mkOption {
+          description = "active config for: | (A) | B | C       X | Y | Z |";
+          type = types.str;
+          default = "{'mode'}";
+        };
+
+        b = mkOption {
+          description = "active config for: | A | (B) | C       X | Y | Z |";
+          type = types.str;
+          default = ''
+            {
+              {
+                "branch",
+                  separator = '',
+              },
+                "diff",
+            }
+          '';
+        };
+
+        c = mkOption {
+          description = "active config for: | A | B | (C)       X | Y | Z |";
+          type = types.str;
+          default = "{'filename'}";
+        };
+
+        x = mkOption {
+          description = "active config for: | A | B | C       (X) | Y | Z |";
+          type = types.str;
+          default = ''
+            {
+              {
+                "diagnostics",
+                  sources = {'nvim_lsp'},
+                  separator = '',
+                  symbols = {error = '', warn = '', info = '', hint = ''},
+              },
+                {
+                  "filetype",
+                },
+                "fileformat",
+                "encoding",
+            }
+          '';
+        };
+
+        y = mkOption {
+          description = "active config for: | A | B | C       X | (Y) | Z |";
+          type = types.str;
+          default = "{'progress'}";
+        };
+
+        z = mkOption {
+          description = "active config for: | A | B | C       X | Y | (Z) |";
+          type = types.str;
+          default = "{'location'}";
+        };
+      };
+
+      inactiveSection = {
+        a = mkOption {
+          description = "inactive config for: | (A) | B | C       X | Y | Z |";
+          type = types.str;
+          default = "{}";
+        };
+
+        b = mkOption {
+          description = "inactive config for: | A | (B) | C       X | Y | Z |";
+          type = types.str;
+          default = "{}";
+        };
+
+        c = mkOption {
+          description = "inactive config for: | A | B | (C)       X | Y | Z |";
+          type = types.str;
+          default = "{'filename'}";
+        };
+
+        x = mkOption {
+          description = "inactive config for: | A | B | C       (X) | Y | Z |";
+          type = types.str;
+          default = "{'location'}";
+        };
+
+        y = mkOption {
+          description = "inactive config for: | A | B | C       X | (Y) | Z |";
+          type = types.str;
+          default = "{}";
+        };
+
+        z = mkOption {
+          description = "inactive config for: | A | B | C       X | Y | (Z) |";
+          type = types.str;
+          default = "{}";
+        };
+      };
+    };
+
     noice = {
       enable = mkEnableOption "Noice configuration.";
 
@@ -82,15 +224,15 @@ in {
           type = types.bool;
         };
 
-        longMessageToSplit = mkOption {
-          default = true;
-          description = "Long messages will be sent to a split";
-          type = types.bool;
-        };
-
         incRename = mkOption {
           default = false;
           description = "Enables an input dialog for inc-rename.nvim";
+          type = types.bool;
+        };
+
+        longMessageToSplit = mkOption {
+          default = true;
+          description = "Long messages will be sent to a split";
           type = types.bool;
         };
 
@@ -102,13 +244,12 @@ in {
       };
     };
 
+    nvimWebDevicons.enable = mkEnableOption "dev icons. Required for certain plugins [nvim-web-devicons].";
     ranger.enable = mkEnableOption "Ranger filetree [ranger]";
+    theme.enable = mkEnableOption "Theme configuration.";
   };
 
   config = mkIf cfg.enable (mkMerge [
-    (mkIf cfg.nvimWebDevicons.enable {
-      vim.startPlugins = ["nvim-web-devicons"];
-    })
     (mkIf cfg.autopairs.enable {
       vim.startPlugins = ["nvim-autopairs"];
       vim.luaConfigRC.autopairs =
@@ -128,34 +269,8 @@ in {
         lua
         */
         ''
-          vim.opt.list = true
-          local highlight = {
-              "RainbowRed",
-              "RainbowYellow",
-              "RainbowBlue",
-              "RainbowOrange",
-              "RainbowGreen",
-              "RainbowViolet",
-              "RainbowCyan",
-          }
-
-          local hooks = require "ibl.hooks"
-          -- create the highlight groups in the highlight setup hook, so they are reset
-          -- every time the colorscheme changes
-          hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-              vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-              vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-              vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-              vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-              vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-              vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-              vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-          end)
-
           require("ibl").setup {
-            -- indent = { highlight = highlight, char = "|" },
             indent = {
-              highlight = highlight,
               char = "▏",
               tab_char = ".",
             },
@@ -167,6 +282,49 @@ in {
               show_start = false,
               show_end = false,
             },
+          }
+        '';
+    })
+    (mkIf cfg.lualine.enable {
+      vim.startPlugins = ["lualine"];
+      vim.luaConfigRC.lualine =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          require'lualine'.setup {
+            options = {
+              icons_enabled = ${boolToString cfg.lualine.icons},
+              theme = "${toString cfg.lualine.theme}",
+              component_separators = {
+                left = "${cfg.lualine.componentSeparator.left}",
+                right = "${cfg.lualine.componentSeparator.right}"
+              },
+              section_separators = {
+                left = "${cfg.lualine.sectionSeparator.left}",
+                right = "${cfg.lualine.sectionSeparator.right}"
+              },
+              disabled_filetypes = {},
+            },
+            sections = {
+              lualine_a = ${cfg.lualine.activeSection.a},
+              lualine_b = ${cfg.lualine.activeSection.b},
+              lualine_c = ${cfg.lualine.activeSection.c},
+              lualine_x = ${cfg.lualine.activeSection.x},
+              lualine_y = ${cfg.lualine.activeSection.y},
+              lualine_z = ${cfg.lualine.activeSection.z},
+            },
+            inactive_sections = {
+              lualine_a = ${cfg.lualine.inactiveSection.a},
+              lualine_b = ${cfg.lualine.inactiveSection.b},
+              lualine_c = ${cfg.lualine.inactiveSection.c},
+              lualine_x = ${cfg.lualine.inactiveSection.x},
+              lualine_y = ${cfg.lualine.inactiveSection.y},
+              lualine_z = ${cfg.lualine.inactiveSection.z},
+            },
+            tabline = {},
+            extensions = {},
           }
         '';
     })
@@ -201,8 +359,8 @@ in {
             presets = {
               bottom_search = ${boolToString cfg.noice.presets.bottomSearch},
               command_palette = ${boolToString cfg.noice.presets.commandPalette},
-              long_message_to_split = ${boolToString cfg.noice.presets.longMessageToSplit},
               inc_rename = ${boolToString cfg.noice.presets.incRename},
+              long_message_to_split = ${boolToString cfg.noice.presets.longMessageToSplit},
               lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
             },
           })
@@ -211,6 +369,9 @@ in {
             background_colour = "#00000000"
           })
         '';
+    })
+    (mkIf cfg.nvimWebDevicons.enable {
+      vim.startPlugins = ["nvim-web-devicons"];
     })
     (mkIf cfg.ranger.enable {
       vim.startPlugins = ["ranger"];
@@ -227,6 +388,34 @@ in {
                   require("ranger-nvim").open(true)
                 end,
               })
+        '';
+    })
+    (mkIf cfg.theme.enable {
+      vim.startPlugins = ["theme"];
+      vim.luaConfigRC.nightfox =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          require('nightfox').setup({
+            options = {
+              transparent = true,
+              styles = {
+                comments = "italic",
+                conditionals = "italic, bold",
+                constants = "italic, bold",
+                functions = "italic, bold",
+                keywords = "italic, bold",
+                numbers = "bold",
+                operators = "italic",
+                strings = "italic",
+                types = "bold",
+                variables = "italic",
+              },
+            },
+          })
+          vim.cmd("colorscheme nightfox")
         '';
     })
   ]);
