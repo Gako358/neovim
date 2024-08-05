@@ -7,7 +7,6 @@ with lib;
 with builtins; let
   cfg = config.vim.autocomplete;
   debugEnabled = config.vim.debug.enable;
-  sqlEnabled = config.vim.sql.enable;
 
   builtSources =
     concatMapStringsSep

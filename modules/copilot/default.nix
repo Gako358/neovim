@@ -25,9 +25,9 @@ in {
       ''
         require("copilot").setup({
           suggestion = {
+            enabled = true,
             keymap = {
               accept = "<C-j>",
-              next = "<M-n>",
             },
           },
         })
