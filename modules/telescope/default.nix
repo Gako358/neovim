@@ -23,6 +23,7 @@ in {
         "<leader>fg" = "<cmd> Telescope live_grep<CR>";
         "<leader>fh" = "<cmd> Telescope help_tags<CR>";
         "<leader>ft" = "<cmd> Telescope<CR>";
+        "<leader>fc" = "<cmd> TodoTelescope<CR>";
 
         # Buffers
         "<Tab>" = "<cmd> Telescope buffers<CR>";

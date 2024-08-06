@@ -19,6 +19,7 @@ in {
     vim.nnoremap = {
       "<leader>xx" = "<cmd>Trouble diagnostics toggle<CR>";
       "<leader>xX" = "<cmd>Trouble diagnostics toggle filter.buf=0<CR>";
+      "<leader>xt" = "<cmd>Trouble todo<CR>";
       "<leader>cs" = "<cmd>Trouble symbols toggle focus=false<CR>";
       "<leader>cl" = "<cmd>Trouble lsp toggle focus=false win.position=right<CR>";
       "<leader>xL" = "<cmd>Trouble loclist toggle<CR>";
