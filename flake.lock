@@ -666,6 +666,22 @@
         "type": "github"
       }
     },
+    "plugins-todo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721651141,
+        "narHash": "sha256-pzUFoFaBrhKxO5jCmqaYaEnkyM/b9xer32yM7qpV2Tg=",
+        "owner": "folke",
+        "repo": "todo-comments.nvim",
+        "rev": "8f45f353dc3649cb9b44cecda96827ea88128584",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "todo-comments.nvim",
+        "type": "github"
+      }
+    },
     "plugins-trouble": {
       "flake": false,
       "locked": {
@@ -773,6 +789,7 @@
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
         "plugins-theme": "plugins-theme",
+        "plugins-todo": "plugins-todo",
         "plugins-trouble": "plugins-trouble",
         "plugins-undotree": "plugins-undotree",
         "plugins-vim-vsnip": "plugins-vim-vsnip",

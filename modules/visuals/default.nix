@@ -247,6 +247,7 @@ in {
     nvimWebDevicons.enable = mkEnableOption "dev icons. Required for certain plugins [nvim-web-devicons].";
     ranger.enable = mkEnableOption "Ranger filetree [ranger]";
     theme.enable = mkEnableOption "Theme configuration.";
+    todo.enable = mkEnableOption "Todo highlights [nvim-todo]";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -416,6 +417,17 @@ in {
             },
           })
           vim.cmd("colorscheme nightfox")
+        '';
+    })
+    (mkIf cfg.todo.enable {
+      vim.startPlugins = ["todo"];
+      vim.luaConfigRC.todo =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          require("todo-comments").setup{}
         '';
     })
   ]);

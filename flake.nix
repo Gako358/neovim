@@ -189,6 +189,10 @@
       url = "github:EdenEast/nightfox.nvim";
       flake = false;
     };
+    plugins-todo = {
+      url = "github:folke/todo-comments.nvim";
+      flake = false;
+    };
 
     # Key binding help
     plugins-which-key = {
@@ -299,6 +303,7 @@
           nvimWebDevicons.enable = true;
           ranger.enable = true;
           theme.enable = true;
+          todo.enable = true;
         };
         vim.telescope.enable = true;
       };
