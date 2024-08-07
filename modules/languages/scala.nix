@@ -67,6 +67,37 @@ in {
           vim.cmd([[augroup lsp]])
           vim.cmd([[autocmd!]])
 
+          -- https://github.com/neovim/neovim/issues/29156
+          local function setup_codelens_refresh(client, bufnr)
+            local status_ok, codelens_supported = pcall(function()
+              return client.supports_method("textDocument/codeLens")
+            end)
+            if not status_ok or not codelens_supported then
+              return
+            end
+            local group = "lsp_code_lens_refresh"
+            local cl_events = { "BufEnter", "InsertLeave" }
+            local ok, cl_autocmds = pcall(vim.api.nvim_get_autocmds, {
+              group = group,
+              buffer = bufnr,
+              event = cl_events,
+            })
+            if ok and #cl_autocmds > 0 then
+              return
+            end
+            local cb = function()
+              if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_is_valid(bufnr) then
+                vim.lsp.codelens.refresh({ bufnr = bufnr })
+              end
+            end
+            vim.api.nvim_create_augroup(group, { clear = false })
+            vim.api.nvim_create_autocmd(cl_events, {
+              group = group,
+              buffer = bufnr,
+              callback = cb,
+            })
+          end
+
           scala_on_attach = function(client, bufnr)
             attach_keymaps(client, bufnr)
             local opts = { noremap=true, silent=true, buffer = bufnr }
@@ -75,6 +106,7 @@ in {
             vim.keymap.set("n", "<leader>so", "<Cmd>MetalsOrganizeImports<CR>", opts)
             vim.keymap.set("n", "<leader>sd", "<Cmd>MetalsRunDoctor<CR>", opts)
             vim.keymap.set("n", "<leader>si", "<Cmd>MetalsInfo<CR>", opts)
+            setup_codelens_refresh(client, bufnr)
           end
 
           metals_config.capabilities = capabilities;
