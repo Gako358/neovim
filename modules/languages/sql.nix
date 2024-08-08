@@ -7,6 +7,7 @@
 with lib;
 with builtins; let
   cfg = config.vim.languages.sql;
+  sqlfluffDefault = "sqlfluff";
 
   defaultServer = "sqlls";
   servers = {
@@ -27,6 +28,45 @@ with builtins; let
             end;
           }
         '';
+    };
+  };
+  defaultFormat = "sqlfluff";
+  formats = {
+    sqlfluff = {
+      package = [sqlfluffDefault];
+      nullConfig =
+        /*
+        lua
+        */
+        ''
+          table.insert(
+            ls_sources,
+            null_ls.builtins.formatting.sqlfluff.with({
+              command = "${nvim.languages.commandOptToCmd cfg.format.package "sqlfluff"}",
+              extra_args = {"--dialect", "${cfg.dialect}"}
+            })
+          )
+        '';
+    };
+  };
+
+  defaultDiagnostics = ["sqlfluff"];
+  diagnostics = {
+    sqlfluff = {
+      package = pkgs.${sqlfluffDefault};
+      nullConfig = pkg:
+      /*
+      lua
+      */
+      ''
+        table.insert(
+          ls_sources,
+          null_ls.builtins.diagnostics.sqlfluff.with({
+            command = "${pkg}/bin/sqlfluff",
+            extra_args = {"--dialect", "${cfg.dialect}"}
+          })
+        )
+      '';
     };
   };
 in {
@@ -65,6 +105,36 @@ in {
         default = servers.${cfg.lsp.server}.package;
       };
     };
+
+    format = {
+      enable = mkOption {
+        description = "Enable SQL formatting";
+        type = types.bool;
+        default = config.vim.languages.enableFormat;
+      };
+      type = mkOption {
+        description = "SQL formatter to use";
+        type = with types; enum (attrNames formats);
+        default = defaultFormat;
+      };
+      package = nvim.options.mkCommandOption pkgs {
+        description = "SQL formatter";
+        inherit (formats.${cfg.format.type}) package;
+      };
+    };
+
+    extraDiagnostics = {
+      enable = mkOption {
+        description = "Enable extra SQL diagnostics";
+        type = types.bool;
+        default = config.vim.languages.enableExtraDiagnostics;
+      };
+      types = lib.nvim.options.mkDiagnosticsOption {
+        langDesc = "SQL";
+        inherit diagnostics;
+        inherit defaultDiagnostics;
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -78,6 +148,20 @@ in {
 
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.sql-lsp = servers.${cfg.lsp.server}.lspConfig;
+    })
+
+    (mkIf cfg.format.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources."sql-format" = formats.${cfg.format.type}.nullConfig;
+    })
+
+    (mkIf cfg.extraDiagnostics.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+        lang = "sql";
+        config = cfg.extraDiagnostics.types;
+        inherit diagnostics;
+      };
     })
   ]);
 }
