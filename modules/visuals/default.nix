@@ -404,15 +404,7 @@ in {
               transparent = true,
               styles = {
                 comments = "italic",
-                conditionals = "italic, bold",
-                constants = "italic, bold",
-                functions = "italic, bold",
-                keywords = "italic, bold",
-                numbers = "bold",
-                operators = "italic",
                 strings = "italic",
-                types = "bold",
-                variables = "italic",
               },
             },
           })
