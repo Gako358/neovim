@@ -165,6 +165,12 @@ in {
         type = types.bool;
       };
     };
+
+    bufOnlyCommand = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Define the BufOnly command";
+    };
   };
 
   config = {
@@ -215,6 +221,9 @@ in {
 
         # Clear Search
         "<leader>dv" = ":noh<CR>";
+
+        # BufOnly command
+        "<leader>bq" = ":BufOnly<CR>";
       })
     ];
 
@@ -310,6 +319,9 @@ in {
       ''}
       ${optionalString cfg.list ''
         set list
+      ''}
+      ${optionalString cfg.bufOnlyCommand ''
+        command! BufOnly silent! execute "%bd|e#|bd#"
       ''}
     '';
   };
