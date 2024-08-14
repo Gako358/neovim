@@ -403,8 +403,18 @@ in {
             options = {
               transparent = true,
               styles = {
+                functions = "italic,bold",
+                operators = "italic,bold",
                 comments = "italic",
                 strings = "italic",
+                types = "bold",
+              },
+            },
+            palettes = {
+              nightfox = {
+                bg0 = "#272727",
+                sel0 = "#282828",
+                sel1 = "#272727",
               },
             },
           })
