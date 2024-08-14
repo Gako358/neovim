@@ -33,7 +33,9 @@ in {
       */
       ''
         -- Enable trouble diagnostics viewer
-        require("trouble").setup {}
+        require("trouble").setup {
+          focus = true,
+        }
       '';
   };
 }
