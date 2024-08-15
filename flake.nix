@@ -186,7 +186,7 @@
       flake = false;
     };
     plugins-theme = {
-      url = "github:EdenEast/nightfox.nvim";
+      url = "github:rebelot/kanagawa.nvim";
       flake = false;
     };
     plugins-todo = {
@@ -295,7 +295,7 @@
           };
           lualine = {
             enable = true;
-            theme = "nightfox";
+            theme = "kanagawa";
           };
           noice = {
             enable = true;
