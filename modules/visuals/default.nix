@@ -393,42 +393,33 @@ in {
     })
     (mkIf cfg.theme.enable {
       vim.startPlugins = ["theme"];
-      vim.luaConfigRC.kanagawa =
+      vim.luaConfigRC.nightfox =
         nvim.dag.entryAnywhere
         /*
         lua
         */
         ''
-          require('kanagawa').setup({
-            transparent = true,
-            colors = {
-              theme = {
-                dragon = {
-                  ui = {
-                    bg_m3 = "#272727",
-                    bg_m2 = "#272727",
-                    bg_m1 = "#272727",
-                    bg = "#272727",
-                    bg_p1 = "#272727",
-                    bg_p2 = "#272727",
-                    pmenu = {
-                      bg = "none",
-                      bg_sbar = "none",
-                    },
-                    float = {
-                      bg = "none",
-                    },
-                  },
-                },
+          require('nightfox').setup({
+            options = {
+              transparent = true,
+              styles = {
+                comments = "italic",
+                strings = "italic",
               },
             },
-            theme = "dragon",
-            background = {
-              dark = "dragon",
-              light = " lotus"
+            palettes = {
+              nightfox = {
+                bg0 = "#272727",
+                bg1 = "#272727",
+                bg2 = "#272727",
+                bg3 = "#272727",
+                bg4 = "#272727",
+                sel0 = "#272727",
+                sel1 = "#272727",
+              },
             },
           })
-          vim.cmd("colorscheme kanagawa")
+          vim.cmd("colorscheme nightfox")
         '';
     })
     (mkIf cfg.todo.enable {

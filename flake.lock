@@ -653,16 +653,16 @@
     "plugins-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1719991166,
-        "narHash": "sha256-FnwqqF/jtCgfmjIIR70xx8kL5oAqonrbDEGNw0sixoA=",
-        "owner": "rebelot",
-        "repo": "kanagawa.nvim",
-        "rev": "e5f7b8a804360f0a48e40d0083a97193ee4fcc87",
+        "lastModified": 1721661222,
+        "narHash": "sha256-2efugsL7pbQ78XxwWRybnfxhuqe7LSUgpTlwcJJTAX0=",
+        "owner": "EdenEast",
+        "repo": "nightfox.nvim",
+        "rev": "d3e8b1acc095baf57af81bb5e89fe7c4359eb619",
         "type": "github"
       },
       "original": {
-        "owner": "rebelot",
-        "repo": "kanagawa.nvim",
+        "owner": "EdenEast",
+        "repo": "nightfox.nvim",
         "type": "github"
       }
     },
