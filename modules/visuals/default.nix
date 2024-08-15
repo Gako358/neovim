@@ -403,16 +403,15 @@ in {
             options = {
               transparent = true,
               styles = {
-                functions = "italic,bold",
-                operators = "italic,bold",
                 comments = "italic",
                 strings = "italic",
-                types = "bold",
               },
             },
             palettes = {
               nightfox = {
                 bg0 = "#282828",
+                sel0 = "#3c3c3c",
+                sel1 = "#323232",
               },
             },
           })
