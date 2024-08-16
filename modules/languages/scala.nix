@@ -59,9 +59,10 @@ in {
             metalsBinaryPath = "${cfg.lsp.package}/bin/metals",
             showImplicitArguments = true,
             showImplicitConversionsAndClasses = true,
-             showInferredType = true,
-             excludedPackages = {
-             }
+            showInferredType = true,
+            enableSemanticHighlighting = false,
+            excludedPackages = {
+            }
           }
 
           vim.cmd([[augroup lsp]])
