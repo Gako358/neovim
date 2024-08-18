@@ -53,7 +53,6 @@ in {
         lua
         */
         ''
-          -- Scala nvim-metals config
           local metals_config = require("metals").bare_config()
           metals_config.settings = {
             metalsBinaryPath = "${cfg.lsp.package}/bin/metals",
@@ -61,14 +60,12 @@ in {
             showImplicitConversionsAndClasses = true,
             showInferredType = true,
             enableSemanticHighlighting = false,
-            excludedPackages = {
-            }
+            excludedPackages = {}
           }
 
           vim.cmd([[augroup lsp]])
           vim.cmd([[autocmd!]])
 
-          -- https://github.com/neovim/neovim/issues/29156
           local function setup_codelens_refresh(client, bufnr)
             local status_ok, codelens_supported = pcall(function()
               return client.supports_method("textDocument/codeLens")
@@ -108,14 +105,15 @@ in {
             vim.keymap.set("n", "<leader>sd", "<Cmd>MetalsRunDoctor<CR>", opts)
             vim.keymap.set("n", "<leader>si", "<Cmd>MetalsInfo<CR>", opts)
             setup_codelens_refresh(client, bufnr)
+            require("metals").setup_dap()
           end
 
-          metals_config.capabilities = capabilities;
-          metals_config.on_attach = scala_on_attach;
+          metals_config.capabilities = capabilities
+          metals_config.on_attach = scala_on_attach
 
           local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
           vim.api.nvim_create_autocmd("FileType", {
-            pattern = { "scala", "sbt",},
+            pattern = { "scala", "sbt" },
             callback = function()
               require("metals").initialize_or_attach(metals_config)
             end,

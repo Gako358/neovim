@@ -46,6 +46,26 @@ in {
             },
           }
 
+          -- Scala DAP configurations
+          dap.configurations.scala = {
+            {
+              type = "scala",
+              request = "launch",
+              name = "Run or Test Target",
+              metals = {
+                runType = "runOrTestFile",
+              },
+            },
+            {
+              type = "scala",
+              request = "launch",
+              name = "Test Target",
+              metals = {
+                runType = "testTarget",
+              },
+            },
+          }
+
           vim.keymap.set("n", "<leader>do", dap.repl.open)
           vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
           vim.keymap.set("n", "<leader>dm", dap.run_to_cursor)
