@@ -106,6 +106,38 @@
         "type": "github"
       }
     },
+    "plugins-cmp-nvim-lsp-document-symbol": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716967041,
+        "narHash": "sha256-BBvG0/yEyYs+sLPtCYAgZLz9ccGAMBCMhgmwC+gZ3kc=",
+        "owner": "hrsh7th",
+        "repo": "cmp-nvim-lsp-document-symbol",
+        "rev": "f94f7ba948e32cd302caba1c2ca3f7c697fb4fcf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "cmp-nvim-lsp-document-symbol",
+        "type": "github"
+      }
+    },
+    "plugins-cmp-nvim-lsp-signature-help": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1715965063,
+        "narHash": "sha256-tLMhkmdehH3IDlIdqJq6GHpudY0G05Asjir6p4aONyI=",
+        "owner": "hrsh7th",
+        "repo": "cmp-nvim-lsp-signature-help",
+        "rev": "031e6ba70b0ad5eee49fd2120ff7a2e325b17fa7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "cmp-nvim-lsp-signature-help",
+        "type": "github"
+      }
+    },
     "plugins-cmp-path": {
       "flake": false,
       "locked": {
@@ -183,6 +215,22 @@
       "original": {
         "owner": "CopilotC-Nvim",
         "repo": "CopilotChat.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-copilot-cmp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718601710,
+        "narHash": "sha256-8w9go2SBkI+BrXNadWM8ZxDDfrAnZZJx6RbVHAK4+Pg=",
+        "owner": "zbirenbaum",
+        "repo": "copilot-cmp",
+        "rev": "b6e5286b3d74b04256d0a7e3bd2908eabec34b44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zbirenbaum",
+        "repo": "copilot-cmp",
         "type": "github"
       }
     },
@@ -754,11 +802,14 @@
         "plugins-cmp-buffer": "plugins-cmp-buffer",
         "plugins-cmp-dap": "plugins-cmp-dap",
         "plugins-cmp-nvim-lsp": "plugins-cmp-nvim-lsp",
+        "plugins-cmp-nvim-lsp-document-symbol": "plugins-cmp-nvim-lsp-document-symbol",
+        "plugins-cmp-nvim-lsp-signature-help": "plugins-cmp-nvim-lsp-signature-help",
         "plugins-cmp-path": "plugins-cmp-path",
         "plugins-cmp-treesitter": "plugins-cmp-treesitter",
         "plugins-cmp-vsnip": "plugins-cmp-vsnip",
         "plugins-copilot": "plugins-copilot",
         "plugins-copilot-chat": "plugins-copilot-chat",
+        "plugins-copilot-cmp": "plugins-copilot-cmp",
         "plugins-crates-nvim": "plugins-crates-nvim",
         "plugins-fidget": "plugins-fidget",
         "plugins-gitsigns-nvim": "plugins-gitsigns-nvim",

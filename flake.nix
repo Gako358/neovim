@@ -115,6 +115,14 @@
       url = "github:rcarriga/cmp-dap";
       flake = false;
     };
+    plugins-cmp-nvim-lsp-signature-help = {
+      url = "github:hrsh7th/cmp-nvim-lsp-signature-help";
+      flake = false;
+    };
+    plugins-cmp-nvim-lsp-document-symbol = {
+      url = "github:hrsh7th/cmp-nvim-lsp-document-symbol";
+      flake = false;
+    };
 
     # snippets
     plugins-vim-vsnip = {
@@ -125,6 +133,10 @@
     # Copilot
     plugins-copilot = {
       url = "github:zbirenbaum/copilot.lua";
+      flake = false;
+    };
+    plugins-copilot-cmp = {
+      url = "github:zbirenbaum/copilot-cmp";
       flake = false;
     };
     plugins-copilot-chat = {

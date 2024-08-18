@@ -82,6 +82,8 @@ in {
     vim.startPlugins =
       [
         "nvim-cmp"
+        "cmp-nvim-lsp-signature-help"
+        "cmp-nvim-lsp-document-symbol"
         "cmp-buffer"
         "cmp-vsnip"
         "cmp-path"
@@ -90,6 +92,9 @@ in {
 
     vim.autocomplete.sources = {
       "nvim-cmp" = null;
+      "copilot" = null;
+      "nvim_lsp_document_symbol" = "[LSP]";
+      "nvim_lsp_signature_help" = "[LSP]";
       "vsnip" = "[VSnip]";
       "buffer" = "[Buffer]";
       "crates" = "[Crates]";

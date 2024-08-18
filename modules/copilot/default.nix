@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     vim.startPlugins = [
       "copilot"
+      "copilot-cmp"
       "copilot-chat"
     ];
 
@@ -23,6 +24,7 @@ in {
       lua
       */
       ''
+        require("copilot_cmp").setup()
         require("copilot").setup({
           suggestion = {
             enabled = true,
