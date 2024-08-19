@@ -409,13 +409,24 @@ in {
             },
             palettes = {
               nightfox = {
-                bg0 = "#272727",
-                bg1 = "#272727",
-                bg2 = "#272727",
-                bg3 = "#272727",
-                bg4 = "#272727",
-                sel0 = "#343434",
-                sel1 = "#414141",
+                bg0 = "None",
+                bg1 = "None",
+                bg2 = "None",
+                bg3 = "None",
+                bg4 = "None",
+                sel0 = "None",
+                sel1 = "#3c5372",
+              },
+            },
+            groups = {
+              nightfox = {
+                WinSeperator = { fg = "None" },
+                NormalFloat = { bg = "None" },
+                StatusLine = { bg = "None" },
+                StatusLineNC = { bg = "None" },
+                TabLineFill = { bg = "None" },
+                WinBarNC = { bg = "None" },
+                Visual = { bg = "#3c5372" },
               },
             },
           })
