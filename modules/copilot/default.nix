@@ -26,8 +26,9 @@ in {
       ''
         require("copilot_cmp").setup()
         require("copilot").setup({
+          panel = { enabled = false },
           suggestion = {
-            enabled = true,
+            enabled = false,
             keymap = {
               accept = "<C-j>",
             },
