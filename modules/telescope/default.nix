@@ -24,6 +24,7 @@ in {
         "<leader>fh" = "<cmd> Telescope help_tags<CR>";
         "<leader>ft" = "<cmd> Telescope<CR>";
         "<leader>fc" = "<cmd> TodoTelescope<CR>";
+        "<leader><space>" = "<cmd> Telescop grep_string<CR>";
 
         # Buffers
         "<Tab>" = "<cmd> Telescope buffers<CR>";
