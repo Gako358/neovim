@@ -40,9 +40,7 @@ in {
           model = "gpt-4o",
           context = "buffers",
           window = {
-            layout = "float",
-            width = 0.7,
-            height = 0.9,
+            layout = "vertical",
             title = "Copilot Chat",
           },
         })
@@ -56,6 +54,7 @@ in {
         vim.keymap.set({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChatOptimize<cr>', { desc = "CopilotChat - Optimize selected code" })
         vim.keymap.set({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocs<cr>', { desc = "CopilotChat - Add docs on selected code" })
         vim.keymap.set({ 'n', 'v' }, '<leader>ccp', '<cmd>CopilotChatReview<cr>', { desc = "CopilotChat - Review selected code" })
+        vim.keymap.set({ 'n', 'v' }, '<leader>ccs', '<cmd>CopilotChatStop<cr>', { desc = "CopilotChat - Stop current window output" })
         vim.keymap.set('n', '<leader>ccp', function()
           local actions = require("CopilotChat.actions")
           require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
