@@ -287,7 +287,7 @@
           xml.enable = true;
         };
         vim.lsp = {
-          formatOnSave = true;
+          formatOnSave = false;
           fidget.enable = true;
           lightbulb.enable = true;
           lspkind.enable = true;
