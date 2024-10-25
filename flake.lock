@@ -618,6 +618,22 @@
         "type": "github"
       }
     },
+    "plugins-obsidian": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722536347,
+        "narHash": "sha256-mbq7fAPmlwOAbWlN3lGX9WGBKTV8cAPZx8pnRCyszJc=",
+        "owner": "epwalsh",
+        "repo": "obsidian.nvim",
+        "rev": "14e0427bef6c55da0d63f9a313fd9941be3a2479",
+        "type": "github"
+      },
+      "original": {
+        "owner": "epwalsh",
+        "repo": "obsidian.nvim",
+        "type": "github"
+      }
+    },
     "plugins-plenary-nvim": {
       "flake": false,
       "locked": {
@@ -834,6 +850,7 @@
         "plugins-nvim-metals": "plugins-nvim-metals",
         "plugins-nvim-nio": "plugins-nvim-nio",
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
+        "plugins-obsidian": "plugins-obsidian",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
         "plugins-ranger": "plugins-ranger",
         "plugins-rust-tools": "plugins-rust-tools",

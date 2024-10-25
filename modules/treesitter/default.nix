@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -44,6 +43,8 @@ in {
       lua
       */
       ''
+        vim.opt.conceallevel = 2
+
         require'nvim-treesitter.configs'.setup {
           highlight = {
             enable = true,

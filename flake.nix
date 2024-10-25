@@ -164,6 +164,12 @@
       flake = false;
     };
 
+    # Notes
+    plugins-obsidian = {
+      url = "github:epwalsh/obsidian.nvim";
+      flake = false;
+    };
+
     # Visuals
     plugins-nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
@@ -299,6 +305,7 @@
           ui.enable = true;
         };
         vim.undo.enable = true;
+        vim.note.enable = true;
         vim.visuals = {
           enable = true;
           autopairs.enable = true;

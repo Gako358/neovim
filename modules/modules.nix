@@ -14,6 +14,7 @@
     ./keys
     ./languages
     ./lsp
+    ./note
     ./snippets
     ./telescope
     ./treesitter
