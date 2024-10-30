@@ -193,6 +193,10 @@
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
+    plugins-luatab = {
+      url = "github:alvarosevilla95/luatab.nvim";
+      flake = false;
+    };
     plugins-noice = {
       url = "github:folke/noice.nvim";
       flake = false;
@@ -327,6 +331,7 @@
             enable = true;
             theme = "nightfox";
           };
+          luatab.enable = true;
           noice = {
             enable = true;
           };

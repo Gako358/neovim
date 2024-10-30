@@ -208,6 +208,7 @@ in {
       };
     };
 
+    luatab.enable = mkEnableOption "Luatab [luatab]";
     noice = {
       enable = mkEnableOption "Noice configuration.";
 
@@ -329,6 +330,17 @@ in {
           }
         '';
     })
+    (mkIf cfg.luatab.enable {
+      vim.startPlugins = ["luatab"];
+      vim.luaConfigRC.luatab =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          require("luatab").setup{}
+        '';
+    })
     (mkIf cfg.noice.enable {
       vim.startPlugins = [
         "noice"
@@ -410,7 +422,7 @@ in {
             palettes = {
               nightfox = {
                 bg0 = "None",
-                bg1 = "#1a1a1a",
+                bg1 = "#1f1f1f",
                 bg2 = "None",
                 bg3 = "None",
                 bg4 = "None",

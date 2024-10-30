@@ -378,6 +378,22 @@
         "type": "github"
       }
     },
+    "plugins-luatab": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720020287,
+        "narHash": "sha256-urV+cNpw3my6Un5j2L/2rkxQ8fyXmaLUd7J5NFih2oA=",
+        "owner": "alvarosevilla95",
+        "repo": "luatab.nvim",
+        "rev": "7bc6e0f6957fbaa93c98529f2cf28052329002e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alvarosevilla95",
+        "repo": "luatab.nvim",
+        "type": "github"
+      }
+    },
     "plugins-noice": {
       "flake": false,
       "locked": {
@@ -867,6 +883,7 @@
         "plugins-lsp-signature": "plugins-lsp-signature",
         "plugins-lspkind": "plugins-lspkind",
         "plugins-lualine": "plugins-lualine",
+        "plugins-luatab": "plugins-luatab",
         "plugins-noice": "plugins-noice",
         "plugins-notify": "plugins-notify",
         "plugins-nui": "plugins-nui",
