@@ -207,6 +207,10 @@ in {
         "<A-Left>" = ":vertical resize -3<CR>";
         "<A-Right>" = ":vertical resize +3<CR>";
 
+        "<A-t>" = ":tabnew<CR>";
+        "<A-n>" = ":tabnext<CR>";
+        "<A-p>" = ":tabprevious<CR>";
+
         "<F4>" = ":setlocal spell<CR>";
 
         # Return to last edit buffer.

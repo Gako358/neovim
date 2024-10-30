@@ -30,9 +30,16 @@ in {
         -- Neovide Font
         vim.o.guifont = "JetBrainsMono Nerd Font:h10:Medium:i"
       end
+      -- Lua function to open terminal in new tab
+      function _G.OpenTerminalInNewTab()
+        vim.cmd("tabnew")
+        vim.cmd("terminal")
+      end
+
       vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
       vim.keymap.set("n", "<leader>tv", ":vsplit | terminal<CR>", {desc = "Open vertical split terminal"})
       vim.keymap.set("n", "<leader>th", ":split | terminal<CR>", {desc = "Open horizontal split terminal"})
+      vim.keymap.set("n", "<leader>tt", ":lua OpenTerminalInNewTab()<CR>", {desc = "Open terminal in new tab"})
     '';
   };
 }
