@@ -86,6 +86,16 @@
       flake = false;
     };
 
+    # Projects
+    plugins-project = {
+      url = "github:coffebar/neovim-project";
+      flake = false;
+    };
+    plugins-session = {
+      url = "github:Shatur/neovim-session-manager";
+      flake = false;
+    };
+
     # Autocompletes
     plugins-nvim-cmp = {
       url = "github:hrsh7th/nvim-cmp";
@@ -259,6 +269,7 @@
           gitsigns.codeActions = true;
           lazygit.enable = true;
         };
+        vim.gui.enable = true;
         vim.keys = {
           enable = true;
           whichKey.enable = true;
@@ -325,6 +336,7 @@
           todo.enable = true;
         };
         vim.telescope.enable = true;
+        vim.project.enable = true;
       };
     };
   in

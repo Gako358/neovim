@@ -401,7 +401,7 @@ in {
         ''
           require('nightfox').setup({
             options = {
-              transparent = true,
+              transparent = false,
               styles = {
                 comments = "italic",
                 strings = "italic",
@@ -409,23 +409,23 @@ in {
             },
             palettes = {
               nightfox = {
-                bg0 = "None",
-                bg1 = "None",
-                bg2 = "None",
-                bg3 = "None",
-                bg4 = "None",
-                sel0 = "None",
+                bg0 = "#272727",
+                bg1 = "#272727",
+                bg2 = "#272727",
+                bg3 = "#272727",
+                bg4 = "#272727",
+                sel0 = "#272727",
                 sel1 = "#3c5372",
               },
             },
             groups = {
               nightfox = {
-                WinSeperator = { fg = "None" },
-                NormalFloat = { bg = "None" },
-                StatusLine = { bg = "None" },
-                StatusLineNC = { bg = "None" },
-                TabLineFill = { bg = "None" },
-                WinBarNC = { bg = "None" },
+                WinSeperator = { fg = "#272727" },
+                NormalFloat = { bg = "#272727" },
+                StatusLine = { bg = "#272727" },
+                StatusLineNC = { bg = "#272727" },
+                TabLineFill = { bg = "#272727" },
+                WinBarNC = { bg = "#272727" },
                 Visual = { bg = "#3c5372" },
               },
             },

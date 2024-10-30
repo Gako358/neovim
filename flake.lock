@@ -650,6 +650,22 @@
         "type": "github"
       }
     },
+    "plugins-project": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1726220391,
+        "narHash": "sha256-56OflNXtVtoRH38LuPxT4RGNIXlG3pH04jvOey/6qio=",
+        "owner": "coffebar",
+        "repo": "neovim-project",
+        "rev": "f841cf801031e56f5193a52402f9cc488ea1a8e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "coffebar",
+        "repo": "neovim-project",
+        "type": "github"
+      }
+    },
     "plugins-ranger": {
       "flake": false,
       "locked": {
@@ -679,6 +695,22 @@
       "original": {
         "owner": "simrat39",
         "repo": "rust-tools.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-session": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728423652,
+        "narHash": "sha256-W9jtfVXHC8MQJwdbxakNqhd+xh/auQb3U09XKdN2Wzw=",
+        "owner": "Shatur",
+        "repo": "neovim-session-manager",
+        "rev": "ce43f2eb2a52492157d7742e5f684b9a42bb3e5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shatur",
+        "repo": "neovim-session-manager",
         "type": "github"
       }
     },
@@ -852,8 +884,10 @@
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
         "plugins-obsidian": "plugins-obsidian",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
+        "plugins-project": "plugins-project",
         "plugins-ranger": "plugins-ranger",
         "plugins-rust-tools": "plugins-rust-tools",
+        "plugins-session": "plugins-session",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-telescope": "plugins-telescope",
         "plugins-theme": "plugins-theme",

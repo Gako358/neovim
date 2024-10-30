@@ -11,10 +11,12 @@
     ./core
     ./debug
     ./git
+    ./gui
     ./keys
     ./languages
     ./lsp
     ./note
+    ./project
     ./snippets
     ./telescope
     ./treesitter
