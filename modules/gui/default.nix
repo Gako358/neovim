@@ -25,7 +25,7 @@ in {
         vim.g.neovide_cursor_vfx_particle_lifetime = 5.0
         vim.g.neovide_cursor_vfx_particle_density = 14.0
         vim.g.neovide_cursor_vfx_particle_speed = 12.0
-        vim.g.neovide_transparency = 0.46
+        vim.g.neovide_transparency = 0.91
 
         -- Neovide Font
         vim.o.guifont = "JetBrainsMono Nerd Font:h10:Medium:i"
