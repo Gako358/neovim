@@ -413,7 +413,7 @@ in {
         ''
           require('nightfox').setup({
             options = {
-              transparent = false,
+              transparent = true,
               styles = {
                 comments = "italic",
                 strings = "italic",
@@ -422,7 +422,7 @@ in {
             palettes = {
               nightfox = {
                 bg0 = "None",
-                bg1 = "#1f1f1f",
+                bg1 = "None",
                 bg2 = "None",
                 bg3 = "None",
                 bg4 = "None",

@@ -35,9 +35,10 @@ in {
             "~/Documents/*",
           },
           picker = {
-            type = "telescope", -- or "fzf-lua"
+            type = "telescope",
           }
         }
+        require("session_manager").setup{}
       '';
   };
 }
