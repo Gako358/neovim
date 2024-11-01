@@ -95,6 +95,10 @@
       url = "github:Shatur/neovim-session-manager";
       flake = false;
     };
+    plugins-direnv = {
+      url = "github:NotAShelf/direnv.nvim";
+      flake = false;
+    };
 
     # Autocompletes
     plugins-nvim-cmp = {

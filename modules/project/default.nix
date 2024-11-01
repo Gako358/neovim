@@ -15,6 +15,7 @@ in {
     vim.startPlugins = [
       "project"
       "session"
+      "direnv"
     ];
 
     vim.luaConfigRC.sql =
@@ -39,6 +40,9 @@ in {
           }
         }
         require("session_manager").setup{}
+        require("direnv").setup({
+          autoload_direnv = true,
+        })
       '';
   };
 }
