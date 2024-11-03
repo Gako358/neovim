@@ -4,14 +4,12 @@
   ...
 }:
 with lib;
-with builtins; let
-  cfg = config.vim.project;
-in {
+with builtins; {
   options.vim.project = {
     enable = mkEnableOption "enable project management in neovim";
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf (config.vim.gui.enable) {
     vim.startPlugins = [
       "project"
       "session"
@@ -31,6 +29,7 @@ in {
         require("neovim-project").setup {
           projects = {
             "~/Projects/*",
+            "~/Projects/plugins/*",
             "~/Projects/workspace/*",
             "~/Sources/*",
             "~/Documents/*",

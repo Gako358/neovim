@@ -685,15 +685,15 @@
     "plugins-project": {
       "flake": false,
       "locked": {
-        "lastModified": 1726220391,
-        "narHash": "sha256-56OflNXtVtoRH38LuPxT4RGNIXlG3pH04jvOey/6qio=",
-        "owner": "coffebar",
+        "lastModified": 1730653508,
+        "narHash": "sha256-d4tnzKZzCa6IrWdxrJ7ZaDZYSjQe9/xnMUBe2odDQIk=",
+        "owner": "Gako358",
         "repo": "neovim-project",
-        "rev": "f841cf801031e56f5193a52402f9cc488ea1a8e6",
+        "rev": "b035d547f33091144a52a39555e2691905bfb9aa",
         "type": "github"
       },
       "original": {
-        "owner": "coffebar",
+        "owner": "Gako358",
         "repo": "neovim-project",
         "type": "github"
       }

@@ -88,7 +88,7 @@
 
     # Projects
     plugins-project = {
-      url = "github:coffebar/neovim-project";
+      url = "github:Gako358/neovim-project";
       flake = false;
     };
     plugins-session = {
@@ -277,7 +277,7 @@
           gitsigns.codeActions = true;
           lazygit.enable = true;
         };
-        vim.gui.enable = true;
+        vim.gui.enable = false;
         vim.keys = {
           enable = true;
           whichKey.enable = true;
@@ -345,7 +345,6 @@
           todo.enable = true;
         };
         vim.telescope.enable = true;
-        vim.project.enable = true;
       };
     };
   in
