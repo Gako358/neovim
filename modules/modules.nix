@@ -16,7 +16,6 @@
     ./languages
     ./lsp
     ./note
-    ./project
     ./snippets
     ./telescope
     ./treesitter

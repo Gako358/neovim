@@ -7,6 +7,10 @@ with lib;
 with builtins; let
   cfg = config.vim.gui;
 in {
+  imports = [
+    ./project.nix
+  ];
+
   options.vim.gui = {
     enable = mkEnableOption "Neovide gui";
   };
