@@ -14,7 +14,7 @@
     ./languages
     ./lsp
     ./telescope
-    #./terminal
+    ./terminal
     ./treesitter
     ./visuals
   ];

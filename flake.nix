@@ -325,6 +325,12 @@
           undo.enable = true;
         };
         vim.telescope.enable = true;
+        vim.terminal = {
+          enable = true;
+          simple.enable = true;
+          float.enable = true;
+          project.enable = true;
+        };
       };
     };
   in

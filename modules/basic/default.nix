@@ -228,6 +228,11 @@ in {
 
         # BufOnly command
         "<leader>bq" = ":BufOnly<CR>";
+
+        # Navitate Quickfix
+        "<A-j>" = ":cnext<CR>";
+        "<A-k>" = ":cprev<CR>";
+        "<leader>q" = ":cclose<CR>";
       })
     ];
 
