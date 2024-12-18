@@ -249,6 +249,7 @@ in {
     ranger.enable = mkEnableOption "Ranger filetree [ranger]";
     theme.enable = mkEnableOption "Theme configuration.";
     todo.enable = mkEnableOption "Todo highlights [nvim-todo]";
+    undo.enable = mkEnableOption "Undo tree [undotree]";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -454,6 +455,18 @@ in {
         */
         ''
           require("todo-comments").setup{}
+        '';
+    })
+    (mkIf cfg.undo.enable {
+      vim.startPlugins = ["undotree"];
+      vim.luaConfigRC.todo =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          require('undotree').setup()
+          vim.api.nvim_set_keymap('n', '<leader>u', ':lua require("undotree").toggle()<CR>', {noremap = true, silent = true})
         '';
     })
   ]);

@@ -6,7 +6,7 @@
 with lib;
 with builtins; let
   cfg = config.vim.treesitter;
-  usingNvimCmp = config.vim.autocomplete.enable && config.vim.autocomplete.type == "nvim-cmp";
+  usingNvimCmp = config.vim.autocomplete.enable && config.vim.autocomplete.cmp.type == "nvim-cmp";
 in {
   options.vim.treesitter = {
     enable = mkEnableOption "treesitter, also enabled automatically through language options";
@@ -28,7 +28,7 @@ in {
       ["nvim-treesitter"]
       ++ optional usingNvimCmp "cmp-treesitter";
 
-    vim.autocomplete.sources = {"treesitter" = "[Treesitter]";};
+    vim.autocomplete.cmp.sources = {"treesitter" = "[Treesitter]";};
 
     # For some reason treesitter highlighting does not work on start if this is set before syntax on
     vim.configRC.treesitter-fold = mkIf cfg.fold (nvim.dag.entryBefore ["basic"] ''

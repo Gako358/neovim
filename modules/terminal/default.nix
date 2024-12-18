@@ -7,10 +7,6 @@ with lib;
 with builtins; let
   cfg = config.vim.gui;
 in {
-  imports = [
-    ./project.nix
-  ];
-
   options.vim.gui = {
     enable = mkEnableOption "Neovide gui";
   };
@@ -22,19 +18,12 @@ in {
       lua
       */
       ''
-         -- Neovide
-        if vim.g.neovide then
-          -- Neovide options
-          vim.g.neovide_fullscreen = false
-          vim.g.neovide_hide_mouse_when_typing = false
-          vim.g.neovide_refresh_rate = 165
-          vim.g.neovide_cursor_vfx_mode = "ripple"
-          vim.g.neovide_cursor_animate_command_line = true
-          vim.g.neovide_cursor_animate_in_insert_mode = true
-          vim.g.neovide_cursor_vfx_particle_lifetime = 5.0
-          vim.g.neovide_cursor_vfx_particle_density = 14.0
-          vim.g.neovide_cursor_vfx_particle_speed = 12.0
-          vim.g.neovide_transparency = 0.91
+
+          -- TODO: need to be done today
+          -- need to bind qluck fix list navigation cnex nprev and so on
+          -- need to turn off copilot, only for when i need it
+          -- need to fix a terminal float and toggle
+          -- need to remove zellij
 
           -- Neovide Font
           vim.o.guifont = "JetBrainsMono Nerd Font:h10:Medium:i"

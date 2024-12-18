@@ -7,19 +7,15 @@
     ./basic
     ./build
     ./completion
-    ./copilot
     ./core
     ./debug
     ./git
-    ./gui
     ./keys
     ./languages
     ./lsp
-    ./note
-    ./snippets
     ./telescope
+    #./terminal
     ./treesitter
-    ./undo
     ./visuals
   ];
 

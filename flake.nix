@@ -86,16 +86,6 @@
       flake = false;
     };
 
-    # Projects
-    plugins-project = {
-      url = "github:Gako358/neovim-project";
-      flake = false;
-    };
-    plugins-session = {
-      url = "github:Shatur/neovim-session-manager";
-      flake = false;
-    };
-
     # Autocompletes
     plugins-nvim-cmp = {
       url = "github:hrsh7th/nvim-cmp";
@@ -171,12 +161,6 @@
     };
     plugins-undotree = {
       url = "github:jiaoshijie/undotree";
-      flake = false;
-    };
-
-    # Notes
-    plugins-obsidian = {
-      url = "github:epwalsh/obsidian.nvim";
       flake = false;
     };
 
@@ -262,10 +246,12 @@
         build.vimAlias = true;
         vim.autocomplete = {
           enable = true;
-          type = "nvim-cmp";
-        };
-        vim.copilot.chat = {
-          enable = true;
+          cmp = {
+            enable = true;
+            type = "nvim-cmp";
+          };
+          copilot.enable = true;
+          snippets.enable = true;
         };
         vim.git = {
           enable = true;
@@ -273,7 +259,6 @@
           gitsigns.codeActions = true;
           lazygit.enable = true;
         };
-        vim.gui.enable = false;
         vim.keys = {
           enable = true;
           whichKey.enable = true;
@@ -319,8 +304,6 @@
           virtualText.enable = true;
           ui.enable = true;
         };
-        vim.undo.enable = true;
-        vim.note.enable = true;
         vim.visuals = {
           enable = true;
           autopairs.enable = true;
@@ -339,6 +322,7 @@
           ranger.enable = true;
           theme.enable = true;
           todo.enable = true;
+          undo.enable = true;
         };
         vim.telescope.enable = true;
       };
