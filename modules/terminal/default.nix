@@ -39,7 +39,7 @@ in {
             -- Create a new window
             vim.cmd("vnew")
             vim.cmd.wincmd("J")
-            vim.api.nvim_win_set_height(0, 10)
+            vim.api.nvim_win_set_height(0, 19)
             vim.api.nvim_win_set_buf(0, state.simple.buf)
             state.simple.win = vim.api.nvim_get_current_win()
           end

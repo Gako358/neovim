@@ -218,22 +218,6 @@
         "type": "github"
       }
     },
-    "plugins-copilot-cmp": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1718601710,
-        "narHash": "sha256-8w9go2SBkI+BrXNadWM8ZxDDfrAnZZJx6RbVHAK4+Pg=",
-        "owner": "zbirenbaum",
-        "repo": "copilot-cmp",
-        "rev": "b6e5286b3d74b04256d0a7e3bd2908eabec34b44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zbirenbaum",
-        "repo": "copilot-cmp",
-        "type": "github"
-      }
-    },
     "plugins-crates-nvim": {
       "flake": false,
       "locked": {
@@ -825,7 +809,6 @@
         "plugins-cmp-vsnip": "plugins-cmp-vsnip",
         "plugins-copilot": "plugins-copilot",
         "plugins-copilot-chat": "plugins-copilot-chat",
-        "plugins-copilot-cmp": "plugins-copilot-cmp",
         "plugins-crates-nvim": "plugins-crates-nvim",
         "plugins-fidget": "plugins-fidget",
         "plugins-gitsigns-nvim": "plugins-gitsigns-nvim",

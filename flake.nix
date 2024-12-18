@@ -135,10 +135,6 @@
       url = "github:zbirenbaum/copilot.lua";
       flake = false;
     };
-    plugins-copilot-cmp = {
-      url = "github:zbirenbaum/copilot-cmp";
-      flake = false;
-    };
     plugins-copilot-chat = {
       url = "github:CopilotC-Nvim/CopilotChat.nvim";
       flake = false;

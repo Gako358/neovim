@@ -204,7 +204,6 @@ in {
     (mkIf cfg.copilot.enable {
       vim.startPlugins = [
         "copilot"
-        "copilot-cmp"
         "copilot-chat"
       ];
       vim.luaConfigRC.copilot =
@@ -213,13 +212,14 @@ in {
         lua
         */
         ''
-          require("copilot_cmp").setup()
           require("copilot").setup({
-            panel = { enabled = false },
+            panel = { enabled = true },
             suggestion = {
-              enabled = false,
+              enabled = true,
+              auto_trigger = false,
               keymap = {
-                accept = "<C-j>",
+                accept = "<C-y>",
+                next = "<C-j>",
               },
             },
           })
