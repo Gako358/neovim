@@ -142,5 +142,20 @@ in {
           vim.keymap.set("n", "<leader>tp", ":lua OpenProjectTerminal()<CR>", {desc = "Open new tab with project terminals"})
         '';
     })
+    (mkIf cfg.project.enable {
+      vim.luaConfigRC.gui =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          function _G.OpenGitTerminal()
+            vim.cmd("tabnew")
+            vim.cmd("terminal")
+          end
+
+          vim.keymap.set("n", "<leader>tg", ":lua OpenGitTerminal()<CR>", {desc = "Open new tab with git terminals"})
+        '';
+    })
   ]);
 }
