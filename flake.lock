@@ -250,6 +250,22 @@
         "type": "github"
       }
     },
+    "plugins-fzf-lua": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737815075,
+        "narHash": "sha256-Wufg0hipTDnjB2QK6NEjg9Mk/pPS4/03KVqffWysz2Q=",
+        "owner": "ibhagwan",
+        "repo": "fzf-lua",
+        "rev": "ba6eee118e8fbc3bacaa8649b0d236ed78f91a92",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ibhagwan",
+        "repo": "fzf-lua",
+        "type": "github"
+      }
+    },
     "plugins-gitsigns-nvim": {
       "flake": false,
       "locked": {
@@ -682,22 +698,6 @@
         "type": "github"
       }
     },
-    "plugins-telescope": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1722561161,
-        "narHash": "sha256-F5TGzfPSDQY+AOzaDXStswHjkGQvnLeTWW5/xdBalpo=",
-        "owner": "nvim-telescope",
-        "repo": "telescope.nvim",
-        "rev": "3b1600d0fd5172ad9fae00987362ca0ef3d8895d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-telescope",
-        "repo": "telescope.nvim",
-        "type": "github"
-      }
-    },
     "plugins-theme": {
       "flake": false,
       "locked": {
@@ -811,6 +811,7 @@
         "plugins-copilot-chat": "plugins-copilot-chat",
         "plugins-crates-nvim": "plugins-crates-nvim",
         "plugins-fidget": "plugins-fidget",
+        "plugins-fzf-lua": "plugins-fzf-lua",
         "plugins-gitsigns-nvim": "plugins-gitsigns-nvim",
         "plugins-glow-nvim": "plugins-glow-nvim",
         "plugins-indent-blankline": "plugins-indent-blankline",
@@ -838,7 +839,6 @@
         "plugins-ranger": "plugins-ranger",
         "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
-        "plugins-telescope": "plugins-telescope",
         "plugins-theme": "plugins-theme",
         "plugins-todo": "plugins-todo",
         "plugins-trouble": "plugins-trouble",

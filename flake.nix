@@ -81,8 +81,8 @@
     };
 
     # Telescope
-    plugins-telescope = {
-      url = "github:nvim-telescope/telescope.nvim";
+    plugins-fzf-lua = {
+      url = "github:ibhagwan/fzf-lua";
       flake = false;
     };
 
@@ -249,6 +249,7 @@
           copilot.enable = true;
           snippets.enable = true;
         };
+        vim.fzf.enable = true;
         vim.git.enable = true;
         vim.keys = {
           enable = true;
@@ -315,7 +316,6 @@
           todo.enable = true;
           undo.enable = true;
         };
-        vim.telescope.enable = true;
         vim.terminal = {
           enable = true;
           simple.enable = true;
