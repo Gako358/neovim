@@ -165,6 +165,14 @@
       url = "github:windwp/nvim-autopairs";
       flake = false;
     };
+    plugins-bufferline = {
+      url = "github:akinsho/bufferline.nvim";
+      flake = false;
+    };
+    plugins-bufdelete = {
+      url = "github:famiu/bufdelete.nvim";
+      flake = false;
+    };
     plugins-indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
@@ -300,6 +308,11 @@
           vim.visuals = {
             enable = true;
             autopairs.enable = true;
+            bufferline = {
+              enable = true;
+              separatorStyle = "slant";
+              showBufferClose = true;
+            };
             indentBlankline = {
               enable = true;
             };

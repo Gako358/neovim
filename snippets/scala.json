@@ -1,0 +1,107 @@
+{
+  "case_class": {
+    "prefix": "case_class",
+    "body": "case class ${1:CaseClassName}(${2:argName}: ${3:ArgType})",
+    "description": "Case class with single argument"
+  },
+  "case_class_2": {
+    "prefix": "case_class_2",
+    "body": [
+      "case class ${1:CaseClassName}(",
+      "\t${2:arg1Name}: ${3:Arg1Type},",
+      "\t${4:arg2Name}: ${5:Arg2Type},",
+      ")"
+    ],
+    "description": "Case class with two arguments"
+  },
+  "enum": {
+    "prefix": "enum",
+    "body": ["enum ${1:Name}:", "\tcase ${2:Foo}, ${3:Bar}"],
+    "description": "Enumeration"
+  },
+  "algebra": {
+    "prefix": "algebra",
+    "body": [
+      "trait ${1:Algebra}[F[_]]:",
+      "\tdef ${2:methodName}: F[${3:returnType}]"
+    ],
+    "description": "Abstract algebra encoding"
+  },
+  "typeclass": {
+    "prefix": "typeclass",
+    "body": [
+      "import cats.effect.Async",
+      "import cats.syntax.all.*",
+      "",
+      "trait ${1:TypeClass}[F[_]]:",
+      "\tdef ${2:methodName}: F[${3:returnType}]",
+      "",
+      "object ${1:TypeClass}:",
+      "\tdef apply[F[_]: ${1:TypeClass}]: ${1:TypeClass}[F] = summon",
+      "",
+      "\tgiven [F[_]: Async]: ${1:TypeClass}[F] with",
+      "\t\tdef ${2:methodName}: F[${3:returnType}] = ???"
+    ],
+    "description": "Typeclass encoding"
+  },
+  "ioapp": {
+    "prefix": "app",
+    "body": [
+      "import cats.effect.*",
+      "",
+      "object ${1:Main} extends IOApp.Simple:",
+      "\t${2:def run: IO[Unit] =}",
+      "\t\t${3:IO.println(\"Hello, world!\")}"
+    ],
+    "description": "Main object extending IOApp.Simple"
+  },
+  "def": {
+    "prefix": "def",
+    "body": [
+      "def ${1:methodName}(${2:argName}: ${3:ArgType}): ${4:ReturnType} =",
+      "\t${5:???}"
+    ],
+    "description": "Method"
+  },
+  "def_short": {
+    "prefix": "def_short",
+    "body": "def ${1:methodName}(${2:argName}: ${3:ArgType}): ${4:ReturnType} = ${5:???}",
+    "description": "Method as one-liner"
+  },
+  "for-comprehension": {
+    "prefix": "forc",
+    "body": ["for", "\t${1:x} <- ${2:IO.pure(1)}", "yield ${3:()}"],
+    "description": "For-comprehension"
+  },
+  "ifelse": {
+    "prefix": "ifelse",
+    "body": [
+      "if ${1:condition} then",
+      "\t${2:\"Foo\"}",
+      "else",
+      "\t${3:\"Bar\"}"
+    ],
+    "description": "Branch based on conditions using if/else"
+  },
+  "ifelse_short": {
+    "prefix": "ifelse_short",
+    "body": "if ${1:true} then ${2:123} else ${3:\"foo\"}",
+    "description": "Branch based on conditions using if/else"
+  },
+  "test_weaver": {
+    "prefix": "test_weaver",
+    "body": [
+      "import cats.effect.*",
+      "import weaver.SimpleIOSuite",
+      "",
+      "object ${1:SomeTest} extends SimpleIOSuite:",
+      "\toverride def sharedResource: Resource[IO, String] =",
+      "\t\tResource.pure(\"test\")",
+      "",
+      "\ttest(${2:\"test name\"}) { fixture =>",
+      "\t\tIO.pure(success)",
+      "\t}"
+    ],
+    "description": "Weaver IO test"
+  }
+}
