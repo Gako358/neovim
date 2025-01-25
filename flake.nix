@@ -218,113 +218,114 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    ...
-  } @ inputs: let
-    rawPlugins = nvimLib.plugins.fromInputs inputs "plugins-";
+  outputs =
+    { nixpkgs
+    , flake-utils
+    , ...
+    } @ inputs:
+    let
+      rawPlugins = nvimLib.plugins.fromInputs inputs "plugins-";
 
-    neovimConfiguration = {modules ? [], ...} @ args:
-      import ./modules
-      (args // {modules = [{config.build.rawPlugins = rawPlugins;}] ++ modules;});
+      neovimConfiguration = { modules ? [ ], ... } @ args:
+        import ./modules
+          (args // { modules = [{ config.build.rawPlugins = rawPlugins; }] ++ modules; });
 
-    nvimBin = pkg: "${pkg}/bin/nvim";
+      nvimBin = pkg: "${pkg}/bin/nvim";
 
-    buildPkg = pkgs: modules: (neovimConfiguration {
-      inherit pkgs modules;
-    });
+      buildPkg = pkgs: modules: (neovimConfiguration {
+        inherit pkgs modules;
+      });
 
-    nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
-    mainConfig = {
-      config = {
-        build.viAlias = false;
-        build.vimAlias = true;
-        vim.autocomplete = {
-          enable = true;
-          cmp = {
+      nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
+      mainConfig = {
+        config = {
+          build.viAlias = false;
+          build.vimAlias = true;
+          vim.autocomplete = {
             enable = true;
-            type = "nvim-cmp";
+            cmp = {
+              enable = true;
+              type = "nvim-cmp";
+            };
+            copilot.enable = true;
+            snippets.enable = true;
           };
-          copilot.enable = true;
-          snippets.enable = true;
-        };
-        vim.fzf.enable = true;
-        vim.git.enable = true;
-        vim.keys = {
-          enable = true;
-          whichKey.enable = true;
-        };
-        vim.languages = {
-          enableLSP = true;
-          enableDebug = true;
-          enableFormat = true;
-          enableTreesitter = true;
-          enableExtraDiagnostics = true;
+          vim.fzf.enable = true;
+          vim.git.enable = true;
+          vim.keys = {
+            enable = true;
+            whichKey.enable = true;
+          };
+          vim.languages = {
+            enableLSP = true;
+            enableDebug = true;
+            enableFormat = true;
+            enableTreesitter = true;
+            enableExtraDiagnostics = true;
 
-          clang.enable = true;
-          css.enable = true;
-          haskell.enable = true;
-          html.enable = true;
-          java.enable = true;
-          kotlin.enable = true;
-          lua.enable = true;
-          markdown.enable = true;
-          nix.enable = true;
-          python.enable = true;
-          rust = {
-            enable = true;
-            crates.enable = true;
+            clang.enable = true;
+            css.enable = true;
+            haskell.enable = true;
+            html.enable = true;
+            java.enable = true;
+            kotlin.enable = true;
+            lua.enable = true;
+            markdown.enable = true;
+            nix.enable = true;
+            python.enable = true;
+            rust = {
+              enable = true;
+              crates.enable = true;
+            };
+            scala.enable = true;
+            shell.enable = true;
+            sql.enable = true;
+            tailwind.enable = true;
+            ts.enable = true;
+            vue.enable = true;
+            xml.enable = true;
           };
-          scala.enable = true;
-          shell.enable = true;
-          sql.enable = true;
-          tailwind.enable = true;
-          ts.enable = true;
-          vue.enable = true;
-          xml.enable = true;
-        };
-        vim.lsp = {
-          formatOnSave = false;
-          fidget.enable = true;
-          lightbulb.enable = true;
-          lspkind.enable = true;
-          lspSignature.enable = true;
-          trouble.enable = true;
-        };
-        vim.debug = {
-          virtualText.enable = true;
-          ui.enable = true;
-        };
-        vim.visuals = {
-          enable = true;
-          autopairs.enable = true;
-          indentBlankline = {
-            enable = true;
+          vim.lsp = {
+            formatOnSave = false;
+            fidget.enable = true;
+            lightbulb.enable = true;
+            lspkind.enable = true;
+            lspSignature.enable = true;
+            trouble.enable = true;
           };
-          lualine = {
-            enable = true;
-            theme = "nightfox";
+          vim.debug = {
+            virtualText.enable = true;
+            ui.enable = true;
           };
-          luatab.enable = true;
-          noice = {
+          vim.visuals = {
             enable = true;
+            autopairs.enable = true;
+            indentBlankline = {
+              enable = true;
+            };
+            lualine = {
+              enable = true;
+              theme = "nightfox";
+            };
+            luatab.enable = true;
+            noice = {
+              enable = true;
+            };
+            nvimWebDevicons.enable = true;
+            ranger.enable = true;
+            theme.enable = true;
+            todo.enable = true;
+            undo.enable = true;
           };
-          nvimWebDevicons.enable = true;
-          ranger.enable = true;
-          theme.enable = true;
-          todo.enable = true;
-          undo.enable = true;
-        };
-        vim.terminal = {
-          enable = true;
-          simple.enable = true;
-          float.enable = true;
-          project.enable = true;
+          vim.terminal = {
+            enable = true;
+            simple.enable = true;
+            float.enable = true;
+            project.enable = true;
+          };
         };
       };
-    };
-  in
+    in
     {
       lib = {
         nvim = nvimLib;
@@ -333,10 +334,11 @@
 
       overlays.default = final: prev: {
         inherit neovimConfiguration;
-        neovim = buildPkg prev [mainConfig];
+        neovim = buildPkg prev [ mainConfig ];
       };
     }
-    // (flake-utils.lib.eachDefaultSystem (system: let
+    // (flake-utils.lib.eachDefaultSystem (system:
+    let
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
@@ -347,10 +349,11 @@
         ];
       };
 
-      neovimPkg = buildPkg pkgs [mainConfig];
+      neovimPkg = buildPkg pkgs [ mainConfig ];
 
-      devPkg = buildPkg pkgs [mainConfig {config.vim.languages.html.enable = pkgs.lib.mkForce true;}];
-    in {
+      devPkg = buildPkg pkgs [ mainConfig { config.vim.languages.html.enable = pkgs.lib.mkForce true; } ];
+    in
+    {
       apps =
         rec {
           neovim = {
@@ -359,18 +362,16 @@
           };
           default = neovim;
         }
-        // pkgs.lib.optionalAttrs (!(builtins.elem system ["aarch64-darwin" "x86_64-darwin"])) {
-        };
+        // pkgs.lib.optionalAttrs (!(builtins.elem system [ "aarch64-darwin" "x86_64-darwin" ])) { };
 
-      devShells.default = pkgs.mkShell {nativeBuildInputs = [devPkg];};
+      devShells.default = pkgs.mkShell { nativeBuildInputs = [ devPkg ]; };
 
       packages =
         {
           default = neovimPkg;
           neovim = neovimPkg;
         }
-        // pkgs.lib.optionalAttrs (!(builtins.elem system ["aarch64-darwin" "x86_64-darwin"])) {
-        };
+        // pkgs.lib.optionalAttrs (!(builtins.elem system [ "aarch64-darwin" "x86_64-darwin" ])) { };
       defaultPackage = neovimPkg;
     }));
 }

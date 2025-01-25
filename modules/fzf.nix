@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.fzf;
-in {
+in
+{
   options.vim.fzf = {
     enable = mkEnableOption "enable fzf-lua";
   };
@@ -49,29 +49,30 @@ in {
           "<leader>fld" = "<cmd>lua require('fzf-lua').lsp_workspace_diagnostics()<CR>";
           "<leader>fla" = "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>";
         }
-        else {}
+        else { }
       );
 
     vim.luaConfigRC.fzf =
       nvim.dag.entryAnywhere
-      /*
+        /*
       lua
-      */
-      ''
-        require("fzf-lua").setup({
-          previewers = {
-            default = "bat"
-          },
-          winopts = {
-            preview = {
-              default = "bat",
-              scrollbar = "float"
+        */
+        ''
+          require("fzf-lua").setup({
+            "telescope",
+            previewers = {
+              default = "bat"
+            },
+            winopts = {
+              preview = {
+                default = "bat",
+                scrollbar = "float"
+              }
+            },
+            fzf_opts = {
+              ["--layout"] = "reverse"
             }
-          },
-          fzf_opts = {
-            ["--layout"] = "reverse"
-          }
-        })
-      '';
+          })
+        '';
   };
 }
