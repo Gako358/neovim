@@ -4,19 +4,18 @@
   check ? true,
 }: let
   modules = [
-    ./basic
-    ./build
-    ./completion
-    ./core
-    ./debug
-    ./git
-    ./keys
     ./languages
     ./lsp
-    ./telescope
-    ./terminal
-    ./treesitter
-    ./visuals
+    ./basic.nix
+    ./completion.nix
+    ./core.nix
+    ./debug.nix
+    ./git.nix
+    ./keys.nix
+    ./telescope.nix
+    ./terminal.nix
+    ./treesitter.nix
+    ./visual.nix
   ];
 
   pkgsModule = {config, ...}: {

@@ -249,12 +249,7 @@
           copilot.enable = true;
           snippets.enable = true;
         };
-        vim.git = {
-          enable = true;
-          gitsigns.enable = true;
-          gitsigns.codeActions = true;
-          lazygit.enable = true;
-        };
+        vim.git.enable = true;
         vim.keys = {
           enable = true;
           whichKey.enable = true;
