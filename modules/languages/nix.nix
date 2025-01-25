@@ -11,58 +11,36 @@ with builtins; let
   useFormat = "on_attach = default_on_attach";
   noFormat = "on_attach = attach_keymaps";
 
-  defaultServer = "nil";
+  defaultServer = "nixd";
   servers = {
-    nil = {
-      package = pkgs.nil;
-      internalFormatter = true;
+    nixd = {
+      package = pkgs.nixd;
+      internalFormatter = false;
       lspConfig = ''
-        lspconfig.nil_ls.setup{
+        lspconfig.nixd.setup{
           capabilities = capabilities,
-        ${
-          if cfg.format.enable
-          then useFormat
-          else noFormat
-        },
-          cmd = {"${cfg.lsp.package}/bin/nil"},
-        ${optionalString cfg.format.enable ''
-          settings = {
-            ["nil"] = {
-          ${optionalString (cfg.format.type == "alejandra")
-            ''
-              formatting = {
-                command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
-              },
-            ''}
-          ${optionalString (cfg.format.type == "nixpkgs-fmt")
-            ''
-              formatting = {
-                command = {"${cfg.format.package}/bin/nixpkgs-fmt"},
-              },
-            ''}
-            },
-          };
-        ''}
+          ${if cfg.format.enable
+            then useFormat
+            else noFormat},
+          cmd = {"${cfg.lsp.package}/bin/nixd"}
         }
       '';
     };
   };
 
-  defaultFormat = "alejandra";
+  defaultFormat = "nixpkgs-fmt";
   formats = {
-    alejandra = {
-      package = pkgs.alejandra;
+    nixpkgs-fmt = {
+      package = pkgs.nixpkgs-fmt;
       nullConfig = ''
         table.insert(
           ls_sources,
-          null_ls.builtins.formatting.alejandra.with({
-            command = "${cfg.format.package}/bin/alejandra"
+          null_ls.builtins.formatting.nixpkgs_fmt.with({
+            command = "${cfg.format.package}/bin/nixpkgs-fmt",
+            filetypes = { "nix" }
           })
         )
       '';
-    };
-    nixpkgs-fmt = {
-      package = pkgs.nixpkgs-fmt;
     };
   };
 in {
@@ -86,7 +64,7 @@ in {
       };
       server = mkOption {
         description = "Nix LSP server to use";
-        type = types.str;
+        type = with types; enum (attrNames servers);
         default = defaultServer;
       };
       package = mkOption {
@@ -116,11 +94,11 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
-    {
-      vim.configRC.nix = nvim.dag.entryAnywhere ''
+    (mkIf true {
+      vim.configRC.nix-indent = nvim.dag.entryAnywhere ''
         autocmd filetype nix setlocal tabstop=2 shiftwidth=2 softtabstop=2
       '';
-    }
+    })
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
