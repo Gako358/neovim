@@ -226,10 +226,12 @@ in {
 
 
           require("CopilotChat").setup({
-            model = "gpt-4o",
-            context = "buffers",
+            model = "claude-3.5-sonnet",
+            context = "files:full",
             window = {
-              layout = "vertical",
+              layout = "float",
+              width = 0.8,
+              height = 0.7,
               title = "Copilot Chat",
             },
           })
