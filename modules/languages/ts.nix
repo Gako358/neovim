@@ -1,23 +1,22 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.languages.ts;
 
-  defaultServer = "tsserver";
+  defaultServer = "ts_ls";
   servers = {
-    tsserver = {
+    ts_ls = {
       package = pkgs.nodePackages.typescript-language-server;
       lspConfig =
         /*
         lua
         */
         ''
-          lspconfig.tsserver.setup {
+          lspconfig.ts_ls.setup {
             capabilities = capabilities;
             on_attach = default_on_attach,
             cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
@@ -46,7 +45,8 @@ with builtins; let
         '';
     };
   };
-in {
+in
+{
   options.vim.languages.ts = {
     enable = mkEnableOption "SQL language support";
 
@@ -100,7 +100,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.tsPackage cfg.treesitter.jsPackage];
+      vim.treesitter.grammars = [ cfg.treesitter.tsPackage cfg.treesitter.jsPackage ];
     })
 
     (mkIf cfg.lsp.enable {
