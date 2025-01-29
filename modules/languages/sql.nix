@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -33,7 +32,7 @@ with builtins; let
   defaultFormat = "sqlfluff";
   formats = {
     sqlfluff = {
-      package = [sqlfluffDefault];
+      package = [ sqlfluffDefault ];
       nullConfig =
         /*
         lua
@@ -50,26 +49,27 @@ with builtins; let
     };
   };
 
-  defaultDiagnostics = ["sqlfluff"];
+  defaultDiagnostics = [ "sqlfluff" ];
   diagnostics = {
     sqlfluff = {
       package = pkgs.${sqlfluffDefault};
       nullConfig = pkg:
-      /*
+        /*
       lua
-      */
-      ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.sqlfluff.with({
-            command = "${pkg}/bin/sqlfluff",
-            extra_args = {"--dialect", "${cfg.dialect}"}
-          })
-        )
-      '';
+        */
+        ''
+          table.insert(
+            ls_sources,
+            null_ls.builtins.diagnostics.sqlfluff.with({
+              command = "${pkg}/bin/sqlfluff",
+              extra_args = {"--dialect", "${cfg.dialect}"}
+            })
+          )
+        '';
     };
   };
-in {
+in
+{
   options.vim.languages.sql = {
     enable = mkEnableOption "SQL language support";
 
@@ -140,11 +140,11 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
 
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = ["sqls-nvim"];
+      vim.startPlugins = [ "sqls-nvim" ];
 
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.sql-lsp = servers.${cfg.lsp.server}.lspConfig;

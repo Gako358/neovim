@@ -60,15 +60,6 @@ in
         ''
           require("fzf-lua").setup({
             "telescope",
-            previewers = {
-              default = "bat"
-            },
-            winopts = {
-              preview = {
-                default = "bat",
-                scrollbar = "float"
-              }
-            },
             fzf_opts = {
               ["--layout"] = "reverse"
             }
