@@ -236,7 +236,6 @@ in
       };
     };
 
-    luatab.enable = mkEnableOption "Luatab [luatab]";
     noice = {
       enable = mkEnableOption "Noice configuration.";
 
@@ -277,7 +276,6 @@ in
     ranger.enable = mkEnableOption "Ranger filetree [ranger]";
     theme.enable = mkEnableOption "Theme configuration.";
     todo.enable = mkEnableOption "Todo highlights [nvim-todo]";
-    undo.enable = mkEnableOption "Undo tree [undotree]";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -298,15 +296,21 @@ in
         "bufdelete"
       ];
 
-      vim.nnoremap = {
-        "<leader>bn" = "<cmd>BufferLineCycleNext<CR>";
-        "<leader>bp" = "<cmd>BufferLineCyclePrev<CR>";
-        "<leader>bc" = "<cmd>BufferLinePick<CR>";
-        "<leader>bse" = "<cmd>BufferLineSortByExtension<CR>";
-        "<leader>bsd" = "<cmd>BufferLineSortByDirectory<CR>";
-        "<leader>bmn" = "<cmd>BufferLineMoveNext<CR>";
-        "<leader>bmp" = "<cmd>BufferLineMovePrev<CR>";
-      };
+      vim.luaConfigRC.bufferline-which-key = mkIf config.vim.keys.whichKey.enable (
+        nvim.dag.entryAnywhere ''
+          local wk = require("which-key")
+          wk.add({
+            { "<leader>b", group = "Buffer" },
+            { "<leader>bn", "<cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
+            { "<leader>bp", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
+            { "<leader>bc", "<cmd>BufferLinePick<CR>", desc = "Pick Buffer" },
+            { "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", desc = "Sort by Extension" },
+            { "<leader>bsd", "<cmd>BufferLineSortByDirectory<CR>", desc = "Sort by Directory" },
+            { "<leader>bmn", "<cmd>BufferLineMoveNext<CR>", desc = "Move Buffer Right" },
+            { "<leader>bmp", "<cmd>BufferLineMovePrev<CR>", desc = "Move Buffer Left" },
+            })
+        ''
+      );
 
       vim.luaConfigRC.bufferline =
         nvim.dag.entryAnywhere
@@ -431,17 +435,6 @@ in
             }
           '';
     })
-    (mkIf cfg.luatab.enable {
-      vim.startPlugins = [ "luatab" ];
-      vim.luaConfigRC.luatab =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("luatab").setup{}
-          '';
-    })
     (mkIf cfg.noice.enable {
       vim.startPlugins = [
         "noice"
@@ -478,9 +471,17 @@ in
                 lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
               },
             })
-
             require("notify").setup({
-              background_colour = "#00000000"
+              background_colour = "#00000000",
+              stages = "fade_in_slide_out",
+              render = "compact",
+              timeout = 1200,
+              minimum_width = 50,
+              icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "✎" },
+              fps = 20,
+              on_open = function(win)
+                vim.api.nvim_win_set_config(win, { zindex = 100 })
+              end,
             })
           '';
     })
@@ -555,18 +556,6 @@ in
           */
           ''
             require("todo-comments").setup{}
-          '';
-    })
-    (mkIf cfg.undo.enable {
-      vim.startPlugins = [ "undotree" ];
-      vim.luaConfigRC.todo =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require('undotree').setup()
-            vim.api.nvim_set_keymap('n', '<leader>u', ':lua require("undotree").toggle()<CR>', {noremap = true, silent = true})
           '';
     })
   ]);

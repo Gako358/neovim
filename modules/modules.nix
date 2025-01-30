@@ -10,9 +10,9 @@
     ./completion.nix
     ./core.nix
     ./debug.nix
-    ./fzf.nix
     ./git.nix
     ./keys.nix
+    ./picker.nix
     ./terminal.nix
     ./treesitter.nix
     ./visual.nix

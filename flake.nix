@@ -155,10 +155,6 @@
       url = "github:kdheepak/lazygit.nvim";
       flake = false;
     };
-    plugins-undotree = {
-      url = "github:jiaoshijie/undotree";
-      flake = false;
-    };
 
     # Visuals
     plugins-nvim-autopairs = {
@@ -181,16 +177,8 @@
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
-    plugins-luatab = {
-      url = "github:alvarosevilla95/luatab.nvim";
-      flake = false;
-    };
     plugins-noice = {
       url = "github:folke/noice.nvim";
-      flake = false;
-    };
-    plugins-nui = {
-      url = "github:MunifTanjim/nui.nvim";
       flake = false;
     };
     plugins-notify = {
@@ -220,8 +208,13 @@
       flake = false;
     };
 
+    # Core
     plugins-plenary-nvim = {
       url = "github:nvim-lua/plenary.nvim";
+      flake = false;
+    };
+    plugins-nui = {
+      url = "github:MunifTanjim/nui.nvim";
       flake = false;
     };
   };
@@ -320,7 +313,6 @@
               enable = true;
               theme = "nightfox";
             };
-            luatab.enable = true;
             noice = {
               enable = true;
             };
@@ -328,7 +320,6 @@
             ranger.enable = true;
             theme.enable = true;
             todo.enable = true;
-            undo.enable = true;
           };
           vim.terminal = {
             enable = true;
