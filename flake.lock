@@ -58,38 +58,6 @@
         "type": "github"
       }
     },
-    "plugins-bufdelete": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1708814161,
-        "narHash": "sha256-ljUNfmpImtxFCS19HC9kFlaLlqaPDltKtnx1+/6Y33U=",
-        "owner": "famiu",
-        "repo": "bufdelete.nvim",
-        "rev": "f6bcea78afb3060b198125256f897040538bcb81",
-        "type": "github"
-      },
-      "original": {
-        "owner": "famiu",
-        "repo": "bufdelete.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-bufferline": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736870559,
-        "narHash": "sha256-ae4MB6+6v3awvfSUWlau9ASJ147ZpwuX1fvJdfMwo1Q=",
-        "owner": "akinsho",
-        "repo": "bufferline.nvim",
-        "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "akinsho",
-        "repo": "bufferline.nvim",
-        "type": "github"
-      }
-    },
     "plugins-cmp-buffer": {
       "flake": false,
       "locked": {
@@ -799,8 +767,6 @@
         "flake-utils": "flake-utils",
         "nil": "nil",
         "nixpkgs": "nixpkgs",
-        "plugins-bufdelete": "plugins-bufdelete",
-        "plugins-bufferline": "plugins-bufferline",
         "plugins-cmp-buffer": "plugins-cmp-buffer",
         "plugins-cmp-dap": "plugins-cmp-dap",
         "plugins-cmp-nvim-lsp": "plugins-cmp-nvim-lsp",

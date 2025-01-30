@@ -20,34 +20,6 @@ in
       };
     };
 
-    bufferline = {
-      enable = mkEnableOption "Enable bufferline";
-
-      icons = mkOption {
-        description = "Enable icons for bufferline";
-        type = types.bool;
-        default = true;
-      };
-
-      numbers = mkOption {
-        description = "Show buffer numbers";
-        type = types.str;
-        default = "both";
-      };
-
-      separatorStyle = mkOption {
-        description = "Style of the separator between buffers";
-        type = types.str;
-        default = "thin";
-      };
-
-      showBufferClose = mkOption {
-        description = "Show buffer close icons";
-        type = types.bool;
-        default = true;
-      };
-    };
-
     indentBlankline = {
       enable = mkEnableOption "indentation guides [indent-blankline].";
 
@@ -288,83 +260,6 @@ in
           */
           ''
             require("nvim-autopairs").setup{}
-          '';
-    })
-    (mkIf cfg.bufferline.enable {
-      vim.startPlugins = [
-        "bufferline"
-        "bufdelete"
-      ];
-
-      vim.luaConfigRC.bufferline-which-key = mkIf config.vim.keys.whichKey.enable (
-        nvim.dag.entryAnywhere ''
-          local wk = require("which-key")
-          wk.add({
-            { "<leader>b", group = "Buffer" },
-            { "<leader>bn", "<cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
-            { "<leader>bp", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
-            { "<leader>bc", "<cmd>BufferLinePick<CR>", desc = "Pick Buffer" },
-            { "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", desc = "Sort by Extension" },
-            { "<leader>bsd", "<cmd>BufferLineSortByDirectory<CR>", desc = "Sort by Directory" },
-            { "<leader>bmn", "<cmd>BufferLineMoveNext<CR>", desc = "Move Buffer Right" },
-            { "<leader>bmp", "<cmd>BufferLineMovePrev<CR>", desc = "Move Buffer Left" },
-            })
-        ''
-      );
-
-      vim.luaConfigRC.bufferline =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("bufferline").setup{
-              options = {
-                numbers = "${cfg.bufferline.numbers}",
-                close_command = function(bufnum)
-                  require("bufdelete").bufdelete(bufnum, false)
-                end,
-                right_mouse_command = "vertical sbuffer %d",
-                indicator = {
-                  icon = "▎",
-                  style = "icon"
-                },
-                buffer_close_icon = "",
-                modified_icon = "●",
-                close_icon = "",
-                left_trunc_marker = "",
-                right_trunc_marker = "",
-                separator_style = "${cfg.bufferline.separatorStyle}",
-                max_name_length = 18,
-                max_prefix_length = 15,
-                tab_size = 18,
-                show_buffer_icons = ${boolToString cfg.bufferline.icons},
-                show_buffer_close_icons = ${boolToString cfg.bufferline.showBufferClose},
-                show_close_icon = true,
-                show_tab_indicators = true,
-                persist_buffer_sort = true,
-                enforce_regular_tabs = false,
-                always_show_bufferline = false,
-                hide_when_empty = true,
-                offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left"}},
-                sort_by = "extension",
-                diagnostics = "nvim_lsp",
-                diagnostics_indicator = function(count, level, diagnostics_dict, context)
-                  local s = ""
-                  for e, n in pairs(diagnostics_dict) do
-                    local sym = e == "error" and ""
-                      or (e == "warning" and "" or "" )
-                    if(sym ~= "") then
-                      s = s .. " " .. n .. sym
-                    end
-                  end
-                  return s
-                end,
-                numbers = function(opts)
-                  return string.format("%s·%s", opts.raise(opts.id), opts.lower(opts.ordinal))
-                end,
-              }
-            }
           '';
     })
 
