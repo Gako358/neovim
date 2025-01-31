@@ -1,8 +1,9 @@
-{
-  pkgs,
-  lib,
-  check ? true,
-}: let
+{ pkgs
+, lib
+, check ? true
+,
+}:
+let
   modules = [
     ./languages
     ./lsp
@@ -14,11 +15,12 @@
     ./keys.nix
     ./picker.nix
     ./terminal.nix
+    ./theme.nix
     ./treesitter.nix
     ./visual.nix
   ];
 
-  pkgsModule = {config, ...}: {
+  pkgsModule = { config, ... }: {
     config = {
       _module.args.baseModules = modules;
       _module.args.pkgsPath = lib.mkDefault pkgs.path;
@@ -27,4 +29,4 @@
     };
   };
 in
-  modules ++ [pkgsModule]
+modules ++ [ pkgsModule ]

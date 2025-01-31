@@ -156,6 +156,12 @@
       flake = false;
     };
 
+    # Theme
+    plugins-theme = {
+      url = "github:EdenEast/nightfox.nvim";
+      flake = false;
+    };
+
     # Visuals
     plugins-nvim-autopairs = {
       url = "github:windwp/nvim-autopairs";
@@ -183,10 +189,6 @@
     };
     plugins-ranger = {
       url = "github:kelly-lin/ranger.nvim";
-      flake = false;
-    };
-    plugins-theme = {
-      url = "github:EdenEast/nightfox.nvim";
       flake = false;
     };
     plugins-todo = {
@@ -290,6 +292,7 @@
             virtualText.enable = true;
             ui.enable = true;
           };
+          vim.theme.enable = true;
           vim.visuals = {
             enable = true;
             autopairs.enable = true;
@@ -305,7 +308,6 @@
             };
             nvimWebDevicons.enable = true;
             ranger.enable = true;
-            theme.enable = true;
             todo.enable = true;
           };
           vim.terminal = {
