@@ -205,11 +205,11 @@
     "plugins-copilot-chat": {
       "flake": false,
       "locked": {
-        "lastModified": 1737794639,
-        "narHash": "sha256-5RjLUEWKMx7/4F7VcfGeWLHuhCWyhlWIJM0ZI2ivV5o=",
+        "lastModified": 1737946836,
+        "narHash": "sha256-ZQASKfbtw41RPKMeN5czsp5jVEp2NEwu4bVKbSxYiqU=",
         "owner": "CopilotC-Nvim",
         "repo": "CopilotChat.nvim",
-        "rev": "0a62c9f002c7adc533610d53386e09ede96274b6",
+        "rev": "1b375c24602680b5fe28c3c223a822111857dc37",
         "type": "github"
       },
       "original": {
@@ -221,11 +221,11 @@
     "plugins-crates-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1715690194,
-        "narHash": "sha256-R1y1OIep4tcFd4mhylZ/A2zdwOmEQtCzuVBOBYu0qUI=",
+        "lastModified": 1735942265,
+        "narHash": "sha256-dj7VXlMbS4HvSc+/WMQprtqWzrYrWaCnSEE0ygp/LcI=",
         "owner": "Saecki",
         "repo": "crates.nvim",
-        "rev": "d556c00d60c9421c913ee54ff690df2a34f6264e",
+        "rev": "bd35b13e94a292ee6e32c351e05ca2202dc9f070",
         "type": "github"
       },
       "original": {
@@ -525,11 +525,11 @@
     "plugins-nvim-jdtls": {
       "flake": false,
       "locked": {
-        "lastModified": 1716563650,
-        "narHash": "sha256-eAS3fZ4tUacDctQfeHucBZQRH5Af9KyNwfzuuqBl5Gw=",
+        "lastModified": 1737626217,
+        "narHash": "sha256-WJlgXyts9A57R0vR8sMbb1pr6zU1jYhzGH+1HOnWYYQ=",
         "owner": "mfussenegger",
         "repo": "nvim-jdtls",
-        "rev": "10691312d51c5485c656a71258b55d3798d3fb3e",
+        "rev": "3efcd0700a293efea9dada58f79c32a64850eb24",
         "type": "github"
       },
       "original": {
@@ -573,11 +573,11 @@
     "plugins-nvim-metals": {
       "flake": false,
       "locked": {
-        "lastModified": 1735386491,
-        "narHash": "sha256-G9V7fX65uW4z7kiuiP8mLtEjLoTJ1mkltj51OlN5/oM=",
+        "lastModified": 1738260722,
+        "narHash": "sha256-IHafZMkpsoxTyaymsQtp55+ao7J21eeFIsgylwOIq1k=",
         "owner": "scalameta",
         "repo": "nvim-metals",
-        "rev": "e6b02c99161b43c67cfe1d6e5f9a9b9a0bb4701c",
+        "rev": "7f847637870bdc6b679a33f1d427e2357da5732c",
         "type": "github"
       },
       "original": {
@@ -669,11 +669,11 @@
     "plugins-sqls-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1684697500,
-        "narHash": "sha256-jKFut6NZAf/eIeIkY7/2EsjsIhvZQKCKAJzeQ6XSr0s=",
+        "lastModified": 1733090837,
+        "narHash": "sha256-o5uD6shPkweuE+k/goBX42W3I2oojXVijfJC7L50sGU=",
         "owner": "nanotee",
         "repo": "sqls.nvim",
-        "rev": "4b1274b5b44c48ce784aac23747192f5d9d26207",
+        "rev": "a514379f5f89bf72955ed3bf5c1c31a40b8a1472",
         "type": "github"
       },
       "original": {
