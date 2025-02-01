@@ -19,6 +19,15 @@ in
     vim.startPlugins = [ "which-key" ];
 
     vim.luaConfigRC.whichkey = nvim.dag.entryAnywhere /*lua*/''
+
+      function ReplaceWord()
+        local word = vim.fn.expand("<cword>")
+        local new_word = vim.fn.input("Replace with: ")
+        if new_word ~= "" then
+          vim.cmd(string.format("%%s/\\<%s\\>/%s/gc", word, new_word))
+        end
+      end
+
       local wk = require("which-key")
       wk.setup {}
 
@@ -52,7 +61,7 @@ in
 
         -- Leader commands
         { "<leader>s", group = "Search" },
-        { "<leader>sr", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", desc = "Search and Replace" },
+        { "<leader>sr", ":lua ReplaceWord()<CR>", desc = "Search and Replace with Input" },
 
         { "<leader>d", group = "Diagnostics" },
         { "<leader>dv", ":noh<CR>", desc = "Clear Search Highlight" },
