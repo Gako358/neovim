@@ -227,7 +227,7 @@ in
 
             require("CopilotChat").setup({
               model = "claude-3.5-sonnet",
-              context = "files:full",
+              context = "buffers",
               window = {
                 layout = "vertical",
                 title = "Copilot Chat",
