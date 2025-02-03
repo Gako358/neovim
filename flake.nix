@@ -171,6 +171,10 @@
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
+    plugins-leap = {
+      url = "github:ggandor/leap.nvim";
+      flake = false;
+    };
     plugins-lualine = {
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
@@ -299,6 +303,7 @@
             indentBlankline = {
               enable = true;
             };
+            leap.enable = true;
             lualine = {
               enable = true;
               theme = "nightfox";

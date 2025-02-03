@@ -66,6 +66,7 @@ in
       };
     };
 
+    leap.enable = mkEnableOption "Leap motion support [leap]";
     lualine = {
       enable = mkEnableOption "lualine statusline.";
       icons = mkOption {
@@ -284,6 +285,17 @@ in
                 show_end = false,
               },
             }
+          '';
+    })
+    (mkIf cfg.leap.enable {
+      vim.startPlugins = [ "leap" ];
+      vim.luaConfigRC.leap =
+        nvim.dag.entryAnywhere
+          /*
+        lua
+          */
+          ''
+            require('leap').create_default_mappings()
           '';
     })
     (mkIf cfg.lualine.enable {
