@@ -6,12 +6,12 @@
 }:
 with lib;
 with builtins; let
-  cfg = config.vim.languages.shell;
+  cfg = config.vim.languages.bash;
 
   defaultServer = "bashls";
   servers = {
     bashls = {
-      package = pkgs.bash-language-server;
+      package = ["nodePackages" "bash-language-server"];
       lspConfig =
         /*
         lua
@@ -19,8 +19,8 @@ with builtins; let
         ''
           lspconfig.bashls.setup{
             capabilities = capabilities;
-            on_attach = default_on_attach,
-            cmd = { "${cfg.lsp.package}/bin/bash-language-server" },
+            on_attach = default_on_attach;
+            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "bash-language-server"}", "start"};
           }
         '';
     };
@@ -29,7 +29,7 @@ with builtins; let
   defaultFormat = "shfmt";
   formats = {
     shfmt = {
-      package = pkgs.shfmt;
+      package = ["shfmt"];
       nullConfig =
         /*
         lua
@@ -38,58 +38,89 @@ with builtins; let
           table.insert(
             ls_sources,
             null_ls.builtins.formatting.shfmt.with({
-              command = "${cfg.format.package}/bin/shfmt";
+              command = "${nvim.languages.commandOptToCmd cfg.format.package "shfmt"}",
             })
           )
         '';
     };
   };
+
+  defaultDiagnostics = ["shellcheck"];
+  diagnostics = {
+    shellcheck = {
+      package = pkgs.shellcheck;
+      nullConfig = pkg:
+      /*
+      lua
+      */
+      ''
+        table.insert(
+          ls_sources,
+          null_ls.builtins.diagnostics.shellcheck.with({
+            command = "${pkg}/bin/shellcheck",
+          })
+        )
+      '';
+    };
+  };
 in {
-  options.vim.languages.shell = {
-    enable = mkEnableOption "Shell language support";
+  options.vim.languages.bash = {
+    enable = mkEnableOption "Bash language support";
 
     treesitter = {
       enable = mkOption {
-        description = "Enable Shell treesitter";
+        description = "Bash treesitter";
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      package = nvim.types.mkGrammarOption pkgs "bash";
+      package = nvim.options.mkGrammarOption pkgs "bash";
     };
 
     lsp = {
       enable = mkOption {
-        description = "Shell LSP support";
+        description = "Enable Bash LSP support";
         type = types.bool;
         default = config.vim.languages.enableLSP;
       };
       server = mkOption {
-        description = "Shell LSP server";
-        type = types.str;
+        description = "Bash LSP server to use";
+        type = with types; enum (attrNames servers);
         default = defaultServer;
       };
-      package = mkOption {
-        description = "Shell lsp package";
-        type = types.package;
-        default = servers.${cfg.lsp.server}.package;
+      package = lib.nvim.options.mkCommandOption pkgs {
+        description = "Bash LSP server";
+        inherit (servers.${cfg.lsp.server}) package;
       };
     };
 
     format = {
       enable = mkOption {
-        description = "Enable Shell formatting";
+        description = "Enable Bash formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
       type = mkOption {
-        description = "Shell formatter to use";
+        description = "Bash formatter to use";
         type = with types; enum (attrNames formats);
         default = defaultFormat;
       };
-      package = mkOption {
-        description = "Shell formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
+
+      package = lib.nvim.options.mkCommandOption pkgs {
+        description = "Bash formatter package.";
+        inherit (formats.${cfg.format.type}) package;
+      };
+    };
+
+    extraDiagnostics = {
+      enable = mkOption {
+        description = "Enable extra Bash diagnostics";
+        type = types.bool;
+        default = config.vim.languages.enableExtraDiagnostics;
+      };
+      types = lib.nvim.options.mkDiagnosticsOption {
+        langDesc = "Bash";
+        inherit diagnostics;
+        inherit defaultDiagnostics;
       };
     };
   };
@@ -99,13 +130,24 @@ in {
       vim.treesitter.enable = true;
       vim.treesitter.grammars = [cfg.treesitter.package];
     })
+
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.bash-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
+
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
       vim.lsp.null-ls.sources.bash-format = formats.${cfg.format.type}.nullConfig;
+    })
+
+    (mkIf cfg.extraDiagnostics.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+        lang = "bash";
+        config = cfg.extraDiagnostics.types;
+        inherit diagnostics;
+      };
     })
   ]);
 }

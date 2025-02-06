@@ -8,20 +8,19 @@ with lib;
 with builtins; let
   cfg = config.vim.languages.ts;
 
-  defaultServer = "ts_ls";
+  defaultServer = "tsserver";
   servers = {
-    ts_ls = {
-      package = pkgs.nodePackages.typescript-language-server;
+    tsserver = {
+      package = ["nodePackages" "typescript-language-server"];
       lspConfig =
         /*
         lua
         */
         ''
-          lspconfig.ts_ls.setup {
+          lspconfig.tsserver.setup {
             capabilities = capabilities;
-            on_attach = default_on_attach,
-            cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
-            filetypes = {"typescript", "javascript"}
+            on_attach = attach_keymaps,
+            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "typescript-language-server"}", "--stdio"},
           }
         '';
     };
@@ -31,7 +30,7 @@ with builtins; let
   defaultFormat = "prettier";
   formats = {
     prettier = {
-      package = pkgs.nodePackages.prettier;
+      package = ["nodePackages" "prettier"];
       nullConfig =
         /*
         lua
@@ -40,10 +39,30 @@ with builtins; let
           table.insert(
             ls_sources,
             null_ls.builtins.formatting.prettier.with({
-              command = "${cfg.format.package}/bin/prettier",
+              command = "${nvim.languages.commandOptToCmd cfg.format.package "prettier"}",
             })
           )
         '';
+    };
+  };
+
+  # TODO: specify packages
+  defaultDiagnostics = ["eslint"];
+  diagnostics = {
+    eslint = {
+      package = pkgs.nodePackages.eslint;
+      nullConfig = pkg:
+      /*
+      lua
+      */
+      ''
+        table.insert(
+          ls_sources,
+          null_ls.builtins.diagnostics.eslint.with({
+            command = "${pkg}/bin/eslint",
+          })
+        )
+      '';
     };
   };
 in {
@@ -56,8 +75,8 @@ in {
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      tsPackage = nvim.types.mkGrammarOption pkgs "tsx";
-      jsPackage = nvim.types.mkGrammarOption pkgs "javascript";
+      tsPackage = nvim.options.mkGrammarOption pkgs "tsx";
+      jsPackage = nvim.options.mkGrammarOption pkgs "javascript";
     };
 
     lsp = {
@@ -71,10 +90,9 @@ in {
         type = with types; enum (attrNames servers);
         default = defaultServer;
       };
-      package = mkOption {
-        description = "Typescript/Javascript LSP server package";
-        type = types.package;
-        default = servers.${cfg.lsp.server}.package;
+      package = nvim.options.mkCommandOption pkgs {
+        description = "Typescript/Javascript LSP server";
+        inherit (servers.${cfg.lsp.server}) package;
       };
     };
 
@@ -89,10 +107,22 @@ in {
         type = with types; enum (attrNames formats);
         default = defaultFormat;
       };
-      package = mkOption {
-        description = "Typescript/Javascript formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
+      package = nvim.options.mkCommandOption pkgs {
+        description = "Typescript/Javascript formatter";
+        inherit (formats.${cfg.format.type}) package;
+      };
+    };
+
+    extraDiagnostics = {
+      enable = mkOption {
+        description = "Enable extra Typescript/Javascript diagnostics";
+        type = types.bool;
+        default = config.vim.languages.enableExtraDiagnostics;
+      };
+      types = nvim.options.mkDiagnosticsOption {
+        langDesc = "Typescript/Javascript";
+        inherit diagnostics;
+        inherit defaultDiagnostics;
       };
     };
   };
@@ -111,6 +141,15 @@ in {
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
       vim.lsp.null-ls.sources.ts-format = formats.${cfg.format.type}.nullConfig;
+    })
+
+    (mkIf cfg.extraDiagnostics.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+        lang = "ts";
+        config = cfg.extraDiagnostics.types;
+        inherit diagnostics;
+      };
     })
   ]);
 }

@@ -276,7 +276,7 @@
             crates.enable = true;
           };
           scala.enable = true;
-          shell.enable = true;
+          bash.enable = true;
           sql.enable = true;
           tailwind.enable = true;
           ts.enable = true;
