@@ -1,12 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.fzf;
-in
-{
+in {
   options.vim.fzf = {
     enable = mkEnableOption "enable fzf-lua";
   };
@@ -57,16 +57,16 @@ in
 
     vim.luaConfigRC.fzf =
       nvim.dag.entryAnywhere
-        /*
+      /*
       lua
-        */
-        ''
-          require("fzf-lua").setup({
-            "telescope",
-            fzf_opts = {
-              ["--layout"] = "reverse"
-            }
-          })
-        '';
+      */
+      ''
+        require("fzf-lua").setup({
+          "telescope",
+          fzf_opts = {
+            ["--layout"] = "reverse"
+          }
+        })
+      '';
   };
 }

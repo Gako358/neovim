@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
@@ -13,76 +14,88 @@ with builtins; let
   defaultServer = "nil";
   servers = {
     rnix = {
-      package = [ "rnix-lsp" ];
+      package = ["rnix-lsp"];
       internalFormatter = cfg.format.type == "nixpkgs-fmt";
-      lspConfig = /* lua */ ''
-        lspconfig.rnix.setup{
-          capabilities = capabilities,
-        ${
-          if (cfg.format.enable && cfg.format.type == "nixpkgs-fmt")
-          then useFormat
-          else noFormat
-        },
-          cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "rnix-lsp"}"},
-        }
-      '';
+      lspConfig =
+        /*
+        lua
+        */
+        ''
+          lspconfig.rnix.setup{
+            capabilities = capabilities,
+          ${
+            if (cfg.format.enable && cfg.format.type == "nixpkgs-fmt")
+            then useFormat
+            else noFormat
+          },
+            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "rnix-lsp"}"},
+          }
+        '';
     };
 
     nil = {
-      package = [ "nil" ];
+      package = ["nil"];
       internalFormatter = true;
-      lspConfig = /* lua */ ''
-        lspconfig.nil_ls.setup{
-          capabilities = capabilities,
-        ${
-          if cfg.format.enable
-          then useFormat
-          else noFormat
-        },
-          cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "nil"}"},
-        ${optionalString cfg.format.enable ''
-          settings = {
-            ["nil"] = {
-          ${optionalString (cfg.format.type == "alejandra")
-            ''
-              formatting = {
-                command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
+      lspConfig =
+        /*
+        lua
+        */
+        ''
+          lspconfig.nil_ls.setup{
+            capabilities = capabilities,
+          ${
+            if cfg.format.enable
+            then useFormat
+            else noFormat
+          },
+            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "nil"}"},
+          ${optionalString cfg.format.enable ''
+            settings = {
+              ["nil"] = {
+            ${optionalString (cfg.format.type == "alejandra")
+              ''
+                formatting = {
+                  command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
+                },
+              ''}
+            ${optionalString (cfg.format.type == "nixpkgs-fmt")
+              ''
+                formatting = {
+                  command = {"${cfg.format.package}/bin/nixpkgs-fmt"},
+                },
+              ''}
               },
-            ''}
-          ${optionalString (cfg.format.type == "nixpkgs-fmt")
-            ''
-              formatting = {
-                command = {"${cfg.format.package}/bin/nixpkgs-fmt"},
-              },
-            ''}
-            },
-          };
-        ''}
-        }
-      '';
+            };
+          ''}
+          }
+        '';
     };
   };
 
   defaultFormat = "alejandra";
   formats = {
     alejandra = {
-      package = [ "alejandra" ];
-      nullConfig = /* lua */ ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.alejandra.with({
-            command = {"${nvim.languages.commandOptToCmd cfg.format.package "alejandra"}"},
-          })
-        )
-      '';
+      package = ["alejandra"];
+      nullConfig =
+        /*
+        lua
+        */
+        ''
+          table.insert(
+            ls_sources,
+            null_ls.builtins.formatting.alejandra.with({
+              command = {"${nvim.languages.commandOptToCmd cfg.format.package "alejandra"}"},
+            })
+          )
+        '';
     };
     nixpkgs-fmt = {
-      package = [ "nixpkgs-fmt" ];
+      package = ["nixpkgs-fmt"];
       # Never need to use null-ls for nixpkgs-fmt
     };
   };
 
-  defaultDiagnostics = [ "statix" "deadnix" ];
+  defaultDiagnostics = ["statix" "deadnix"];
   diagnostics = {
     statix = {
       package = pkgs.statix;
@@ -107,8 +120,7 @@ with builtins; let
       '';
     };
   };
-in
-{
+in {
   options.vim.languages.nix = {
     enable = mkEnableOption "Nix language support";
 
@@ -178,7 +190,7 @@ in
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.package ];
+      vim.treesitter.grammars = [cfg.treesitter.package];
     })
 
     (mkIf cfg.lsp.enable {

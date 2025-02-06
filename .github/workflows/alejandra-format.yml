@@ -1,0 +1,53 @@
+name: Format Nix Files
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  push_update:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Placeholder step
+        run: echo "Push update job completed"
+
+  format_files:
+    runs-on: ubuntu-20.04
+    needs: [push_update]
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          token: "${{ secrets.TEST_TOKEN }}"
+          ref: main
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v30
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Format files
+        run: nix develop --command alejandra .
+
+      - name: Create format PR
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git switch -c format-${{ github.run_id }}
+            git config user.email "gako358@outlook.com"
+            git config user.name "Gako358"
+            git commit -am "style: format nix files"
+            git push -u origin format-${{ github.run_id }}
+            PR=$(gh pr create \
+              --assignee Gako358 \
+              --base main \
+              --body "Automatic formatting of Nix files" \
+              --title "style: format nix files" \
+              --label bot)
+            gh pr merge $PR --merge --delete-branch
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}

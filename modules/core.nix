@@ -177,14 +177,19 @@ in {
     };
 
     # Vim config helpers
-    mkVimBool = val: if val then "1" else "0";
+    mkVimBool = val:
+      if val
+      then "1"
+      else "0";
     valToVim = val:
       if (isInt val)
       then (builtins.toString val)
       else
-        (if (isBool val)
-        then (mkVimBool val)
-        else (toJSON val));
+        (
+          if (isBool val)
+          then (mkVimBool val)
+          else (toJSON val)
+        );
 
     filterNonNull = mappings: filterAttrs (name: value: value != null) mappings;
     globalsScript =

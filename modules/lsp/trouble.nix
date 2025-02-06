@@ -1,12 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.lsp;
-in
-{
+in {
   options.vim.lsp = {
     trouble = {
       enable = mkEnableOption "trouble diagnostics viewer";
@@ -14,7 +14,7 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.trouble.enable) {
-    vim.startPlugins = [ "trouble" ];
+    vim.startPlugins = ["trouble"];
 
     vim.luaConfigRC.trouble-maps = nvim.dag.entryAnywhere ''
       if ${boolToString config.vim.keys.whichKey.enable} then
@@ -36,12 +36,12 @@ in
 
     vim.luaConfigRC.trouble =
       nvim.dag.entryAnywhere
-        /*
+      /*
       lua
-        */
-        ''
-          -- Enable trouble diagnostics viewer
-          require("trouble").setup {}
-        '';
+      */
+      ''
+        -- Enable trouble diagnostics viewer
+        require("trouble").setup {}
+      '';
   };
 }
