@@ -226,7 +226,7 @@ in {
 
 
           require("CopilotChat").setup({
-            model = "claude-3.5-sonnet",
+            model = "gemini-2.0-flash-001",
             context = "buffers",
             window = {
               layout = "vertical",
