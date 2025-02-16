@@ -634,6 +634,38 @@
         "type": "github"
       }
     },
+    "plugins-org-roam": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738257172,
+        "narHash": "sha256-I6Cz1d+7RJ5BJS5DhCqpUpKJIGI9B5McTWxcu06R7ag=",
+        "owner": "chipsenkbeil",
+        "repo": "org-roam.nvim",
+        "rev": "c32aa470a9f9c2aa9e63c91859b0425e45cb3d1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chipsenkbeil",
+        "repo": "org-roam.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-orgmode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739606305,
+        "narHash": "sha256-hZ2ZE83VRuM5T8XsCCegnR1IrUN5q4PmbZLuYw8/9BQ=",
+        "owner": "nvim-orgmode",
+        "repo": "orgmode",
+        "rev": "f3f888af34ac02eb2488bbf068d11d8a4b822642",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-orgmode",
+        "repo": "orgmode",
+        "type": "github"
+      }
+    },
     "plugins-plenary-nvim": {
       "flake": false,
       "locked": {
@@ -819,6 +851,8 @@
         "plugins-nvim-metals": "plugins-nvim-metals",
         "plugins-nvim-nio": "plugins-nvim-nio",
         "plugins-nvim-web-devicons": "plugins-nvim-web-devicons",
+        "plugins-org-roam": "plugins-org-roam",
+        "plugins-orgmode": "plugins-orgmode",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
         "plugins-ranger": "plugins-ranger",
         "plugins-rust-tools": "plugins-rust-tools",

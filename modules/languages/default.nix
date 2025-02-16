@@ -17,6 +17,7 @@ in {
     ./lua.nix
     ./nix.nix
     ./markdown.nix
+    ./orgmode.nix
     ./python.nix
     ./rust.nix
     ./scala.nix

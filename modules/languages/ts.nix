@@ -8,19 +8,20 @@ with lib;
 with builtins; let
   cfg = config.vim.languages.ts;
 
-  defaultServer = "tsserver";
+  defaultServer = "ts_ls";
   servers = {
-    tsserver = {
-      package = ["nodePackages" "typescript-language-server"];
+    ts_ls = {
+      package = pkgs.nodePackages.typescript-language-server;
       lspConfig =
         /*
         lua
         */
         ''
-          lspconfig.tsserver.setup {
+          lspconfig.ts_ls.setup {
             capabilities = capabilities;
-            on_attach = attach_keymaps,
-            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "typescript-language-server"}", "--stdio"},
+            on_attach = default_on_attach,
+            cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
+            filetypes = {"typescript", "javascript"}
           }
         '';
     };
@@ -90,9 +91,10 @@ in {
         type = with types; enum (attrNames servers);
         default = defaultServer;
       };
-      package = nvim.options.mkCommandOption pkgs {
-        description = "Typescript/Javascript LSP server";
-        inherit (servers.${cfg.lsp.server}) package;
+      package = mkOption {
+        description = "Typescript/Javascript LSP server package";
+        type = types.package;
+        default = servers.${cfg.lsp.server}.package;
       };
     };
 

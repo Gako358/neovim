@@ -200,6 +200,16 @@
       flake = false;
     };
 
+    #Orgmode
+    plugins-orgmode = {
+      url = "github:nvim-orgmode/orgmode";
+      flake = false;
+    };
+    plugins-org-roam = {
+      url = "github:chipsenkbeil/org-roam.nvim";
+      flake = false;
+    };
+
     # Key binding help
     plugins-which-key = {
       url = "github:folke/which-key.nvim";
@@ -270,6 +280,7 @@
           lua.enable = true;
           markdown.enable = true;
           nix.enable = true;
+          org.enable = true;
           python.enable = true;
           rust = {
             enable = true;
