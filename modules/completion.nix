@@ -226,7 +226,7 @@ in {
 
 
           require("CopilotChat").setup({
-            model = "gemini-2.0-flash-001",
+            model = "o3-mini",
             context = "buffers",
             window = {
               layout = "vertical",
