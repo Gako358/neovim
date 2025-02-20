@@ -13,6 +13,7 @@ in {
     simple.enable = mkEnableOption "Enable simple terminal";
     float.enable = mkEnableOption "Enable floating terminal";
     project.enable = mkEnableOption "Enable project terminal";
+    new_tab.enable = mkEnableOption "Enable new tab terminal";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -87,12 +88,31 @@ in {
             }
           }
 
-          -- ... (rest of the floating terminal setup)
+          local function create_floating_window(opts)
+            opts = opts or {}
+            local width = math.floor(vim.o.columns * 0.8)
+            local height = math.floor(vim.o.lines * 0.8)
+            local row = math.floor((vim.o.lines - height) / 2)
+            local col = math.floor((vim.o.columns - width) / 2)
+            local win_opts = {
+              style = "minimal",
+              relative = "editor",
+              width = width,
+              height = height,
+              row = row,
+              col = col,
+            }
+            if opts.buf == -1 or not vim.api.nvim_buf_is_valid(opts.buf) then
+              opts.buf = vim.api.nvim_create_buf(false, true)
+              state.floating.buf = opts.buf
+            end
+            return vim.api.nvim_open_win(opts.buf, true, win_opts)
+          end
 
           -- Toggle terminal
           local toggle_terminal = function()
             if not vim.api.nvim_win_is_valid(state.floating.win) then
-              state.floating = create_floating_window { buf = state.floating.buf }
+              state.floating.win = create_floating_window { buf = state.floating.buf }
               if vim.bo[state.floating.buf].buftype ~= "terminal" then
                 vim.cmd.term()
               end
@@ -167,6 +187,50 @@ in {
           else
             -- Regular mappings if which-key is disabled
             vim.keymap.set("n", "<leader>tg", ":lua OpenGitTerminal()<CR>", {desc = "Open new tab with git terminals"})
+          end
+        '';
+    })
+
+    (mkIf cfg.new_tab.enable {
+      vim.luaConfigRC.gui =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          function _G.OpenNewTabTerminal()
+            vim.cmd("tabnew")
+            vim.cmd("terminal")
+          end
+
+          -- Which-key mappings if enabled
+          if ${boolToString config.vim.keys.whichKey.enable} then
+            local wk = require("which-key")
+            wk.add({
+              { "<leader>t", group = "Terminal" },
+              { "<leader>tn", "<cmd>lua OpenNewTabTerminal()<CR>", desc = "Open new tab terminal" },
+            })
+          else
+            -- Regular mapping if which-key is disabled
+            vim.keymap.set("n", "<leader>tn", ":lua OpenNewTabTerminal()<CR>", {desc = "Open new tab terminal"})
+          end
+        '';
+    })
+    (mkIf true {
+      vim.luaConfigRC.gui =
+        nvim.dag.entryAnywhere
+        /*
+        lua
+        */
+        ''
+          if ${boolToString config.vim.keys.whichKey.enable} then
+            local wk = require("which-key")
+            wk.add({
+              { "<leader>t", group = "Terminal" },
+              { "<leader>tc", "<cmd>tabclose<CR>", desc = "Close current tab" },
+            })
+          else
+            vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", {desc = "Close current tab"})
           end
         '';
     })

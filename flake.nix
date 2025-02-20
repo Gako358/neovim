@@ -330,6 +330,7 @@
           simple.enable = true;
           float.enable = true;
           project.enable = true;
+          new_tab.enable = true;
         };
       };
     };
