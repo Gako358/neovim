@@ -227,7 +227,7 @@ in {
 
 
           require("CopilotChat").setup({
-            model = "o3-mini",
+            model = "claude-3.7-sonnet",
             context = "buffers",
             window = {
               layout = "vertical",

@@ -189,11 +189,11 @@
     "plugins-copilot": {
       "flake": false,
       "locked": {
-        "lastModified": 1734926641,
-        "narHash": "sha256-c2UE0dLBtoYMvMxg+jXzfsD+wN9sZLvftJq4gGmooZU=",
+        "lastModified": 1739230958,
+        "narHash": "sha256-632UIbG1jwam+tug5+jODkT509+uBfJgUN21C3ppnEo=",
         "owner": "zbirenbaum",
         "repo": "copilot.lua",
-        "rev": "886ee73b6d464b2b3e3e6a7ff55ce87feac423a9",
+        "rev": "30321e33b03cb924fdcd6a806a0dc6fa0b0eafb9",
         "type": "github"
       },
       "original": {
@@ -205,11 +205,11 @@
     "plugins-copilot-chat": {
       "flake": false,
       "locked": {
-        "lastModified": 1738786323,
-        "narHash": "sha256-4YS4IvKffIYNq6Lh4LZrGUgGt+kY0dt8cFrfUaycCtg=",
+        "lastModified": 1740283955,
+        "narHash": "sha256-pXH1wHbWg6euXN/yGaqI8v4EIX0I5Tay0jMvOH2wpNo=",
         "owner": "CopilotC-Nvim",
         "repo": "CopilotChat.nvim",
-        "rev": "834ba1bc71e1a146831be0ebfeb456ad252c3c56",
+        "rev": "a3932a1505a990c238183617b5c5cb239f43f5ec",
         "type": "github"
       },
       "original": {
