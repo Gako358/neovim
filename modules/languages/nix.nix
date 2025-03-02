@@ -72,7 +72,7 @@ with builtins; let
     };
   };
 
-  defaultFormat = "alejandra";
+  defaultFormat = "nixpkgs-fmt";
   formats = {
     alejandra = {
       package = ["alejandra"];
