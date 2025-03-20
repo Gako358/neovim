@@ -4,7 +4,8 @@
   lib,
   ...
 }:
-with lib; with builtins; let
+with lib;
+with builtins; let
   cfg = config.vim.languages.org;
 in {
   options.vim.languages.org = {
