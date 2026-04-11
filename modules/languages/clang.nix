@@ -32,18 +32,17 @@ with builtins; let
   formats = {
     clang-format = {
       package = pkgs.clang-tools;
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.clang_format.with({
-              command = "${cfg.format.package}/bin/clang-format";
-              filetypes = {"c", "cpp", "cs", "*.h", "*.hpp", "*.cc"};
-            })
-          )
+          conform_formatters_by_ft["c"] = { "clang-format" }
+          conform_formatters_by_ft["cpp"] = { "clang-format" }
+          conform_formatters_by_ft["cs"] = { "clang-format" }
+          conform_formatters["clang-format"] = {
+            command = "${cfg.format.package}/bin/clang-format",
+          }
         '';
     };
   };
@@ -124,8 +123,8 @@ in
       vim.lsp.lspconfig.sources.clang-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.clang-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.clang-format = formats.${cfg.format.type}.conformConfig;
     })
   ]);
 }

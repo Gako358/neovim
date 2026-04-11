@@ -26,42 +26,43 @@ with builtins; let
     };
   };
 
-  # TODO: specify packages
   defaultFormat = "prettier";
   formats = {
     prettier = {
       package = [ "prettier" ];
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.prettier.with({
-              command = "${nvim.languages.commandOptToCmd cfg.format.package "prettier"}",
-            })
-          )
+          conform_formatters_by_ft["javascript"] = { "prettier" }
+          conform_formatters_by_ft["typescript"] = { "prettier" }
+          conform_formatters_by_ft["javascriptreact"] = { "prettier" }
+          conform_formatters_by_ft["typescriptreact"] = { "prettier" }
+          conform_formatters["prettier"] = {
+            command = "${nvim.languages.commandOptToCmd cfg.format.package "prettier"}",
+          }
         '';
     };
   };
 
-  # TODO: specify packages
+  -- TODO: specify packages
   defaultDiagnostics = [ "eslint" ];
   diagnostics = {
     eslint = {
       package = pkgs.eslint_d;
-      nullConfig = pkg:
+      lintConfig = pkg:
         /*
       lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.diagnostics.eslint.with({
-              command = "${pkg}/bin/eslint_d",
-            })
-          )
+          lint.linters_by_ft["javascript"] = vim.list_extend(lint.linters_by_ft["javascript"] or {}, { "eslint_d" })
+          lint.linters_by_ft["typescript"] = vim.list_extend(lint.linters_by_ft["typescript"] or {}, { "eslint_d" })
+          lint.linters_by_ft["javascriptreact"] = vim.list_extend(lint.linters_by_ft["javascriptreact"] or {}, { "eslint_d" })
+          lint.linters_by_ft["typescriptreact"] = vim.list_extend(lint.linters_by_ft["typescriptreact"] or {}, { "eslint_d" })
+          lint.linters.eslint_d = vim.tbl_deep_extend("force", lint.linters.eslint_d or {}, {
+            cmd = "${pkg}/bin/eslint_d",
+          })
         '';
     };
   };
@@ -141,13 +142,13 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.ts-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.ts-format = formats.${cfg.format.type}.conformConfig;
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+      vim.lsp.nvim-lint.enable = true;
+      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
         lang = "ts";
         config = cfg.extraDiagnostics.types;
         inherit diagnostics;

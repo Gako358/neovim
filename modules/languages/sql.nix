@@ -33,18 +33,16 @@ with builtins; let
   formats = {
     sqlfluff = {
       package = [ sqlfluffDefault ];
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.sqlfluff.with({
-              command = "${nvim.languages.commandOptToCmd cfg.format.package "sqlfluff"}",
-              extra_args = {"--dialect", "${cfg.dialect}"}
-            })
-          )
+          conform_formatters_by_ft["sql"] = { "sqlfluff" }
+          conform_formatters["sqlfluff"] = {
+            command = "${nvim.languages.commandOptToCmd cfg.format.package "sqlfluff"}",
+            args = { "fix", "--dialect", "${cfg.dialect}", "-" },
+          }
         '';
     };
   };
@@ -53,18 +51,16 @@ with builtins; let
   diagnostics = {
     sqlfluff = {
       package = pkgs.${sqlfluffDefault};
-      nullConfig = pkg:
+      lintConfig = pkg:
         /*
       lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.diagnostics.sqlfluff.with({
-              command = "${pkg}/bin/sqlfluff",
-              extra_args = {"--dialect", "${cfg.dialect}"}
-            })
-          )
+          lint.linters_by_ft["sql"] = vim.list_extend(lint.linters_by_ft["sql"] or {}, { "sqlfluff" })
+          lint.linters.sqlfluff = vim.tbl_deep_extend("force", lint.linters.sqlfluff or {}, {
+            cmd = "${pkg}/bin/sqlfluff",
+            args = { "lint", "--dialect", "${cfg.dialect}", "-" },
+          })
         '';
     };
   };
@@ -151,13 +147,13 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources."sql-format" = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources."sql-format" = formats.${cfg.format.type}.conformConfig;
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+      vim.lsp.nvim-lint.enable = true;
+      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
         lang = "sql";
         config = cfg.extraDiagnostics.types;
         inherit diagnostics;

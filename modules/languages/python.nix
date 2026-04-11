@@ -29,17 +29,15 @@ with builtins; let
   formats = {
     black = {
       package = pkgs.black;
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.black.with({
-              command = "${cfg.format.package}/bin/black",
-            })
-          )
+          conform_formatters_by_ft["python"] = { "black" }
+          conform_formatters["black"] = {
+            command = "${cfg.format.package}/bin/black",
+          }
         '';
     };
   };
@@ -105,8 +103,8 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.python-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.python-format = formats.${cfg.format.type}.conformConfig;
     })
   ]);
 }

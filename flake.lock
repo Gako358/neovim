@@ -512,22 +512,6 @@
         "type": "github"
       }
     },
-    "plugins-null-ls": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775508426,
-        "narHash": "sha256-5s1ZpC+RyCiRwIbWlWALKrWvozpvXjdlavVfF1cx7hQ=",
-        "owner": "nvimtools",
-        "repo": "none-ls.nvim",
-        "rev": "7f9301e416533b5d74e2fb3b1ce5059eeaed748b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvimtools",
-        "repo": "none-ls.nvim",
-        "type": "github"
-      }
-    },
     "plugins-nvim-autopairs": {
       "flake": false,
       "locked": {
@@ -878,7 +862,6 @@
         "plugins-noice": "plugins-noice",
         "plugins-notify": "plugins-notify",
         "plugins-nui": "plugins-nui",
-        "plugins-null-ls": "plugins-null-ls",
         "plugins-nvim-autopairs": "plugins-nvim-autopairs",
         "plugins-nvim-cmp": "plugins-nvim-cmp",
         "plugins-nvim-dap": "plugins-nvim-dap",
@@ -898,7 +881,41 @@
         "plugins-todo": "plugins-todo",
         "plugins-trouble": "plugins-trouble",
         "plugins-vim-vsnip": "plugins-vim-vsnip",
-        "plugins-which-key": "plugins-which-key"
+        "plugins-which-key": "plugins-which-key",
+        "plugins-conform-nvim": "plugins-conform-nvim",
+        "plugins-nvim-lint": "plugins-nvim-lint"
+      }
+    },
+    "plugins-conform-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741582671,
+        "narHash": "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-nvim-lint": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1744188328,
+        "narHash": "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "rev": "eab58b48eb11d7745c11c505e0f3057165902461",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "type": "github"
       }
     }
   },

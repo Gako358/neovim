@@ -29,17 +29,15 @@ with builtins; let
   formats = {
     ktlint = {
       package = pkgs.ktlint;
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.ktlint.with({
-              command = "${cfg.format.package}/bin/ktlint";
-            })
-          )
+          conform_formatters_by_ft["kotlin"] = { "ktlint" }
+          conform_formatters["ktlint"] = {
+            command = "${cfg.format.package}/bin/ktlint",
+          }
         '';
     };
   };
@@ -48,13 +46,11 @@ with builtins; let
   diagnostics = {
     ktlint = {
       package = pkgs.ktlint;
-      nullConfig = pkg: ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.ktlint.with({
-            command = "${pkg}/bin/ktlint",
-          })
-        )
+      lintConfig = pkg: ''
+        lint.linters_by_ft["kotlin"] = vim.list_extend(lint.linters_by_ft["kotlin"] or {}, { "ktlint" })
+        lint.linters.ktlint = vim.tbl_deep_extend("force", lint.linters.ktlint or {}, {
+          cmd = "${pkg}/bin/ktlint",
+        })
       '';
     };
   };
@@ -134,13 +130,13 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.kotlin-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.kotlin-format = formats.${cfg.format.type}.conformConfig;
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+      vim.lsp.nvim-lint.enable = true;
+      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
         lang = "kotlin";
         config = cfg.extraDiagnostics.types;
         inherit diagnostics;
