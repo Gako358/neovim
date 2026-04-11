@@ -157,26 +157,34 @@ in
     }
 
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.package ];
+      vim.treesitter = {
+        enable = true;
+        grammars = [ cfg.treesitter.package ];
+      };
     })
 
     (mkIf cfg.lsp.enable {
-      vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.nix-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig = {
+        enable = true;
+        sources.nix-lsp = servers.${cfg.lsp.server}.lspConfig;
+      };
     })
 
     (mkIf (cfg.format.enable && !servers.${cfg.lsp.server}.internalFormatter) {
-      vim.lsp.conform.enable = true;
-      vim.lsp.conform.sources.nix-format = formats.${cfg.format.type}.conformConfig;
+      vim.lsp.conform = {
+        enable = true;
+        sources.nix-format = formats.${cfg.format.type}.conformConfig;
+      };
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.nvim-lint.enable = true;
-      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
-        lang = "nix";
-        config = cfg.extraDiagnostics.types;
-        inherit diagnostics;
+      vim.lsp.nvim-lint = {
+        enable = true;
+        sources = lib.nvim.languages.diagnosticsToLua {
+          lang = "nix";
+          config = cfg.extraDiagnostics.types;
+          inherit diagnostics;
+        };
       };
     })
   ]);

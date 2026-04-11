@@ -16,14 +16,15 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.whichKey.enable) {
-    vim.startPlugins = [ "which-key" ];
+    vim = {
+      startPlugins = [ "which-key" ];
 
-    vim.luaConfigRC.whichkey =
-      nvim.dag.entryAnywhere
-        /*
-      lua
-        */
-        ''
+      luaConfigRC.whichkey =
+        nvim.dag.entryAnywhere
+          /*
+        lua
+          */
+          ''
 
         function ReplaceWord()
           local word = vim.fn.expand("<cword>")
@@ -83,5 +84,6 @@ in
           { "K", ":m '<-2<CR>gv=gv", desc = "Move Line Up", mode = "v" },
         })
       '';
+    };
   };
 }

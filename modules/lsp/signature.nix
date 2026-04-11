@@ -14,16 +14,18 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.lspSignature.enable) {
-    vim.startPlugins = [ "lsp-signature" ];
+    vim = {
+      startPlugins = [ "lsp-signature" ];
 
-    vim.luaConfigRC.lsp-signature =
-      nvim.dag.entryAnywhere
-        /*
-      lua
-        */
-        ''
-          -- Enable lsp signature viewer
-          require("lsp_signature").setup()
-        '';
+      luaConfigRC.lsp-signature =
+        nvim.dag.entryAnywhere
+          /*
+        lua
+          */
+          ''
+            -- Enable lsp signature viewer
+            require("lsp_signature").setup()
+          '';
+    };
   };
 }

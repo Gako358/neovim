@@ -253,15 +253,18 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.autopairs.enable {
-      vim.startPlugins = [ "nvim-autopairs" ];
-      vim.luaConfigRC.autopairs = nvim.dag.entryAnywhere /* lua */ ''
-        require("nvim-autopairs").setup{}
-      '';
+      vim = {
+        startPlugins = [ "nvim-autopairs" ];
+        luaConfigRC.autopairs = nvim.dag.entryAnywhere /* lua */ ''
+          require("nvim-autopairs").setup{}
+        '';
+      };
     })
 
     (mkIf cfg.indentBlankline.enable {
-      vim.startPlugins = [ "indent-blankline" ];
-      vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere /* lua */ ''
+      vim = {
+        startPlugins = [ "indent-blankline" ];
+        luaConfigRC.indent-blankline = nvim.dag.entryAnywhere /* lua */ ''
         require("ibl").setup {
           indent = {
             char = "▏",
@@ -276,10 +279,12 @@ in
           },
         }
       '';
+      };
     })
     (mkIf cfg.lualine.enable {
-      vim.startPlugins = [ "lualine" ];
-      vim.luaConfigRC.lualine = nvim.dag.entryAnywhere /* lua */ ''
+      vim = {
+        startPlugins = [ "lualine" ];
+        luaConfigRC.lualine = nvim.dag.entryAnywhere /* lua */ ''
         require'lualine'.setup {
           options = {
             icons_enabled = ${boolToString cfg.lualine.icons},
@@ -314,13 +319,15 @@ in
           extensions = {},
         }
       '';
+      };
     })
     (mkIf cfg.noice.enable {
-      vim.startPlugins = [
-        "noice"
-        "notify"
-      ];
-      vim.luaConfigRC.noice = nvim.dag.entryAnywhere /* lua */ ''
+      vim = {
+        startPlugins = [
+          "noice"
+          "notify"
+        ];
+        luaConfigRC.noice = nvim.dag.entryAnywhere /* lua */ ''
         require("noice").setup({
           lsp = {
             progress = {
@@ -359,13 +366,15 @@ in
           end,
         })
       '';
+      };
     })
     (mkIf cfg.nvimWebDevicons.enable {
       vim.startPlugins = [ "nvim-web-devicons" ];
     })
     (mkIf cfg.ranger.enable {
-      vim.startPlugins = [ "ranger" ];
-      vim.luaConfigRC.ranger = nvim.dag.entryAnywhere /* lua */ ''
+      vim = {
+        startPlugins = [ "ranger" ];
+        luaConfigRC.ranger = nvim.dag.entryAnywhere /* lua */ ''
         require("ranger-nvim").setup({ replace_netrw = true })
             vim.api.nvim_set_keymap("n", "<leader>ef", "", {
               noremap = true,
@@ -374,12 +383,15 @@ in
               end,
             })
       '';
+      };
     })
     (mkIf cfg.todo.enable {
-      vim.startPlugins = [ "todo" ];
-      vim.luaConfigRC.todo = nvim.dag.entryAnywhere /* lua */ ''
-        require("todo-comments").setup{}
-      '';
+      vim = {
+        startPlugins = [ "todo" ];
+        luaConfigRC.todo = nvim.dag.entryAnywhere /* lua */ ''
+          require("todo-comments").setup{}
+        '';
+      };
     })
   ]);
 }
