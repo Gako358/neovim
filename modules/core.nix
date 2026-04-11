@@ -143,6 +143,9 @@ in
           version = "master";
           src = assert asserts.assertMsg (name != "nvim-treesitter") "Use buildTreesitterPlug for building nvim-treesitter.";
             cfgBuild.rawPlugins.${pname}.src;
+          # Disable nvim-require-check: plugins built from flake inputs
+          # don't have their runtime dependencies available at build time.
+          doCheck = false;
         };
 
       treeSitterPlug = pkgs.vimPlugins.nvim-treesitter.withPlugins (_: config.vim.treesitter.grammars);
