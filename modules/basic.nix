@@ -166,27 +166,28 @@ in
   };
 
   config = {
-    vim.startPlugins = [
-      "plenary-nvim"
-      "nvim-nio"
-      "nui"
-    ];
+    vim = {
+      startPlugins = [
+        "plenary-nvim"
+        "nvim-nio"
+        "nui"
+      ];
 
-    vim.nmap = mkIf cfg.disableArrows {
-      "<up>" = "<nop>";
-      "<down>" = "<nop>";
-      "<left>" = "<nop>";
-      "<right>" = "<nop>";
-    };
+      nmap = mkIf cfg.disableArrows {
+        "<up>" = "<nop>";
+        "<down>" = "<nop>";
+        "<left>" = "<nop>";
+        "<right>" = "<nop>";
+      };
 
-    vim.imap = mkIf cfg.disableArrows {
-      "<up>" = "<nop>";
-      "<down>" = "<nop>";
-      "<left>" = "<nop>";
-      "<right>" = "<nop>";
-    };
+      imap = mkIf cfg.disableArrows {
+        "<up>" = "<nop>";
+        "<down>" = "<nop>";
+        "<left>" = "<nop>";
+        "<right>" = "<nop>";
+      };
 
-    vim.configRC.basic = nvim.dag.entryAfter [ "globalsScript" ] ''
+      configRC.basic = nvim.dag.entryAfter [ "globalsScript" ] ''
       " Settings that are set for everything
       set encoding=utf-8
       set mouse=${cfg.mouseSupport}
@@ -276,6 +277,7 @@ in
       ${optionalString cfg.bufOnlyCommand ''
         command! BufOnly silent! execute "%bd|e#|bd#"
       ''}
-    '';
+      '';
+    };
   };
 }

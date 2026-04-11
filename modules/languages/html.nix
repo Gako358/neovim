@@ -29,8 +29,10 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.package ];
+      vim.treesitter = {
+        enable = true;
+        grammars = [ cfg.treesitter.package ];
+      };
     })
   ]);
 }

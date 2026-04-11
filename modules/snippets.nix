@@ -11,7 +11,7 @@ in
   options.vim.snippets.vsnip = {
     enable = mkEnableOption "Enable vim-vsnip";
     dataDir = mkOption {
-      default = builtins.toPath ../../snippets;
+      default = toString ../../snippets;
       description = "Directory for the snippet files";
       type = types.str;
     };

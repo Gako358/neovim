@@ -25,9 +25,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
-    vim.autocomplete.cmp.sources = { "nvim_lsp" = "[LSP]"; };
-    vim.luaConfigRC.lsp-setup =
+    vim = {
+      startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
+      autocomplete.cmp.sources = { "nvim_lsp" = "[LSP]"; };
+      luaConfigRC.lsp-setup =
       /*
       lua
       */
@@ -90,5 +91,6 @@ in
           end,
         })
       '';
+    };
   };
 }

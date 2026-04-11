@@ -83,20 +83,22 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.crates.enable {
-      vim.startPlugins = [ "crates-nvim" ];
+      vim = {
+        startPlugins = [ "crates-nvim" ];
 
-      vim.autocomplete.cmp.sources = {
-        "crates" = "[Crates]";
-      };
-      vim.luaConfigRC.rust-crates = nvim.dag.entryAnywhere ''
-        require('crates').setup {
-          completion = {
-            cmp = {
-              enabled = true,
+        autocomplete.cmp.sources = {
+          "crates" = "[Crates]";
+        };
+        luaConfigRC.rust-crates = nvim.dag.entryAnywhere ''
+          require('crates').setup {
+            completion = {
+              cmp = {
+                enabled = true,
+              },
             },
-          },
-        }
-      '';
+          }
+        '';
+      };
     })
     (mkIf cfg.treesitter.enable {
       vim = {
