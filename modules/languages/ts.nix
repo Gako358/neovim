@@ -46,7 +46,7 @@ with builtins; let
     };
   };
 
-  -- TODO: specify packages
+  # TODO: specify packages
   defaultDiagnostics = [ "eslint" ];
   diagnostics = {
     eslint = {
