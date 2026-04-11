@@ -16,11 +16,11 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.lemminx.setup{
-            capabilities = capabilities;
-            on_attach = default_on_attach,
+          vim.lsp.config('lemminx', {
+            capabilities = capabilities,
             cmd = { "${cfg.lsp.package}/bin/lemminx" },
-          }
+          })
+          vim.lsp.enable('lemminx')
         '';
     };
   };

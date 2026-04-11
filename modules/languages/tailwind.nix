@@ -16,13 +16,13 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.tailwindcss.setup{
-            cmd = {'${cfg.lsp.package}/bin/tailwindcss-language-server'};
-            filetypes = {'css', 'scss', 'less', 'html', 'vue', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'};
-            root_dir = require('lspconfig/util').root_pattern('tailwind.config.js', 'tailwind.config.ts', 'tailwind.config.lua', 'package.json');
-            on_attach = attach_keymaps;
-            capabilities = capabilities;
-          }
+          vim.lsp.config('tailwindcss', {
+            capabilities = capabilities,
+            cmd = {'${cfg.lsp.package}/bin/tailwindcss-language-server'},
+            filetypes = {'css', 'scss', 'less', 'html', 'vue', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
+            root_markers = {'tailwind.config.js', 'tailwind.config.ts', 'tailwind.config.lua', 'package.json'},
+          })
+          vim.lsp.enable('tailwindcss')
         '';
     };
   };

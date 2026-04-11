@@ -7,9 +7,6 @@ with lib;
 with builtins; let
   cfg = config.vim.languages.nix;
 
-  useFormat = "on_attach = default_on_attach";
-  noFormat = "on_attach = attach_keymaps";
-
   defaultServer = "nil";
   servers = {
     nil = {
@@ -20,13 +17,8 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.nil_ls.setup{
+          vim.lsp.config('nil_ls', {
             capabilities = capabilities,
-          ${
-            if cfg.format.enable
-            then useFormat
-            else noFormat
-          },
             cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "nil"}"},
           ${optionalString cfg.format.enable ''
             settings = {
@@ -44,9 +36,10 @@ with builtins; let
                 },
               ''}
               },
-            };
+            },
           ''}
-          }
+          })
+          vim.lsp.enable('nil_ls')
         '';
     };
   };

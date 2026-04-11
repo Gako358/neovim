@@ -16,12 +16,12 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.ts_ls.setup {
-            capabilities = capabilities;
-            on_attach = default_on_attach,
+          vim.lsp.config('ts_ls', {
+            capabilities = capabilities,
             cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
-            filetypes = {"typescript", "javascript"}
-          }
+            filetypes = {"typescript", "javascript"},
+          })
+          vim.lsp.enable('ts_ls')
         '';
     };
   };

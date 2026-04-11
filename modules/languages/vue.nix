@@ -16,12 +16,12 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.volar.setup {
-            capabilities = capabilities;
-            on_attach = default_on_attach,
+          vim.lsp.config('volar', {
+            capabilities = capabilities,
             cmd = { "${cfg.lsp.package}/bin/vue-language-server", "--stdio" },
-            filetypes = {"typescript", "typescriptreact", "javascript", "javascriptreact", "vue", "json"}
-          }
+            filetypes = {"typescript", "typescriptreact", "javascript", "javascriptreact", "vue", "json"},
+          })
+          vim.lsp.enable('volar')
         '';
     };
   };

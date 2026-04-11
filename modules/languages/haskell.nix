@@ -16,12 +16,12 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.hls.setup{
-            capabilities = capabilities;
-            on_attach = default_on_attach,
-            cmd = {'${cfg.lsp.package}/bin/haskell-language-server-wrapper', '--lsp'};
-            root_dir = lspconfig.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml");
-          }
+          vim.lsp.config('hls', {
+            capabilities = capabilities,
+            cmd = {'${cfg.lsp.package}/bin/haskell-language-server-wrapper', '--lsp'},
+            root_markers = {"*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"},
+          })
+          vim.lsp.enable('hls')
         '';
     };
   };
