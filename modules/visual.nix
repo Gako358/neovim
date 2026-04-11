@@ -1,9 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.visuals;
 in
 {
@@ -66,7 +68,6 @@ in
       };
     };
 
-    leap.enable = mkEnableOption "Leap motion support [leap]";
     lualine = {
       enable = mkEnableOption "lualine statusline.";
       icons = mkOption {
@@ -253,173 +254,132 @@ in
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.autopairs.enable {
       vim.startPlugins = [ "nvim-autopairs" ];
-      vim.luaConfigRC.autopairs =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("nvim-autopairs").setup{}
-          '';
+      vim.luaConfigRC.autopairs = nvim.dag.entryAnywhere /* lua */ ''
+        require("nvim-autopairs").setup{}
+      '';
     })
 
     (mkIf cfg.indentBlankline.enable {
       vim.startPlugins = [ "indent-blankline" ];
-      vim.luaConfigRC.indent-blankline =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("ibl").setup {
-              indent = {
-                char = "▏",
-                tab_char = ".",
-              },
-              whitespace = {
-                remove_blankline_trail = false,
-              },
-              scope = {
-                show_start = false,
-                show_end = false,
-              },
-            }
-          '';
-    })
-    (mkIf cfg.leap.enable {
-      vim.startPlugins = [ "leap" ];
-      vim.luaConfigRC.leap =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require('leap').create_default_mappings()
-          '';
+      vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere /* lua */ ''
+        require("ibl").setup {
+          indent = {
+            char = "▏",
+            tab_char = ".",
+          },
+          whitespace = {
+            remove_blankline_trail = false,
+          },
+          scope = {
+            show_start = false,
+            show_end = false,
+          },
+        }
+      '';
     })
     (mkIf cfg.lualine.enable {
       vim.startPlugins = [ "lualine" ];
-      vim.luaConfigRC.lualine =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require'lualine'.setup {
-              options = {
-                icons_enabled = ${boolToString cfg.lualine.icons},
-                theme = "${toString cfg.lualine.theme}",
-                component_separators = {
-                  left = "${cfg.lualine.componentSeparator.left}",
-                  right = "${cfg.lualine.componentSeparator.right}"
-                },
-                section_separators = {
-                  left = "${cfg.lualine.sectionSeparator.left}",
-                  right = "${cfg.lualine.sectionSeparator.right}"
-                },
-                disabled_filetypes = {},
-              },
-              sections = {
-                lualine_a = ${cfg.lualine.activeSection.a},
-                lualine_b = ${cfg.lualine.activeSection.b},
-                lualine_c = ${cfg.lualine.activeSection.c},
-                lualine_x = ${cfg.lualine.activeSection.x},
-                lualine_y = ${cfg.lualine.activeSection.y},
-                lualine_z = ${cfg.lualine.activeSection.z},
-              },
-              inactive_sections = {
-                lualine_a = ${cfg.lualine.inactiveSection.a},
-                lualine_b = ${cfg.lualine.inactiveSection.b},
-                lualine_c = ${cfg.lualine.inactiveSection.c},
-                lualine_x = ${cfg.lualine.inactiveSection.x},
-                lualine_y = ${cfg.lualine.inactiveSection.y},
-                lualine_z = ${cfg.lualine.inactiveSection.z},
-              },
-              tabline = {},
-              extensions = {},
-            }
-          '';
+      vim.luaConfigRC.lualine = nvim.dag.entryAnywhere /* lua */ ''
+        require'lualine'.setup {
+          options = {
+            icons_enabled = ${boolToString cfg.lualine.icons},
+            theme = "${toString cfg.lualine.theme}",
+            component_separators = {
+              left = "${cfg.lualine.componentSeparator.left}",
+              right = "${cfg.lualine.componentSeparator.right}"
+            },
+            section_separators = {
+              left = "${cfg.lualine.sectionSeparator.left}",
+              right = "${cfg.lualine.sectionSeparator.right}"
+            },
+            disabled_filetypes = {},
+          },
+          sections = {
+            lualine_a = ${cfg.lualine.activeSection.a},
+            lualine_b = ${cfg.lualine.activeSection.b},
+            lualine_c = ${cfg.lualine.activeSection.c},
+            lualine_x = ${cfg.lualine.activeSection.x},
+            lualine_y = ${cfg.lualine.activeSection.y},
+            lualine_z = ${cfg.lualine.activeSection.z},
+          },
+          inactive_sections = {
+            lualine_a = ${cfg.lualine.inactiveSection.a},
+            lualine_b = ${cfg.lualine.inactiveSection.b},
+            lualine_c = ${cfg.lualine.inactiveSection.c},
+            lualine_x = ${cfg.lualine.inactiveSection.x},
+            lualine_y = ${cfg.lualine.inactiveSection.y},
+            lualine_z = ${cfg.lualine.inactiveSection.z},
+          },
+          tabline = {},
+          extensions = {},
+        }
+      '';
     })
     (mkIf cfg.noice.enable {
       vim.startPlugins = [
         "noice"
         "notify"
       ];
-      vim.luaConfigRC.noice =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("noice").setup({
-              lsp = {
-                progress = {
-                  enabled = false,
-                },
-                override = {
-                  ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                  ["vim.lsp.util.stylize_markdown"] = true,
-                  ["cmp.entry.get_documentation"] = true,
-                },
-                signature = {
-                  enabled = false,
-                },
-                message = {
-                  enabled = false,
-                },
-              },
-              presets = {
-                bottom_search = ${boolToString cfg.noice.presets.bottomSearch},
-                command_palette = ${boolToString cfg.noice.presets.commandPalette},
-                inc_rename = ${boolToString cfg.noice.presets.incRename},
-                long_message_to_split = ${boolToString cfg.noice.presets.longMessageToSplit},
-                lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
-              },
-            })
-            require("notify").setup({
-              background_colour = "#00000000",
-              stages = "fade_in_slide_out",
-              render = "compact",
-              timeout = 3000,
-              minimum_width = 50,
-              icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "✎" },
-              fps = 20,
-              on_open = function(win)
-                vim.api.nvim_win_set_config(win, { zindex = 100 })
-              end,
-            })
-          '';
+      vim.luaConfigRC.noice = nvim.dag.entryAnywhere /* lua */ ''
+        require("noice").setup({
+          lsp = {
+            progress = {
+              enabled = false,
+            },
+            override = {
+              ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+              ["vim.lsp.util.stylize_markdown"] = true,
+              ["cmp.entry.get_documentation"] = true,
+            },
+            signature = {
+              enabled = false,
+            },
+            message = {
+              enabled = false,
+            },
+          },
+          presets = {
+            bottom_search = ${boolToString cfg.noice.presets.bottomSearch},
+            command_palette = ${boolToString cfg.noice.presets.commandPalette},
+            inc_rename = ${boolToString cfg.noice.presets.incRename},
+            long_message_to_split = ${boolToString cfg.noice.presets.longMessageToSplit},
+            lsp_doc_border = ${boolToString cfg.noice.presets.lspDocBorder},
+          },
+        })
+        require("notify").setup({
+          background_colour = "#00000000",
+          stages = "fade_in_slide_out",
+          render = "compact",
+          timeout = 3000,
+          minimum_width = 50,
+          icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "✎" },
+          fps = 20,
+          on_open = function(win)
+            vim.api.nvim_win_set_config(win, { zindex = 100 })
+          end,
+        })
+      '';
     })
     (mkIf cfg.nvimWebDevicons.enable {
       vim.startPlugins = [ "nvim-web-devicons" ];
     })
     (mkIf cfg.ranger.enable {
       vim.startPlugins = [ "ranger" ];
-      vim.luaConfigRC.ranger =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("ranger-nvim").setup({ replace_netrw = true })
-                vim.api.nvim_set_keymap("n", "<leader>ef", "", {
-                  noremap = true,
-                  callback = function()
-                    require("ranger-nvim").open(true)
-                  end,
-                })
-          '';
+      vim.luaConfigRC.ranger = nvim.dag.entryAnywhere /* lua */ ''
+        require("ranger-nvim").setup({ replace_netrw = true })
+            vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+              noremap = true,
+              callback = function()
+                require("ranger-nvim").open(true)
+              end,
+            })
+      '';
     })
     (mkIf cfg.todo.enable {
       vim.startPlugins = [ "todo" ];
-      vim.luaConfigRC.todo =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("todo-comments").setup{}
-          '';
+      vim.luaConfigRC.todo = nvim.dag.entryAnywhere /* lua */ ''
+        require("todo-comments").setup{}
+      '';
     })
   ]);
 }

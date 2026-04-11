@@ -1,8 +1,10 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.vim.snippets.vsnip;
 in
 {
@@ -15,13 +17,15 @@ in
     };
   };
 
-  config = mkIf (cfg.enable) {
-    vim.startPlugins = [
-      vim-vsnip
-    ];
+  config = mkIf cfg.enable {
+    vim = {
+      startPlugins = [
+        vim-vsnip
+      ];
 
-    vim.configRC = ''
-      let g:vsnip_snippet_dir = "${cfg.dataDir}"
-    '';
+      configRC = ''
+        let g:vsnip_snippet_dir = "${cfg.dataDir}"
+      '';
+    };
   };
 }

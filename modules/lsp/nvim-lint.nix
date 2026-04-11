@@ -1,9 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -19,33 +21,27 @@ in
 
   config = mkIf cfg.nvim-lint.enable (mkMerge [
     {
-      vim.lsp.enable = true;
-      vim.startPlugins = [ "nvim-lint" ];
+      vim = {
+        lsp.enable = true;
+        startPlugins = [ "nvim-lint" ];
 
-      vim.luaConfigRC.nvim-lint-setup =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            local lint = require("lint")
-          '';
+        luaConfigRC.nvim-lint-setup = nvim.dag.entryAnywhere /* lua */ ''
+          local lint = require("lint")
+        '';
 
-      vim.luaConfigRC.nvim-lint =
-        nvim.dag.entryAfter [ "nvim-lint-setup" ]
-          /*
-        lua
-          */
-          ''
-            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-              callback = function()
-                lint.try_lint()
-              end,
-            })
-          '';
+        luaConfigRC.nvim-lint = nvim.dag.entryAfter [ "nvim-lint-setup" ] /* lua */ ''
+          vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+            callback = function()
+              lint.try_lint()
+            end,
+          })
+        '';
+      };
     }
     {
-      vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryBetween [ "nvim-lint" ] [ "nvim-lint-setup" ] v)) cfg.nvim-lint.sources;
+      vim.luaConfigRC = mapAttrs (
+        _: v: (nvim.dag.entryBetween [ "nvim-lint" ] [ "nvim-lint-setup" ] v)
+      ) cfg.nvim-lint.sources;
     }
   ]);
 }

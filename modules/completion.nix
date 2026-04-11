@@ -1,27 +1,19 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.autocomplete;
   debugEnabled = config.vim.debug.enable;
 
-  builtSources =
-    concatMapStringsSep
-      "\n"
-      (n: "{ name = '${n}'},")
-      (attrNames cfg.cmp.sources);
+  builtSources = concatMapStringsSep "\n" (n: "{ name = '${n}'},") (attrNames cfg.cmp.sources);
 
-  builtMaps =
-    concatStringsSep
-      "\n"
-      (mapAttrsToList
-        (n: v:
-          if v == null
-          then ""
-          else "${n} = '${v}',")
-        cfg.cmp.sources);
+  builtMaps = concatStringsSep "\n" (
+    mapAttrsToList (n: v: if v == null then "" else "${n} = '${v}',") cfg.cmp.sources
+  );
 
   dagPlacement = nvim.dag.entryAnywhere;
 in
@@ -84,8 +76,8 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.cmp.enable {
-      vim.startPlugins =
-        [
+      vim = {
+        startPlugins = [
           "nvim-cmp"
           "cmp-nvim-lsp-signature-help"
           "cmp-nvim-lsp-document-symbol"
@@ -95,22 +87,18 @@ in
         ]
         ++ optional debugEnabled "cmp-dap";
 
-      vim.autocomplete.cmp.sources = {
-        "nvim-cmp" = null;
-        "copilot" = null;
-        "nvim_lsp_document_symbol" = "[LSP]";
-        "nvim_lsp_signature_help" = "[LSP]";
-        "vsnip" = "[VSnip]";
-        "buffer" = "[Buffer]";
-        "crates" = "[Crates]";
-        "path" = "[Path]";
-      };
+        autocomplete.cmp.sources = {
+          "nvim-cmp" = null;
+          "copilot" = null;
+          "nvim_lsp_document_symbol" = "[LSP]";
+          "nvim_lsp_signature_help" = "[LSP]";
+          "vsnip" = "[VSnip]";
+          "buffer" = "[Buffer]";
+          "crates" = "[Crates]";
+          "path" = "[Path]";
+        };
 
-      vim.luaConfigRC.completion = mkIf (cfg.cmp.type == "nvim-cmp") (dagPlacement
-        /*
-        lua
-        */
-        ''
+        luaConfigRC.completion = mkIf (cfg.cmp.type == "nvim-cmp") (dagPlacement /* lua */ ''
           local nvim_cmp_menu_map = function(entry, vim_item)
             -- name for each source
             vim_item.menu = ({
@@ -182,17 +170,20 @@ in
               format = ${cfg.cmp.formatting.format},
             },
             ${optionalString debugEnabled ''
-            enabled = function()
-              return vim.bo[0].buftype ~= "prompt"
-                or require("cmp_dap").is_dap_buffer()
-            end,
-          ''}
+              enabled = function()
+                return vim.bo[0].buftype ~= "prompt"
+                  or require("cmp_dap").is_dap_buffer()
+              end,
+            ''}
           })
 
-          ${optionalString (config.vim.visuals.autopairs.enable && config.vim.visuals.autopairs.type == "nvim-autopairs") ''
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { text = ""} }))
-          ''}
+          ${optionalString
+            (config.vim.visuals.autopairs.enable && config.vim.visuals.autopairs.type == "nvim-autopairs")
+            ''
+              local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+              cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { text = ""} }))
+            ''
+          }
 
           ${optionalString debugEnabled ''
             cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
@@ -200,57 +191,55 @@ in
             })
           ''}
         '');
+      };
     })
     (mkIf cfg.copilot.enable {
-      vim.startPlugins = [
-        "copilot"
-        "copilot-chat"
-      ];
-      vim.luaConfigRC.copilot =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("copilot").setup({
-              panel = { enabled = true },
-              suggestion = {
-                enabled = true,
-                auto_trigger = false,
-                keymap = {
-                  accept = "<C-y>",
-                  next = "<C-j>",
-                },
+      vim = {
+        startPlugins = [
+          "copilot"
+          "copilot-chat"
+        ];
+        luaConfigRC.copilot = nvim.dag.entryAnywhere /* lua */ ''
+          require("copilot").setup({
+            panel = { enabled = true },
+            suggestion = {
+              enabled = true,
+              auto_trigger = false,
+              keymap = {
+                accept = "<C-y>",
+                next = "<C-j>",
               },
-            })
+            },
+          })
 
 
-            require("CopilotChat").setup({
-              model = "gpt-4o",
-              context = "buffers",
-              window = {
-                layout = "vertical",
-                title = "Copilot Chat",
-              },
-            })
+          require("CopilotChat").setup({
+            model = "gpt-4o",
+            context = "buffers",
+            window = {
+              layout = "vertical",
+              title = "Copilot Chat",
+            },
+          })
 
-            vim.keymap.set({ 'n', 'v' }, '<leader>cc', '<cmd>CopilotChatToggle<cr>', { desc = "CopilotChat - Toggle" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>cce', '<cmd>CopilotChatExplain<cr>', { desc = "CopilotChat - Explain code" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>ccg', '<cmd>CopilotChatCommit<cr>', { desc = "CopilotChat - Write commit message for the change" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>cct', '<cmd>CopilotChatTests<cr>', { desc = "CopilotChat - Generate tests" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChatFix<cr>', { desc = "CopilotChat - Fix diagnostic" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChatReset<cr>', { desc = "CopilotChat - Reset chat history and clear buffer" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChatOptimize<cr>', { desc = "CopilotChat - Optimize selected code" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocs<cr>', { desc = "CopilotChat - Add docs on selected code" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>ccp', '<cmd>CopilotChatReview<cr>', { desc = "CopilotChat - Review selected code" })
-            vim.keymap.set({ 'n', 'v' }, '<leader>ccs', '<cmd>CopilotChatStop<cr>', { desc = "CopilotChat - Stop current window output" })
-            vim.keymap.set("n", "<leader>ccq", function()
-              local input = vim.fn.input("Quick Chat: ")
-              if input ~= "" then
-                require("CopilotChat").ask(input)
-              end
-            end, { desc = 'CopilotChat - Quick chat' })
-          '';
+          vim.keymap.set({ 'n', 'v' }, '<leader>cc', '<cmd>CopilotChatToggle<cr>', { desc = "CopilotChat - Toggle" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>cce', '<cmd>CopilotChatExplain<cr>', { desc = "CopilotChat - Explain code" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>ccg', '<cmd>CopilotChatCommit<cr>', { desc = "CopilotChat - Write commit message for the change" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>cct', '<cmd>CopilotChatTests<cr>', { desc = "CopilotChat - Generate tests" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChatFix<cr>', { desc = "CopilotChat - Fix diagnostic" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChatReset<cr>', { desc = "CopilotChat - Reset chat history and clear buffer" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChatOptimize<cr>', { desc = "CopilotChat - Optimize selected code" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocs<cr>', { desc = "CopilotChat - Add docs on selected code" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>ccp', '<cmd>CopilotChatReview<cr>', { desc = "CopilotChat - Review selected code" })
+          vim.keymap.set({ 'n', 'v' }, '<leader>ccs', '<cmd>CopilotChatStop<cr>', { desc = "CopilotChat - Stop current window output" })
+          vim.keymap.set("n", "<leader>ccq", function()
+            local input = vim.fn.input("Quick Chat: ")
+            if input ~= "" then
+              require("CopilotChat").ask(input)
+            end
+          end, { desc = 'CopilotChat - Quick chat' })
+        '';
+      };
     })
     (mkIf cfg.snippets.enable {
       vim.startPlugins = [ "vim-vsnip" ];

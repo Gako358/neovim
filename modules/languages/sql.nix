@@ -1,10 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.sql;
   sqlfluffDefault = "sqlfluff";
 
@@ -12,34 +14,26 @@ with builtins; let
   servers = {
     sqlls = {
       package = pkgs.sqls;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('sqlls', {
-            capabilities = capabilities,
-            cmd = { "${cfg.lsp.package}/bin/sqls" },
-          })
-          vim.lsp.enable('sqlls')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('sqlls', {
+          capabilities = capabilities,
+          cmd = { "${cfg.lsp.package}/bin/sqls" },
+        })
+        vim.lsp.enable('sqlls')
+      '';
     };
   };
   defaultFormat = "sqlfluff";
   formats = {
     sqlfluff = {
       package = [ sqlfluffDefault ];
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["sql"] = { "sqlfluff" }
-          conform_formatters["sqlfluff"] = {
-            command = "${nvim.languages.commandOptToCmd cfg.format.package "sqlfluff"}",
-            args = { "fix", "--dialect", "${cfg.dialect}", "-" },
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["sql"] = { "sqlfluff" }
+        conform_formatters["sqlfluff"] = {
+          command = "${nvim.languages.commandOptToCmd cfg.format.package "sqlfluff"}",
+          args = { "fix", "--dialect", "${cfg.dialect}", "-" },
+        }
+      '';
     };
   };
 
@@ -47,17 +41,13 @@ with builtins; let
   diagnostics = {
     sqlfluff = {
       package = pkgs.${sqlfluffDefault};
-      lintConfig = pkg:
-        /*
-      lua
-        */
-        ''
-          lint.linters_by_ft["sql"] = vim.list_extend(lint.linters_by_ft["sql"] or {}, { "sqlfluff" })
-          lint.linters.sqlfluff = vim.tbl_deep_extend("force", lint.linters.sqlfluff or {}, {
-            cmd = "${pkg}/bin/sqlfluff",
-            args = { "lint", "--dialect", "${cfg.dialect}", "-" },
-          })
-        '';
+      lintConfig = pkg: /* lua */ ''
+        lint.linters_by_ft["sql"] = vim.list_extend(lint.linters_by_ft["sql"] or {}, { "sqlfluff" })
+        lint.linters.sqlfluff = vim.tbl_deep_extend("force", lint.linters.sqlfluff or {}, {
+          cmd = "${pkg}/bin/sqlfluff",
+          args = { "lint", "--dialect", "${cfg.dialect}", "-" },
+        })
+      '';
     };
   };
 in
@@ -131,28 +121,37 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.package ];
+      vim = {
+        treesitter.enable = true;
+        treesitter.grammars = [ cfg.treesitter.package ];
+      };
     })
 
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = [ "sqls-nvim" ];
-
-      vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.sql-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim = {
+        startPlugins = [ "sqls-nvim" ];
+        lsp = {
+          lspconfig.enable = true;
+          lspconfig.sources.sql-lsp = servers.${cfg.lsp.server}.lspConfig;
+        };
+      };
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.conform.enable = true;
-      vim.lsp.conform.sources."sql-format" = formats.${cfg.format.type}.conformConfig;
+      vim.lsp.conform = {
+        enable = true;
+        sources."sql-format" = formats.${cfg.format.type}.conformConfig;
+      };
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.nvim-lint.enable = true;
-      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
-        lang = "sql";
-        config = cfg.extraDiagnostics.types;
-        inherit diagnostics;
+      vim.lsp.nvim-lint = {
+        enable = true;
+        sources = lib.nvim.languages.diagnosticsToLua {
+          lang = "sql";
+          config = cfg.extraDiagnostics.types;
+          inherit diagnostics;
+        };
       };
     })
   ]);

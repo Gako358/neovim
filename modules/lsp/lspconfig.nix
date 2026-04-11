@@ -1,9 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -19,15 +21,16 @@ in
 
   config = mkIf cfg.lspconfig.enable (mkMerge [
     {
-      vim.lsp.enable = true;
+      vim = {
+        lsp.enable = true;
 
-      vim.startPlugins = [ "nvim-lspconfig" ];
+        startPlugins = [ "nvim-lspconfig" ];
 
-      # nvim-lspconfig is loaded as a plugin to provide default server configs.
-      # Language modules now use vim.lsp.config() + vim.lsp.enable() instead
-      # of the deprecated require('lspconfig').XYZ.setup{} pattern.
-      vim.luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] ''
-      '';
+        # nvim-lspconfig is loaded as a plugin to provide default server configs.
+        # Language modules now use vim.lsp.config() + vim.lsp.enable() instead
+        # of the deprecated require('lspconfig').XYZ.setup{} pattern.
+        luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] "";
+      };
     }
     {
       vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter [ "lspconfig" ] v)) cfg.lspconfig.sources;

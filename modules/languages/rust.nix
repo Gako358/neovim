@@ -1,26 +1,24 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.rust;
 
   defaultFormat = "rustfmt";
   formats = {
     rustfmt = {
       package = pkgs.rustfmt;
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["rust"] = { "rustfmt" }
-          conform_formatters["rustfmt"] = {
-            command = "${cfg.format.package}/bin/rustfmt",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["rust"] = { "rustfmt" }
+        conform_formatters["rustfmt"] = {
+          command = "${cfg.format.package}/bin/rustfmt",
+        }
+      '';
     };
   };
 in
@@ -87,7 +85,9 @@ in
     (mkIf cfg.crates.enable {
       vim.startPlugins = [ "crates-nvim" ];
 
-      vim.autocomplete.cmp.sources = { "crates" = "[Crates]"; };
+      vim.autocomplete.cmp.sources = {
+        "crates" = "[Crates]";
+      };
       vim.luaConfigRC.rust-crates = nvim.dag.entryAnywhere ''
         require('crates').setup {
           completion = {
@@ -99,18 +99,17 @@ in
       '';
     })
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.package ];
+      vim = {
+        treesitter.enable = true;
+        treesitter.grammars = [ cfg.treesitter.package ];
+      };
     })
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = [ "rustaceanvim" ];
+      vim = {
+        startPlugins = [ "rustaceanvim" ];
 
-      vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.rust-lsp =
-        /*
-        lua
-        */
-        ''
+        lsp.lspconfig.enable = true;
+        lsp.lspconfig.sources.rust-lsp = /* lua */ ''
           vim.g.rustaceanvim = {
             server = {
               capabilities = capabilities,
@@ -133,10 +132,13 @@ in
             }
           }
         '';
+      };
     })
     (mkIf cfg.format.enable {
-      vim.lsp.conform.enable = true;
-      vim.lsp.conform.sources.rust-format = formats.${cfg.format.type}.conformConfig;
+      vim = {
+        lsp.conform.enable = true;
+        lsp.conform.sources.rust-format = formats.${cfg.format.type}.conformConfig;
+      };
     })
   ]);
 }
