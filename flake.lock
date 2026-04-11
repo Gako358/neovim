@@ -845,7 +845,7 @@
         "plugins-trouble": "plugins-trouble",
         "plugins-vim-vsnip": "plugins-vim-vsnip",
         "plugins-which-key": "plugins-which-key",
-        "plugins-rustaceanvim": "plugins-rust-tools"
+        "plugins-rustaceanvim": "plugins-rustaceanvim"
       }
     },
     "rust-overlay": {
