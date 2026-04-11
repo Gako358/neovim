@@ -1,24 +1,27 @@
 { lib }:
-with lib; let
-  diagnosticSubmodule = { ... }: {
-    options = {
-      type = mkOption {
-        description = "Type of diagnostic to enable";
-        type = attrNames diagnostics;
-      };
-      package = mkOption {
-        description = "Diagnostics package";
-        type = types.package;
+with lib;
+let
+  diagnosticSubmodule =
+    { _ }:
+    {
+      options = {
+        type = mkOption {
+          description = "Type of diagnostic to enable";
+          type = attrNames diagnostics;
+        };
+        package = mkOption {
+          description = "Diagnostics package";
+          type = types.package;
+        };
       };
     };
-  };
 in
 {
   diagnostics =
-    { langDesc
-    , diagnostics
-    , defaultDiagnostics
-    ,
+    {
+      langDesc,
+      diagnostics,
+      defaultDiagnostics,
     }:
     mkOption {
       description = "List of ${langDesc} diagnostics to enable";
@@ -26,8 +29,14 @@ in
       default = defaultDiagnostics;
     };
 
-  mkGrammarOption = pkgs: grammar:
+  mkGrammarOption =
+    pkgs: grammar:
     mkPackageOption pkgs [ "${grammar} treesitter" ] {
-      default = [ "vimPlugins" "nvim-treesitter" "builtGrammars" grammar ];
+      default = [
+        "vimPlugins"
+        "nvim-treesitter"
+        "builtGrammars"
+        grammar
+      ];
     };
 }

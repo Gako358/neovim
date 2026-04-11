@@ -4,10 +4,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # git-hooks = {
+    #   url = "github:cachix/git-hooks.nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nil = {
       url = "github:oxalica/nil";
@@ -179,10 +179,6 @@
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
-    plugins-leap = {
-      url = "github:ggandor/leap.nvim";
-      flake = false;
-    };
     plugins-lualine = {
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
@@ -226,18 +222,20 @@
   };
 
   outputs =
-    { nixpkgs
-    , flake-parts
-    , ...
+    {
+      nixpkgs,
+      flake-parts,
+      ...
     }@inputs:
     let
       rawPlugins = nvimLib.plugins.fromInputs inputs "plugins-";
 
       neovimConfiguration =
-        { modules ? [ ]
-        , ...
+        {
+          modules ? [ ],
+          ...
         }@args:
-        import ./modules (args // { modules = [{ config.build.rawPlugins = rawPlugins; }] ++ modules; });
+        import ./modules (args // { modules = [ { config.build.rawPlugins = rawPlugins; } ] ++ modules; });
 
       nvimBin = pkg: "${pkg}/bin/nvim";
 
@@ -252,93 +250,99 @@
         config = {
           build.viAlias = false;
           build.vimAlias = true;
-          vim.autocomplete = {
-            enable = true;
-            cmp = {
+          vim = {
+            autocomplete = {
               enable = true;
-              type = "nvim-cmp";
+              cmp = {
+                enable = true;
+                type = "nvim-cmp";
+              };
+              copilot.enable = true;
+              snippets.enable = true;
             };
-            copilot.enable = true;
-            snippets.enable = true;
-          };
-          vim.fzf.enable = true;
-          vim.git.enable = true;
-          vim.keys = {
-            enable = true;
-            whichKey.enable = true;
-          };
-          vim.languages = {
-            enableLSP = true;
-            enableDebug = true;
-            enableFormat = true;
-            enableTreesitter = true;
-            enableExtraDiagnostics = true;
+            fzf.enable = true;
+            git.enable = true;
+            keys = {
+              enable = true;
+              whichKey.enable = true;
+            };
+            languages = {
+              enableLSP = true;
+              enableDebug = true;
+              enableFormat = true;
+              enableTreesitter = true;
+              enableExtraDiagnostics = true;
 
-            clang.enable = true;
-            css.enable = true;
-            haskell.enable = true;
-            html.enable = true;
-            java.enable = true;
-            kotlin.enable = true;
-            lua.enable = true;
-            markdown.enable = true;
-            nix.enable = true;
-            python.enable = true;
-            rust = {
-              enable = true;
-              crates.enable = true;
+              clang.enable = true;
+              css.enable = true;
+              haskell.enable = true;
+              html.enable = true;
+              java.enable = true;
+              kotlin.enable = true;
+              lua.enable = true;
+              markdown.enable = true;
+              nix.enable = true;
+              python.enable = true;
+              rust = {
+                enable = true;
+                crates.enable = true;
+              };
+              scala.enable = true;
+              bash.enable = true;
+              sql.enable = true;
+              tailwind.enable = true;
+              ts.enable = true;
+              vue.enable = true;
+              xml.enable = true;
             };
-            scala.enable = true;
-            bash.enable = true;
-            sql.enable = true;
-            tailwind.enable = true;
-            ts.enable = true;
-            vue.enable = true;
-            xml.enable = true;
-          };
-          vim.lsp = {
-            formatOnSave = false;
-            fidget.enable = true;
-            lightbulb.enable = true;
-            lspkind.enable = true;
-            lspSignature.enable = true;
-            trouble.enable = true;
-          };
-          vim.debug = {
-            virtualText.enable = true;
-            ui.enable = true;
-          };
-          vim.theme.enable = true;
-          vim.visuals = {
-            enable = true;
-            autopairs.enable = true;
-            indentBlankline = {
-              enable = true;
+            lsp = {
+              formatOnSave = false;
+              fidget.enable = true;
+              lightbulb.enable = true;
+              lspkind.enable = true;
+              lspSignature.enable = true;
+              trouble.enable = true;
             };
-            leap.enable = true;
-            lualine = {
-              enable = true;
-              theme = "nightfox";
+            debug = {
+              virtualText.enable = true;
+              ui.enable = true;
             };
-            noice = {
+            theme.enable = true;
+            visuals = {
               enable = true;
+              autopairs.enable = true;
+              indentBlankline = {
+                enable = true;
+              };
+              lualine = {
+                enable = true;
+                theme = "nightfox";
+              };
+              noice = {
+                enable = true;
+              };
+              nvimWebDevicons.enable = true;
+              ranger.enable = true;
+              todo.enable = true;
             };
-            nvimWebDevicons.enable = true;
-            ranger.enable = true;
-            todo.enable = true;
-          };
-          vim.terminal = {
-            enable = true;
-            simple.enable = true;
-            float.enable = true;
-            project.enable = true;
-            new_tab.enable = true;
+            terminal = {
+              enable = true;
+              simple.enable = true;
+              float.enable = true;
+              project.enable = true;
+              new_tab.enable = true;
+            };
           };
         };
       };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
       flake = {
         lib = {
@@ -352,7 +356,8 @@
         };
       };
 
-      perSystem = { system, ... }:
+      perSystem =
+        { system, ... }:
         let
           pkgs = import nixpkgs {
             inherit system;
@@ -370,24 +375,24 @@
             { config.vim.languages.html.enable = pkgs.lib.mkForce true; }
           ];
 
-          pre-commit-check = inputs.git-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              statix.enable = true;
-              deadnix.enable = true;
-              nil.enable = true;
-              nixpkgs-fmt.enable = true;
-              shellcheck.enable = true;
-              beautysh.enable = true;
-            };
-          };
+          # pre-commit-check = inputs.git-hooks.lib.${system}.run {
+          #   src = ./.;
+          #   hooks = {
+          #     statix.enable = true;
+          #     deadnix.enable = true;
+          #     nil.enable = true;
+          #     nixfmt.enable = true;
+          #     shellcheck.enable = true;
+          #     beautysh.enable = true;
+          #   };
+          # };
         in
         {
-          formatter = pkgs.nixpkgs-fmt;
+          formatter = pkgs.nixfmt;
 
-          checks = {
-            inherit pre-commit-check;
-          };
+          # checks = {
+          #   inherit pre-commit-check;
+          # };
 
           apps = rec {
             neovim = {
@@ -398,10 +403,8 @@
           };
 
           devShells.default = pkgs.mkShell {
-            inherit (pre-commit-check) shellHook;
             nativeBuildInputs = [
               devPkg
-              pkgs.alejandra
             ];
           };
 
