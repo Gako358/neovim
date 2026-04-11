@@ -20,17 +20,19 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.lspkind.enable) {
-    vim.startPlugins = [ "lspkind" ];
-    vim.luaConfigRC.lspkind =
-      nvim.dag.entryAnywhere
-        /*
-      lua
-        */
-        ''
-          local lspkind = require'lspkind'
-          local lspkind_opts = {
-            mode = '${cfg.lspkind.mode}'
-          }
-        '';
+    vim = {
+      startPlugins = [ "lspkind" ];
+      luaConfigRC.lspkind =
+        nvim.dag.entryAnywhere
+          /*
+        lua
+          */
+          ''
+            local lspkind = require'lspkind'
+            local lspkind_opts = {
+              mode = '${cfg.lspkind.mode}'
+            }
+          '';
+    };
   };
 }

@@ -14,9 +14,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = [ "theme" ];
+    vim = {
+      startPlugins = [ "theme" ];
 
-    vim.luaConfigRC.nightfox = nvim.dag.entryAnywhere /* lua */ ''
+      luaConfigRC.nightfox = nvim.dag.entryAnywhere /* lua */ ''
       require('nightfox').setup({
         options = {
           transparent = true,
@@ -50,5 +51,6 @@ in
       })
       vim.cmd("colorscheme nightfox")
     '';
+    };
   };
 }

@@ -14,18 +14,20 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.lightbulb.enable) {
-    vim.startPlugins = [ "nvim-lightbulb" ];
+    vim = {
+      startPlugins = [ "nvim-lightbulb" ];
 
-    vim.luaConfigRC.lightbulb =
-      nvim.dag.entryAnywhere
-        /*
-      lua
-        */
-        ''
-          -- Enable lightbulb for code actions
-          require'nvim-lightbulb'.setup({
-            autocmd = { enabled = true }
-          })
-        '';
+      luaConfigRC.lightbulb =
+        nvim.dag.entryAnywhere
+          /*
+        lua
+          */
+          ''
+            -- Enable lightbulb for code actions
+            require'nvim-lightbulb'.setup({
+              autocmd = { enabled = true }
+            })
+          '';
+    };
   };
 }

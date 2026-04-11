@@ -25,14 +25,15 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      vim.startPlugins = [ "nvim-dap" ];
+      vim = {
+        startPlugins = [ "nvim-dap" ];
 
-      vim.luaConfigRC.dap-setup =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
+        luaConfigRC.dap-setup =
+          nvim.dag.entryAnywhere
+            /*
+          lua
+            */
+            ''
             local dap = require('dap')
 
             -- JAVA
@@ -90,23 +91,27 @@ in
               })
             end
           '';
+      };
     }
     (mkIf cfg.virtualText.enable {
-      vim.startPlugins = [ "nvim-dap-virtual-text" ];
+      vim = {
+        startPlugins = [ "nvim-dap-virtual-text" ];
 
-      vim.luaConfigRC.dap-virtual-text =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            require("nvim-dap-virtual-text").setup()
-          '';
+        luaConfigRC.dap-virtual-text =
+          nvim.dag.entryAnywhere
+            /*
+          lua
+            */
+            ''
+              require("nvim-dap-virtual-text").setup()
+            '';
+      };
     })
     (mkIf cfg.ui.enable {
-      vim.startPlugins = [ "nvim-dap-ui" "nvim-nio" ];
+      vim = {
+        startPlugins = [ "nvim-dap-ui" "nvim-nio" ];
 
-      vim.luaConfigRC.dap-ui = nvim.dag.entryAfter [ "dap-setup" ] ((
+        luaConfigRC.dap-ui = nvim.dag.entryAfter [ "dap-setup" ] (
         /*
           lua
           */
@@ -121,22 +126,22 @@ in
             })
           end
         ''
-      )
-      + (optionalString cfg.ui.autoOpen
-        /*
-          lua
-          */
-        ''
-          dap.listeners.after.event_initialized["dapui_config"] = function()
-            dapui.open()
-          end
-          dap.listeners.before.event_terminated["dapui_config"] = function()
-            dapui.close()
-          end
-          dap.listeners.before.event_exited["dapui_config"] = function()
-            dapui.close()
-          end
-        ''));
+        + (optionalString cfg.ui.autoOpen
+          /*
+            lua
+            */
+          ''
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+              dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+              dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+              dapui.close()
+            end
+          ''));
+      };
     })
   ]);
 }

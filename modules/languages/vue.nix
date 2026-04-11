@@ -61,13 +61,17 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.vuePackage cfg.treesitter.tsPackage ];
+      vim.treesitter = {
+        enable = true;
+        grammars = [ cfg.treesitter.vuePackage cfg.treesitter.tsPackage ];
+      };
     })
 
     (mkIf cfg.lsp.enable {
-      vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.vue-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig = {
+        enable = true;
+        sources.vue-lsp = servers.${cfg.lsp.server}.lspConfig;
+      };
     })
   ]);
 }

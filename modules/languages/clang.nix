@@ -113,18 +113,23 @@ in
     })
 
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [ cfg.treesitter.cPackage cfg.treesitter.cppPackage ];
+      vim.treesitter = {
+        enable = true;
+        grammars = [ cfg.treesitter.cPackage cfg.treesitter.cppPackage ];
+      };
     })
 
     (mkIf cfg.lsp.enable {
-      vim.lsp.lspconfig.enable = true;
-
-      vim.lsp.lspconfig.sources.clang-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig = {
+        enable = true;
+        sources.clang-lsp = servers.${cfg.lsp.server}.lspConfig;
+      };
     })
     (mkIf cfg.format.enable {
-      vim.lsp.conform.enable = true;
-      vim.lsp.conform.sources.clang-format = formats.${cfg.format.type}.conformConfig;
+      vim.lsp.conform = {
+        enable = true;
+        sources.clang-format = formats.${cfg.format.type}.conformConfig;
+      };
     })
   ]);
 }

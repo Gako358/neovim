@@ -14,22 +14,24 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.fidget.enable) {
-    vim.startPlugins = [ "fidget" ];
+    vim = {
+      startPlugins = [ "fidget" ];
 
-    vim.luaConfigRC.fidget =
-      nvim.dag.entryAnywhere
-        /*
-      lua
-        */
-        ''
-          -- Enable fidget
-          require'fidget'.setup({
-            notification = {
-              window = {
-                winblend = 0
+      luaConfigRC.fidget =
+        nvim.dag.entryAnywhere
+          /*
+        lua
+          */
+          ''
+            -- Enable fidget
+            require'fidget'.setup({
+              notification = {
+                window = {
+                  winblend = 0
+                },
               },
-            },
-          })
-        '';
+            })
+          '';
+    };
   };
 }
