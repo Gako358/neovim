@@ -157,18 +157,17 @@ with builtins; let
   formats = {
     google-java-format = {
       package = pkgs.google-java-format;
-      nullConfig = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.google_java_format.with({
-            command = "${cfg.format.package}/bin/google-java-format";
-            args = {
-              "--aosp",
-              "--skip-sorting-imports",
-              "--skip-removing-unused-imports",
-            };
-          })
-        )
+      conformConfig = ''
+        conform_formatters_by_ft["java"] = { "google-java-format" }
+        conform_formatters["google-java-format"] = {
+          command = "${cfg.format.package}/bin/google-java-format",
+          args = {
+            "--aosp",
+            "--skip-sorting-imports",
+            "--skip-removing-unused-imports",
+            "-",
+          },
+        }
       '';
     };
   };
@@ -244,8 +243,8 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.java-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.java-format = formats.${cfg.format.type}.conformConfig;
     })
 
     (mkIf cfg.debug.enable {

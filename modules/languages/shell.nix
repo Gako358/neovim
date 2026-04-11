@@ -29,17 +29,16 @@ with builtins; let
   formats = {
     shfmt = {
       package = [ "shfmt" ];
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.shfmt.with({
-              command = "${nvim.languages.commandOptToCmd cfg.format.package "shfmt"}",
-            })
-          )
+          conform_formatters_by_ft["sh"] = { "shfmt" }
+          conform_formatters_by_ft["bash"] = { "shfmt" }
+          conform_formatters["shfmt"] = {
+            command = "${nvim.languages.commandOptToCmd cfg.format.package "shfmt"}",
+          }
         '';
     };
   };
@@ -48,17 +47,16 @@ with builtins; let
   diagnostics = {
     shellcheck = {
       package = pkgs.shellcheck;
-      nullConfig = pkg:
+      lintConfig = pkg:
         /*
       lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.diagnostics.shellcheck.with({
-              command = "${pkg}/bin/shellcheck",
-            })
-          )
+          lint.linters_by_ft["sh"] = vim.list_extend(lint.linters_by_ft["sh"] or {}, { "shellcheck" })
+          lint.linters_by_ft["bash"] = vim.list_extend(lint.linters_by_ft["bash"] or {}, { "shellcheck" })
+          lint.linters.shellcheck = vim.tbl_deep_extend("force", lint.linters.shellcheck or {}, {
+            cmd = "${pkg}/bin/shellcheck",
+          })
         '';
     };
   };
@@ -137,13 +135,13 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.bash-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.bash-format = formats.${cfg.format.type}.conformConfig;
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+      vim.lsp.nvim-lint.enable = true;
+      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
         lang = "bash";
         config = cfg.extraDiagnostics.types;
         inherit diagnostics;

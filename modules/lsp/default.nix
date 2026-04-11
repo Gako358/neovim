@@ -9,17 +9,18 @@ with builtins; let
 in
 {
   imports = [
+    ./conform.nix
     ./fidget.nix
     ./lightbulb.nix
     ./lspconfig.nix
     ./lspkind.nix
-    ./null-ls.nix
+    ./nvim-lint.nix
     ./signature.nix
     ./trouble.nix
   ];
 
   options.vim.lsp = {
-    enable = mkEnableOption "LSP, also enabled automatically through null-ls and lspconfig options";
+    enable = mkEnableOption "LSP, also enabled automatically through conform, nvim-lint, and lspconfig options";
     formatOnSave = mkEnableOption "format on save";
   };
 

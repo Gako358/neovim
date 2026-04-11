@@ -46,17 +46,15 @@ with builtins; let
   formats = {
     lua-format = {
       package = pkgs.luaformatter;
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.lua_format.with({
-              command = "${cfg.format.package}/bin/lua-format";
-            })
-          )
+          conform_formatters_by_ft["lua"] = { "lua-format" }
+          conform_formatters["lua-format"] = {
+            command = "${cfg.format.package}/bin/lua-format",
+          }
         '';
     };
   };
@@ -121,8 +119,8 @@ in
       vim.lsp.lspconfig.sources.lua-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.lua-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.lua-format = formats.${cfg.format.type}.conformConfig;
     })
   ]);
 }

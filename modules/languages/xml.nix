@@ -29,17 +29,15 @@ with builtins; let
   formats = {
     tidy = {
       package = pkgs.html-tidy;
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.tidy.with({
-              command = "${cfg.format.package}/bin/tidy";
-            })
-          )
+          conform_formatters_by_ft["xml"] = { "tidy" }
+          conform_formatters["tidy"] = {
+            command = "${cfg.format.package}/bin/tidy",
+          }
         '';
     };
   };
@@ -104,8 +102,8 @@ in
       vim.lsp.lspconfig.sources.xml-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.xml-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.xml-format = formats.${cfg.format.type}.conformConfig;
     })
   ]);
 }

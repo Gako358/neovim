@@ -31,8 +31,12 @@
       url = "github:onsails/lspkind-nvim";
       flake = false;
     };
-    plugins-null-ls = {
-      url = "github:nvimtools/none-ls.nvim";
+    plugins-conform-nvim = {
+      url = "github:stevearc/conform.nvim";
+      flake = false;
+    };
+    plugins-nvim-lint = {
+      url = "github:mfussenegger/nvim-lint";
       flake = false;
     };
     plugins-lsp-signature = {

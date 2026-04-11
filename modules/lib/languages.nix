@@ -1,7 +1,6 @@
 # From home-manager: https://github.com/nix-community/home-manager/blob/master/modules/lib/booleans.nix
 { lib }: {
-  # Converts a boolean to a yes/no string. This is used in lots of
-  # configuration formats.
+  # Converts diagnostic configuration to nvim-lint Lua sources
   diagnosticsToLua =
     { lang
     , config
@@ -23,7 +22,7 @@
         in
         {
           name = "${lang}-diagnostics-${type}";
-          value = diagnostics.${type}.nullConfig package;
+          value = diagnostics.${type}.lintConfig package;
         })
         config);
 

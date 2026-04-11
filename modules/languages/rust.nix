@@ -11,17 +11,15 @@ with builtins; let
   formats = {
     rustfmt = {
       package = pkgs.rustfmt;
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.rustfmt.with({
-              command = "${cfg.format.package}/bin/rustfmt";
-            })
-          )
+          conform_formatters_by_ft["rust"] = { "rustfmt" }
+          conform_formatters["rustfmt"] = {
+            command = "${cfg.format.package}/bin/rustfmt",
+          }
         '';
     };
   };
@@ -42,7 +40,7 @@ in
     crates = {
       enable = mkEnableOption "crates-nvim, tools for managing dependencies";
       codeActions = mkOption {
-        description = "Enable code actions through null-ls";
+        description = "Enable code actions through LSP";
         type = types.bool;
         default = true;
       };
@@ -137,8 +135,8 @@ in
         '';
     })
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.rust-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.rust-format = formats.${cfg.format.type}.conformConfig;
     })
   ]);
 }

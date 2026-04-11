@@ -55,22 +55,21 @@ with builtins; let
   formats = {
     alejandra = {
       package = [ "alejandra" ];
-      nullConfig =
+      conformConfig =
         /*
         lua
         */
         ''
-          table.insert(
-            ls_sources,
-            null_ls.builtins.formatting.alejandra.with({
-              command = {"${nvim.languages.commandOptToCmd cfg.format.package "alejandra"}"},
-            })
-          )
+          conform_formatters_by_ft["nix"] = { "alejandra" }
+          conform_formatters["alejandra"] = {
+            command = "${nvim.languages.commandOptToCmd cfg.format.package "alejandra"}",
+            args = { "--quiet", "-" },
+          }
         '';
     };
     nixpkgs-fmt = {
       package = [ "nixpkgs-fmt" ];
-      # Never need to use null-ls for nixpkgs-fmt
+      # Never need to use conform for nixpkgs-fmt — it uses LSP internal formatter
     };
   };
 
@@ -78,24 +77,20 @@ with builtins; let
   diagnostics = {
     statix = {
       package = pkgs.statix;
-      nullConfig = pkg: ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.statix.with({
-            command = "${pkg}/bin/statix",
-          })
-        )
+      lintConfig = pkg: ''
+        lint.linters_by_ft["nix"] = vim.list_extend(lint.linters_by_ft["nix"] or {}, { "statix" })
+        lint.linters.statix = vim.tbl_deep_extend("force", lint.linters.statix or {}, {
+          cmd = "${pkg}/bin/statix",
+        })
       '';
     };
     deadnix = {
       package = pkgs.deadnix;
-      nullConfig = pkg: ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.deadnix.with({
-            command = "${pkg}/bin/deadnix",
-          })
-        )
+      lintConfig = pkg: ''
+        lint.linters_by_ft["nix"] = vim.list_extend(lint.linters_by_ft["nix"] or {}, { "deadnix" })
+        lint.linters.deadnix = vim.tbl_deep_extend("force", lint.linters.deadnix or {}, {
+          cmd = "${pkg}/bin/deadnix",
+        })
       '';
     };
   };
@@ -179,13 +174,13 @@ in
     })
 
     (mkIf (cfg.format.enable && !servers.${cfg.lsp.server}.internalFormatter) {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.nix-format = formats.${cfg.format.type}.nullConfig;
+      vim.lsp.conform.enable = true;
+      vim.lsp.conform.sources.nix-format = formats.${cfg.format.type}.conformConfig;
     })
 
     (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+      vim.lsp.nvim-lint.enable = true;
+      vim.lsp.nvim-lint.sources = lib.nvim.languages.diagnosticsToLua {
         lang = "nix";
         config = cfg.extraDiagnostics.types;
         inherit diagnostics;
