@@ -1,11 +1,11 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.vim.snippets.vsnip;
-in {
+in
+{
   options.vim.snippets.vsnip = {
     enable = mkEnableOption "Enable vim-vsnip";
     dataDir = mkOption {

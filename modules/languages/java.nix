@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -173,7 +172,8 @@ with builtins; let
       '';
     };
   };
-in {
+in
+{
   options.vim.languages.java = {
     enable = mkEnableOption "Java language support";
 
@@ -234,11 +234,11 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
 
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = ["nvim-jdtls"];
+      vim.startPlugins = [ "nvim-jdtls" ];
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.java-lsp = servers.${cfg.lsp.server}.lspConfig;
     })

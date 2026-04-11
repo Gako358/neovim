@@ -1,6 +1,6 @@
-{lib}:
+{ lib }:
 with lib; let
-  diagnosticSubmodule = {...}: {
+  diagnosticSubmodule = { ... }: {
     options = {
       type = mkOption {
         description = "Type of diagnostic to enable";
@@ -12,12 +12,14 @@ with lib; let
       };
     };
   };
-in {
-  diagnostics = {
-    langDesc,
-    diagnostics,
-    defaultDiagnostics,
-  }:
+in
+{
+  diagnostics =
+    { langDesc
+    , diagnostics
+    , defaultDiagnostics
+    ,
+    }:
     mkOption {
       description = "List of ${langDesc} diagnostics to enable";
       type = with types; listOf (either (enum (attrNames diagnostics)) (submodule diagnosticSubmodule));
@@ -25,7 +27,7 @@ in {
     };
 
   mkGrammarOption = pkgs: grammar:
-    mkPackageOption pkgs ["${grammar} treesitter"] {
-      default = ["vimPlugins" "nvim-treesitter" "builtGrammars" grammar];
+    mkPackageOption pkgs [ "${grammar} treesitter" ] {
+      default = [ "vimPlugins" "nvim-treesitter" "builtGrammars" grammar ];
     };
 }
