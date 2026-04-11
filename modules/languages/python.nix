@@ -16,11 +16,11 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.pyright.setup{
-            capabilities = capabilities;
-            on_attach = default_on_attach;
-            cmd = {"${cfg.lsp.package}/bin/pyright-langserver", "--stdio"}
-          }
+          vim.lsp.config('pyright', {
+            capabilities = capabilities,
+            cmd = {"${cfg.lsp.package}/bin/pyright-langserver", "--stdio"},
+          })
+          vim.lsp.enable('pyright')
         '';
     };
   };

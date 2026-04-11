@@ -16,11 +16,11 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.kotlin_language_server.setup{
-            capabilities = capabilities;
-            on_attach = default_on_attach,
-            cmd = {'${cfg.lsp.package}/bin/kotlin-language-server'};
-          }
+          vim.lsp.config('kotlin_language_server', {
+            capabilities = capabilities,
+            cmd = {'${cfg.lsp.package}/bin/kotlin-language-server'},
+          })
+          vim.lsp.enable('kotlin_language_server')
         '';
     };
   };

@@ -23,30 +23,10 @@ in
 
       vim.startPlugins = [ "nvim-lspconfig" ];
 
+      # nvim-lspconfig is loaded as a plugin to provide default server configs.
+      # Language modules now use vim.lsp.config() + vim.lsp.enable() instead
+      # of the deprecated require('lspconfig').XYZ.setup{} pattern.
       vim.luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] ''
-        local lspconfig = require('lspconfig')
-        lspconfig.lua_ls.setup {
-          on_init = function(client)
-            local path = client.workspace_folders[1].name
-            if not vim.uv.fs_stat(path .. '/.luarc.json') and not vim.uv.fs_stat(path .. '/.luarc.jsonc') then
-              client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
-                Lua = {
-                  runtime = {
-                    version = 'LuaJIT'
-                  },
-                  workspace = {
-                    checkThirdParty = false,
-                    library = {
-                      vim.env.VIMRUNTIME
-                    }
-                  }
-                }
-              })
-              client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-            end
-            return true
-          end
-        }
       '';
     }
     {

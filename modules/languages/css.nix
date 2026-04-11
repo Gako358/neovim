@@ -16,22 +16,23 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.cssls.setup{
-            on_attach = default_on_attach,
-            cmd = {'${cfg.lsp.package}/bin/vscode-css-language-server', '--stdio'};
-            filetypes = {'css', 'scss', 'less'};
+          vim.lsp.config('cssls', {
+            capabilities = capabilities,
+            cmd = {'${cfg.lsp.package}/bin/vscode-css-language-server', '--stdio'},
+            filetypes = {'css', 'scss', 'less'},
             settings = {
               css = {
-                validate = true;
-              };
+                validate = true,
+              },
               less = {
-                validate = true;
-              };
+                validate = true,
+              },
               scss = {
-                validate = true;
-              };
-            };
-          }
+                validate = true,
+              },
+            },
+          })
+          vim.lsp.enable('cssls')
         '';
     };
   };

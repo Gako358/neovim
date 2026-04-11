@@ -16,14 +16,14 @@ with builtins; let
         lua
         */
         ''
-          local clangd_capabilities = capabilities;
-          clangd_capabilities.textDocument.semanticHighlighting = true;
-          clangd_capabilities.offsetEncoding = {"utf-16"};
-          lspconfig.clangd.setup{
+          local clangd_capabilities = vim.deepcopy(capabilities)
+          clangd_capabilities.textDocument.semanticHighlighting = true
+          clangd_capabilities.offsetEncoding = {"utf-16"}
+          vim.lsp.config('clangd', {
             capabilities = clangd_capabilities,
-            on_attach = default_on_attach,
-            cmd = {"${pkgs.clang-tools}/bin/clangd"};
-          }
+            cmd = {"${pkgs.clang-tools}/bin/clangd"},
+          })
+          vim.lsp.enable('clangd')
         '';
     };
   };

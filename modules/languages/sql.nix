@@ -17,15 +17,11 @@ with builtins; let
         lua
         */
         ''
-          local root_dir = require('lspconfig/util').root_pattern('.git', 'flake.nix')(vim.fn.getcwd())
-          lspconfig.sqlls.setup {
-            capabilities = capabilities;
-            on_attach = attach_keymaps,
-            cmd = { "${cfg.lsp.package}/bin/sqls", "-config", string.format("%s/config.yml", root_dir) };
-            root_dir = function(fname)
-              return root_dir
-            end;
-          }
+          vim.lsp.config('sqlls', {
+            capabilities = capabilities,
+            cmd = { "${cfg.lsp.package}/bin/sqls" },
+          })
+          vim.lsp.enable('sqlls')
         '';
     };
   };

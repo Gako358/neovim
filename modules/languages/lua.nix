@@ -16,9 +16,8 @@ with builtins; let
         lua
         */
         ''
-          lspconfig.lua_ls.setup{
+          vim.lsp.config('lua_ls', {
             capabilities = capabilities,
-            on_attach = default_on_attach,
             cmd = { "${cfg.lsp.package}/bin/lua-language-server" },
             settings = {
               Lua = {
@@ -37,7 +36,8 @@ with builtins; let
                 },
               },
             },
-          }
+          })
+          vim.lsp.enable('lua_ls')
         '';
     };
   };

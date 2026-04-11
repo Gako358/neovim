@@ -30,7 +30,7 @@ with builtins; let
 
           -- Setting up root_dir
           local function get_root_dir()
-            return lspconfig.util.root_pattern(unpack(root_markers))(vim.fn.expand('%:p:h'))
+            return vim.fs.root(vim.fn.expand('%:p:h'), root_markers)
           end
 
           local jdtls_config_dir = home .. "/.config/jdtls_config"
@@ -56,8 +56,8 @@ with builtins; let
             vim.keymap.set("x", "<leader>jrc", "<Esc><Cmd>lua require'jdtls'.extract_constant(true)<CR>", opts)
             vim.keymap.set("x", "<leader>jrm", "<Esc><Cmd>lua require'jdtls'.extract_method(true)<CR>", opts)
 
-            -- Set autocommands conditional on server_capabilities
-            vim.lsp.codelens.refresh()
+            -- Enable codelens
+            vim.lsp.codelens.enable(true, { bufnr = bufnr })
           end
 
           local config = {

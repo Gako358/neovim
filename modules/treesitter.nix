@@ -45,25 +45,13 @@ in
         ''
           vim.opt.conceallevel = 2
 
-          require'nvim-treesitter.configs'.setup {
-            highlight = {
-              enable = true,
-              disable = {},
-            },
-
-            auto_install = false,
-            ensure_installed = {},
-
-            incremental_selection = {
-              enable = true,
-              keymaps = {
-                init_selection = "gnn",
-                node_incremental = "grn",
-                scope_incremental = "grc",
-                node_decremental = "grm",
-              },
-            }
-          }
+          -- nvim-treesitter new API: use vim.treesitter.start() for highlighting
+          -- Parsers are installed via Nix (withPlugins), not ensure_installed
+          vim.api.nvim_create_autocmd('FileType', {
+            callback = function()
+              pcall(vim.treesitter.start)
+            end,
+          })
         '';
   };
 }
