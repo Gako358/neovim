@@ -28,7 +28,7 @@
       flake = false;
     };
     plugins-null-ls = {
-      url = "github:jose-elias-alvarez/null-ls.nvim";
+      url = "github:nvimtools/none-ls.nvim";
       flake = false;
     };
     plugins-lsp-signature = {
@@ -53,8 +53,8 @@
       url = "github:scalameta/nvim-metals";
       flake = false;
     };
-    plugins-rust-tools = {
-      url = "github:simrat39/rust-tools.nvim";
+    plugins-rustaceanvim = {
+      url = "github:mrcjkb/rustaceanvim";
       flake = false;
     };
     plugins-sqls-nvim = {
@@ -351,7 +351,6 @@
         inherit system;
         overlays = [
           (final: prev: {
-            rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
             nil = inputs.nil.packages.${system}.default;
           })
         ];

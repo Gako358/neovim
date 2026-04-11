@@ -12,20 +12,12 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
-    # Base git plugins and null-ls
+    # Base git plugins
     {
       vim.startPlugins = [
         "lazygit"
         "gitsigns-nvim"
       ];
-
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.gitsigns-ca = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.code_actions.gitsigns
-        )
-      '';
     }
 
     # LazyGit configuration

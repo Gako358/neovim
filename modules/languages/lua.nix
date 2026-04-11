@@ -18,23 +18,26 @@ with builtins; let
         */
         ''
           lspconfig.lua_ls.setup{
-            capabilities = capabilities;
+            capabilities = capabilities,
             on_attach = default_on_attach,
             cmd = { "${cfg.lsp.package}/bin/lua-language-server" },
-            Lua = {
-              runtime = {
-                version = 'LuaJIT',
+            settings = {
+              Lua = {
+                runtime = {
+                  version = 'LuaJIT',
+                },
+                diagnostics = {
+                  globals = { "vim" },
+                },
+                workspace = {
+                  library = vim.api.nvim_get_runtime_file("lua", true),
+                  checkThirdParty = false,
+                },
+                telemetry = {
+                  enable = false,
+                },
               },
-              diagnostics = {
-                globals = { "vim" },
-              },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("lua", true),
-              },
-              telemetry = {
-                enable = false,
-              };
-            };
+            },
           }
         '';
     };
