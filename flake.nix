@@ -350,7 +350,7 @@
           inherit neovimConfiguration;
         };
 
-        overlays.default = final: prev: {
+        overlays.default = _: prev: {
           inherit neovimConfiguration;
           neovim = buildPkg prev [ mainConfig ];
         };
@@ -362,7 +362,7 @@
           pkgs = import nixpkgs {
             inherit system;
             overlays = [
-              (final: prev: {
+              (_: _: {
                 nil = inputs.nil.packages.${system}.default;
               })
             ];

@@ -11,7 +11,7 @@ with builtins; let
   cfgVim = config.vim;
   cfg = config.vim;
 
-  inputsSubmodule = { ... }: {
+  inputsSubmodule = _: {
     options.src = mkOption {
       description = "The plugin source";
       type = types.package;
@@ -99,13 +99,13 @@ in
       };
 
       startPlugins = nvim.types.pluginsOpt {
-        rawPlugins = config.build.rawPlugins;
+        inherit (config.build) rawPlugins;
         default = [ ];
         description = "List of plugins to startup.";
       };
 
       optPlugins = nvim.types.pluginsOpt {
-        rawPlugins = config.build.rawPlugins;
+        inherit (config.build) rawPlugins;
         default = [ ];
         description = "List of plugins to optionally load";
       };

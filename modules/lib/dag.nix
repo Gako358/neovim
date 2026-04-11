@@ -83,7 +83,7 @@ in
         mapAttrs
           (n: v: {
             name = n;
-            data = v.data;
+            inherit (v) data;
             after = v.after ++ dagBefore dag n;
           })
           dag;
