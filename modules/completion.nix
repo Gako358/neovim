@@ -104,7 +104,6 @@ in
         "buffer" = "[Buffer]";
         "crates" = "[Crates]";
         "path" = "[Path]";
-        "orgmode" = "[Orgmode]";
       };
 
       vim.luaConfigRC.completion = mkIf (cfg.cmp.type == "nvim-cmp") (dagPlacement

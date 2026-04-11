@@ -2,12 +2,16 @@
   description = "MerrinX Neovim Configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
 
     # LSP plugins
@@ -219,7 +223,7 @@
 
   outputs =
     { nixpkgs
-    , flake-utils
+    , flake-parts
     , ...
     }@inputs:
     let
@@ -329,73 +333,78 @@
         };
       };
     in
-    {
-      lib = {
-        nvim = nvimLib;
-        inherit neovimConfiguration;
-      };
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
-      overlays.default = final: prev: {
-        inherit neovimConfiguration;
-        neovim = buildPkg prev [ mainConfig ];
-      };
-    }
-    // (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            (final: prev: {
-              nil = inputs.nil.packages.${system}.default;
-            })
-          ];
+      flake = {
+        lib = {
+          nvim = nvimLib;
+          inherit neovimConfiguration;
         };
 
-        neovimPkg = buildPkg pkgs [ mainConfig ];
+        overlays.default = final: prev: {
+          inherit neovimConfiguration;
+          neovim = buildPkg prev [ mainConfig ];
+        };
+      };
 
-        devPkg = buildPkg pkgs [
-          mainConfig
-          { config.vim.languages.html.enable = pkgs.lib.mkForce true; }
-        ];
-      in
-      {
-        apps = rec {
-          neovim = {
-            type = "app";
-            program = nvimBin neovimPkg;
+      perSystem = { system, ... }:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              (final: prev: {
+                nil = inputs.nil.packages.${system}.default;
+              })
+            ];
           };
-          default = neovim;
-        }
-        // pkgs.lib.optionalAttrs
-          (
-            !(builtins.elem system [
-              "aarch64-darwin"
-              "x86_64-darwin"
-            ])
-          )
-          { };
 
-        devShells.default = pkgs.mkShell {
-          nativeBuildInputs = [
-            devPkg
-            pkgs.alejandra
+          neovimPkg = buildPkg pkgs [ mainConfig ];
+
+          devPkg = buildPkg pkgs [
+            mainConfig
+            { config.vim.languages.html.enable = pkgs.lib.mkForce true; }
           ];
-        };
 
-        packages = {
-          default = neovimPkg;
-          neovim = neovimPkg;
-        }
-        // pkgs.lib.optionalAttrs
-          (
-            !(builtins.elem system [
-              "aarch64-darwin"
-              "x86_64-darwin"
-            ])
-          )
-          { };
-        defaultPackage = neovimPkg;
-      }
-    ));
+          pre-commit-check = inputs.git-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              statix.enable = true;
+              deadnix.enable = true;
+              nil.enable = true;
+              nixpkgs-fmt.enable = true;
+              shellcheck.enable = true;
+              beautysh.enable = true;
+            };
+          };
+        in
+        {
+          formatter = pkgs.nixpkgs-fmt;
+
+          checks = {
+            inherit pre-commit-check;
+          };
+
+          apps = rec {
+            neovim = {
+              type = "app";
+              program = nvimBin neovimPkg;
+            };
+            default = neovim;
+          };
+
+          devShells.default = pkgs.mkShell {
+            inherit (pre-commit-check) shellHook;
+            nativeBuildInputs = [
+              devPkg
+              pkgs.alejandra
+            ];
+          };
+
+          packages = {
+            default = neovimPkg;
+            neovim = neovimPkg;
+          };
+        };
+    };
 }

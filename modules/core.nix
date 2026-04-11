@@ -172,10 +172,15 @@ in
           })
           cfgBuilt.optPlugins);
 
-      neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
-        inherit (cfgBuild) viAlias vimAlias;
+      neovimConfig = {
+        wrapRc = true;
+        neovimRcContent = cfgBuilt.configRC;
         plugins = normalizedPlugins;
-        customRC = cfgBuilt.configRC;
+        viAlias = cfgBuild.viAlias;
+        vimAlias = cfgBuild.vimAlias;
+        withNodeJs = false;
+        withRuby = false;
+        withPython3 = false;
       };
 
       # Vim config helpers
@@ -278,10 +283,7 @@ in
         optPlugins = buildConfigPlugins cfgVim.optPlugins;
 
         package =
-          (pkgs.wrapNeovimUnstable cfgBuild.package (neovimConfig
-            // {
-            wrapRc = true;
-          })).overrideAttrs (oldAttrs: {
+          (pkgs.wrapNeovimUnstable cfgBuild.package neovimConfig).overrideAttrs (oldAttrs: {
             passthru =
               oldAttrs
               // {
