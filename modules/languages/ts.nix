@@ -10,7 +10,7 @@ with builtins; let
   defaultServer = "ts_ls";
   servers = {
     ts_ls = {
-      package = pkgs.nodePackages.typescript-language-server;
+      package = pkgs.typescript-language-server;
       lspConfig =
         /*
         lua
@@ -30,7 +30,7 @@ with builtins; let
   defaultFormat = "prettier";
   formats = {
     prettier = {
-      package = [ "nodePackages" "prettier" ];
+      package = [ "prettier" ];
       nullConfig =
         /*
         lua
@@ -50,7 +50,7 @@ with builtins; let
   defaultDiagnostics = [ "eslint" ];
   diagnostics = {
     eslint = {
-      package = pkgs.nodePackages.eslint;
+      package = pkgs.eslint_d;
       nullConfig = pkg:
         /*
       lua
@@ -59,7 +59,7 @@ with builtins; let
           table.insert(
             ls_sources,
             null_ls.builtins.diagnostics.eslint.with({
-              command = "${pkg}/bin/eslint",
+              command = "${pkg}/bin/eslint_d",
             })
           )
         '';

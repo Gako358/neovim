@@ -6,6 +6,13 @@
 with lib;
 with builtins; let
   cfg = config.vim.languages.scala;
+
+  defaultServer = "metals";
+  servers = {
+    metals = {
+      package = pkgs.metals;
+    };
+  };
 in
 {
   options.vim.languages.scala = {
@@ -34,7 +41,7 @@ in
       package = mkOption {
         description = "Scala LSP server package";
         type = types.package;
-        default = pkgs.metals;
+        default = servers.${cfg.lsp.server}.package;
       };
     };
   };

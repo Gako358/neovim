@@ -10,7 +10,7 @@ with builtins; let
   defaultServer = "tailwind";
   servers = {
     tailwind = {
-      package = pkgs.nodePackages."@tailwindcss/language-server";
+      package = pkgs.tailwindcss-language-server;
       lspConfig =
         /*
         lua

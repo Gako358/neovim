@@ -10,7 +10,7 @@ with builtins; let
   defaultServer = "volar";
   servers = {
     volar = {
-      package = pkgs.nodePackages.volar;
+      package = pkgs.vue-language-server;
       lspConfig =
         /*
         lua
@@ -36,11 +36,8 @@ in
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      packages = mkOption {
-        description = "Tree-sitter grammars for Vue and TypeScript";
-        type = types.listOf types.package;
-        default = [ pkgs.vimPlugins.nvim-treesitter.builtGrammars.vue pkgs.vimPlugins.nvim-treesitter.builtGrammars.typescript ];
-      };
+      vuePackage = nvim.types.mkGrammarOption pkgs "vue";
+      tsPackage = nvim.types.mkGrammarOption pkgs "typescript";
     };
 
     lsp = {
@@ -65,7 +62,7 @@ in
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = cfg.treesitter.packages;
+      vim.treesitter.grammars = [ cfg.treesitter.vuePackage cfg.treesitter.tsPackage ];
     })
 
     (mkIf cfg.lsp.enable {
