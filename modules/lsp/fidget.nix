@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.lsp;
-in {
+in
+{
   options.vim.lsp = {
     fidget = {
       enable = mkEnableOption "UI for nvim-lsp progress";
@@ -14,22 +14,22 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.fidget.enable) {
-    vim.startPlugins = ["fidget"];
+    vim.startPlugins = [ "fidget" ];
 
     vim.luaConfigRC.fidget =
       nvim.dag.entryAnywhere
-      /*
+        /*
       lua
-      */
-      ''
-        -- Enable fidget
-        require'fidget'.setup({
-          notification = {
-            window = {
-              winblend = 0
+        */
+        ''
+          -- Enable fidget
+          require'fidget'.setup({
+            notification = {
+              window = {
+                winblend = 0
+              },
             },
-          },
-        })
-      '';
+          })
+        '';
   };
 }

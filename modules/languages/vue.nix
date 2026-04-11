@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -26,7 +25,8 @@ with builtins; let
         '';
     };
   };
-in {
+in
+{
   options.vim.languages.vue = {
     enable = mkEnableOption "Vue language support";
 
@@ -39,7 +39,7 @@ in {
       packages = mkOption {
         description = "Tree-sitter grammars for Vue and TypeScript";
         type = types.listOf types.package;
-        default = [pkgs.vimPlugins.nvim-treesitter.builtGrammars.vue pkgs.vimPlugins.nvim-treesitter.builtGrammars.typescript];
+        default = [ pkgs.vimPlugins.nvim-treesitter.builtGrammars.vue pkgs.vimPlugins.nvim-treesitter.builtGrammars.typescript ];
       };
     };
 

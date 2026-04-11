@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -27,7 +26,8 @@ with builtins; let
         '';
     };
   };
-in {
+in
+{
   options.vim.languages.tailwind = {
     enable = mkEnableOption "Tailwind CSS language support";
 

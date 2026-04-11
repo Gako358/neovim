@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -26,7 +25,8 @@ with builtins; let
         '';
     };
   };
-in {
+in
+{
   options.vim.languages.rust = {
     enable = mkEnableOption "Rust language support";
 
@@ -87,9 +87,9 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.crates.enable {
-      vim.startPlugins = ["crates-nvim"];
+      vim.startPlugins = [ "crates-nvim" ];
 
-      vim.autocomplete.cmp.sources = {"crates" = "[Crates]";};
+      vim.autocomplete.cmp.sources = { "crates" = "[Crates]"; };
       vim.luaConfigRC.rust-crates = nvim.dag.entryAnywhere ''
         require('crates').setup {
           completion = {
@@ -102,10 +102,10 @@ in {
     })
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
     (mkIf cfg.lsp.enable {
-      vim.startPlugins = ["rustaceanvim"];
+      vim.startPlugins = [ "rustaceanvim" ];
 
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.rust-lsp =

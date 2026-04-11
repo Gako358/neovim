@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.keys;
-in {
+in
+{
   options.vim.keys = {
     enable = mkEnableOption "key binding plugins";
 
@@ -16,14 +16,14 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.whichKey.enable) {
-    vim.startPlugins = ["which-key"];
+    vim.startPlugins = [ "which-key" ];
 
     vim.luaConfigRC.whichkey =
       nvim.dag.entryAnywhere
-      /*
+        /*
       lua
-      */
-      ''
+        */
+        ''
 
         function ReplaceWord()
           local word = vim.fn.expand("<cword>")

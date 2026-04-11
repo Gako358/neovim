@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.lsp;
   usingNvimCmp = config.vim.autocomplete.enable && config.vim.autocomplete.cmp.type == "nvim-cmp";
-in {
+in
+{
   imports = [
     ./fidget.nix
     ./lightbulb.nix
@@ -25,7 +25,7 @@ in {
 
   config = mkIf cfg.enable {
     vim.startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
-    vim.autocomplete.cmp.sources = {"nvim_lsp" = "[LSP]";};
+    vim.autocomplete.cmp.sources = { "nvim_lsp" = "[LSP]"; };
     vim.luaConfigRC.lsp-setup =
       /*
       lua

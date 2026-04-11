@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim.lsp;
-in {
+in
+{
   options.vim.lsp = {
     lightbulb = {
       enable = mkEnableOption "lightbulb for code actions. Requires emoji font";
@@ -14,18 +14,18 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.lightbulb.enable) {
-    vim.startPlugins = ["nvim-lightbulb"];
+    vim.startPlugins = [ "nvim-lightbulb" ];
 
     vim.luaConfigRC.lightbulb =
       nvim.dag.entryAnywhere
-      /*
+        /*
       lua
-      */
-      ''
-        -- Enable lightbulb for code actions
-        require'nvim-lightbulb'.setup({
-          autocmd = { enabled = true }
-        })
-      '';
+        */
+        ''
+          -- Enable lightbulb for code actions
+          require'nvim-lightbulb'.setup({
+            autocmd = { enabled = true }
+          })
+        '';
   };
 }

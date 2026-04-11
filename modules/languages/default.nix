@@ -1,12 +1,15 @@
-{lib, ...}:
-with lib; let
-  mkEnable = desc:
+{ lib, ... }:
+with lib;
+let
+  mkEnable =
+    desc:
     mkOption {
       description = "Turn on ${desc} for enabled languages by default";
       type = types.bool;
       default = false;
     };
-in {
+in
+{
   imports = [
     ./clang.nix
     ./css.nix
@@ -17,7 +20,6 @@ in {
     ./lua.nix
     ./nix.nix
     ./markdown.nix
-    ./orgmode.nix
     ./python.nix
     ./rust.nix
     ./scala.nix

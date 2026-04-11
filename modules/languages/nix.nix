@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -14,7 +13,7 @@ with builtins; let
   defaultServer = "nil";
   servers = {
     nil = {
-      package = ["nil"];
+      package = [ "nil" ];
       internalFormatter = true;
       lspConfig =
         /*
@@ -55,7 +54,7 @@ with builtins; let
   defaultFormat = "nixpkgs-fmt";
   formats = {
     alejandra = {
-      package = ["alejandra"];
+      package = [ "alejandra" ];
       nullConfig =
         /*
         lua
@@ -70,12 +69,12 @@ with builtins; let
         '';
     };
     nixpkgs-fmt = {
-      package = ["nixpkgs-fmt"];
+      package = [ "nixpkgs-fmt" ];
       # Never need to use null-ls for nixpkgs-fmt
     };
   };
 
-  defaultDiagnostics = ["statix" "deadnix"];
+  defaultDiagnostics = [ "statix" "deadnix" ];
   diagnostics = {
     statix = {
       package = pkgs.statix;
@@ -100,7 +99,8 @@ with builtins; let
       '';
     };
   };
-in {
+in
+{
   options.vim.languages.nix = {
     enable = mkEnableOption "Nix language support";
 
@@ -170,7 +170,7 @@ in {
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
 
     (mkIf cfg.lsp.enable {

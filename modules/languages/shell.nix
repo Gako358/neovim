@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
@@ -11,7 +10,7 @@ with builtins; let
   defaultServer = "bashls";
   servers = {
     bashls = {
-      package = ["nodePackages" "bash-language-server"];
+      package = [ "nodePackages" "bash-language-server" ];
       lspConfig =
         /*
         lua
@@ -29,7 +28,7 @@ with builtins; let
   defaultFormat = "shfmt";
   formats = {
     shfmt = {
-      package = ["shfmt"];
+      package = [ "shfmt" ];
       nullConfig =
         /*
         lua
@@ -45,25 +44,26 @@ with builtins; let
     };
   };
 
-  defaultDiagnostics = ["shellcheck"];
+  defaultDiagnostics = [ "shellcheck" ];
   diagnostics = {
     shellcheck = {
       package = pkgs.shellcheck;
       nullConfig = pkg:
-      /*
+        /*
       lua
-      */
-      ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.shellcheck.with({
-            command = "${pkg}/bin/shellcheck",
-          })
-        )
-      '';
+        */
+        ''
+          table.insert(
+            ls_sources,
+            null_ls.builtins.diagnostics.shellcheck.with({
+              command = "${pkg}/bin/shellcheck",
+            })
+          )
+        '';
     };
   };
-in {
+in
+{
   options.vim.languages.bash = {
     enable = mkEnableOption "Bash language support";
 
@@ -128,7 +128,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars = [cfg.treesitter.package];
+      vim.treesitter.grammars = [ cfg.treesitter.package ];
     })
 
     (mkIf cfg.lsp.enable {

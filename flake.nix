@@ -200,16 +200,6 @@
       flake = false;
     };
 
-    #Orgmode
-    plugins-orgmode = {
-      url = "github:nvim-orgmode/orgmode";
-      flake = false;
-    };
-    plugins-org-roam = {
-      url = "github:chipsenkbeil/org-roam.nvim";
-      flake = false;
-    };
-
     # Key binding help
     plugins-which-key = {
       url = "github:folke/which-key.nvim";
@@ -227,114 +217,118 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    ...
-  } @ inputs: let
-    rawPlugins = nvimLib.plugins.fromInputs inputs "plugins-";
+  outputs =
+    { nixpkgs
+    , flake-utils
+    , ...
+    }@inputs:
+    let
+      rawPlugins = nvimLib.plugins.fromInputs inputs "plugins-";
 
-    neovimConfiguration = {modules ? [], ...} @ args:
-      import ./modules
-      (args // {modules = [{config.build.rawPlugins = rawPlugins;}] ++ modules;});
+      neovimConfiguration =
+        { modules ? [ ]
+        , ...
+        }@args:
+        import ./modules (args // { modules = [{ config.build.rawPlugins = rawPlugins; }] ++ modules; });
 
-    nvimBin = pkg: "${pkg}/bin/nvim";
+      nvimBin = pkg: "${pkg}/bin/nvim";
 
-    buildPkg = pkgs: modules: (neovimConfiguration {
-      inherit pkgs modules;
-    });
+      buildPkg =
+        pkgs: modules:
+        (neovimConfiguration {
+          inherit pkgs modules;
+        });
 
-    nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
-    mainConfig = {
-      config = {
-        build.viAlias = false;
-        build.vimAlias = true;
-        vim.autocomplete = {
-          enable = true;
-          cmp = {
+      nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
+      mainConfig = {
+        config = {
+          build.viAlias = false;
+          build.vimAlias = true;
+          vim.autocomplete = {
             enable = true;
-            type = "nvim-cmp";
+            cmp = {
+              enable = true;
+              type = "nvim-cmp";
+            };
+            copilot.enable = true;
+            snippets.enable = true;
           };
-          copilot.enable = true;
-          snippets.enable = true;
-        };
-        vim.fzf.enable = true;
-        vim.git.enable = true;
-        vim.keys = {
-          enable = true;
-          whichKey.enable = true;
-        };
-        vim.languages = {
-          enableLSP = true;
-          enableDebug = true;
-          enableFormat = true;
-          enableTreesitter = true;
-          enableExtraDiagnostics = true;
+          vim.fzf.enable = true;
+          vim.git.enable = true;
+          vim.keys = {
+            enable = true;
+            whichKey.enable = true;
+          };
+          vim.languages = {
+            enableLSP = true;
+            enableDebug = true;
+            enableFormat = true;
+            enableTreesitter = true;
+            enableExtraDiagnostics = true;
 
-          clang.enable = true;
-          css.enable = true;
-          haskell.enable = true;
-          html.enable = true;
-          java.enable = true;
-          kotlin.enable = true;
-          lua.enable = true;
-          markdown.enable = true;
-          nix.enable = true;
-          org.enable = true;
-          python.enable = true;
-          rust = {
-            enable = true;
-            crates.enable = true;
+            clang.enable = true;
+            css.enable = true;
+            haskell.enable = true;
+            html.enable = true;
+            java.enable = true;
+            kotlin.enable = true;
+            lua.enable = true;
+            markdown.enable = true;
+            nix.enable = true;
+            python.enable = true;
+            rust = {
+              enable = true;
+              crates.enable = true;
+            };
+            scala.enable = true;
+            bash.enable = true;
+            sql.enable = true;
+            tailwind.enable = true;
+            ts.enable = true;
+            vue.enable = true;
+            xml.enable = true;
           };
-          scala.enable = true;
-          bash.enable = true;
-          sql.enable = true;
-          tailwind.enable = true;
-          ts.enable = true;
-          vue.enable = true;
-          xml.enable = true;
-        };
-        vim.lsp = {
-          formatOnSave = false;
-          fidget.enable = true;
-          lightbulb.enable = true;
-          lspkind.enable = true;
-          lspSignature.enable = true;
-          trouble.enable = true;
-        };
-        vim.debug = {
-          virtualText.enable = true;
-          ui.enable = true;
-        };
-        vim.theme.enable = true;
-        vim.visuals = {
-          enable = true;
-          autopairs.enable = true;
-          indentBlankline = {
-            enable = true;
+          vim.lsp = {
+            formatOnSave = false;
+            fidget.enable = true;
+            lightbulb.enable = true;
+            lspkind.enable = true;
+            lspSignature.enable = true;
+            trouble.enable = true;
           };
-          leap.enable = true;
-          lualine = {
-            enable = true;
-            theme = "nightfox";
+          vim.debug = {
+            virtualText.enable = true;
+            ui.enable = true;
           };
-          noice = {
+          vim.theme.enable = true;
+          vim.visuals = {
             enable = true;
+            autopairs.enable = true;
+            indentBlankline = {
+              enable = true;
+            };
+            leap.enable = true;
+            lualine = {
+              enable = true;
+              theme = "nightfox";
+            };
+            noice = {
+              enable = true;
+            };
+            nvimWebDevicons.enable = true;
+            ranger.enable = true;
+            todo.enable = true;
           };
-          nvimWebDevicons.enable = true;
-          ranger.enable = true;
-          todo.enable = true;
-        };
-        vim.terminal = {
-          enable = true;
-          simple.enable = true;
-          float.enable = true;
-          project.enable = true;
-          new_tab.enable = true;
+          vim.terminal = {
+            enable = true;
+            simple.enable = true;
+            float.enable = true;
+            project.enable = true;
+            new_tab.enable = true;
+          };
         };
       };
-    };
-  in
+    in
     {
       lib = {
         nvim = nvimLib;
@@ -343,46 +337,65 @@
 
       overlays.default = final: prev: {
         inherit neovimConfiguration;
-        neovim = buildPkg prev [mainConfig];
+        neovim = buildPkg prev [ mainConfig ];
       };
     }
-    // (flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          (final: prev: {
-            nil = inputs.nil.packages.${system}.default;
-          })
+    // (flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (final: prev: {
+              nil = inputs.nil.packages.${system}.default;
+            })
+          ];
+        };
+
+        neovimPkg = buildPkg pkgs [ mainConfig ];
+
+        devPkg = buildPkg pkgs [
+          mainConfig
+          { config.vim.languages.html.enable = pkgs.lib.mkForce true; }
         ];
-      };
-
-      neovimPkg = buildPkg pkgs [mainConfig];
-
-      devPkg = buildPkg pkgs [mainConfig {config.vim.languages.html.enable = pkgs.lib.mkForce true;}];
-    in {
-      apps =
-        rec {
+      in
+      {
+        apps = rec {
           neovim = {
             type = "app";
             program = nvimBin neovimPkg;
           };
           default = neovim;
         }
-        // pkgs.lib.optionalAttrs (!(builtins.elem system ["aarch64-darwin" "x86_64-darwin"])) {};
+        // pkgs.lib.optionalAttrs
+          (
+            !(builtins.elem system [
+              "aarch64-darwin"
+              "x86_64-darwin"
+            ])
+          )
+          { };
 
-      devShells.default = pkgs.mkShell {
-        nativeBuildInputs = [
-          devPkg
-          pkgs.alejandra
-        ];
-      };
+        devShells.default = pkgs.mkShell {
+          nativeBuildInputs = [
+            devPkg
+            pkgs.alejandra
+          ];
+        };
 
-      packages =
-        {
+        packages = {
           default = neovimPkg;
           neovim = neovimPkg;
         }
-        // pkgs.lib.optionalAttrs (!(builtins.elem system ["aarch64-darwin" "x86_64-darwin"])) {};
-      defaultPackage = neovimPkg;
-    }));
+        // pkgs.lib.optionalAttrs
+          (
+            !(builtins.elem system [
+              "aarch64-darwin"
+              "x86_64-darwin"
+            ])
+          )
+          { };
+        defaultPackage = neovimPkg;
+      }
+    ));
 }
