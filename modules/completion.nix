@@ -184,7 +184,7 @@ in
             },
             ${optionalString debugEnabled ''
             enabled = function()
-              return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+              return vim.bo[0].buftype ~= "prompt"
                 or require("cmp_dap").is_dap_buffer()
             end,
           ''}
@@ -245,14 +245,10 @@ in
             vim.keymap.set({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocs<cr>', { desc = "CopilotChat - Add docs on selected code" })
             vim.keymap.set({ 'n', 'v' }, '<leader>ccp', '<cmd>CopilotChatReview<cr>', { desc = "CopilotChat - Review selected code" })
             vim.keymap.set({ 'n', 'v' }, '<leader>ccs', '<cmd>CopilotChatStop<cr>', { desc = "CopilotChat - Stop current window output" })
-            vim.keymap.set('n', '<leader>ccp', function()
-              local actions = require("CopilotChat.actions")
-              require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-            end, { desc = 'CopilotChat - Prompt actions' })
             vim.keymap.set("n", "<leader>ccq", function()
               local input = vim.fn.input("Quick Chat: ")
               if input ~= "" then
-                require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+                require("CopilotChat").ask(input)
               end
             end, { desc = 'CopilotChat - Quick chat' })
           '';

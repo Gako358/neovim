@@ -447,14 +447,14 @@
       "locked": {
         "lastModified": 1691810493,
         "narHash": "sha256-cWA0rzkOp/ekVKaFee7iea1lhnqKtWUIU+fW5M950wI=",
-        "owner": "jose-elias-alvarez",
-        "repo": "null-ls.nvim",
+        "owner": "nvimtools",
+        "repo": "none-ls.nvim",
         "rev": "0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7",
         "type": "github"
       },
       "original": {
-        "owner": "jose-elias-alvarez",
-        "repo": "null-ls.nvim",
+        "owner": "nvimtools",
+        "repo": "none-ls.nvim",
         "type": "github"
       }
     },
@@ -698,22 +698,6 @@
         "type": "github"
       }
     },
-    "plugins-rust-tools": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704259376,
-        "narHash": "sha256-kFane5ze7VDiOzF7jdmXkr50XQsNvdb+a9HQtybEVE0=",
-        "owner": "simrat39",
-        "repo": "rust-tools.nvim",
-        "rev": "676187908a1ce35ffcd727c654ed68d851299d3e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "simrat39",
-        "repo": "rust-tools.nvim",
-        "type": "github"
-      }
-    },
     "plugins-sqls-nvim": {
       "flake": false,
       "locked": {
@@ -855,13 +839,13 @@
         "plugins-orgmode": "plugins-orgmode",
         "plugins-plenary-nvim": "plugins-plenary-nvim",
         "plugins-ranger": "plugins-ranger",
-        "plugins-rust-tools": "plugins-rust-tools",
         "plugins-sqls-nvim": "plugins-sqls-nvim",
         "plugins-theme": "plugins-theme",
         "plugins-todo": "plugins-todo",
         "plugins-trouble": "plugins-trouble",
         "plugins-vim-vsnip": "plugins-vim-vsnip",
-        "plugins-which-key": "plugins-which-key"
+        "plugins-which-key": "plugins-which-key",
+        "plugins-rustaceanvim": "plugins-rust-tools"
       }
     },
     "rust-overlay": {
@@ -901,6 +885,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "plugins-rustaceanvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704259376,
+        "narHash": "sha256-kFane5ze7VDiOzF7jdmXkr50XQsNvdb+a9HQtybEVE0=",
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim",
+        "rev": "676187908a1ce35ffcd727c654ed68d851299d3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim",
         "type": "github"
       }
     }

@@ -104,7 +104,7 @@ in {
         '';
     })
     (mkIf cfg.ui.enable {
-      vim.startPlugins = ["nvim-dap-ui"];
+      vim.startPlugins = ["nvim-dap-ui" "nvim-nio"];
 
       vim.luaConfigRC.dap-ui = nvim.dag.entryAfter ["dap-setup"] ((
           /*

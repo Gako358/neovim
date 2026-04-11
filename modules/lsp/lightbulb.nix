@@ -16,18 +16,16 @@ in {
   config = mkIf (cfg.enable && cfg.lightbulb.enable) {
     vim.startPlugins = ["nvim-lightbulb"];
 
-    vim.configRC.lightbulb = nvim.dag.entryAnywhere ''
-      autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-    '';
-
     vim.luaConfigRC.lightbulb =
       nvim.dag.entryAnywhere
       /*
       lua
       */
       ''
-        -- Enable trouble diagnostics viewer
-        require'nvim-lightbulb'.setup()
+        -- Enable lightbulb for code actions
+        require'nvim-lightbulb'.setup({
+          autocmd = { enabled = true }
+        })
       '';
   };
 }

@@ -47,8 +47,8 @@ in {
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-          vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-          vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+          vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>', opts)
+          vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.jump({count=1, float=true})<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
@@ -58,14 +58,10 @@ in {
         -- Enable formatting
         format_callback = function(client, bufnr)
           vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
             buffer = bufnr,
             callback = function()
               if vim.g.formatsave then
-                if client.supports_method("textDocument/formatting") then
-                  local params = require'vim.lsp.util'.make_formatting_params({})
-                  client.request('textDocument/formatting', params, nil, bufnr)
-                end
+                vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 3000 })
               end
             end
           })
@@ -77,7 +73,8 @@ in {
         end
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        ${optionalString usingNvimCmp "capabilities = require('cmp_nvim_lsp').default_capabilities()"}
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+        ${optionalString usingNvimCmp "capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)"}
       '';
   };
 }
