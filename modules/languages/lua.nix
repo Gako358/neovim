@@ -1,44 +1,42 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.lua;
 
   defaultServer = "lua";
   servers = {
     lua = {
       package = pkgs.lua-language-server;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('lua_ls', {
-            capabilities = capabilities,
-            cmd = { "${cfg.lsp.package}/bin/lua-language-server" },
-            settings = {
-              Lua = {
-                runtime = {
-                  version = 'LuaJIT',
-                },
-                diagnostics = {
-                  globals = { "vim" },
-                },
-                workspace = {
-                  library = vim.api.nvim_get_runtime_file("lua", true),
-                  checkThirdParty = false,
-                },
-                telemetry = {
-                  enable = false,
-                },
+      lspConfig = /* lua */ ''
+        vim.lsp.config('lua_ls', {
+          capabilities = capabilities,
+          cmd = { "${cfg.lsp.package}/bin/lua-language-server" },
+          settings = {
+            Lua = {
+              runtime = {
+                version = 'LuaJIT',
+              },
+              diagnostics = {
+                globals = { "vim" },
+              },
+              workspace = {
+                library = vim.api.nvim_get_runtime_file("lua", true),
+                checkThirdParty = false,
+              },
+              telemetry = {
+                enable = false,
               },
             },
-          })
-          vim.lsp.enable('lua_ls')
-        '';
+          },
+        })
+        vim.lsp.enable('lua_ls')
+      '';
     };
   };
 
@@ -46,16 +44,12 @@ with builtins; let
   formats = {
     lua-format = {
       package = pkgs.luaformatter;
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["lua"] = { "lua-format" }
-          conform_formatters["lua-format"] = {
-            command = "${cfg.format.package}/bin/lua-format",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["lua"] = { "lua-format" }
+        conform_formatters["lua-format"] = {
+          command = "${cfg.format.package}/bin/lua-format",
+        }
+      '';
     };
   };
 in

@@ -1,27 +1,25 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.bash;
 
   defaultServer = "bashls";
   servers = {
     bashls = {
       package = [ "bash-language-server" ];
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('bashls', {
-            capabilities = capabilities,
-            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "bash-language-server"}", "start"},
-          })
-          vim.lsp.enable('bashls')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('bashls', {
+          capabilities = capabilities,
+          cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "bash-language-server"}", "start"},
+        })
+        vim.lsp.enable('bashls')
+      '';
     };
   };
 
@@ -29,17 +27,13 @@ with builtins; let
   formats = {
     shfmt = {
       package = [ "shfmt" ];
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["sh"] = { "shfmt" }
-          conform_formatters_by_ft["bash"] = { "shfmt" }
-          conform_formatters["shfmt"] = {
-            command = "${nvim.languages.commandOptToCmd cfg.format.package "shfmt"}",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["sh"] = { "shfmt" }
+        conform_formatters_by_ft["bash"] = { "shfmt" }
+        conform_formatters["shfmt"] = {
+          command = "${nvim.languages.commandOptToCmd cfg.format.package "shfmt"}",
+        }
+      '';
     };
   };
 
@@ -47,17 +41,13 @@ with builtins; let
   diagnostics = {
     shellcheck = {
       package = pkgs.shellcheck;
-      lintConfig = pkg:
-        /*
-      lua
-        */
-        ''
-          lint.linters_by_ft["sh"] = vim.list_extend(lint.linters_by_ft["sh"] or {}, { "shellcheck" })
-          lint.linters_by_ft["bash"] = vim.list_extend(lint.linters_by_ft["bash"] or {}, { "shellcheck" })
-          lint.linters.shellcheck = vim.tbl_deep_extend("force", lint.linters.shellcheck or {}, {
-            cmd = "${pkg}/bin/shellcheck",
-          })
-        '';
+      lintConfig = pkg: /* lua */ ''
+        lint.linters_by_ft["sh"] = vim.list_extend(lint.linters_by_ft["sh"] or {}, { "shellcheck" })
+        lint.linters_by_ft["bash"] = vim.list_extend(lint.linters_by_ft["bash"] or {}, { "shellcheck" })
+        lint.linters.shellcheck = vim.tbl_deep_extend("force", lint.linters.shellcheck or {}, {
+          cmd = "${pkg}/bin/shellcheck",
+        })
+      '';
     };
   };
 in

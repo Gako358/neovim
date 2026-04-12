@@ -1,9 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
+
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -17,15 +20,10 @@ in
     vim = {
       startPlugins = [ "lsp-signature" ];
 
-      luaConfigRC.lsp-signature =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            -- Enable lsp signature viewer
-            require("lsp_signature").setup()
-          '';
+      luaConfigRC.lsp-signature = nvim.dag.entryAnywhere /* lua */ ''
+        -- Enable lsp signature viewer
+        require("lsp_signature").setup()
+      '';
     };
   };
 }

@@ -1,9 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
+
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
   usingNvimCmp = config.vim.autocomplete.enable && config.vim.autocomplete.cmp.type == "nvim-cmp";
 in
@@ -27,12 +30,10 @@ in
   config = mkIf cfg.enable {
     vim = {
       startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
-      autocomplete.cmp.sources = { "nvim_lsp" = "[LSP]"; };
-      luaConfigRC.lsp-setup =
-      /*
-      lua
-      */
-      ''
+      autocomplete.cmp.sources = {
+        "nvim_lsp" = "[LSP]";
+      };
+      luaConfigRC.lsp-setup = /* lua */ ''
         vim.g.formatsave = ${boolToString cfg.formatOnSave};
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()

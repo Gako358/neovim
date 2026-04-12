@@ -1,28 +1,26 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.haskell;
 
   defaultServer = "haskell";
   servers = {
     haskell = {
       package = pkgs.haskell-language-server;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('hls', {
-            capabilities = capabilities,
-            cmd = {'${cfg.lsp.package}/bin/haskell-language-server-wrapper', '--lsp'},
-            root_markers = {"*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"},
-          })
-          vim.lsp.enable('hls')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('hls', {
+          capabilities = capabilities,
+          cmd = {'${cfg.lsp.package}/bin/haskell-language-server-wrapper', '--lsp'},
+          root_markers = {"*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"},
+        })
+        vim.lsp.enable('hls')
+      '';
     };
   };
 in

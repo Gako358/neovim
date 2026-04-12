@@ -1,20 +1,18 @@
 { lib }:
 with lib;
 let
-  diagnosticSubmodule =
-    { _ }:
-    {
-      options = {
-        type = mkOption {
-          description = "Type of diagnostic to enable";
-          type = attrNames diagnostics;
-        };
-        package = mkOption {
-          description = "Diagnostics package";
-          type = types.package;
-        };
+  diagnosticSubmodule = {
+    options = {
+      type = mkOption {
+        description = "Type of diagnostic to enable";
+        type = attrNames diagnostics;
+      };
+      package = mkOption {
+        description = "Diagnostics package";
+        type = types.package;
       };
     };
+  };
 in
 {
   mkDiagnosticsOption =

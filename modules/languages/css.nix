@@ -1,39 +1,37 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.css;
 
   defaultServer = "cssls";
   servers = {
     cssls = {
       package = pkgs.vscode-langservers-extracted;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('cssls', {
-            capabilities = capabilities,
-            cmd = {'${cfg.lsp.package}/bin/vscode-css-language-server', '--stdio'},
-            filetypes = {'css', 'scss', 'less'},
-            settings = {
-              css = {
-                validate = true,
-              },
-              less = {
-                validate = true,
-              },
-              scss = {
-                validate = true,
-              },
+      lspConfig = /* lua */ ''
+        vim.lsp.config('cssls', {
+          capabilities = capabilities,
+          cmd = {'${cfg.lsp.package}/bin/vscode-css-language-server', '--stdio'},
+          filetypes = {'css', 'scss', 'less'},
+          settings = {
+            css = {
+              validate = true,
             },
-          })
-          vim.lsp.enable('cssls')
-        '';
+            less = {
+              validate = true,
+            },
+            scss = {
+              validate = true,
+            },
+          },
+        })
+        vim.lsp.enable('cssls')
+      '';
     };
   };
 in

@@ -1,9 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
+
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -35,15 +38,10 @@ in
         end
       '';
 
-      luaConfigRC.trouble =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            -- Enable trouble diagnostics viewer
-            require("trouble").setup {}
-          '';
+      luaConfigRC.trouble = nvim.dag.entryAnywhere /* lua */ ''
+        -- Enable trouble diagnostics viewer
+        require("trouble").setup {}
+      '';
     };
   };
 }

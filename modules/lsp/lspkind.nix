@@ -1,9 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
+
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -13,7 +16,14 @@ in
 
       mode = mkOption {
         description = "Defines how annotations are shown";
-        type = with types; enum [ "text" "text_symbol" "symbol_text" "symbol" ];
+        type =
+          with types;
+          enum [
+            "text"
+            "text_symbol"
+            "symbol_text"
+            "symbol"
+          ];
         default = "symbol_text";
       };
     };
@@ -22,17 +32,12 @@ in
   config = mkIf (cfg.enable && cfg.lspkind.enable) {
     vim = {
       startPlugins = [ "lspkind" ];
-      luaConfigRC.lspkind =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            local lspkind = require'lspkind'
-            local lspkind_opts = {
-              mode = '${cfg.lspkind.mode}'
-            }
-          '';
+      luaConfigRC.lspkind = nvim.dag.entryAnywhere /* lua */ ''
+        local lspkind = require'lspkind'
+        local lspkind_opts = {
+          mode = '${cfg.lspkind.mode}'
+        }
+      '';
     };
   };
 }

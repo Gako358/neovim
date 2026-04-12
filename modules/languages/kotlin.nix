@@ -1,27 +1,25 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.kotlin;
 
   defaultServer = "kotlin";
   servers = {
     kotlin = {
       package = pkgs.kotlin-language-server;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('kotlin_language_server', {
-            capabilities = capabilities,
-            cmd = {'${cfg.lsp.package}/bin/kotlin-language-server'},
-          })
-          vim.lsp.enable('kotlin_language_server')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('kotlin_language_server', {
+          capabilities = capabilities,
+          cmd = {'${cfg.lsp.package}/bin/kotlin-language-server'},
+        })
+        vim.lsp.enable('kotlin_language_server')
+      '';
     };
   };
 
@@ -29,16 +27,12 @@ with builtins; let
   formats = {
     ktlint = {
       package = pkgs.ktlint;
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["kotlin"] = { "ktlint" }
-          conform_formatters["ktlint"] = {
-            command = "${cfg.format.package}/bin/ktlint",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["kotlin"] = { "ktlint" }
+        conform_formatters["ktlint"] = {
+          command = "${cfg.format.package}/bin/ktlint",
+        }
+      '';
     };
   };
 

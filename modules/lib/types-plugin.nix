@@ -1,17 +1,17 @@
 { lib }:
-with lib; let
-  pluginsType = rawPlugins:
+with lib;
+let
+  pluginsType =
+    rawPlugins:
     with types;
-    listOf (nullOr (either
-      (enum ((attrNames rawPlugins) ++ [ "nvim-treesitter" ]))
-      package));
+    listOf (nullOr (either (enum ((attrNames rawPlugins) ++ [ "nvim-treesitter" ])) package));
 in
 {
   pluginsOpt =
-    { rawPlugins
-    , description
-    , default ? [ ]
-    ,
+    {
+      rawPlugins,
+      description,
+      default ? [ ],
     }:
     mkOption {
       inherit description default;

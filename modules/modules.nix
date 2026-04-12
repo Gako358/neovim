@@ -20,19 +20,17 @@ let
     ./visual.nix
   ];
 
-  pkgsModule =
-    { config, ... }:
-    {
-      config = {
-        _module = {
-          args = {
-            baseModules = modules;
-            pkgsPath = lib.mkDefault pkgs.path;
-            pkgs = lib.mkDefault pkgs;
-          };
-          inherit check;
+  pkgsModule = {
+    config = {
+      _module = {
+        args = {
+          baseModules = modules;
+          pkgsPath = lib.mkDefault pkgs.path;
+          pkgs = lib.mkDefault pkgs;
         };
+        inherit check;
       };
     };
+  };
 in
 modules ++ [ pkgsModule ]

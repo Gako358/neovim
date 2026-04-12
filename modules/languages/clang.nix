@@ -1,30 +1,28 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.clang;
 
   defaultServer = "clangd";
   servers = {
     clangd = {
       package = pkgs.clang-tools;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          local clangd_capabilities = vim.deepcopy(capabilities)
-          clangd_capabilities.textDocument.semanticHighlighting = true
-          clangd_capabilities.offsetEncoding = {"utf-16"}
-          vim.lsp.config('clangd', {
-            capabilities = clangd_capabilities,
-            cmd = {"${pkgs.clang-tools}/bin/clangd"},
-          })
-          vim.lsp.enable('clangd')
-        '';
+      lspConfig = /* lua */ ''
+        local clangd_capabilities = vim.deepcopy(capabilities)
+        clangd_capabilities.textDocument.semanticHighlighting = true
+        clangd_capabilities.offsetEncoding = {"utf-16"}
+        vim.lsp.config('clangd', {
+          capabilities = clangd_capabilities,
+          cmd = {"${pkgs.clang-tools}/bin/clangd"},
+        })
+        vim.lsp.enable('clangd')
+      '';
     };
   };
 
@@ -32,18 +30,14 @@ with builtins; let
   formats = {
     clang-format = {
       package = pkgs.clang-tools;
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["c"] = { "clang-format" }
-          conform_formatters_by_ft["cpp"] = { "clang-format" }
-          conform_formatters_by_ft["cs"] = { "clang-format" }
-          conform_formatters["clang-format"] = {
-            command = "${cfg.format.package}/bin/clang-format",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["c"] = { "clang-format" }
+        conform_formatters_by_ft["cpp"] = { "clang-format" }
+        conform_formatters_by_ft["cs"] = { "clang-format" }
+        conform_formatters["clang-format"] = {
+          command = "${cfg.format.package}/bin/clang-format",
+        }
+      '';
     };
   };
 in
@@ -115,7 +109,10 @@ in
     (mkIf cfg.treesitter.enable {
       vim.treesitter = {
         enable = true;
-        grammars = [ cfg.treesitter.cPackage cfg.treesitter.cppPackage ];
+        grammars = [
+          cfg.treesitter.cPackage
+          cfg.treesitter.cppPackage
+        ];
       };
     })
 

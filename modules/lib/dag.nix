@@ -9,14 +9,19 @@
 #    by" relationship.
 { lib }:
 let
-  inherit (lib) all filterAttrs nvim mapAttrs toposort;
+  inherit (lib)
+    all
+    filterAttrs
+    nvim
+    mapAttrs
+    toposort
+    ;
 in
 {
   empty = { };
 
   isEntry = e: e ? data && e ? after && e ? before;
-  isDag = dag:
-    builtins.isAttrs dag && all nvim.dag.isEntry (builtins.attrValues dag);
+  isDag = dag: builtins.isAttrs dag && all nvim.dag.isEntry (builtins.attrValues dag);
 
   # Takes an attribute set containing entries built by entryAnywhere,
   # entryAfter, and entryBefore to a topologically sorted list of
@@ -74,27 +79,24 @@ in
   #                ];
   #              }
   #    true
-  topoSort = dag:
+  topoSort =
+    dag:
     let
-      dagBefore = dag: name:
-        builtins.attrNames
-          (filterAttrs (n: v: builtins.elem name v.before) dag);
-      normalizedDag =
-        mapAttrs
-          (n: v: {
-            name = n;
-            inherit (v) data;
-            after = v.after ++ dagBefore dag n;
-          })
-          dag;
+      dagBefore = dag: name: builtins.attrNames (filterAttrs (_: v: builtins.elem name v.before) dag);
+      normalizedDag = mapAttrs (n: v: {
+        name = n;
+        inherit (v) data;
+        after = v.after ++ dagBefore dag n;
+      }) dag;
       before = a: b: builtins.elem a.name b.after;
       sorted = toposort before (builtins.attrValues normalizedDag);
     in
-    if sorted ? result
-    then {
-      result = map (v: { inherit (v) name data; }) sorted.result;
-    }
-    else sorted;
+    if sorted ? result then
+      {
+        result = map (v: { inherit (v) name data; }) sorted.result;
+      }
+    else
+      sorted;
 
   # Applies a function to each element of the given DAG.
   map = f: mapAttrs (n: v: v // { data = f n v.data; });
@@ -108,17 +110,18 @@ in
   entryBefore = before: nvim.dag.entryBetween before [ ];
 
   resolveDag =
-    { name
-    , dag
-    , mapResult
-    ,
+    {
+      name,
+      dag,
+      mapResult,
     }:
     let
       sortedDag = nvim.dag.topoSort dag;
       result =
-        if sortedDag ? result
-        then mapResult sortedDag.result
-        else abort ("Dependency cycle in ${name}: " + builtins.toJSON sortedDag);
+        if sortedDag ? result then
+          mapResult sortedDag.result
+        else
+          abort ("Dependency cycle in ${name}: " + builtins.toJSON sortedDag);
     in
     result;
 }

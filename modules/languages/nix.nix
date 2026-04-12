@@ -1,10 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.nix;
 
   defaultServer = "nil";
@@ -12,35 +14,29 @@ with builtins; let
     nil = {
       package = [ "nil" ];
       internalFormatter = true;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('nil_ls', {
-            capabilities = capabilities,
-            cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "nil"}"},
-          ${optionalString cfg.format.enable ''
-            settings = {
-              ["nil"] = {
-            ${optionalString (cfg.format.type == "alejandra")
-              ''
-                formatting = {
-                  command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
-                },
-              ''}
-            ${optionalString (cfg.format.type == "nixpkgs-fmt")
-              ''
-                formatting = {
-                  command = {"${cfg.format.package}/bin/nixpkgs-fmt"},
-                },
-              ''}
-              },
+      lspConfig = /* lua */ ''
+        vim.lsp.config('nil_ls', {
+          capabilities = capabilities,
+          cmd = {"${nvim.languages.commandOptToCmd cfg.lsp.package "nil"}"},
+        ${optionalString cfg.format.enable ''
+          settings = {
+            ["nil"] = {
+          ${optionalString (cfg.format.type == "alejandra") ''
+            formatting = {
+              command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
             },
           ''}
-          })
-          vim.lsp.enable('nil_ls')
-        '';
+          ${optionalString (cfg.format.type == "nixpkgs-fmt") ''
+            formatting = {
+              command = {"${cfg.format.package}/bin/nixpkgs-fmt"},
+            },
+          ''}
+            },
+          },
+        ''}
+        })
+        vim.lsp.enable('nil_ls')
+      '';
     };
   };
 
@@ -48,17 +44,13 @@ with builtins; let
   formats = {
     alejandra = {
       package = [ "alejandra" ];
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["nix"] = { "alejandra" }
-          conform_formatters["alejandra"] = {
-            command = "${nvim.languages.commandOptToCmd cfg.format.package "alejandra"}",
-            args = { "--quiet", "-" },
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["nix"] = { "alejandra" }
+        conform_formatters["alejandra"] = {
+          command = "${nvim.languages.commandOptToCmd cfg.format.package "alejandra"}",
+          args = { "--quiet", "-" },
+        }
+      '';
     };
     nixpkgs-fmt = {
       package = [ "nixpkgs-fmt" ];
@@ -66,7 +58,10 @@ with builtins; let
     };
   };
 
-  defaultDiagnostics = [ "statix" "deadnix" ];
+  defaultDiagnostics = [
+    "statix"
+    "deadnix"
+  ];
   diagnostics = {
     statix = {
       package = pkgs.statix;

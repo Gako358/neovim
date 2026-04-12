@@ -1,9 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.keys;
 in
 {
@@ -19,12 +21,7 @@ in
     vim = {
       startPlugins = [ "which-key" ];
 
-      luaConfigRC.whichkey =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
+      luaConfigRC.whichkey = nvim.dag.entryAnywhere /* lua */ ''
 
         function ReplaceWord()
           local word = vim.fn.expand("<cword>")

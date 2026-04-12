@@ -1,27 +1,25 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.xml;
 
   defaultServer = "lemminx";
   servers = {
     lemminx = {
       package = pkgs.lemminx;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('lemminx', {
-            capabilities = capabilities,
-            cmd = { "${cfg.lsp.package}/bin/lemminx" },
-          })
-          vim.lsp.enable('lemminx')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('lemminx', {
+          capabilities = capabilities,
+          cmd = { "${cfg.lsp.package}/bin/lemminx" },
+        })
+        vim.lsp.enable('lemminx')
+      '';
     };
   };
 
@@ -29,16 +27,12 @@ with builtins; let
   formats = {
     tidy = {
       package = pkgs.html-tidy;
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["xml"] = { "tidy" }
-          conform_formatters["tidy"] = {
-            command = "${cfg.format.package}/bin/tidy",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["xml"] = { "tidy" }
+        conform_formatters["tidy"] = {
+          command = "${cfg.format.package}/bin/tidy",
+        }
+      '';
     };
   };
 in
