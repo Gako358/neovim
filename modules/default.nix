@@ -1,9 +1,9 @@
-{ modules ? [ ]
-, pkgs
-, lib ? pkgs.lib
-, check ? true
-, extraSpecialArgs ? { }
-,
+{
+  modules ? [ ],
+  pkgs,
+  lib ? pkgs.lib,
+  check ? true,
+  extraSpecialArgs ? { },
 }:
 let
   extendedLib = import ./lib/stdlib-extended.nix lib;
@@ -15,12 +15,11 @@ let
 
   module = extendedLib.evalModules {
     modules = modules ++ nvimModules;
-    specialArgs =
-      {
-        modulesPath = builtins.toString ./.;
-        currentModules = modules;
-      }
-      // extraSpecialArgs;
+    specialArgs = {
+      modulesPath = builtins.toString ./.;
+      currentModules = modules;
+    }
+    // extraSpecialArgs;
   };
 in
 module.config.built.package

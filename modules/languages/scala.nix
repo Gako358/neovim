@@ -1,10 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.scala;
 
   defaultServer = "metals";
@@ -58,11 +60,7 @@ in
       vim = {
         startPlugins = [ "nvim-metals" ];
         lsp.lspconfig.enable = true;
-        lsp.lspconfig.sources.scala-lsp =
-        /*
-        lua
-        */
-        ''
+        lsp.lspconfig.sources.scala-lsp = /* lua */ ''
           local metals_config = require("metals").bare_config()
           metals_config.settings = {
             metalsBinaryPath = "${cfg.lsp.package}/bin/metals",

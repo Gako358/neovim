@@ -4,10 +4,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # git-hooks = {
-    #   url = "github:cachix/git-hooks.nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nil = {
       url = "github:oxalica/nil";
@@ -375,24 +375,24 @@
             { config.vim.languages.html.enable = pkgs.lib.mkForce true; }
           ];
 
-          # pre-commit-check = inputs.git-hooks.lib.${system}.run {
-          #   src = ./.;
-          #   hooks = {
-          #     statix.enable = true;
-          #     deadnix.enable = true;
-          #     nil.enable = true;
-          #     nixfmt.enable = true;
-          #     shellcheck.enable = true;
-          #     beautysh.enable = true;
-          #   };
-          # };
+          pre-commit-check = inputs.git-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              statix.enable = true;
+              deadnix.enable = true;
+              nil.enable = true;
+              nixfmt.enable = true;
+              shellcheck.enable = true;
+              beautysh.enable = true;
+            };
+          };
         in
         {
           formatter = pkgs.nixfmt;
 
-          # checks = {
-          #   inherit pre-commit-check;
-          # };
+          checks = {
+            inherit pre-commit-check;
+          };
 
           apps = rec {
             neovim = {
@@ -403,6 +403,7 @@
           };
 
           devShells.default = pkgs.mkShell {
+            inherit (pre-commit-check) shellHook;
             nativeBuildInputs = [
               devPkg
             ];

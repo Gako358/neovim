@@ -2,8 +2,7 @@
 # Used for ordering config text.
 { lib }:
 let
-  inherit
-    (lib)
+  inherit (lib)
     defaultFunctor
     nvim
     mkIf
@@ -13,39 +12,41 @@ let
     types
     ;
 
-  dagEntryOf = elemType:
+  dagEntryOf =
+    elemType:
     let
-      submoduleType = types.submodule ({ name, ... }: {
-        options = {
-          data = mkOption { type = elemType; };
-          after = mkOption { type = with types; listOf str; };
-          before = mkOption { type = with types; listOf str; };
-        };
-        config = mkIf (elemType.name == "submodule") {
-          data._module.args.dagName = name;
-        };
-      });
-      maybeConvert = def:
-        if nvim.dag.isEntry def.value
-        then def.value
+      submoduleType = types.submodule (
+        { name, ... }:
+        {
+          options = {
+            data = mkOption { type = elemType; };
+            after = mkOption { type = with types; listOf str; };
+            before = mkOption { type = with types; listOf str; };
+          };
+          config = mkIf (elemType.name == "submodule") {
+            data._module.args.dagName = name;
+          };
+        }
+      );
+      maybeConvert =
+        def:
+        if nvim.dag.isEntry def.value then
+          def.value
         else
-          nvim.dag.entryAnywhere (
-            if def ? priority
-            then mkOrder def.priority def.value
-            else def.value
-          );
+          nvim.dag.entryAnywhere (if def ? priority then mkOrder def.priority def.value else def.value);
     in
     mkOptionType {
       name = "dagEntryOf";
       description = "DAG entry of ${elemType.description}";
       # leave the checking to the submodule type
-      merge = loc: defs:
-        submoduleType.merge loc (map
-          (def: {
+      merge =
+        loc: defs:
+        submoduleType.merge loc (
+          map (def: {
             inherit (def) file;
             value = maybeConvert def;
-          })
-          defs);
+          }) defs
+        );
     };
 in
 rec {
@@ -56,7 +57,8 @@ rec {
   # internal structure of the DAG values. To give access to the
   # "actual" attribute name a new submodule argument is provided with
   # the name `dagName`.
-  dagOf = elemType:
+  dagOf =
+    elemType:
     let
       attrEquivalent = types.attrsOf (dagEntryOf elemType);
     in
@@ -67,7 +69,9 @@ rec {
       getSubOptions = prefix: elemType.getSubOptions (prefix ++ [ "<name>" ]);
       inherit (elemType) getSubModules;
       substSubModules = m: dagOf (elemType.substSubModules m);
-      functor = (defaultFunctor name) // { wrapped = elemType; };
+      functor = (defaultFunctor name) // {
+        wrapped = elemType;
+      };
       nestedTypes.elemType = elemType;
     };
 }

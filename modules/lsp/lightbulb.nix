@@ -1,9 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
+
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -17,17 +20,12 @@ in
     vim = {
       startPlugins = [ "nvim-lightbulb" ];
 
-      luaConfigRC.lightbulb =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            -- Enable lightbulb for code actions
-            require'nvim-lightbulb'.setup({
-              autocmd = { enabled = true }
-            })
-          '';
+      luaConfigRC.lightbulb = nvim.dag.entryAnywhere /* lua */ ''
+        -- Enable lightbulb for code actions
+        require'nvim-lightbulb'.setup({
+          autocmd = { enabled = true }
+        })
+      '';
     };
   };
 }

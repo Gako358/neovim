@@ -1,27 +1,25 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.python;
 
   defaultServer = "pyright";
   servers = {
     pyright = {
       package = pkgs.pyright;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('pyright', {
-            capabilities = capabilities,
-            cmd = {"${cfg.lsp.package}/bin/pyright-langserver", "--stdio"},
-          })
-          vim.lsp.enable('pyright')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('pyright', {
+          capabilities = capabilities,
+          cmd = {"${cfg.lsp.package}/bin/pyright-langserver", "--stdio"},
+        })
+        vim.lsp.enable('pyright')
+      '';
     };
   };
 
@@ -29,16 +27,12 @@ with builtins; let
   formats = {
     black = {
       package = pkgs.black;
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["python"] = { "black" }
-          conform_formatters["black"] = {
-            command = "${cfg.format.package}/bin/black",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["python"] = { "black" }
+        conform_formatters["black"] = {
+          command = "${cfg.format.package}/bin/black",
+        }
+      '';
     };
   };
 in

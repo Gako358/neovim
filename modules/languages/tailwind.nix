@@ -1,29 +1,27 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.tailwind;
 
   defaultServer = "tailwind";
   servers = {
     tailwind = {
       package = pkgs.tailwindcss-language-server;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('tailwindcss', {
-            capabilities = capabilities,
-            cmd = {'${cfg.lsp.package}/bin/tailwindcss-language-server'},
-            filetypes = {'css', 'scss', 'less', 'html', 'vue', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
-            root_markers = {'tailwind.config.js', 'tailwind.config.ts', 'tailwind.config.lua', 'package.json'},
-          })
-          vim.lsp.enable('tailwindcss')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('tailwindcss', {
+          capabilities = capabilities,
+          cmd = {'${cfg.lsp.package}/bin/tailwindcss-language-server'},
+          filetypes = {'css', 'scss', 'less', 'html', 'vue', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
+          root_markers = {'tailwind.config.js', 'tailwind.config.ts', 'tailwind.config.lua', 'package.json'},
+        })
+        vim.lsp.enable('tailwindcss')
+      '';
     };
   };
 in

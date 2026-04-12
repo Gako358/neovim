@@ -1,9 +1,12 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
+
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {
@@ -17,21 +20,16 @@ in
     vim = {
       startPlugins = [ "fidget" ];
 
-      luaConfigRC.fidget =
-        nvim.dag.entryAnywhere
-          /*
-        lua
-          */
-          ''
-            -- Enable fidget
-            require'fidget'.setup({
-              notification = {
-                window = {
-                  winblend = 0
-                },
-              },
-            })
-          '';
+      luaConfigRC.fidget = nvim.dag.entryAnywhere /* lua */ ''
+        -- Enable fidget
+        require'fidget'.setup({
+          notification = {
+            window = {
+              winblend = 0
+            },
+          },
+        })
+      '';
     };
   };
 }

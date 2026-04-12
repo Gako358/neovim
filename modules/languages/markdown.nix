@@ -1,10 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.markdown;
 in
 {
@@ -32,29 +34,27 @@ in
     (mkIf cfg.treesitter.enable {
       vim.treesitter = {
         enable = true;
-        grammars = [ cfg.treesitter.mdPackage cfg.treesitter.mdInlinePackage ];
+        grammars = [
+          cfg.treesitter.mdPackage
+          cfg.treesitter.mdInlinePackage
+        ];
       };
     })
     (mkIf cfg.glow.enable {
       vim = {
         startPlugins = [ "glow-nvim" ];
 
-        luaConfigRC.glow =
-          nvim.dag.entryAnywhere
-            /*
-          lua
-            */
-            ''
-              require'glow'.setup({
-                glow_path = "${pkgs.glow}/bin/glow",
-              })
-              vim.api.nvim_create_autocmd("FileType", {
-                pattern = "markdown",
-                callback = function(args)
-                  vim.keymap.set('n', '<leader>p', function() vim.cmd('Glow') end)
-                end
-              })
-            '';
+        luaConfigRC.glow = nvim.dag.entryAnywhere /* lua */ ''
+          require'glow'.setup({
+            glow_path = "${pkgs.glow}/bin/glow",
+          })
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = "markdown",
+            callback = function(args)
+              vim.keymap.set('n', '<leader>p', function() vim.cmd('Glow') end)
+            end
+          })
+        '';
       };
     })
   ]);

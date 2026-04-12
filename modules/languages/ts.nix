@@ -1,28 +1,26 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.ts;
 
   defaultServer = "ts_ls";
   servers = {
     ts_ls = {
       package = pkgs.typescript-language-server;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('ts_ls', {
-            capabilities = capabilities,
-            cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
-            filetypes = {"typescript", "javascript"},
-          })
-          vim.lsp.enable('ts_ls')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('ts_ls', {
+          capabilities = capabilities,
+          cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
+          filetypes = {"typescript", "javascript"},
+        })
+        vim.lsp.enable('ts_ls')
+      '';
     };
   };
 
@@ -30,19 +28,15 @@ with builtins; let
   formats = {
     prettier = {
       package = [ "prettier" ];
-      conformConfig =
-        /*
-        lua
-        */
-        ''
-          conform_formatters_by_ft["javascript"] = { "prettier" }
-          conform_formatters_by_ft["typescript"] = { "prettier" }
-          conform_formatters_by_ft["javascriptreact"] = { "prettier" }
-          conform_formatters_by_ft["typescriptreact"] = { "prettier" }
-          conform_formatters["prettier"] = {
-            command = "${nvim.languages.commandOptToCmd cfg.format.package "prettier"}",
-          }
-        '';
+      conformConfig = /* lua */ ''
+        conform_formatters_by_ft["javascript"] = { "prettier" }
+        conform_formatters_by_ft["typescript"] = { "prettier" }
+        conform_formatters_by_ft["javascriptreact"] = { "prettier" }
+        conform_formatters_by_ft["typescriptreact"] = { "prettier" }
+        conform_formatters["prettier"] = {
+          command = "${nvim.languages.commandOptToCmd cfg.format.package "prettier"}",
+        }
+      '';
     };
   };
 
@@ -51,19 +45,15 @@ with builtins; let
   diagnostics = {
     eslint = {
       package = pkgs.eslint_d;
-      lintConfig = pkg:
-        /*
-      lua
-        */
-        ''
-          lint.linters_by_ft["javascript"] = vim.list_extend(lint.linters_by_ft["javascript"] or {}, { "eslint_d" })
-          lint.linters_by_ft["typescript"] = vim.list_extend(lint.linters_by_ft["typescript"] or {}, { "eslint_d" })
-          lint.linters_by_ft["javascriptreact"] = vim.list_extend(lint.linters_by_ft["javascriptreact"] or {}, { "eslint_d" })
-          lint.linters_by_ft["typescriptreact"] = vim.list_extend(lint.linters_by_ft["typescriptreact"] or {}, { "eslint_d" })
-          lint.linters.eslint_d = vim.tbl_deep_extend("force", lint.linters.eslint_d or {}, {
-            cmd = "${pkg}/bin/eslint_d",
-          })
-        '';
+      lintConfig = pkg: /* lua */ ''
+        lint.linters_by_ft["javascript"] = vim.list_extend(lint.linters_by_ft["javascript"] or {}, { "eslint_d" })
+        lint.linters_by_ft["typescript"] = vim.list_extend(lint.linters_by_ft["typescript"] or {}, { "eslint_d" })
+        lint.linters_by_ft["javascriptreact"] = vim.list_extend(lint.linters_by_ft["javascriptreact"] or {}, { "eslint_d" })
+        lint.linters_by_ft["typescriptreact"] = vim.list_extend(lint.linters_by_ft["typescriptreact"] or {}, { "eslint_d" })
+        lint.linters.eslint_d = vim.tbl_deep_extend("force", lint.linters.eslint_d or {}, {
+          cmd = "${pkg}/bin/eslint_d",
+        })
+      '';
     };
   };
 in
@@ -134,7 +124,10 @@ in
     (mkIf cfg.treesitter.enable {
       vim.treesitter = {
         enable = true;
-        grammars = [ cfg.treesitter.tsPackage cfg.treesitter.jsPackage ];
+        grammars = [
+          cfg.treesitter.tsPackage
+          cfg.treesitter.jsPackage
+        ];
       };
     })
 

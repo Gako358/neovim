@@ -1,11 +1,13 @@
-{ config
-, lib
-, pkgs
-, currentModules
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  currentModules,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfgBuild = config.build;
   cfgBuilt = config.built;
   cfgVim = config.vim;
@@ -24,12 +26,15 @@ with builtins; let
     EOF
   '';
 
-  mkMappingOption = it:
-    mkOption ({
-      default = { };
-      type = with types; attrsOf (nullOr str);
-    }
-    // it);
+  mkMappingOption =
+    it:
+    mkOption (
+      {
+        default = { };
+        type = with types; attrsOf (nullOr str);
+      }
+      // it
+    );
 in
 {
   options = {
@@ -137,11 +142,15 @@ in
 
   config =
     let
-      buildPlug = name:
+      buildPlug =
+        name:
         pkgs.vimUtils.buildVimPlugin rec {
           pname = name;
           version = "master";
-          src = assert asserts.assertMsg (name != "nvim-treesitter") "Use buildTreesitterPlug for building nvim-treesitter.";
+          src =
+            assert asserts.assertMsg (
+              name != "nvim-treesitter"
+            ) "Use buildTreesitterPlug for building nvim-treesitter.";
             cfgBuild.rawPlugins.${pname}.src;
           # Disable nvim-require-check: plugins built from flake inputs
           # don't have their runtime dependencies available at build time.
@@ -150,30 +159,24 @@ in
 
       treeSitterPlug = pkgs.vimPlugins.nvim-treesitter.withPlugins (_: config.vim.treesitter.grammars);
 
-      buildConfigPlugins = plugins:
-        map
-          (plug: (
-            if isString plug
-            then
-              (
-                if (plug == "nvim-treesitter")
-                then treeSitterPlug
-                else buildPlug plug
-              )
-            else plug
-          ))
-          (filter
-            (f: f != null)
-            plugins);
+      buildConfigPlugins =
+        plugins:
+        map (
+          plug:
+          (
+            if isString plug then
+              (if (plug == "nvim-treesitter") then treeSitterPlug else buildPlug plug)
+            else
+              plug
+          )
+        ) (filter (f: f != null) plugins);
 
       normalizedPlugins =
         cfgBuilt.startPlugins
-        ++ (map
-          (plugin: {
-            inherit plugin;
-            optional = true;
-          })
-          cfgBuilt.optPlugins);
+        ++ (map (plugin: {
+          inherit plugin;
+          optional = true;
+        }) cfgBuilt.optPlugins);
 
       neovimConfig = {
         inherit (cfgBuild) viAlias vimAlias;
@@ -186,36 +189,29 @@ in
       };
 
       # Vim config helpers
-      mkVimBool = val:
-        if val
-        then "1"
-        else "0";
-      valToVim = val:
-        if (isInt val)
-        then (builtins.toString val)
+      mkVimBool = val: if val then "1" else "0";
+      valToVim =
+        val:
+        if (isInt val) then
+          (builtins.toString val)
         else
-          (
-            if (isBool val)
-            then (mkVimBool val)
-            else (toJSON val)
-          );
+          (if (isBool val) then (mkVimBool val) else (toJSON val));
 
-      filterNonNull = mappings: filterAttrs (name: value: value != null) mappings;
-      globalsScript =
-        mapAttrsToList (name: value: "let g:${name}=${valToVim value}")
-          (filterNonNull cfg.globals);
+      filterNonNull = mappings: filterAttrs (_: value: value != null) mappings;
+      globalsScript = mapAttrsToList (name: value: "let g:${name}=${valToVim value}") (
+        filterNonNull cfg.globals
+      );
 
       matchCtrl = it: match "Ctrl-(.)(.*)" it;
-      mapKeyBinding = it:
+      mapKeyBinding =
+        it:
         let
           groups = matchCtrl it;
         in
-        if groups == null
-        then it
-        else "<C-${toUpper (head groups)}>${head (tail groups)}";
-      mapVimBinding = prefix: mappings:
-        mapAttrsToList (name: value: "${prefix} ${mapKeyBinding name} ${value}")
-          (filterNonNull mappings);
+        if groups == null then it else "<C-${toUpper (head groups)}>${head (tail groups)}";
+      mapVimBinding =
+        prefix: mappings:
+        mapAttrsToList (name: value: "${prefix} ${mapKeyBinding name} ${value}") (filterNonNull mappings);
 
       # Map bindings
       nmap = mapVimBinding "nmap" config.vim.nmap;
@@ -258,7 +254,24 @@ in
 
           mappings =
             let
-              maps = [ nmap imap vmap xmap smap cmap omap tmap nnoremap inoremap vnoremap xnoremap snoremap cnoremap onoremap tnoremap ];
+              maps = [
+                nmap
+                imap
+                vmap
+                xmap
+                smap
+                cmap
+                omap
+                tmap
+                nnoremap
+                inoremap
+                vnoremap
+                xnoremap
+                snoremap
+                cnoremap
+                onoremap
+                tnoremap
+              ];
               mapConfig = concatStringsSep "\n" (map (v: concatStringsSep "\n" v) maps);
             in
             nvim.dag.entryAfter [ "globalsScript" ] mapConfig;
@@ -284,33 +297,28 @@ in
         startPlugins = buildConfigPlugins cfgVim.startPlugins;
         optPlugins = buildConfigPlugins cfgVim.optPlugins;
 
-        package =
-          (pkgs.wrapNeovimUnstable cfgBuild.package neovimConfig).overrideAttrs (oldAttrs: {
-            passthru =
-              (oldAttrs.passthru or { })
-              // {
-                extendConfiguration =
-                  { modules ? [ ]
-                  , pkgs ? config._module.args.pkgs
-                  , lib ? pkgs.lib
-                  , extraSpecialArgs ? { }
-                  , check ? config._module.args.check
-                  ,
-                  }:
-                  import ../../modules {
-                    modules = currentModules ++ modules;
-                    extraSpecialArgs = config._module.specialArgs // extraSpecialArgs;
-                    inherit pkgs lib;
-                  };
+        package = (pkgs.wrapNeovimUnstable cfgBuild.package neovimConfig).overrideAttrs (oldAttrs: {
+          passthru = (oldAttrs.passthru or { }) // {
+            extendConfiguration =
+              {
+                modules ? [ ],
+                pkgs ? config._module.args.pkgs,
+                lib ? pkgs.lib,
+                extraSpecialArgs ? { },
+                check ? config._module.args.check,
+              }:
+              import ../../modules {
+                modules = currentModules ++ modules;
+                extraSpecialArgs = config._module.specialArgs // extraSpecialArgs;
+                inherit pkgs lib check;
               };
-            meta =
-              (oldAttrs.meta or { })
-              // {
-                module = {
-                  inherit config options;
-                };
-              };
-          });
+          };
+          meta = (oldAttrs.meta or { }) // {
+            module = {
+              inherit config options;
+            };
+          };
+        });
       };
     };
 }

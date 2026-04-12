@@ -5,10 +5,12 @@ nixpkgsLib:
 let
   mkNvimLib = import ./.;
 in
-nixpkgsLib.extend (self: super: {
-  nvim = mkNvimLib { lib = self; };
+nixpkgsLib.extend (
+  self: super: {
+    nvim = mkNvimLib { lib = self; };
 
-  # For forward compatibility.
-  literalExpression = super.literalExpression or super.literalExample;
-  literalDocBook = super.literalDocBook or super.literalExample;
-})
+    # For forward compatibility.
+    literalExpression = super.literalExpression or super.literalExample;
+    literalDocBook = super.literalDocBook or super.literalExample;
+  }
+)

@@ -1,9 +1,11 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim;
 in
 {
@@ -63,13 +65,28 @@ in
     };
 
     mouseSupport = mkOption {
-      type = with types; enum [ "a" "n" "v" "i" "c" ];
+      type =
+        with types;
+        enum [
+          "a"
+          "n"
+          "v"
+          "i"
+          "c"
+        ];
       default = "a";
       description = "Set modes for mouse support. a - all, n - normal, v - visual, i - insert, c - command";
     };
 
     lineNumberMode = mkOption {
-      type = with types; enum [ "relative" "number" "relNumber" "none" ];
+      type =
+        with types;
+        enum [
+          "relative"
+          "number"
+          "relNumber"
+          "none"
+        ];
       default = "relNumber";
       description = "How line numbers are displayed. none, relative, number, relNumber";
     };
@@ -111,7 +128,11 @@ in
     };
 
     bell = mkOption {
-      type = types.enum [ "none" "visual" "on" ];
+      type = types.enum [
+        "none"
+        "visual"
+        "on"
+      ];
       default = "none";
       description = "Set how bells are handled. Options: on, visual or none";
     };
@@ -188,95 +209,95 @@ in
       };
 
       configRC.basic = nvim.dag.entryAfter [ "globalsScript" ] ''
-      " Settings that are set for everything
-      set encoding=utf-8
-      set mouse=${cfg.mouseSupport}
-      set tabstop=${toString cfg.tabWidth}
-      set shiftwidth=${toString cfg.tabWidth}
-      set softtabstop=${toString cfg.tabWidth}
-      set expandtab
-      set cmdheight=${toString cfg.cmdHeight}
-      set updatetime=${toString cfg.updateTime}
-      set shortmess+=c
-      set tm=${toString cfg.mapTimeout}
-      set hidden
-      ${optionalString cfg.splitBelow ''
-        set splitbelow
-      ''}
-      ${optionalString cfg.splitRight ''
-        set splitright
-      ''}
-      ${optionalString cfg.showSignColumn ''
-        set signcolumn=yes
-      ''}
-      ${optionalString cfg.autoIndent ''
-        set autoindent
-      ''}
+        " Settings that are set for everything
+        set encoding=utf-8
+        set mouse=${cfg.mouseSupport}
+        set tabstop=${toString cfg.tabWidth}
+        set shiftwidth=${toString cfg.tabWidth}
+        set softtabstop=${toString cfg.tabWidth}
+        set expandtab
+        set cmdheight=${toString cfg.cmdHeight}
+        set updatetime=${toString cfg.updateTime}
+        set shortmess+=c
+        set tm=${toString cfg.mapTimeout}
+        set hidden
+        ${optionalString cfg.splitBelow ''
+          set splitbelow
+        ''}
+        ${optionalString cfg.splitRight ''
+          set splitright
+        ''}
+        ${optionalString cfg.showSignColumn ''
+          set signcolumn=yes
+        ''}
+        ${optionalString cfg.autoIndent ''
+          set autoindent
+        ''}
 
-      ${optionalString cfg.preventJunkFiles ''
-        set noswapfile
-        set nobackup
-        set nowritebackup
-      ''}
-      ${optionalString (cfg.bell == "none") ''
-        set noerrorbells
-        set novisualbell
-      ''}
-      ${optionalString (cfg.bell == "on") ''
-        set novisualbell
-      ''}
-      ${optionalString (cfg.bell == "visual") ''
-        set noerrorbells
-      ''}
-      ${optionalString (cfg.lineNumberMode == "relative") ''
-        set relativenumber
-      ''}
-      ${optionalString (cfg.lineNumberMode == "number") ''
-        set number
-      ''}
-      ${optionalString (cfg.lineNumberMode == "relNumber") ''
-        set number relativenumber
-      ''}
-      ${optionalString cfg.useSystemClipboard ''
-        set clipboard+=unnamedplus
-      ''}
-      ${optionalString cfg.mapLeaderSpace ''
-        let mapleader=" "
-        let maplocalleader=" "
-      ''}
-      ${optionalString cfg.syntaxHighlighting ''
-        syntax on
-      ''}
-      ${optionalString (!cfg.wordWrap) ''
-        set nowrap
-      ''}
-      ${optionalString cfg.hideSearchHighlight ''
-        set nohlsearch
-        set incsearch
-      ''}
-      ${optionalString cfg.colourTerm ''
-        set termguicolors
-        set t_Co=256
-      ''}
-      ${optionalString cfg.transparentBackground ''
-        hi Normal guibg=NONE ctermbg=NONE
-      ''}
-      ${optionalString cfg.hideStatusLine ''
-        set laststatus=0
-      ''}
-      ${optionalString cfg.linkStatusLine ''
-        hi! link StatusLine Normal
-        hi! link StatusLineNC Normal
-      ''}
-      ${optionalString cfg.customStatusLine ''
-        set statusline=%{repeat('─',winwidth('.'))}
-      ''}
-      ${optionalString cfg.list ''
-        set list
-      ''}
-      ${optionalString cfg.bufOnlyCommand ''
-        command! BufOnly silent! execute "%bd|e#|bd#"
-      ''}
+        ${optionalString cfg.preventJunkFiles ''
+          set noswapfile
+          set nobackup
+          set nowritebackup
+        ''}
+        ${optionalString (cfg.bell == "none") ''
+          set noerrorbells
+          set novisualbell
+        ''}
+        ${optionalString (cfg.bell == "on") ''
+          set novisualbell
+        ''}
+        ${optionalString (cfg.bell == "visual") ''
+          set noerrorbells
+        ''}
+        ${optionalString (cfg.lineNumberMode == "relative") ''
+          set relativenumber
+        ''}
+        ${optionalString (cfg.lineNumberMode == "number") ''
+          set number
+        ''}
+        ${optionalString (cfg.lineNumberMode == "relNumber") ''
+          set number relativenumber
+        ''}
+        ${optionalString cfg.useSystemClipboard ''
+          set clipboard+=unnamedplus
+        ''}
+        ${optionalString cfg.mapLeaderSpace ''
+          let mapleader=" "
+          let maplocalleader=" "
+        ''}
+        ${optionalString cfg.syntaxHighlighting ''
+          syntax on
+        ''}
+        ${optionalString (!cfg.wordWrap) ''
+          set nowrap
+        ''}
+        ${optionalString cfg.hideSearchHighlight ''
+          set nohlsearch
+          set incsearch
+        ''}
+        ${optionalString cfg.colourTerm ''
+          set termguicolors
+          set t_Co=256
+        ''}
+        ${optionalString cfg.transparentBackground ''
+          hi Normal guibg=NONE ctermbg=NONE
+        ''}
+        ${optionalString cfg.hideStatusLine ''
+          set laststatus=0
+        ''}
+        ${optionalString cfg.linkStatusLine ''
+          hi! link StatusLine Normal
+          hi! link StatusLineNC Normal
+        ''}
+        ${optionalString cfg.customStatusLine ''
+          set statusline=%{repeat('─',winwidth('.'))}
+        ''}
+        ${optionalString cfg.list ''
+          set list
+        ''}
+        ${optionalString cfg.bufOnlyCommand ''
+          command! BufOnly silent! execute "%bd|e#|bd#"
+        ''}
       '';
     };
   };

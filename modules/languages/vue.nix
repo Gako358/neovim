@@ -1,28 +1,26 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.vue;
 
   defaultServer = "volar";
   servers = {
     volar = {
       package = pkgs.vue-language-server;
-      lspConfig =
-        /*
-        lua
-        */
-        ''
-          vim.lsp.config('volar', {
-            capabilities = capabilities,
-            cmd = { "${cfg.lsp.package}/bin/vue-language-server", "--stdio" },
-            filetypes = {"typescript", "typescriptreact", "javascript", "javascriptreact", "vue", "json"},
-          })
-          vim.lsp.enable('volar')
-        '';
+      lspConfig = /* lua */ ''
+        vim.lsp.config('volar', {
+          capabilities = capabilities,
+          cmd = { "${cfg.lsp.package}/bin/vue-language-server", "--stdio" },
+          filetypes = {"typescript", "typescriptreact", "javascript", "javascriptreact", "vue", "json"},
+        })
+        vim.lsp.enable('volar')
+      '';
     };
   };
 in
@@ -63,7 +61,10 @@ in
     (mkIf cfg.treesitter.enable {
       vim.treesitter = {
         enable = true;
-        grammars = [ cfg.treesitter.vuePackage cfg.treesitter.tsPackage ];
+        grammars = [
+          cfg.treesitter.vuePackage
+          cfg.treesitter.tsPackage
+        ];
       };
     })
 
